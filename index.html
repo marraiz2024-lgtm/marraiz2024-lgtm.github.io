@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<!-- saved from url=(0046)file:///C:/Users/marra/Downloads/index_15.html -->
+<!-- saved from url=(0046)file:///C:/Users/marra/Downloads/index_17.html -->
 <html lang="es"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -10,320 +10,240 @@
 <link href="./MMercedesEnglish — Aprende inglés fácil y real_files/css2" rel="stylesheet">
 <style>
   :root {
-    --blue:       #1B6CA8;
-    --blue-dark:  #0D4F80;
-    --blue-light: #D6E9F8;
-    --blue-xl:    #EBF4FC;
-    --yellow:     #F5C842;
-    --yellow-dk:  #C9991A;
-    --black:      #1A1A2E;
-    --gray:       #6B7280;
-    --gray-lt:    #F3F4F6;
-    --white:      #FFFFFF;
-    --green:      #25D366;
-    --r:          14px;
-    --r-lg:       22px;
+    --blue:#1B6CA8; --blue-dark:#0D4F80; --blue-light:#D6E9F8; --blue-xl:#EBF4FC;
+    --yellow:#F5C842; --yellow-dk:#C9991A; --black:#1A1A2E; --gray:#6B7280;
+    --gray-lt:#F3F4F6; --white:#FFFFFF; --green:#25D366; --r:14px; --r-lg:22px;
   }
-  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-  html { scroll-behavior: smooth; }
-  body { font-family: 'Nunito', sans-serif; background: var(--white); color: var(--black); overflow-x: hidden; line-height: 1.6; }
-  img { max-width: 100%; display: block; }
-  a { text-decoration: none; color: inherit; }
-  .container { width: min(700px, 92vw); margin: 0 auto; }
-  .text-center { text-align: center; }
-
-  /* ANIMATIONS */
-  @keyframes fadeUp { from { opacity:0; transform:translateY(24px); } to { opacity:1; transform:translateY(0); } }
-  @keyframes float { 0%,100% { transform:translateY(0); } 50% { transform:translateY(-8px); } }
-  @keyframes shimmer { 0% { background-position:-200% center; } 100% { background-position:200% center; } }
-  .fade-up { animation: fadeUp .6s ease both; }
-  .d1 { animation-delay:.1s; } .d2 { animation-delay:.2s; } .d3 { animation-delay:.3s; } .d4 { animation-delay:.4s; }
+  *,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
+  html{scroll-behavior:smooth;}
+  body{font-family:'Nunito',sans-serif;background:var(--white);color:var(--black);overflow-x:hidden;line-height:1.6;}
+  img{max-width:100%;display:block;}
+  a{text-decoration:none;color:inherit;}
+  .container{width:min(700px,92vw);margin:0 auto;}
+  .text-center{text-align:center;}
+  @keyframes fadeUp{from{opacity:0;transform:translateY(24px);}to{opacity:1;transform:translateY(0);}}
+  @keyframes float{0%,100%{transform:translateY(0);}50%{transform:translateY(-8px);}}
+  @keyframes shimmer{0%{background-position:-200% center;}100%{background-position:200% center;}}
+  .fade-up{animation:fadeUp .6s ease both;}
+  .d1{animation-delay:.1s;}.d2{animation-delay:.2s;}.d3{animation-delay:.3s;}.d4{animation-delay:.4s;}
 
   /* TOP BAR */
-  .topbar { background:var(--blue-dark); color:var(--white); text-align:center; padding:9px 16px; font-family:'Poppins',sans-serif; font-size:13px; font-weight:600; letter-spacing:.02em; }
-  .topbar span { color:var(--yellow); }
+  .topbar{background:var(--blue-dark);color:var(--white);text-align:center;padding:9px 16px;font-family:'Poppins',sans-serif;font-size:13px;font-weight:600;}
+  .topbar span{color:var(--yellow);}
 
   /* NAV */
-  nav { background:var(--white); border-bottom:2px solid var(--blue-light); padding:12px 0; position:sticky; top:0; z-index:100; }
-  .nav-inner { width:min(700px,92vw); margin:0 auto; display:flex; align-items:center; justify-content:space-between; gap:8px; }
-  .logo { font-family:'Poppins',sans-serif; font-weight:800; font-size:17px; color:var(--black); white-space:nowrap; }
-  .logo .mm { color:var(--blue); }
-  .nav-btns { display:flex; align-items:center; gap:8px; flex-shrink:0; }
-  .nav-btn { font-family:'Poppins',sans-serif; font-weight:700; font-size:12px; padding:7px 14px; border-radius:50px; white-space:nowrap; transition:transform .15s,box-shadow .15s; }
-  .nav-btn-outline { border:2px solid var(--blue); color:var(--blue); background:transparent; }
-  .nav-btn-outline:hover { background:var(--blue-xl); }
-  .nav-btn-solid { background:var(--green); color:var(--white); border:2px solid var(--green); }
-  .nav-btn-solid:hover { transform:translateY(-1px); box-shadow:0 4px 12px rgba(37,211,102,.4); }
+  nav{background:var(--white);border-bottom:2px solid var(--blue-light);padding:12px 0;position:sticky;top:0;z-index:100;}
+  .nav-inner{width:min(700px,92vw);margin:0 auto;display:flex;align-items:center;justify-content:space-between;gap:8px;}
+  .logo{font-family:'Poppins',sans-serif;font-weight:800;font-size:17px;color:var(--black);white-space:nowrap;}
+  .logo .mm{color:var(--blue);}
+  .nav-btns{display:flex;align-items:center;gap:8px;flex-shrink:0;}
+  .nav-btn{font-family:'Poppins',sans-serif;font-weight:700;font-size:12px;padding:7px 14px;border-radius:50px;white-space:nowrap;transition:transform .15s,box-shadow .15s;}
+  .nav-btn-outline{border:2px solid var(--blue);color:var(--blue);background:transparent;}
+  .nav-btn-solid{background:var(--green);color:var(--white);border:2px solid var(--green);}
+  .nav-btn-solid:hover{transform:translateY(-1px);box-shadow:0 4px 12px rgba(37,211,102,.4);}
 
   /* HERO */
-  .hero { background:linear-gradient(150deg, var(--blue-xl) 0%, var(--white) 55%); padding:52px 0 40px; position:relative; overflow:hidden; }
-  .hero::before { content:''; position:absolute; top:-60px; right:-60px; width:300px; height:300px; background:radial-gradient(circle, rgba(245,200,66,.15) 0%, transparent 70%); border-radius:50%; pointer-events:none; }
-  .hero-grid { display:grid; grid-template-columns:1fr 1fr; gap:32px; align-items:center; }
-  @media(max-width:560px) { .hero-grid { grid-template-columns:1fr; text-align:center; } }
-  .hero-badge { display:inline-flex; align-items:center; gap:6px; background:var(--yellow); color:var(--black); font-family:'Poppins',sans-serif; font-weight:700; font-size:12px; padding:5px 14px; border-radius:50px; margin-bottom:16px; }
-  .hero h1 { font-family:'Poppins',sans-serif; font-weight:800; font-size:clamp(24px,5vw,38px); line-height:1.2; color:var(--black); margin-bottom:12px; }
-  .hero h1 .accent { color:var(--blue); }
-  .hero h1 .accent-y { color:var(--yellow-dk); }
-  .hero-sub { font-size:15px; color:var(--gray); margin-bottom:24px; line-height:1.65; }
-  .hero-btns { display:flex; flex-wrap:wrap; gap:10px; }
-  @media(max-width:560px) { .hero-btns { justify-content:center; } }
-  .btn-primary { display:inline-flex; align-items:center; gap:8px; background:var(--blue); color:var(--white); font-family:'Poppins',sans-serif; font-weight:700; font-size:14px; padding:13px 22px; border-radius:var(--r); transition:transform .15s,box-shadow .15s; border:none; cursor:pointer; }
-  .btn-primary:hover { transform:translateY(-2px); box-shadow:0 6px 20px rgba(27,108,168,.35); }
-  .btn-wa { background:var(--green); }
-  .btn-wa:hover { box-shadow:0 6px 20px rgba(37,211,102,.4); }
-  .hero-img-wrap { position:relative; display:flex; justify-content:center; animation:float 4s ease-in-out infinite; }
-  .hero-img-wrap img { width:min(260px,80vw); border-radius:var(--r-lg); box-shadow:0 20px 50px rgba(13,79,128,.2); }
+  .hero{background:linear-gradient(150deg,var(--blue-xl) 0%,var(--white) 55%);padding:52px 0 40px;position:relative;overflow:hidden;}
+  .hero-grid{display:grid;grid-template-columns:1fr 1fr;gap:32px;align-items:center;}
+  @media(max-width:560px){.hero-grid{grid-template-columns:1fr;text-align:center;}}
+  .hero-badge{display:inline-flex;align-items:center;gap:6px;background:var(--yellow);color:var(--black);font-family:'Poppins',sans-serif;font-weight:700;font-size:12px;padding:5px 14px;border-radius:50px;margin-bottom:16px;}
+  .hero h1{font-family:'Poppins',sans-serif;font-weight:800;font-size:clamp(24px,5vw,38px);line-height:1.2;color:var(--black);margin-bottom:12px;}
+  .hero h1 .accent{color:var(--blue);}
+  .hero h1 .accent-y{color:var(--yellow-dk);}
+  .hero-sub{font-size:15px;color:var(--gray);margin-bottom:24px;line-height:1.65;}
+  .hero-btns{display:flex;flex-wrap:wrap;gap:10px;}
+  @media(max-width:560px){.hero-btns{justify-content:center;}}
+  .btn-primary{display:inline-flex;align-items:center;gap:8px;background:var(--blue);color:var(--white);font-family:'Poppins',sans-serif;font-weight:700;font-size:14px;padding:13px 22px;border-radius:var(--r);transition:transform .15s,box-shadow .15s;border:none;cursor:pointer;}
+  .btn-primary:hover{transform:translateY(-2px);box-shadow:0 6px 20px rgba(27,108,168,.35);}
+  .btn-wa{background:var(--green);}
+  .btn-wa:hover{box-shadow:0 6px 20px rgba(37,211,102,.4);}
+  .hero-img-wrap{position:relative;display:flex;justify-content:center;animation:float 4s ease-in-out infinite;}
+  .hero-img-wrap img{width:min(260px,80vw);border-radius:var(--r-lg);box-shadow:0 20px 50px rgba(13,79,128,.2);}
 
   /* BENEFITS */
-  .benefits { padding:48px 0; background:var(--white); }
-  .section-label { font-family:'Poppins',sans-serif; font-size:11px; font-weight:700; letter-spacing:.1em; text-transform:uppercase; color:var(--blue); margin-bottom:8px; }
-  .section-title { font-family:'Poppins',sans-serif; font-weight:800; font-size:clamp(20px,4.5vw,30px); color:var(--black); line-height:1.25; margin-bottom:32px; }
-  .section-title span { color:var(--blue); }
-  .benefits-grid { display:grid; grid-template-columns:repeat(auto-fit,minmax(150px,1fr)); gap:14px; }
-  .benefit-card { background:var(--blue-xl); border-radius:var(--r-lg); padding:20px 16px; text-align:center; border:1.5px solid var(--blue-light); transition:transform .2s,box-shadow .2s; }
-  .benefit-card:hover { transform:translateY(-3px); box-shadow:0 8px 24px rgba(27,108,168,.12); }
-  .benefit-icon { font-size:28px; margin-bottom:10px; }
-  .benefit-title { font-family:'Poppins',sans-serif; font-weight:700; font-size:13px; color:var(--black); margin-bottom:4px; }
-  .benefit-desc { font-size:12px; color:var(--gray); line-height:1.5; }
+  .benefits{padding:48px 0;background:var(--white);}
+  .section-label{font-family:'Poppins',sans-serif;font-size:11px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--blue);margin-bottom:8px;}
+  .section-title{font-family:'Poppins',sans-serif;font-weight:800;font-size:clamp(20px,4.5vw,30px);color:var(--black);line-height:1.25;margin-bottom:32px;}
+  .section-title span{color:var(--blue);}
+  .benefits-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:14px;}
+  .benefit-card{background:var(--blue-xl);border-radius:var(--r-lg);padding:20px 16px;text-align:center;border:1.5px solid var(--blue-light);transition:transform .2s,box-shadow .2s;}
+  .benefit-card:hover{transform:translateY(-3px);box-shadow:0 8px 24px rgba(27,108,168,.12);}
+  .benefit-icon{font-size:28px;margin-bottom:10px;}
+  .benefit-title{font-family:'Poppins',sans-serif;font-weight:700;font-size:13px;color:var(--black);margin-bottom:4px;}
+  .benefit-desc{font-size:12px;color:var(--gray);line-height:1.5;}
 
   /* BIBLIOTECA */
-  .biblioteca { padding:52px 0; background:var(--gray-lt); }
-  .recursos-grid { display:grid; grid-template-columns:repeat(auto-fit,minmax(280px,1fr)); gap:16px; margin-top:8px; }
-  .recurso-card { background:var(--white); border-radius:var(--r-lg); padding:20px; display:flex; align-items:flex-start; gap:14px; border:1.5px solid var(--blue-light); transition:transform .2s,box-shadow .2s; position:relative; overflow:hidden; }
-  .recurso-card::before { content:''; position:absolute; top:0; left:0; right:0; height:3px; background:linear-gradient(90deg,var(--blue),var(--yellow),var(--blue)); background-size:200% auto; animation:shimmer 3s linear infinite; }
-  .recurso-card:hover { transform:translateY(-3px); box-shadow:0 8px 24px rgba(27,108,168,.12); }
-  .recurso-icon { width:46px; height:46px; border-radius:12px; background:var(--blue-light); display:flex; align-items:center; justify-content:center; font-size:22px; flex-shrink:0; }
-  .recurso-nivel { display:inline-block; font-size:10px; font-weight:700; padding:2px 8px; border-radius:50px; margin-bottom:5px; font-family:'Poppins',sans-serif; letter-spacing:.05em; text-transform:uppercase; }
-  .nivel-basico { background:#EAF3DE; color:#27500A; }
-  .nivel-intermedio { background:#E6F1FB; color:#0C447C; }
-  .recurso-titulo { font-family:'Poppins',sans-serif; font-weight:700; font-size:14px; color:var(--black); margin-bottom:4px; line-height:1.3; }
-  .recurso-desc { font-size:12px; color:var(--gray); line-height:1.5; margin-bottom:12px; }
-  .btn-recurso { display:inline-flex; align-items:center; gap:6px; font-family:'Poppins',sans-serif; font-weight:700; font-size:12px; color:var(--blue); border:1.5px solid var(--blue); padding:6px 14px; border-radius:50px; transition:all .15s; }
-  .btn-recurso:hover { background:var(--blue); color:var(--white); }
-
-  /* FILTROS */
-  .filtros { display:flex; gap:8px; flex-wrap:wrap; margin-bottom:20px; }
-  .filtro-btn { padding:6px 16px; font-size:12px; font-family:'Poppins',sans-serif; font-weight:600; border:1.5px solid var(--blue-light); border-radius:50px; cursor:pointer; background:transparent; color:var(--gray); transition:all .15s; }
-  .filtro-btn:hover { border-color:var(--blue); color:var(--blue); }
-  .filtro-active { background:var(--blue)!important; color:var(--white)!important; border-color:var(--blue)!important; }
-  .recurso-hidden { display:none!important; }
-  .pronto-card { background:var(--blue-xl); border-radius:var(--r-lg); padding:20px; text-align:center; margin-top:16px; border:1.5px dashed var(--blue-light); }
+  .biblioteca{padding:52px 0;background:var(--gray-lt);}
+  .recursos-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:16px;margin-top:8px;}
+  .recurso-card{background:var(--white);border-radius:var(--r-lg);padding:20px;display:flex;align-items:flex-start;gap:14px;border:1.5px solid var(--blue-light);transition:transform .2s,box-shadow .2s;position:relative;overflow:hidden;}
+  .recurso-card::before{content:'';position:absolute;top:0;left:0;right:0;height:3px;background:linear-gradient(90deg,var(--blue),var(--yellow),var(--blue));background-size:200% auto;animation:shimmer 3s linear infinite;}
+  .recurso-card:hover{transform:translateY(-3px);box-shadow:0 8px 24px rgba(27,108,168,.12);}
+  .recurso-icon{width:46px;height:46px;border-radius:12px;background:var(--blue-light);display:flex;align-items:center;justify-content:center;font-size:22px;flex-shrink:0;}
+  .recurso-nivel{display:inline-block;font-size:10px;font-weight:700;padding:2px 8px;border-radius:50px;margin-bottom:5px;font-family:'Poppins',sans-serif;letter-spacing:.05em;text-transform:uppercase;}
+  .nivel-basico{background:#EAF3DE;color:#27500A;}
+  .nivel-intermedio{background:#E6F1FB;color:#0C447C;}
+  .recurso-titulo{font-family:'Poppins',sans-serif;font-weight:700;font-size:14px;color:var(--black);margin-bottom:4px;line-height:1.3;}
+  .recurso-desc{font-size:12px;color:var(--gray);line-height:1.5;margin-bottom:12px;}
+  .btn-recurso{display:inline-flex;align-items:center;gap:6px;font-family:'Poppins',sans-serif;font-weight:700;font-size:12px;color:var(--blue);border:1.5px solid var(--blue);padding:6px 14px;border-radius:50px;transition:all .15s;}
+  .btn-recurso:hover{background:var(--blue);color:var(--white);}
+  .filtros{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:20px;}
+  .filtro-btn{padding:6px 16px;font-size:12px;font-family:'Poppins',sans-serif;font-weight:600;border:1.5px solid var(--blue-light);border-radius:50px;cursor:pointer;background:transparent;color:var(--gray);transition:all .15s;}
+  .filtro-btn:hover{border-color:var(--blue);color:var(--blue);}
+  .filtro-active{background:var(--blue)!important;color:var(--white)!important;border-color:var(--blue)!important;}
+  .recurso-hidden{display:none!important;}
+  .pronto-card{background:var(--blue-xl);border-radius:var(--r-lg);padding:20px;text-align:center;margin-top:16px;border:1.5px dashed var(--blue-light);}
 
   /* CORREO */
-  .correo-section { padding:52px 0; background:var(--blue); }
-  .correo-card { background:rgba(255,255,255,.1); border:1.5px solid rgba(255,255,255,.2); border-radius:var(--r-lg); padding:clamp(24px,5vw,40px); backdrop-filter:blur(10px); }
-  .correo-card h2 { font-family:'Poppins',sans-serif; font-weight:800; font-size:clamp(20px,4vw,28px); color:var(--white); margin-bottom:8px; line-height:1.25; }
-  .correo-card h2 span { color:var(--yellow); }
-  .correo-card p { color:rgba(255,255,255,.8); font-size:14px; margin-bottom:24px; }
-  .correo-form { display:flex; gap:10px; flex-wrap:wrap; }
-  .correo-input { flex:1; min-width:200px; padding:13px 18px; border:2px solid rgba(255,255,255,.3); border-radius:var(--r); font-family:'Nunito',sans-serif; font-size:15px; color:var(--white); background:rgba(255,255,255,.1); outline:none; transition:border-color .2s; }
-  .correo-input::placeholder { color:rgba(255,255,255,.5); }
-  .correo-input:focus { border-color:var(--yellow); }
-  .btn-correo { padding:13px 24px; background:var(--yellow); color:var(--black); font-family:'Poppins',sans-serif; font-weight:700; font-size:14px; border:none; border-radius:var(--r); cursor:pointer; white-space:nowrap; transition:transform .15s,box-shadow .15s; }
-  .btn-correo:hover { transform:translateY(-2px); box-shadow:0 6px 20px rgba(245,200,66,.4); }
-  .correo-nota { font-size:12px; color:rgba(255,255,255,.5); margin-top:12px; text-align:center; }
-
-  /* SUCCESS */
-  .correo-success { display:none; text-align:center; padding:20px; }
-  .correo-success h3 { font-family:'Poppins',sans-serif; font-weight:700; font-size:20px; color:var(--white); margin-bottom:8px; }
-  .correo-success p { color:rgba(255,255,255,.8); font-size:14px; }
+  .correo-section{padding:52px 0;background:var(--blue);}
+  .correo-card{background:rgba(255,255,255,.1);border:1.5px solid rgba(255,255,255,.2);border-radius:var(--r-lg);padding:clamp(24px,5vw,40px);}
+  .correo-card h2{font-family:'Poppins',sans-serif;font-weight:800;font-size:clamp(20px,4vw,28px);color:var(--white);margin-bottom:8px;line-height:1.25;}
+  .correo-card h2 span{color:var(--yellow);}
+  .correo-card p{color:rgba(255,255,255,.8);font-size:14px;margin-bottom:24px;}
+  .correo-form{display:flex;gap:10px;flex-wrap:wrap;}
+  .correo-input{flex:1;min-width:200px;padding:13px 18px;border:2px solid rgba(255,255,255,.3);border-radius:var(--r);font-family:'Nunito',sans-serif;font-size:15px;color:var(--white);background:rgba(255,255,255,.1);outline:none;transition:border-color .2s;}
+  .correo-input::placeholder{color:rgba(255,255,255,.5);}
+  .correo-input:focus{border-color:var(--yellow);}
+  .btn-correo{padding:13px 24px;background:var(--yellow);color:var(--black);font-family:'Poppins',sans-serif;font-weight:700;font-size:14px;border:none;border-radius:var(--r);cursor:pointer;white-space:nowrap;transition:transform .15s,box-shadow .15s;}
+  .btn-correo:hover{transform:translateY(-2px);box-shadow:0 6px 20px rgba(245,200,66,.4);}
+  .correo-nota{font-size:12px;color:rgba(255,255,255,.5);margin-top:12px;text-align:center;}
+  .correo-success{display:none;text-align:center;padding:20px;}
+  .correo-success h3{font-family:'Poppins',sans-serif;font-weight:700;font-size:20px;color:var(--white);margin-bottom:8px;}
+  .correo-success p{color:rgba(255,255,255,.8);font-size:14px;}
 
   /* CLASES */
-  .clases { padding:52px 0; background:var(--white); }
-  .clases-grid { display:grid; grid-template-columns:1fr 1fr; gap:16px; margin-bottom:28px; }
-  @media(max-width:500px) { .clases-grid { grid-template-columns:1fr; } }
-  .clase-card { background:var(--blue-xl); border-radius:var(--r-lg); padding:22px; text-align:center; border:1.5px solid var(--blue-light); }
-  .clase-icon { font-size:32px; margin-bottom:10px; }
-  .clase-title { font-family:'Poppins',sans-serif; font-weight:700; font-size:15px; color:var(--black); margin-bottom:6px; }
-  .clase-desc { font-size:13px; color:var(--gray); line-height:1.5; }
-  .btn-wa-big { display:flex; align-items:center; justify-content:center; gap:12px; background:var(--green); color:var(--white); font-family:'Poppins',sans-serif; font-weight:700; font-size:16px; padding:18px 32px; border-radius:var(--r); transition:transform .15s,box-shadow .15s; max-width:400px; margin:0 auto; }
-  .btn-wa-big:hover { transform:translateY(-2px); box-shadow:0 8px 28px rgba(37,211,102,.4); }
+  .clases{padding:52px 0;background:var(--white);}
+  .clases-grid{display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-bottom:28px;}
+  @media(max-width:500px){.clases-grid{grid-template-columns:1fr;}}
+  .clase-card{background:var(--blue-xl);border-radius:var(--r-lg);padding:22px;text-align:center;border:1.5px solid var(--blue-light);}
+  .clase-icon{font-size:32px;margin-bottom:10px;}
+  .clase-title{font-family:'Poppins',sans-serif;font-weight:700;font-size:15px;color:var(--black);margin-bottom:6px;}
+  .clase-desc{font-size:13px;color:var(--gray);line-height:1.5;}
+  .btn-wa-big{display:flex;align-items:center;justify-content:center;gap:12px;background:var(--green);color:var(--white);font-family:'Poppins',sans-serif;font-weight:700;font-size:16px;padding:18px 32px;border-radius:var(--r);transition:transform .15s,box-shadow .15s;max-width:400px;margin:0 auto;}
+  .btn-wa-big:hover{transform:translateY(-2px);box-shadow:0 8px 28px rgba(37,211,102,.4);}
 
   /* SOBRE MI */
-  .sobre-mi { padding:52px 0; background:var(--black); }
-  .sobre-grid { display:grid; grid-template-columns:auto 1fr; gap:32px; align-items:center; }
-  @media(max-width:500px) { .sobre-grid { grid-template-columns:1fr; text-align:center; } .sobre-grid img { margin:0 auto; } }
-  .sobre-foto { width:130px; height:130px; border-radius:50%; object-fit:cover; border:3px solid var(--yellow); flex-shrink:0; }
-  .sobre-name { font-family:'Poppins',sans-serif; font-weight:800; font-size:22px; color:var(--white); margin-bottom:4px; }
-  .sobre-name span { color:var(--yellow); }
-  .sobre-handle { font-size:13px; color:var(--yellow); margin-bottom:12px; }
-  .sobre-bio { font-size:15px; color:rgba(255,255,255,.75); line-height:1.7; }
-  .sobre-tags { display:flex; flex-wrap:wrap; gap:8px; margin-top:16px; }
-  @media(max-width:500px) { .sobre-tags { justify-content:center; } }
-  .sobre-tag { font-size:12px; font-family:'Poppins',sans-serif; font-weight:600; padding:4px 12px; border-radius:50px; background:rgba(255,255,255,.08); color:rgba(255,255,255,.7); }
+  .sobre-mi{padding:52px 0;background:var(--black);}
+  .sobre-grid{display:grid;grid-template-columns:auto 1fr;gap:32px;align-items:center;}
+  @media(max-width:500px){.sobre-grid{grid-template-columns:1fr;text-align:center;}.sobre-grid img{margin:0 auto;}}
+  .sobre-foto{width:130px;height:130px;border-radius:50%;object-fit:cover;border:3px solid var(--yellow);flex-shrink:0;}
+  .sobre-name{font-family:'Poppins',sans-serif;font-weight:800;font-size:22px;color:var(--white);margin-bottom:4px;}
+  .sobre-name span{color:var(--yellow);}
+  .sobre-handle{font-size:13px;color:var(--yellow);margin-bottom:12px;}
+  .sobre-bio{font-size:15px;color:rgba(255,255,255,.75);line-height:1.7;}
+  .sobre-tags{display:flex;flex-wrap:wrap;gap:8px;margin-top:16px;}
+  @media(max-width:500px){.sobre-tags{justify-content:center;}}
+  .sobre-tag{font-size:12px;font-family:'Poppins',sans-serif;font-weight:600;padding:4px 12px;border-radius:50px;background:rgba(255,255,255,.08);color:rgba(255,255,255,.7);}
 
   /* TESTIMONIOS */
-  .testimonios { padding:52px 0; background:var(--blue-xl); }
-  .testi-grid { display:grid; grid-template-columns:1fr 1fr; gap:16px; margin-top:28px; }
-  @media(max-width:500px) { .testi-grid { grid-template-columns:1fr; } }
-  .testi-card { background:var(--white); border-radius:var(--r-lg); padding:20px; border:1.5px solid var(--blue-light); }
-  .testi-stars { color:var(--yellow); font-size:14px; margin-bottom:10px; }
-  .testi-text { font-size:13px; color:var(--black); line-height:1.65; margin-bottom:14px; font-style:italic; }
-  .testi-author { display:flex; align-items:center; gap:10px; }
-  .testi-av { width:32px; height:32px; border-radius:50%; background:var(--blue-light); display:flex; align-items:center; justify-content:center; font-family:'Poppins',sans-serif; font-weight:700; font-size:11px; color:var(--blue); flex-shrink:0; }
-  .testi-name { font-weight:700; font-size:13px; }
-  .testi-loc { font-size:11px; color:var(--gray); }
+  .testimonios{padding:52px 0;background:var(--blue-xl);}
+  .testi-grid{display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-top:28px;}
+  @media(max-width:500px){.testi-grid{grid-template-columns:1fr;}}
+  .testi-card{background:var(--white);border-radius:var(--r-lg);padding:20px;border:1.5px solid var(--blue-light);}
+  .testi-stars{color:var(--yellow);font-size:14px;margin-bottom:10px;}
+  .testi-text{font-size:13px;color:var(--black);line-height:1.65;margin-bottom:14px;font-style:italic;}
+  .testi-author{display:flex;align-items:center;gap:10px;}
+  .testi-av{width:32px;height:32px;border-radius:50%;background:var(--blue-light);display:flex;align-items:center;justify-content:center;font-family:'Poppins',sans-serif;font-weight:700;font-size:14px;color:var(--blue);flex-shrink:0;}
+  .testi-name{font-weight:700;font-size:13px;}
+  .testi-loc{font-size:11px;color:var(--gray);}
 
   /* FOOTER */
-  footer { background:var(--black); padding:28px 0; text-align:center; }
-  .footer-logo { font-family:'Poppins',sans-serif; font-weight:800; font-size:18px; color:var(--white); margin-bottom:6px; }
-  .footer-logo span { color:var(--blue); }
-  .footer-tagline { font-size:13px; color:rgba(255,255,255,.4); margin-bottom:14px; }
-  .footer-links { display:flex; justify-content:center; gap:20px; flex-wrap:wrap; }
-  .footer-links a { font-size:13px; color:rgba(255,255,255,.4); transition:color .15s; }
-  .footer-links a:hover { color:var(--yellow); }
+  footer{background:var(--black);padding:28px 0;text-align:center;}
+  .footer-logo{font-family:'Poppins',sans-serif;font-weight:800;font-size:18px;color:var(--white);margin-bottom:6px;}
+  .footer-logo span{color:var(--blue);}
+  .footer-tagline{font-size:13px;color:rgba(255,255,255,.4);margin-bottom:14px;}
+  .footer-links{display:flex;justify-content:center;gap:20px;flex-wrap:wrap;}
+  .footer-links a{font-size:13px;color:rgba(255,255,255,.4);transition:color .15s;}
+  .footer-links a:hover{color:var(--yellow);}
 </style>
 </head>
 <body>
 
-<!-- TOP BAR -->
-<div class="topbar">
-  ✨ Recursos gratuitos de inglés para hispanohablantes — <span>¡Sin costo!</span>
-</div>
+<div class="topbar">✨ Recursos gratuitos de inglés para hispanohablantes — <span>¡Sin costo!</span></div>
 
-<!-- NAV -->
 <nav>
   <div class="nav-inner">
     <div class="logo"><span class="mm">MM</span>ercedesEnglish</div>
     <div class="nav-btns">
-      <a class="nav-btn nav-btn-outline" href="file:///C:/Users/marra/Downloads/index_15.html#biblioteca">📚 Biblioteca</a>
-      <a class="nav-btn nav-btn-solid" href="file:///C:/Users/marra/Downloads/index_15.html#clases">💬 Agendar clase</a>
+      <a class="nav-btn nav-btn-outline" href="file:///C:/Users/marra/Downloads/index_17.html#biblioteca">📚 Biblioteca</a>
+      <a class="nav-btn nav-btn-solid" href="file:///C:/Users/marra/Downloads/index_17.html#clases">💬 Agendar clase</a>
     </div>
   </div>
 </nav>
 
-<!-- HERO -->
 <section class="hero">
   <div class="container">
     <div class="hero-grid">
       <div>
         <div class="hero-badge fade-up" style="animation-play-state: running;">👋 Hola, soy Mercedes</div>
-        <h1 class="fade-up d1" style="animation-play-state: running;">
-          Aprende inglés<br>
-          <span class="accent">de forma simple</span><br>
-          <span class="accent-y">y sin teoría pesada</span>
-        </h1>
-        <p class="hero-sub fade-up d2" style="animation-play-state: running;">
-          Soy profesora de inglés especializada en hispanohablantes. Aquí encuentras recursos gratuitos, clases personalizadas y contenido educativo que realmente funciona.
-        </p>
+        <h1 class="fade-up d1" style="animation-play-state: running;">Aprende inglés<br><span class="accent">de forma simple</span><br><span class="accent-y">y sin teoría pesada</span></h1>
+        <p class="hero-sub fade-up d2" style="animation-play-state: running;">Soy profesora de inglés especializada en hispanohablantes. Aquí encuentras recursos gratuitos, clases personalizadas y contenido educativo que realmente funciona.</p>
         <div class="hero-btns fade-up d3" style="animation-play-state: running;">
-          <a class="btn-primary" href="file:///C:/Users/marra/Downloads/index_15.html#biblioteca">
-            📚 Ver recursos gratis
-          </a>
-          <a class="btn-primary btn-wa" href="https://wa.me/19044266634?text=Hola%20Mercedes%2C%20me%20interesa%20agendar%20una%20clase%20de%20ingl%C3%A9s%20%F0%9F%93%9A" target="_blank">
-            💬 Agendar clase
-          </a>
+          <a class="btn-primary" href="file:///C:/Users/marra/Downloads/index_17.html#biblioteca">📚 Ver recursos gratis</a>
+          <a class="btn-primary btn-wa" href="https://wa.me/19044266634?text=Hola%20Mercedes%2C%20me%20interesa%20agendar%20una%20clase%20de%20ingl%C3%A9s%20%F0%9F%93%9A" target="_blank">💬 Agendar clase</a>
         </div>
       </div>
       <div class="hero-img-wrap fade-up d2" style="animation-play-state: running;">
-        <img src="https://via.placeholder.com/280x320/1B6CA8/FFFFFF?text=Avatar+MMercedes" alt="Mercedes — MMercedesEnglish" id="hero-avatar">
+        <img src="https://via.placeholder.com/260x300/1B6CA8/FFFFFF?text=MMercedesEnglish" alt="Mercedes — MMercedesEnglish">
       </div>
     </div>
   </div>
 </section>
 
-<!-- BENEFITS -->
 <section class="benefits">
   <div class="container text-center">
-    <p class="section-label fade-up" style="animation-play-state: running;">¿Qué encuentras aquí?</p>
-    <h2 class="section-title fade-up d1" style="animation-play-state: running;">Todo lo que necesitas para <span>avanzar en inglés</span></h2>
+    <p class="section-label fade-up" style="animation-play-state: paused;">¿Qué encuentras aquí?</p>
+    <h2 class="section-title fade-up d1" style="animation-play-state: paused;">Todo lo que necesitas para <span>avanzar en inglés</span></h2>
     <div class="benefits-grid">
-      <div class="benefit-card fade-up d1" style="animation-play-state: running;">
-        <div class="benefit-icon">📚</div>
-        <div class="benefit-title">Biblioteca gratis</div>
-        <div class="benefit-desc">Guías, fichas y recursos descargables sin costo</div>
-      </div>
-      <div class="benefit-card fade-up d2" style="animation-play-state: running;">
-        <div class="benefit-icon">👩‍🏫</div>
-        <div class="benefit-title">Clases 1:1</div>
-        <div class="benefit-desc">Atención personalizada a tu ritmo y nivel</div>
-      </div>
-      <div class="benefit-card fade-up d3" style="animation-play-state: running;">
-        <div class="benefit-icon">👥</div>
-        <div class="benefit-title">Grupos</div>
-        <div class="benefit-desc">Aprende en comunidad de forma dinámica</div>
-      </div>
-      <div class="benefit-card fade-up d4" style="animation-play-state: running;">
-        <div class="benefit-icon">💡</div>
-        <div class="benefit-title">Tips diarios</div>
-        <div class="benefit-desc">Contenido educativo en Instagram y TikTok</div>
-      </div>
+      <div class="benefit-card fade-up d1" style="animation-play-state: paused;"><div class="benefit-icon">📚</div><div class="benefit-title">Biblioteca gratis</div><div class="benefit-desc">Guías, fichas y recursos descargables sin costo</div></div>
+      <div class="benefit-card fade-up d2" style="animation-play-state: paused;"><div class="benefit-icon">👩‍🏫</div><div class="benefit-title">Clases 1:1</div><div class="benefit-desc">Atención personalizada a tu ritmo y nivel</div></div>
+      <div class="benefit-card fade-up d3" style="animation-play-state: paused;"><div class="benefit-icon">👥</div><div class="benefit-title">Grupos</div><div class="benefit-desc">Aprende en comunidad de forma dinámica</div></div>
+      <div class="benefit-card fade-up d4" style="animation-play-state: paused;"><div class="benefit-icon">💡</div><div class="benefit-title">Tips diarios</div><div class="benefit-desc">Contenido educativo en Instagram y TikTok</div></div>
     </div>
   </div>
 </section>
 
-<!-- BIBLIOTECA -->
 <section class="biblioteca" id="biblioteca">
   <div class="container">
-    <p class="section-label fade-up" style="animation-play-state: running;">Descarga gratis</p>
-    <h2 class="section-title fade-up d1" style="animation-play-state: running;">Biblioteca de <span>recursos</span></h2>
-
-    <div class="filtros fade-up d2" style="animation-play-state: running;">
+    <p class="section-label fade-up" style="animation-play-state: paused;">Descarga gratis</p>
+    <h2 class="section-title fade-up d1" style="animation-play-state: paused;">Biblioteca de <span>recursos</span></h2>
+    <div class="filtros fade-up d2" style="animation-play-state: paused;">
       <button onclick="filtrar(&#39;todos&#39;)" class="filtro-btn filtro-active" data-filtro="todos">Todos</button>
       <button onclick="filtrar(&#39;basico&#39;)" class="filtro-btn" data-filtro="basico">Básico</button>
       <button onclick="filtrar(&#39;intermedio&#39;)" class="filtro-btn" data-filtro="intermedio">Intermedio</button>
       <button onclick="filtrar(&#39;gramatica&#39;)" class="filtro-btn" data-filtro="gramatica">Gramática</button>
       <button onclick="filtrar(&#39;tiempos&#39;)" class="filtro-btn" data-filtro="tiempos">Tiempos verbales</button>
     </div>
-
     <div class="recursos-grid" id="recursos-grid">
-
-      <div class="recurso-card fade-up d1" data-nivel="basico" data-tema="gramatica" style="animation-play-state: running;">
+      <div class="recurso-card fade-up d1" data-nivel="basico" data-tema="gramatica" style="animation-play-state: paused;">
         <div class="recurso-icon">📘</div>
-        <div style="flex:1;">
-          <span class="recurso-nivel nivel-basico">Básico</span>
-          <div class="recurso-titulo">Los Cimientos del Inglés — El Presente</div>
-          <div class="recurso-desc">Guía práctica de los 4 tiempos del presente con ejemplos reales.</div>
-          <a class="btn-recurso" href="https://drive.google.com/file/d/15FtERfWKsfS2unzs9_u5ja0tKMiTuJLd/view?usp=drive_link" target="_blank">⬇ Descargar</a>
-        </div>
+        <div style="flex:1;"><span class="recurso-nivel nivel-basico">Básico</span><div class="recurso-titulo">Los Cimientos del Inglés — El Presente</div><div class="recurso-desc">Guía práctica de los 4 tiempos del presente con ejemplos reales.</div><a class="btn-recurso" href="https://drive.google.com/file/d/15FtERfWKsfS2unzs9_u5ja0tKMiTuJLd/view?usp=drive_link" target="_blank">⬇ Descargar</a></div>
       </div>
-
-      <div class="recurso-card fade-up d2" data-nivel="basico" data-tema="gramatica" style="animation-play-state: running;">
+      <div class="recurso-card fade-up d2" data-nivel="basico" data-tema="gramatica" style="animation-play-state: paused;">
         <div class="recurso-icon">📗</div>
-        <div style="flex:1;">
-          <span class="recurso-nivel nivel-basico">Básico</span>
-          <div class="recurso-titulo">Guía de Gramática</div>
-          <div class="recurso-desc">Gramática esencial para principiantes. Reglas claras sin teoría pesada.</div>
-          <a class="btn-recurso" href="https://drive.google.com/file/d/1ttaXpj5DWDsYSxvTX_XKYKuaAENntGLG/view?usp=drive_link" target="_blank">⬇ Descargar</a>
-        </div>
+        <div style="flex:1;"><span class="recurso-nivel nivel-basico">Básico</span><div class="recurso-titulo">Guía de Gramática</div><div class="recurso-desc">Gramática esencial para principiantes. Reglas claras sin teoría pesada.</div><a class="btn-recurso" href="https://drive.google.com/file/d/1ttaXpj5DWDsYSxvTX_XKYKuaAENntGLG/view?usp=drive_link" target="_blank">⬇ Descargar</a></div>
       </div>
-
-      <div class="recurso-card fade-up d3" data-nivel="basico" data-tema="gramatica" style="animation-play-state: running;">
+      <div class="recurso-card fade-up d3" data-nivel="basico" data-tema="gramatica" style="animation-play-state: paused;">
         <div class="recurso-icon">🃏</div>
-        <div style="flex:1;">
-          <span class="recurso-nivel nivel-basico">Básico</span>
-          <div class="recurso-titulo">Grammar Flashcards</div>
-          <div class="recurso-desc">Fichas gramaticales para repasar de forma visual y práctica.</div>
-          <a class="btn-recurso" href="https://drive.google.com/drive/folders/1vG7dzDmLaYKH_GaW3wbJPpdwmd4rCtyM?usp=drive_link" target="_blank">⬇ Descargar</a>
-        </div>
+        <div style="flex:1;"><span class="recurso-nivel nivel-basico">Básico</span><div class="recurso-titulo">Grammar Flashcards</div><div class="recurso-desc">Fichas gramaticales para repasar de forma visual y práctica.</div><a class="btn-recurso" href="https://drive.google.com/drive/folders/1vG7dzDmLaYKH_GaW3wbJPpdwmd4rCtyM?usp=drive_link" target="_blank">⬇ Descargar</a></div>
       </div>
-
-      <div class="recurso-card fade-up d4" data-nivel="intermedio" data-tema="tiempos" style="animation-play-state: running;">
+      <div class="recurso-card fade-up d4" data-nivel="intermedio" data-tema="tiempos" style="animation-play-state: paused;">
         <div class="recurso-icon">📊</div>
-        <div style="flex:1;">
-          <span class="recurso-nivel nivel-intermedio">Intermedio</span>
-          <div class="recurso-titulo">16 Tenses Chart</div>
-          <div class="recurso-desc">Tabla completa de los 16 tiempos verbales. Tu referencia de consulta rápida.</div>
-          <a class="btn-recurso" href="https://drive.google.com/file/d/1Jo5-muPjNjZVwoGeXEEVH-Vj5N6PrTG-/view?usp=drive_link" target="_blank">⬇ Descargar</a>
-        </div>
+        <div style="flex:1;"><span class="recurso-nivel nivel-intermedio">Intermedio</span><div class="recurso-titulo">16 Tenses Chart</div><div class="recurso-desc">Tabla completa de los 16 tiempos verbales. Tu referencia de consulta rápida.</div><a class="btn-recurso" href="https://drive.google.com/file/d/1Jo5-muPjNjZVwoGeXEEVH-Vj5N6PrTG-/view?usp=drive_link" target="_blank">⬇ Descargar</a></div>
       </div>
-
     </div>
-
-    <div class="pronto-card fade-up" style="animation-play-state: running;">
+    <div class="pronto-card fade-up" style="animation-play-state: paused;">
       <p style="font-family:&#39;Poppins&#39;,sans-serif;font-weight:600;font-size:14px;color:var(--blue);margin-bottom:4px;">🔜 Más materiales próximamente</p>
       <p style="font-size:13px;color:var(--gray);">Suscríbete abajo para recibir nuevos recursos directo en tu correo.</p>
     </div>
   </div>
 </section>
 
-<!-- CORREO -->
 <section class="correo-section" id="correo">
   <div class="container">
-    <div class="correo-card fade-up" style="animation-play-state: running;">
+    <div class="correo-card fade-up" style="animation-play-state: paused;">
       <div id="correo-form-view">
         <h2>Recibe nuevos recursos <span>directo en tu correo</span> 📩</h2>
-        <p>Sin spam. Sin rollo. Solo materiales de inglés que realmente sirven — cuando los publique, te aviso.</p>
+        <p>Sin spam. Sin rollo. Solo materiales de inglés que realmente sirven.</p>
         <div class="correo-form">
           <input class="correo-input" type="email" id="correo-email" placeholder="Tu correo electrónico" required="">
           <button class="btn-correo" onclick="handleCorreo()">Suscribirme</button>
@@ -332,32 +252,23 @@
       </div>
       <div class="correo-success" id="correo-success">
         <div style="font-size:48px;margin-bottom:12px;">🎉</div>
-        <h3>¡Listo, <span id="correo-name-show"></span>!</h3>
+        <h3>¡Listo!</h3>
         <p>Te avisaremos cuando haya nuevos recursos. Mientras tanto, explora la biblioteca. 💙</p>
       </div>
     </div>
   </div>
 </section>
 
-<!-- CLASES -->
 <section class="clases" id="clases">
   <div class="container text-center">
-    <p class="section-label fade-up" style="animation-play-state: running;">Aprende conmigo</p>
-    <h2 class="section-title fade-up d1" style="animation-play-state: running;">Clases de inglés <span>personalizadas</span></h2>
-    <p style="color: var(--gray); font-size: 15px; margin-bottom: 28px; max-width: 480px; margin-left: auto; margin-right: auto; animation-play-state: running;" class="fade-up d2">Adaptadas a tu nivel, tus objetivos y tu ritmo. Escríbeme por WhatsApp y agendamos tu primera clase.</p>
-    <div class="clases-grid fade-up d2" style="animation-play-state: running;">
-      <div class="clase-card">
-        <div class="clase-icon">👤</div>
-        <div class="clase-title">Clases 1:1</div>
-        <div class="clase-desc">Atención personalizada. Avanzas a tu ritmo con enfoque en tus necesidades específicas.</div>
-      </div>
-      <div class="clase-card">
-        <div class="clase-icon">👥</div>
-        <div class="clase-title">Sesiones grupales</div>
-        <div class="clase-desc">Aprende en comunidad. Práctica conversacional en un ambiente dinámico y motivador.</div>
-      </div>
+    <p class="section-label fade-up" style="animation-play-state: paused;">Aprende conmigo</p>
+    <h2 class="section-title fade-up d1" style="animation-play-state: paused;">Clases de inglés <span>personalizadas</span></h2>
+    <p style="color: var(--gray); font-size: 15px; margin-bottom: 28px; max-width: 480px; margin-left: auto; margin-right: auto; animation-play-state: paused;" class="fade-up d2">Adaptadas a tu nivel, tus objetivos y tu ritmo. Escríbeme por WhatsApp y agendamos tu primera clase.</p>
+    <div class="clases-grid fade-up d2" style="animation-play-state: paused;">
+      <div class="clase-card"><div class="clase-icon">👤</div><div class="clase-title">Clases 1:1</div><div class="clase-desc">Atención personalizada. Avanzas a tu ritmo con enfoque en tus necesidades específicas.</div></div>
+      <div class="clase-card"><div class="clase-icon">👥</div><div class="clase-title">Sesiones grupales</div><div class="clase-desc">Aprende en comunidad. Práctica conversacional en un ambiente dinámico y motivador.</div></div>
     </div>
-    <a class="btn-wa-big fade-up d3" href="https://wa.me/19044266634?text=Hola%20Mercedes%2C%20me%20interesa%20agendar%20una%20clase%20de%20ingl%C3%A9s%20%F0%9F%93%9A" target="_blank" style="animation-play-state: running;">
+    <a class="btn-wa-big fade-up d3" href="https://wa.me/19044266634?text=Hola%20Mercedes%2C%20me%20interesa%20agendar%20una%20clase%20de%20ingl%C3%A9s%20%F0%9F%93%9A" target="_blank" style="animation-play-state: paused;">
       <svg width="22" height="22" viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"></path></svg>
       Escribirme por WhatsApp
     </a>
@@ -365,12 +276,11 @@
   </div>
 </section>
 
-<!-- SOBRE MI -->
 <section class="sobre-mi">
   <div class="container">
     <div class="sobre-grid">
-      <img class="sobre-foto fade-up" src="https://via.placeholder.com/130x130/1B6CA8/FFFFFF?text=MM" alt="Mercedes — MMercedesEnglish" id="sobre-foto" style="animation-play-state: running;">
-      <div class="fade-up d1" style="animation-play-state: running;">
+      <img class="sobre-foto fade-up" src="https://via.placeholder.com/130x130/1B6CA8/FFFFFF?text=MM" alt="Mercedes — MMercedesEnglish" style="animation-play-state: paused;">
+      <div class="fade-up d1" style="animation-play-state: paused;">
         <div class="sobre-name"><span>MM</span>ercedes</div>
         <div class="sobre-handle">@MMercedesEnglish</div>
         <p class="sobre-bio">Soy profesora de inglés especializada en hispanohablantes. Mi método es simple: sin teoría pesada, sin abrumar, con ejemplos reales que puedes aplicar hoy. Creo que el inglés no tiene que ser difícil — solo necesitas el enfoque correcto y alguien que te lo explique como tú aprendes.</p>
@@ -385,94 +295,88 @@
   </div>
 </section>
 
-<!-- TESTIMONIOS -->
 <section class="testimonios">
   <div class="container">
-    <p class="section-label text-center fade-up" style="animation-play-state: running;">Lo que dicen</p>
-    <h2 class="section-title text-center fade-up d1" style="animation-play-state: running;">Resultados <span>reales</span></h2>
+    <p class="section-label text-center fade-up" style="animation-play-state: paused;">Lo que dicen</p>
+    <h2 class="section-title text-center fade-up d1" style="animation-play-state: paused;">Resultados <span>reales</span></h2>
     <div class="testi-grid">
-      <div class="testi-card fade-up d1" style="animation-play-state: running;">
+      <div class="testi-card fade-up d1" style="animation-play-state: paused;">
         <div class="testi-stars">★★★★★</div>
         <p class="testi-text">"Me encantó este post... eres la mejor, lo certifico."</p>
-        <div class="testi-author"><div class="testi-av">KM</div><div><div class="testi-name">kuchitura_mr</div><div class="testi-loc">Instagram</div></div></div>
+        <div class="testi-author"><div class="testi-av">♥</div><div><div class="testi-name">Estudiante</div><div class="testi-loc">Instagram</div></div></div>
       </div>
-      <div class="testi-card fade-up d2" style="animation-play-state: running;">
+      <div class="testi-card fade-up d2" style="animation-play-state: paused;">
         <div class="testi-stars">★★★★★</div>
-        <p class="testi-text">"100% recomendada, ella es lo máximo. @mmercedes_english"</p>
-        <div class="testi-author"><div class="testi-av">KM</div><div><div class="testi-name">kuchitura_mr</div><div class="testi-loc">Instagram</div></div></div>
+        <p class="testi-text">"100% recomendada, ella es lo máximo."</p>
+        <div class="testi-author"><div class="testi-av">♥</div><div><div class="testi-name">Estudiante</div><div class="testi-loc">Instagram</div></div></div>
       </div>
       <div class="testi-card fade-up d3" style="animation-play-state: paused;">
         <div class="testi-stars">★★★★★</div>
         <p class="testi-text">"Gracias Mecha, excelente teacher para mi cachorro... te quiero inmenso. 😍"</p>
-        <div class="testi-author"><div class="testi-av">JL</div><div><div class="testi-name">joyeria_jacqueline.lalanne</div><div class="testi-loc">Instagram</div></div></div>
+        <div class="testi-author"><div class="testi-av">♥</div><div><div class="testi-name">Mamá de estudiante</div><div class="testi-loc">Instagram</div></div></div>
       </div>
       <div class="testi-card fade-up d4" style="animation-play-state: paused;">
         <div class="testi-stars">★★★★★</div>
-        <p class="testi-text">"Su contenido es claro, práctico y fácil de entender. Aprendes inglés de verdad con MMercedesEnglish."</p>
-        <div class="testi-author"><div class="testi-av">♥</div><div><div class="testi-name">Comunidad MMercedesEnglish</div><div class="testi-loc">Instagram &amp; TikTok</div></div></div>
+        <p class="testi-text">"Buenos días, me dijo que quedó muy contento por su dedicación y apoyo. Muchas gracias."</p>
+        <div class="testi-author"><div class="testi-av">♥</div><div><div class="testi-name">Representante de estudiante</div><div class="testi-loc">Comunidad</div></div></div>
+      </div>
+      <div class="testi-card fade-up d1" style="animation-play-state: paused;">
+        <div class="testi-stars">★★★★★</div>
+        <p class="testi-text">"Gracias Maria Mercedes, la mejor profesora. Esperamos seguir contando con su enseñanza para nuestra niña."</p>
+        <div class="testi-author"><div class="testi-av">♥</div><div><div class="testi-name">Familia de estudiante</div><div class="testi-loc">Comunidad</div></div></div>
+      </div>
+      <div class="testi-card fade-up d2" style="animation-play-state: paused;">
+        <div class="testi-stars">★★★★★</div>
+        <p class="testi-text">"Su contenido es claro, práctico y fácil de entender. Aprendes inglés de verdad."</p>
+        <div class="testi-author"><div class="testi-av">♥</div><div><div class="testi-name">Estudiante</div><div class="testi-loc">Instagram &amp; TikTok</div></div></div>
       </div>
     </div>
   </div>
 </section>
 
-<!-- FOOTER -->
 <footer>
   <div class="container">
     <div class="footer-logo"><span>MM</span>ercedesEnglish</div>
     <div class="footer-tagline">Tiny Tips, Big Progress 💙</div>
     <div class="footer-links">
       <a href="https://instagram.com/mmercedesenglish" target="_blank">Instagram</a>
-      <a href="file:///C:/Users/marra/Downloads/index_15.html#biblioteca">Recursos gratuitos</a>
-      <a href="file:///C:/Users/marra/Downloads/index_15.html#clases">Agendar clase</a>
-      <a href="file:///C:/Users/marra/Downloads/index_15.html#correo">Newsletter</a>
+      <a href="file:///C:/Users/marra/Downloads/index_17.html#biblioteca">Recursos gratuitos</a>
+      <a href="file:///C:/Users/marra/Downloads/index_17.html#clases">Agendar clase</a>
+      <a href="file:///C:/Users/marra/Downloads/index_17.html#correo">Newsletter</a>
     </div>
   </div>
 </footer>
 
 <script>
-  // Filtros biblioteca
   function filtrar(filtro) {
     document.querySelectorAll('.filtro-btn').forEach(b => b.classList.remove('filtro-active'));
     document.querySelector('[data-filtro="'+filtro+'"]').classList.add('filtro-active');
     document.querySelectorAll('.recurso-card').forEach(card => {
-      if (filtro === 'todos') {
-        card.classList.remove('recurso-hidden');
-      } else {
-        const nivel = card.getAttribute('data-nivel');
-        const tema = card.getAttribute('data-tema');
-        if (nivel === filtro || tema === filtro) {
-          card.classList.remove('recurso-hidden');
-        } else {
-          card.classList.add('recurso-hidden');
-        }
+      if(filtro==='todos'){card.classList.remove('recurso-hidden');}
+      else{
+        const n=card.getAttribute('data-nivel');
+        const t=card.getAttribute('data-tema');
+        if(n===filtro||t===filtro){card.classList.remove('recurso-hidden');}
+        else{card.classList.add('recurso-hidden');}
       }
     });
   }
-
-  // Formulario de correo simple
   function handleCorreo() {
-    const email = document.getElementById('correo-email').value.trim();
-    if (!email || !email.includes('@')) {
-      const inp = document.getElementById('correo-email');
-      inp.style.borderColor = '#EF4444';
-      setTimeout(() => inp.style.borderColor = '', 2000);
+    const email=document.getElementById('correo-email').value.trim();
+    if(!email||!email.includes('@')){
+      const inp=document.getElementById('correo-email');
+      inp.style.borderColor='#EF4444';
+      setTimeout(()=>inp.style.borderColor='',2000);
       return;
     }
-    // Guardar en localStorage como registro local
-    const subs = JSON.parse(localStorage.getItem('mm_subs') || '[]');
-    subs.push({ email, date: new Date().toISOString() });
-    localStorage.setItem('mm_subs', JSON.stringify(subs));
-
-    document.getElementById('correo-form-view').style.display = 'none';
-    document.getElementById('correo-success').style.display = 'block';
+    document.getElementById('correo-form-view').style.display='none';
+    document.getElementById('correo-success').style.display='block';
   }
-
-  // Animaciones scroll
-  const fadeEls = document.querySelectorAll('.fade-up');
-  const obs = new IntersectionObserver(entries => {
-    entries.forEach(e => { if (e.isIntersecting) e.target.style.animationPlayState = 'running'; });
-  }, { threshold: 0.1 });
-  fadeEls.forEach(el => { el.style.animationPlayState = 'paused'; obs.observe(el); });
+  const fadeEls=document.querySelectorAll('.fade-up');
+  const obs=new IntersectionObserver(entries=>{
+    entries.forEach(e=>{if(e.isIntersecting)e.target.style.animationPlayState='running';});
+  },{threshold:0.1});
+  fadeEls.forEach(el=>{el.style.animationPlayState='paused';obs.observe(el);});
 </script>
 
 
