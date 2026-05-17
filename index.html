@@ -1,834 +1,264 @@
 <!DOCTYPE html>
-<!-- saved from url=(0046)file:///C:/Users/marra/Downloads/index_13.html -->
+<!-- saved from url=(0046)file:///C:/Users/marra/Downloads/index_15.html -->
 <html lang="es"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Los Cimientos del Inglés — Descarga Gratis | MMercedesEnglish</title>
-<meta name="description" content="Descarga gratis la guía práctica de los 4 tiempos del presente en inglés. Sin teoría pesada. Sin confusión. Solo resultados.">
+<title>MMercedesEnglish — Aprende inglés fácil y real</title>
+<meta name="description" content="Recursos gratuitos, clases de inglés y materiales para hispanohablantes. Tiny Tips, Big Progress.">
 <link rel="preconnect" href="https://fonts.googleapis.com/">
 <link rel="preconnect" href="https://fonts.gstatic.com/" crossorigin="">
-<link href="./Los Cimientos del Inglés — Descarga Gratis _ MMercedesEnglish_files/css2" rel="stylesheet">
-
+<link href="./MMercedesEnglish — Aprende inglés fácil y real_files/css2" rel="stylesheet">
 <style>
-  /* ── TOKENS ─────────────────────────────────── */
   :root {
-    --blue:        #1B6CA8;
-    --blue-dark:   #0D4F80;
-    --blue-light:  #D6E9F8;
-    --blue-xlight: #EBF4FC;
-    --yellow:      #F5C842;
-    --yellow-dark: #C9991A;
-    --black:       #1A1A2E;
-    --gray:        #6B7280;
-    --gray-light:  #F3F4F6;
-    --white:       #FFFFFF;
-    --radius:      14px;
-    --radius-lg:   22px;
+    --blue:       #1B6CA8;
+    --blue-dark:  #0D4F80;
+    --blue-light: #D6E9F8;
+    --blue-xl:    #EBF4FC;
+    --yellow:     #F5C842;
+    --yellow-dk:  #C9991A;
+    --black:      #1A1A2E;
+    --gray:       #6B7280;
+    --gray-lt:    #F3F4F6;
+    --white:      #FFFFFF;
+    --green:      #25D366;
+    --r:          14px;
+    --r-lg:       22px;
   }
-
-  /* ── RESET ──────────────────────────────────── */
   *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
   html { scroll-behavior: smooth; }
-  body {
-    font-family: 'Nunito', sans-serif;
-    background: var(--white);
-    color: var(--black);
-    overflow-x: hidden;
-    line-height: 1.6;
-  }
+  body { font-family: 'Nunito', sans-serif; background: var(--white); color: var(--black); overflow-x: hidden; line-height: 1.6; }
   img { max-width: 100%; display: block; }
-  a { color: inherit; text-decoration: none; }
-
-  /* ── UTILITIES ──────────────────────────────── */
-  .container { width: min(680px, 92vw); margin: 0 auto; }
+  a { text-decoration: none; color: inherit; }
+  .container { width: min(700px, 92vw); margin: 0 auto; }
   .text-center { text-align: center; }
 
-  /* ── ANIMATIONS ─────────────────────────────── */
-  @keyframes fadeUp {
-    from { opacity: 0; transform: translateY(28px); }
-    to   { opacity: 1; transform: translateY(0); }
-  }
-  @keyframes float {
-    0%, 100% { transform: translateY(0px); }
-    50%       { transform: translateY(-10px); }
-  }
-  @keyframes pulse-ring {
-    0%   { box-shadow: 0 0 0 0 rgba(245,200,66,.45); }
-    70%  { box-shadow: 0 0 0 18px rgba(245,200,66,0); }
-    100% { box-shadow: 0 0 0 0 rgba(245,200,66,0); }
-  }
-  @keyframes shimmer {
-    0%   { background-position: -200% center; }
-    100% { background-position: 200% center; }
-  }
-  @keyframes badgePop {
-    0%   { transform: scale(0.7) rotate(-6deg); opacity: 0; }
-    70%  { transform: scale(1.08) rotate(2deg); }
-    100% { transform: scale(1) rotate(0deg); opacity: 1; }
-  }
-  @keyframes checkPop {
-    0%   { transform: scale(0); }
-    70%  { transform: scale(1.2); }
-    100% { transform: scale(1); }
-  }
+  /* ANIMATIONS */
+  @keyframes fadeUp { from { opacity:0; transform:translateY(24px); } to { opacity:1; transform:translateY(0); } }
+  @keyframes float { 0%,100% { transform:translateY(0); } 50% { transform:translateY(-8px); } }
+  @keyframes shimmer { 0% { background-position:-200% center; } 100% { background-position:200% center; } }
+  .fade-up { animation: fadeUp .6s ease both; }
+  .d1 { animation-delay:.1s; } .d2 { animation-delay:.2s; } .d3 { animation-delay:.3s; } .d4 { animation-delay:.4s; }
 
-  .fade-up { animation: fadeUp .7s ease both; }
-  .delay-1 { animation-delay: .1s; }
-  .delay-2 { animation-delay: .22s; }
-  .delay-3 { animation-delay: .36s; }
-  .delay-4 { animation-delay: .50s; }
-  .delay-5 { animation-delay: .64s; }
+  /* TOP BAR */
+  .topbar { background:var(--blue-dark); color:var(--white); text-align:center; padding:9px 16px; font-family:'Poppins',sans-serif; font-size:13px; font-weight:600; letter-spacing:.02em; }
+  .topbar span { color:var(--yellow); }
 
-  /* ── TOP BAR ─────────────────────────────────── */
-  .topbar {
-    background: var(--blue-dark);
-    color: var(--white);
-    text-align: center;
-    padding: 10px 16px;
-    font-family: 'Poppins', sans-serif;
-    font-size: clamp(12px, 3vw, 14px);
-    font-weight: 600;
-    letter-spacing: .02em;
-  }
-  .topbar span { color: var(--yellow); }
+  /* NAV */
+  nav { background:var(--white); border-bottom:2px solid var(--blue-light); padding:12px 0; position:sticky; top:0; z-index:100; }
+  .nav-inner { width:min(700px,92vw); margin:0 auto; display:flex; align-items:center; justify-content:space-between; gap:8px; }
+  .logo { font-family:'Poppins',sans-serif; font-weight:800; font-size:17px; color:var(--black); white-space:nowrap; }
+  .logo .mm { color:var(--blue); }
+  .nav-btns { display:flex; align-items:center; gap:8px; flex-shrink:0; }
+  .nav-btn { font-family:'Poppins',sans-serif; font-weight:700; font-size:12px; padding:7px 14px; border-radius:50px; white-space:nowrap; transition:transform .15s,box-shadow .15s; }
+  .nav-btn-outline { border:2px solid var(--blue); color:var(--blue); background:transparent; }
+  .nav-btn-outline:hover { background:var(--blue-xl); }
+  .nav-btn-solid { background:var(--green); color:var(--white); border:2px solid var(--green); }
+  .nav-btn-solid:hover { transform:translateY(-1px); box-shadow:0 4px 12px rgba(37,211,102,.4); }
 
-  /* ── NAV ─────────────────────────────────────── */
-  nav {
-    background: var(--white);
-    border-bottom: 2px solid var(--blue-light);
-    padding: 14px 0;
-    position: sticky;
-    top: 0;
-    z-index: 100;
-  }
-  .nav-inner {
-    width: min(680px, 92vw);
-    margin: 0 auto;
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-  }
-  .logo {
-    font-family: 'Poppins', sans-serif;
-    font-weight: 800;
-    font-size: 18px;
-    color: var(--black);
-    display: flex;
-    align-items: center;
-    gap: 4px;
-  }
-  .logo .mm { color: var(--blue); }
-  .nav-cta {
-    background: var(--yellow);
-    color: var(--black);
-    font-family: 'Poppins', sans-serif;
-    font-weight: 700;
-    font-size: 13px;
-    padding: 8px 18px;
-    border-radius: 50px;
-    transition: transform .15s, box-shadow .15s;
-  }
-  .nav-cta:hover { transform: translateY(-1px); box-shadow: 0 4px 14px rgba(245,200,66,.5); }
+  /* HERO */
+  .hero { background:linear-gradient(150deg, var(--blue-xl) 0%, var(--white) 55%); padding:52px 0 40px; position:relative; overflow:hidden; }
+  .hero::before { content:''; position:absolute; top:-60px; right:-60px; width:300px; height:300px; background:radial-gradient(circle, rgba(245,200,66,.15) 0%, transparent 70%); border-radius:50%; pointer-events:none; }
+  .hero-grid { display:grid; grid-template-columns:1fr 1fr; gap:32px; align-items:center; }
+  @media(max-width:560px) { .hero-grid { grid-template-columns:1fr; text-align:center; } }
+  .hero-badge { display:inline-flex; align-items:center; gap:6px; background:var(--yellow); color:var(--black); font-family:'Poppins',sans-serif; font-weight:700; font-size:12px; padding:5px 14px; border-radius:50px; margin-bottom:16px; }
+  .hero h1 { font-family:'Poppins',sans-serif; font-weight:800; font-size:clamp(24px,5vw,38px); line-height:1.2; color:var(--black); margin-bottom:12px; }
+  .hero h1 .accent { color:var(--blue); }
+  .hero h1 .accent-y { color:var(--yellow-dk); }
+  .hero-sub { font-size:15px; color:var(--gray); margin-bottom:24px; line-height:1.65; }
+  .hero-btns { display:flex; flex-wrap:wrap; gap:10px; }
+  @media(max-width:560px) { .hero-btns { justify-content:center; } }
+  .btn-primary { display:inline-flex; align-items:center; gap:8px; background:var(--blue); color:var(--white); font-family:'Poppins',sans-serif; font-weight:700; font-size:14px; padding:13px 22px; border-radius:var(--r); transition:transform .15s,box-shadow .15s; border:none; cursor:pointer; }
+  .btn-primary:hover { transform:translateY(-2px); box-shadow:0 6px 20px rgba(27,108,168,.35); }
+  .btn-wa { background:var(--green); }
+  .btn-wa:hover { box-shadow:0 6px 20px rgba(37,211,102,.4); }
+  .hero-img-wrap { position:relative; display:flex; justify-content:center; animation:float 4s ease-in-out infinite; }
+  .hero-img-wrap img { width:min(260px,80vw); border-radius:var(--r-lg); box-shadow:0 20px 50px rgba(13,79,128,.2); }
 
-  /* ── HERO ─────────────────────────────────────── */
-  .hero {
-    background: linear-gradient(160deg, var(--blue-xlight) 0%, var(--white) 60%);
-    padding: 60px 0 0;
-    position: relative;
-    overflow: hidden;
-  }
-  .hero::before {
-    content: '';
-    position: absolute;
-    top: -80px; right: -80px;
-    width: 340px; height: 340px;
-    background: radial-gradient(circle, rgba(245,200,66,.18) 0%, transparent 70%);
-    border-radius: 50%;
-    pointer-events: none;
-  }
-  .hero::after {
-    content: '';
-    position: absolute;
-    bottom: 60px; left: -60px;
-    width: 220px; height: 220px;
-    background: radial-gradient(circle, rgba(27,108,168,.12) 0%, transparent 70%);
-    border-radius: 50%;
-    pointer-events: none;
-  }
+  /* BENEFITS */
+  .benefits { padding:48px 0; background:var(--white); }
+  .section-label { font-family:'Poppins',sans-serif; font-size:11px; font-weight:700; letter-spacing:.1em; text-transform:uppercase; color:var(--blue); margin-bottom:8px; }
+  .section-title { font-family:'Poppins',sans-serif; font-weight:800; font-size:clamp(20px,4.5vw,30px); color:var(--black); line-height:1.25; margin-bottom:32px; }
+  .section-title span { color:var(--blue); }
+  .benefits-grid { display:grid; grid-template-columns:repeat(auto-fit,minmax(150px,1fr)); gap:14px; }
+  .benefit-card { background:var(--blue-xl); border-radius:var(--r-lg); padding:20px 16px; text-align:center; border:1.5px solid var(--blue-light); transition:transform .2s,box-shadow .2s; }
+  .benefit-card:hover { transform:translateY(-3px); box-shadow:0 8px 24px rgba(27,108,168,.12); }
+  .benefit-icon { font-size:28px; margin-bottom:10px; }
+  .benefit-title { font-family:'Poppins',sans-serif; font-weight:700; font-size:13px; color:var(--black); margin-bottom:4px; }
+  .benefit-desc { font-size:12px; color:var(--gray); line-height:1.5; }
 
-  .badge-free {
-    display: inline-flex;
-    align-items: center;
-    gap: 6px;
-    background: var(--yellow);
-    color: var(--black);
-    font-family: 'Poppins', sans-serif;
-    font-weight: 700;
-    font-size: 13px;
-    padding: 6px 16px;
-    border-radius: 50px;
-    margin-bottom: 20px;
-    animation: badgePop .6s ease both;
-  }
-  .badge-free::before { content: '★'; font-size: 14px; }
+  /* BIBLIOTECA */
+  .biblioteca { padding:52px 0; background:var(--gray-lt); }
+  .recursos-grid { display:grid; grid-template-columns:repeat(auto-fit,minmax(280px,1fr)); gap:16px; margin-top:8px; }
+  .recurso-card { background:var(--white); border-radius:var(--r-lg); padding:20px; display:flex; align-items:flex-start; gap:14px; border:1.5px solid var(--blue-light); transition:transform .2s,box-shadow .2s; position:relative; overflow:hidden; }
+  .recurso-card::before { content:''; position:absolute; top:0; left:0; right:0; height:3px; background:linear-gradient(90deg,var(--blue),var(--yellow),var(--blue)); background-size:200% auto; animation:shimmer 3s linear infinite; }
+  .recurso-card:hover { transform:translateY(-3px); box-shadow:0 8px 24px rgba(27,108,168,.12); }
+  .recurso-icon { width:46px; height:46px; border-radius:12px; background:var(--blue-light); display:flex; align-items:center; justify-content:center; font-size:22px; flex-shrink:0; }
+  .recurso-nivel { display:inline-block; font-size:10px; font-weight:700; padding:2px 8px; border-radius:50px; margin-bottom:5px; font-family:'Poppins',sans-serif; letter-spacing:.05em; text-transform:uppercase; }
+  .nivel-basico { background:#EAF3DE; color:#27500A; }
+  .nivel-intermedio { background:#E6F1FB; color:#0C447C; }
+  .recurso-titulo { font-family:'Poppins',sans-serif; font-weight:700; font-size:14px; color:var(--black); margin-bottom:4px; line-height:1.3; }
+  .recurso-desc { font-size:12px; color:var(--gray); line-height:1.5; margin-bottom:12px; }
+  .btn-recurso { display:inline-flex; align-items:center; gap:6px; font-family:'Poppins',sans-serif; font-weight:700; font-size:12px; color:var(--blue); border:1.5px solid var(--blue); padding:6px 14px; border-radius:50px; transition:all .15s; }
+  .btn-recurso:hover { background:var(--blue); color:var(--white); }
 
-  .hero h1 {
-    font-family: 'Poppins', sans-serif;
-    font-weight: 800;
-    font-size: clamp(26px, 6.5vw, 42px);
-    line-height: 1.15;
-    color: var(--black);
-    margin-bottom: 16px;
-  }
-  .hero h1 .accent { color: var(--blue); }
-  .hero h1 .accent-yellow { color: var(--yellow-dark); }
+  /* FILTROS */
+  .filtros { display:flex; gap:8px; flex-wrap:wrap; margin-bottom:20px; }
+  .filtro-btn { padding:6px 16px; font-size:12px; font-family:'Poppins',sans-serif; font-weight:600; border:1.5px solid var(--blue-light); border-radius:50px; cursor:pointer; background:transparent; color:var(--gray); transition:all .15s; }
+  .filtro-btn:hover { border-color:var(--blue); color:var(--blue); }
+  .filtro-active { background:var(--blue)!important; color:var(--white)!important; border-color:var(--blue)!important; }
+  .recurso-hidden { display:none!important; }
+  .pronto-card { background:var(--blue-xl); border-radius:var(--r-lg); padding:20px; text-align:center; margin-top:16px; border:1.5px dashed var(--blue-light); }
 
-  .hero-sub {
-    font-size: clamp(15px, 3.5vw, 18px);
-    color: var(--gray);
-    max-width: 520px;
-    margin: 0 auto 32px;
-    line-height: 1.65;
-  }
+  /* CORREO */
+  .correo-section { padding:52px 0; background:var(--blue); }
+  .correo-card { background:rgba(255,255,255,.1); border:1.5px solid rgba(255,255,255,.2); border-radius:var(--r-lg); padding:clamp(24px,5vw,40px); backdrop-filter:blur(10px); }
+  .correo-card h2 { font-family:'Poppins',sans-serif; font-weight:800; font-size:clamp(20px,4vw,28px); color:var(--white); margin-bottom:8px; line-height:1.25; }
+  .correo-card h2 span { color:var(--yellow); }
+  .correo-card p { color:rgba(255,255,255,.8); font-size:14px; margin-bottom:24px; }
+  .correo-form { display:flex; gap:10px; flex-wrap:wrap; }
+  .correo-input { flex:1; min-width:200px; padding:13px 18px; border:2px solid rgba(255,255,255,.3); border-radius:var(--r); font-family:'Nunito',sans-serif; font-size:15px; color:var(--white); background:rgba(255,255,255,.1); outline:none; transition:border-color .2s; }
+  .correo-input::placeholder { color:rgba(255,255,255,.5); }
+  .correo-input:focus { border-color:var(--yellow); }
+  .btn-correo { padding:13px 24px; background:var(--yellow); color:var(--black); font-family:'Poppins',sans-serif; font-weight:700; font-size:14px; border:none; border-radius:var(--r); cursor:pointer; white-space:nowrap; transition:transform .15s,box-shadow .15s; }
+  .btn-correo:hover { transform:translateY(-2px); box-shadow:0 6px 20px rgba(245,200,66,.4); }
+  .correo-nota { font-size:12px; color:rgba(255,255,255,.5); margin-top:12px; text-align:center; }
 
-  /* ── BOOK MOCKUP ─────────────────────────────── */
-  .book-wrap {
-    position: relative;
-    display: inline-block;
-    margin: 0 auto 0;
-    animation: float 4s ease-in-out infinite;
-  }
-  .book-wrap img {
-    width: min(280px, 70vw);
-    border-radius: 12px;
-    box-shadow: 0 24px 60px rgba(13,79,128,.22), 0 4px 16px rgba(0,0,0,.10);
-    position: relative;
-    z-index: 2;
-  }
-  .book-glow {
-    position: absolute;
-    inset: 20px -20px -20px 20px;
-    background: linear-gradient(135deg, var(--yellow) 0%, var(--blue) 100%);
-    border-radius: 16px;
-    opacity: .25;
-    filter: blur(24px);
-    z-index: 1;
-  }
-  .book-badge {
-    position: absolute;
-    top: -14px; right: -14px;
-    background: var(--yellow);
-    color: var(--black);
-    font-family: 'Poppins', sans-serif;
-    font-weight: 800;
-    font-size: 11px;
-    text-align: center;
-    width: 62px; height: 62px;
-    border-radius: 50%;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    line-height: 1.2;
-    border: 3px solid var(--white);
-    box-shadow: 0 4px 12px rgba(0,0,0,.15);
-    z-index: 3;
-    animation: badgePop .6s .4s ease both;
-  }
-  .book-badge .big { font-size: 18px; }
+  /* SUCCESS */
+  .correo-success { display:none; text-align:center; padding:20px; }
+  .correo-success h3 { font-family:'Poppins',sans-serif; font-weight:700; font-size:20px; color:var(--white); margin-bottom:8px; }
+  .correo-success p { color:rgba(255,255,255,.8); font-size:14px; }
 
-  /* ── FORM SECTION ────────────────────────────── */
-  .form-section {
-    background: var(--white);
-    padding: 56px 0;
-  }
-  .form-card {
-    background: var(--white);
-    border: 2px solid var(--blue-light);
-    border-radius: var(--radius-lg);
-    padding: clamp(28px, 6vw, 48px) clamp(20px, 5vw, 44px);
-    box-shadow: 0 12px 48px rgba(27,108,168,.10);
-    position: relative;
-    overflow: hidden;
-  }
-  .form-card::before {
-    content: '';
-    position: absolute;
-    top: 0; left: 0; right: 0;
-    height: 5px;
-    background: linear-gradient(90deg, var(--blue) 0%, var(--yellow) 50%, var(--blue) 100%);
-    background-size: 200% auto;
-    animation: shimmer 3s linear infinite;
-  }
-  .form-card h2 {
-    font-family: 'Poppins', sans-serif;
-    font-weight: 800;
-    font-size: clamp(20px, 4.5vw, 28px);
-    color: var(--black);
-    line-height: 1.25;
-    margin-bottom: 8px;
-  }
-  .form-card h2 span { color: var(--blue); }
-  .form-card p {
-    color: var(--gray);
-    font-size: 15px;
-    margin-bottom: 28px;
-  }
+  /* CLASES */
+  .clases { padding:52px 0; background:var(--white); }
+  .clases-grid { display:grid; grid-template-columns:1fr 1fr; gap:16px; margin-bottom:28px; }
+  @media(max-width:500px) { .clases-grid { grid-template-columns:1fr; } }
+  .clase-card { background:var(--blue-xl); border-radius:var(--r-lg); padding:22px; text-align:center; border:1.5px solid var(--blue-light); }
+  .clase-icon { font-size:32px; margin-bottom:10px; }
+  .clase-title { font-family:'Poppins',sans-serif; font-weight:700; font-size:15px; color:var(--black); margin-bottom:6px; }
+  .clase-desc { font-size:13px; color:var(--gray); line-height:1.5; }
+  .btn-wa-big { display:flex; align-items:center; justify-content:center; gap:12px; background:var(--green); color:var(--white); font-family:'Poppins',sans-serif; font-weight:700; font-size:16px; padding:18px 32px; border-radius:var(--r); transition:transform .15s,box-shadow .15s; max-width:400px; margin:0 auto; }
+  .btn-wa-big:hover { transform:translateY(-2px); box-shadow:0 8px 28px rgba(37,211,102,.4); }
 
-  .form-group {
-    display: flex;
-    flex-direction: column;
-    gap: 12px;
-    margin-bottom: 16px;
-  }
-  .form-group input {
-    width: 100%;
-    padding: 15px 20px;
-    border: 2px solid var(--blue-light);
-    border-radius: var(--radius);
-    font-family: 'Nunito', sans-serif;
-    font-size: 16px;
-    color: var(--black);
-    background: var(--white);
-    outline: none;
-    transition: border-color .2s, box-shadow .2s;
-  }
-  .form-group input:focus {
-    border-color: var(--blue);
-    box-shadow: 0 0 0 4px rgba(27,108,168,.12);
-  }
-  .form-group input::placeholder { color: #9CA3AF; }
+  /* SOBRE MI */
+  .sobre-mi { padding:52px 0; background:var(--black); }
+  .sobre-grid { display:grid; grid-template-columns:auto 1fr; gap:32px; align-items:center; }
+  @media(max-width:500px) { .sobre-grid { grid-template-columns:1fr; text-align:center; } .sobre-grid img { margin:0 auto; } }
+  .sobre-foto { width:130px; height:130px; border-radius:50%; object-fit:cover; border:3px solid var(--yellow); flex-shrink:0; }
+  .sobre-name { font-family:'Poppins',sans-serif; font-weight:800; font-size:22px; color:var(--white); margin-bottom:4px; }
+  .sobre-name span { color:var(--yellow); }
+  .sobre-handle { font-size:13px; color:var(--yellow); margin-bottom:12px; }
+  .sobre-bio { font-size:15px; color:rgba(255,255,255,.75); line-height:1.7; }
+  .sobre-tags { display:flex; flex-wrap:wrap; gap:8px; margin-top:16px; }
+  @media(max-width:500px) { .sobre-tags { justify-content:center; } }
+  .sobre-tag { font-size:12px; font-family:'Poppins',sans-serif; font-weight:600; padding:4px 12px; border-radius:50px; background:rgba(255,255,255,.08); color:rgba(255,255,255,.7); }
 
-  .btn-download {
-    width: 100%;
-    padding: 18px 24px;
-    background: var(--blue);
-    color: var(--white);
-    font-family: 'Poppins', sans-serif;
-    font-weight: 700;
-    font-size: clamp(15px, 3.5vw, 17px);
-    border: none;
-    border-radius: var(--radius);
-    cursor: pointer;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    gap: 10px;
-    transition: transform .15s, box-shadow .15s, background .15s;
-    animation: pulse-ring 2.5s ease-in-out infinite;
-    position: relative;
-    overflow: hidden;
-  }
-  .btn-download::after {
-    content: '';
-    position: absolute;
-    inset: 0;
-    background: linear-gradient(90deg, transparent 0%, rgba(255,255,255,.12) 50%, transparent 100%);
-    background-size: 200% auto;
-    animation: shimmer 2s linear infinite;
-  }
-  .btn-download:hover {
-    background: var(--blue-dark);
-    transform: translateY(-2px);
-    box-shadow: 0 8px 28px rgba(27,108,168,.35);
-    animation: none;
-  }
-  .btn-download svg { flex-shrink: 0; }
+  /* TESTIMONIOS */
+  .testimonios { padding:52px 0; background:var(--blue-xl); }
+  .testi-grid { display:grid; grid-template-columns:1fr 1fr; gap:16px; margin-top:28px; }
+  @media(max-width:500px) { .testi-grid { grid-template-columns:1fr; } }
+  .testi-card { background:var(--white); border-radius:var(--r-lg); padding:20px; border:1.5px solid var(--blue-light); }
+  .testi-stars { color:var(--yellow); font-size:14px; margin-bottom:10px; }
+  .testi-text { font-size:13px; color:var(--black); line-height:1.65; margin-bottom:14px; font-style:italic; }
+  .testi-author { display:flex; align-items:center; gap:10px; }
+  .testi-av { width:32px; height:32px; border-radius:50%; background:var(--blue-light); display:flex; align-items:center; justify-content:center; font-family:'Poppins',sans-serif; font-weight:700; font-size:11px; color:var(--blue); flex-shrink:0; }
+  .testi-name { font-weight:700; font-size:13px; }
+  .testi-loc { font-size:11px; color:var(--gray); }
 
-  .privacy-note {
-    text-align: center;
-    font-size: 12px;
-    color: #9CA3AF;
-    margin-top: 14px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    gap: 5px;
-  }
-  .privacy-note::before { content: '🔒'; font-size: 13px; }
-
-  /* ── SUCCESS STATE ───────────────────────────── */
-  .success-state {
-    display: none;
-    text-align: center;
-    padding: 20px 0;
-  }
-  .success-icon {
-    width: 72px; height: 72px;
-    background: #ECFDF5;
-    border-radius: 50%;
-    display: flex; align-items: center; justify-content: center;
-    margin: 0 auto 20px;
-    font-size: 32px;
-    animation: checkPop .5s ease both;
-  }
-  .success-state h3 {
-    font-family: 'Poppins', sans-serif;
-    font-weight: 700;
-    font-size: 22px;
-    color: var(--black);
-    margin-bottom: 8px;
-  }
-  .success-state p { color: var(--gray); margin-bottom: 24px; }
-  .btn-go {
-    display: inline-flex;
-    align-items: center;
-    gap: 8px;
-    background: var(--yellow);
-    color: var(--black);
-    font-family: 'Poppins', sans-serif;
-    font-weight: 700;
-    font-size: 16px;
-    padding: 15px 32px;
-    border-radius: var(--radius);
-    transition: transform .15s, box-shadow .15s;
-    border: none; cursor: pointer;
-  }
-  .btn-go:hover { transform: translateY(-2px); box-shadow: 0 6px 20px rgba(245,200,66,.45); }
-
-  /* ── WHAT YOU GET ────────────────────────────── */
-  .what-section {
-    background: var(--blue-xlight);
-    padding: 56px 0;
-  }
-  .section-label {
-    font-family: 'Poppins', sans-serif;
-    font-size: 12px;
-    font-weight: 700;
-    letter-spacing: .12em;
-    text-transform: uppercase;
-    color: var(--blue);
-    margin-bottom: 10px;
-  }
-  .section-title {
-    font-family: 'Poppins', sans-serif;
-    font-weight: 800;
-    font-size: clamp(22px, 5vw, 32px);
-    color: var(--black);
-    line-height: 1.25;
-    margin-bottom: 36px;
-  }
-  .section-title span { color: var(--blue); }
-
-  .items-grid {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 14px;
-  }
-  @media (max-width: 500px) { .items-grid { grid-template-columns: 1fr; } }
-
-  .item-card {
-    background: var(--white);
-    border-radius: var(--radius);
-    padding: 20px;
-    display: flex;
-    align-items: flex-start;
-    gap: 14px;
-    border: 1.5px solid rgba(27,108,168,.12);
-    transition: transform .2s, box-shadow .2s;
-  }
-  .item-card:hover { transform: translateY(-3px); box-shadow: 0 8px 24px rgba(27,108,168,.10); }
-  .item-icon {
-    width: 44px; height: 44px;
-    border-radius: 10px;
-    background: var(--blue-light);
-    display: flex; align-items: center; justify-content: center;
-    font-size: 20px;
-    flex-shrink: 0;
-  }
-  .item-title {
-    font-family: 'Poppins', sans-serif;
-    font-weight: 700;
-    font-size: 14px;
-    color: var(--black);
-    margin-bottom: 3px;
-  }
-  .item-desc { font-size: 13px; color: var(--gray); line-height: 1.5; }
-
-  /* ── FOR WHO ─────────────────────────────────── */
-  .forwho-section { padding: 56px 0; background: var(--white); }
-  .forwho-list { display: flex; flex-direction: column; gap: 12px; margin-top: 28px; }
-  .forwho-item {
-    display: flex; align-items: center; gap: 14px;
-    padding: 16px 20px;
-    background: var(--gray-light);
-    border-radius: var(--radius);
-    border-left: 4px solid var(--blue);
-    font-size: 15px;
-    font-weight: 600;
-  }
-  .forwho-item .check {
-    width: 28px; height: 28px;
-    background: var(--blue);
-    border-radius: 50%;
-    display: flex; align-items: center; justify-content: center;
-    color: var(--white);
-    font-size: 14px;
-    flex-shrink: 0;
-  }
-
-  /* ── ABOUT ───────────────────────────────────── */
-  .about-section {
-    background: var(--black);
-    padding: 56px 0;
-    color: var(--white);
-  }
-  .about-inner {
-    display: flex;
-    align-items: center;
-    gap: 32px;
-  }
-  @media (max-width: 560px) {
-    .about-inner { flex-direction: column; text-align: center; }
-  }
-  .avatar-circle {
-    width: 110px; height: 110px;
-    border-radius: 50%;
-    border: 3px solid var(--yellow);
-    overflow: hidden;
-    flex-shrink: 0;
-    background: var(--blue-dark);
-    display: flex; align-items: center; justify-content: center;
-    font-family: 'Poppins', sans-serif;
-    font-weight: 800;
-    font-size: 36px;
-    color: var(--yellow);
-  }
-  .about-name {
-    font-family: 'Poppins', sans-serif;
-    font-weight: 800;
-    font-size: 22px;
-    color: var(--white);
-    margin-bottom: 4px;
-  }
-  .about-name span { color: var(--yellow); }
-  .about-handle { font-size: 13px; color: var(--yellow); margin-bottom: 12px; }
-  .about-bio { font-size: 15px; color: rgba(255,255,255,.75); line-height: 1.65; }
-
-  /* ── TESTIMONIALS ────────────────────────────── */
-  .testi-section { background: var(--blue-xlight); padding: 56px 0; }
-  .testi-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin-top: 32px; }
-  @media (max-width: 500px) { .testi-grid { grid-template-columns: 1fr; } }
-  .testi-card {
-    background: var(--white);
-    border-radius: var(--radius);
-    padding: 22px;
-    border: 1.5px solid rgba(27,108,168,.12);
-  }
-  .testi-stars { color: var(--yellow); font-size: 14px; margin-bottom: 10px; }
-  .testi-text { font-size: 14px; color: var(--black); line-height: 1.6; margin-bottom: 14px; font-style: italic; }
-  .testi-author {
-    display: flex; align-items: center; gap: 10px;
-  }
-  .testi-avatar {
-    width: 34px; height: 34px; border-radius: 50%;
-    background: var(--blue-light);
-    display: flex; align-items: center; justify-content: center;
-    font-family: 'Poppins', sans-serif;
-    font-weight: 700; font-size: 12px; color: var(--blue);
-    flex-shrink: 0;
-  }
-  .testi-name { font-weight: 700; font-size: 13px; }
-  .testi-loc { font-size: 12px; color: var(--gray); }
-
-  /* ── BOTTOM CTA ──────────────────────────────── */
-  .bottom-cta {
-    background: var(--blue);
-    padding: 56px 0;
-    text-align: center;
-    position: relative;
-    overflow: hidden;
-  }
-  .bottom-cta::before {
-    content: '';
-    position: absolute; inset: 0;
-    background: radial-gradient(ellipse at 50% -20%, rgba(245,200,66,.2) 0%, transparent 65%);
-  }
-  .bottom-cta h2 {
-    font-family: 'Poppins', sans-serif;
-    font-weight: 800;
-    font-size: clamp(22px, 5vw, 34px);
-    color: var(--white);
-    margin-bottom: 12px;
-    position: relative;
-  }
-  .bottom-cta h2 span { color: var(--yellow); }
-  .bottom-cta p {
-    color: rgba(255,255,255,.8);
-    font-size: 16px;
-    margin-bottom: 32px;
-    position: relative;
-  }
-  .btn-download-white {
-    display: inline-flex;
-    align-items: center;
-    gap: 10px;
-    background: var(--yellow);
-    color: var(--black);
-    font-family: 'Poppins', sans-serif;
-    font-weight: 700;
-    font-size: 16px;
-    padding: 17px 36px;
-    border-radius: var(--radius);
-    border: none;
-    cursor: pointer;
-    transition: transform .15s, box-shadow .15s;
-    position: relative;
-  }
-  .btn-download-white:hover { transform: translateY(-2px); box-shadow: 0 8px 28px rgba(0,0,0,.25); }
-
-  /* ── FOOTER ──────────────────────────────────── */
-  footer {
-    background: var(--black);
-    padding: 28px 0;
-    text-align: center;
-  }
-  .footer-logo {
-    font-family: 'Poppins', sans-serif;
-    font-weight: 800;
-    font-size: 18px;
-    color: var(--white);
-    margin-bottom: 6px;
-  }
-  .footer-logo span { color: var(--blue); }
-  .footer-tagline { font-size: 13px; color: rgba(255,255,255,.45); }
-  .footer-links { margin-top: 16px; display: flex; justify-content: center; gap: 20px; }
-  .footer-links a { font-size: 13px; color: rgba(255,255,255,.45); transition: color .15s; }
-  .footer-links a:hover { color: var(--yellow); }
-
-  /* ── FLOATING CTA (mobile) ───────────────────── */
-  .floating-cta {
-    position: fixed;
-    bottom: 20px; left: 50%;
-    transform: translateX(-50%);
-    background: var(--blue);
-    color: var(--white);
-    font-family: 'Poppins', sans-serif;
-    font-weight: 700;
-    font-size: 14px;
-    padding: 14px 28px;
-    border-radius: 50px;
-    box-shadow: 0 8px 32px rgba(13,79,128,.35);
-    white-space: nowrap;
-    z-index: 200;
-    display: none;
-    align-items: center;
-    gap: 8px;
-    transition: opacity .3s;
-    border: none; cursor: pointer;
-  }
-  @media (max-width: 680px) { .floating-cta { display: flex; } }
-  .floating-cta:hover { background: var(--blue-dark); }
-
+  /* FOOTER */
+  footer { background:var(--black); padding:28px 0; text-align:center; }
+  .footer-logo { font-family:'Poppins',sans-serif; font-weight:800; font-size:18px; color:var(--white); margin-bottom:6px; }
+  .footer-logo span { color:var(--blue); }
+  .footer-tagline { font-size:13px; color:rgba(255,255,255,.4); margin-bottom:14px; }
+  .footer-links { display:flex; justify-content:center; gap:20px; flex-wrap:wrap; }
+  .footer-links a { font-size:13px; color:rgba(255,255,255,.4); transition:color .15s; }
+  .footer-links a:hover { color:var(--yellow); }
 </style>
 </head>
 <body>
 
 <!-- TOP BAR -->
 <div class="topbar">
-  🎁 Descarga <span>100% gratis</span> — Sin tarjeta. Sin trampa. Solo inglés real.
+  ✨ Recursos gratuitos de inglés para hispanohablantes — <span>¡Sin costo!</span>
 </div>
 
 <!-- NAV -->
 <nav>
   <div class="nav-inner">
-    <div class="logo">
-      <span class="mm">MM</span>Mercedes<span style="color:var(--blue)">English</span>
-    </div>
-    <div style="display:flex;align-items:center;gap:16px;">
-      <a href="file:///C:/Users/marra/Downloads/index_13.html#biblioteca" style="font-family:&#39;Poppins&#39;,sans-serif;font-size:13px;font-weight:600;color:var(--blue);text-decoration:none;">📚 Biblioteca</a>
-      <a href="file:///C:/Users/marra/Downloads/index_13.html#clases" style="font-family:&#39;Poppins&#39;,sans-serif;font-size:13px;font-weight:600;color:var(--white);background:var(--blue);padding:7px 16px;border-radius:50px;text-decoration:none;">Agendar clase</a>
+    <div class="logo"><span class="mm">MM</span>ercedesEnglish</div>
+    <div class="nav-btns">
+      <a class="nav-btn nav-btn-outline" href="file:///C:/Users/marra/Downloads/index_15.html#biblioteca">📚 Biblioteca</a>
+      <a class="nav-btn nav-btn-solid" href="file:///C:/Users/marra/Downloads/index_15.html#clases">💬 Agendar clase</a>
     </div>
   </div>
 </nav>
 
 <!-- HERO -->
 <section class="hero">
-  <div class="container text-center">
-    <div class="badge-free fade-up" style="animation-play-state: running;">Módulo 1 — Descarga gratuita</div>
-
-    <h1 class="fade-up delay-1" style="animation-play-state: running;">
-      Domina el presente en inglés<br>
-      <span class="accent">sin confusión</span> y sin<br>
-      <span class="accent-yellow">teoría aburrida</span>
-    </h1>
-
-    <p class="hero-sub fade-up delay-2" style="animation-play-state: running;">
-      La guía práctica de los 4 tiempos del presente que ningún libro de texto te explica como te lo explico yo.
-    </p>
-
-    <div class="book-wrap fade-up delay-3" style="animation-play-state: running;">
-      <div class="book-glow"></div>
-      <img src="https://via.placeholder.com/280x380/1B6CA8/FFFFFF?text=Portada+Ebook" alt="Los Cimientos del Inglés — Módulo 1: El Presente" id="ebook-cover">
-      <div class="book-badge">
-        <span class="big">100%</span>
-        GRATIS
-      </div>
-    </div>
-  </div>
-</section>
-
-<!-- WHAT YOU GET -->
-<section class="what-section">
   <div class="container">
-    <p class="section-label fade-up" style="animation-play-state: running;">Qué incluye</p>
-    <h2 class="section-title fade-up delay-1" style="animation-play-state: running;">
-      Una guía que <span>realmente funciona</span><br>para hispanohablantes
-    </h2>
-    <div class="items-grid">
-      <div class="item-card fade-up delay-1" style="animation-play-state: paused;">
-        <div class="item-icon">🟢</div>
-        <div>
-          <div class="item-title">Present Simple</div>
-          <div class="item-desc">Hábitos, rutinas y verdades. Con tablas claras y señales clave.</div>
-        </div>
-      </div>
-      <div class="item-card fade-up delay-2" style="animation-play-state: paused;">
-        <div class="item-icon">🔵</div>
-        <div>
-          <div class="item-title">Present Continuous</div>
-          <div class="item-desc">Lo que pasa ahora mismo. Estructura simple, ejemplos reales.</div>
-        </div>
-      </div>
-      <div class="item-card fade-up delay-3" style="animation-play-state: paused;">
-        <div class="item-icon">🟡</div>
-        <div>
-          <div class="item-title">Present Perfect</div>
-          <div class="item-desc">El tiempo que más confunde. Explicado en 3 pasos lógicos.</div>
-        </div>
-      </div>
-      <div class="item-card fade-up delay-4" style="animation-play-state: paused;">
-        <div class="item-icon">🟠</div>
-        <div>
-          <div class="item-title">Present Perfect Continuous</div>
-          <div class="item-desc">Duración y contexto. Con ejemplos de la vida diaria.</div>
-        </div>
-      </div>
-      <div class="item-card fade-up delay-2" style="grid-column: 1 / -1; animation-play-state: paused;">
-        <div class="item-icon">⚡</div>
-        <div>
-          <div class="item-title">Errores comunes de hispanohablantes — y cómo evitarlos</div>
-          <div class="item-desc">El "trampolín": los errores que cometes sin darte cuenta y cómo corregirlos hoy.</div>
-        </div>
-      </div>
-    </div>
-  </div>
-</section>
-
-<!-- FOR WHO -->
-<section class="forwho-section">
-  <div class="container">
-    <p class="section-label fade-up" style="animation-play-state: paused;">Esta guía es para ti si...</p>
-    <div class="forwho-list">
-      <div class="forwho-item fade-up delay-1" style="animation-play-state: paused;">
-        <div class="check">✓</div>
-        Estudias inglés pero sientes que no avanzas como quisieras
-      </div>
-      <div class="forwho-item fade-up delay-2" style="animation-play-state: paused;">
-        <div class="check">✓</div>
-        Confundes cuándo usar cada tiempo del presente en inglés
-      </div>
-      <div class="forwho-item fade-up delay-3" style="animation-play-state: paused;">
-        <div class="check">✓</div>
-        Quieres aprender sin clases largas ni libros de texto aburridos
-      </div>
-      <div class="forwho-item fade-up delay-4" style="animation-play-state: paused;">
-        <div class="check">✓</div>
-        Eres adolescente, universitario o profesional que necesita inglés real
-      </div>
-      <div class="forwho-item fade-up delay-5" style="animation-play-state: paused;">
-        <div class="check">✓</div>
-        Buscas una guía clara, práctica y en español que puedas guardar siempre
-      </div>
-    </div>
-  </div>
-</section>
-
-<!-- ABOUT -->
-<section class="about-section">
-  <div class="container">
-    <div class="about-inner">
-      <div class="avatar-circle">MM</div>
+    <div class="hero-grid">
       <div>
-        <div class="about-name"><span>MM</span>Mercedes</div>
-        <div class="about-handle">@MMercedesEnglish</div>
-        <p class="about-bio">
-          Soy profesora de inglés especializada en hispanohablantes. Mi método es simple: sin teoría pesada, sin abrumar, con ejemplos reales que puedes aplicar hoy. <em>Tiny Tips, Big Progress</em> — así es como aprendo y así es como enseño.
+        <div class="hero-badge fade-up" style="animation-play-state: running;">👋 Hola, soy Mercedes</div>
+        <h1 class="fade-up d1" style="animation-play-state: running;">
+          Aprende inglés<br>
+          <span class="accent">de forma simple</span><br>
+          <span class="accent-y">y sin teoría pesada</span>
+        </h1>
+        <p class="hero-sub fade-up d2" style="animation-play-state: running;">
+          Soy profesora de inglés especializada en hispanohablantes. Aquí encuentras recursos gratuitos, clases personalizadas y contenido educativo que realmente funciona.
         </p>
+        <div class="hero-btns fade-up d3" style="animation-play-state: running;">
+          <a class="btn-primary" href="file:///C:/Users/marra/Downloads/index_15.html#biblioteca">
+            📚 Ver recursos gratis
+          </a>
+          <a class="btn-primary btn-wa" href="https://wa.me/19044266634?text=Hola%20Mercedes%2C%20me%20interesa%20agendar%20una%20clase%20de%20ingl%C3%A9s%20%F0%9F%93%9A" target="_blank">
+            💬 Agendar clase
+          </a>
+        </div>
+      </div>
+      <div class="hero-img-wrap fade-up d2" style="animation-play-state: running;">
+        <img src="https://via.placeholder.com/280x320/1B6CA8/FFFFFF?text=Avatar+MMercedes" alt="Mercedes — MMercedesEnglish" id="hero-avatar">
       </div>
     </div>
   </div>
 </section>
 
-<!-- TESTIMONIALS -->
-<section class="testi-section">
-  <div class="container">
-    <p class="section-label text-center fade-up" style="animation-play-state: paused;">Lo que dicen quienes ya lo descargaron</p>
-    <h2 class="section-title text-center fade-up delay-1" style="animation-play-state: paused;">
-      Resultados <span>reales</span>
-    </h2>
-    <div class="testi-grid">
-      <div class="testi-card fade-up delay-1" style="animation-play-state: paused;">
-        <div class="testi-stars">★★★★★</div>
-        <p class="testi-text">"Por fin entiendo la diferencia entre Present Simple y Present Continuous. Las tablas son clarísimas."</p>
-        <div class="testi-author">
-          <div class="testi-avatar">SG</div>
-          <div>
-            <div class="testi-name">Sofia G.</div>
-            <div class="testi-loc">Colombia</div>
-          </div>
-        </div>
+<!-- BENEFITS -->
+<section class="benefits">
+  <div class="container text-center">
+    <p class="section-label fade-up" style="animation-play-state: running;">¿Qué encuentras aquí?</p>
+    <h2 class="section-title fade-up d1" style="animation-play-state: running;">Todo lo que necesitas para <span>avanzar en inglés</span></h2>
+    <div class="benefits-grid">
+      <div class="benefit-card fade-up d1" style="animation-play-state: running;">
+        <div class="benefit-icon">📚</div>
+        <div class="benefit-title">Biblioteca gratis</div>
+        <div class="benefit-desc">Guías, fichas y recursos descargables sin costo</div>
       </div>
-      <div class="testi-card fade-up delay-2" style="animation-play-state: paused;">
-        <div class="testi-stars">★★★★★</div>
-        <p class="testi-text">"Lo descargué pensando que era más de lo mismo. Me sorprendió. Los errores comunes me hicieron reír porque los cometo todos."</p>
-        <div class="testi-author">
-          <div class="testi-avatar">RM</div>
-          <div>
-            <div class="testi-name">Roberto M.</div>
-            <div class="testi-loc">México</div>
-          </div>
-        </div>
+      <div class="benefit-card fade-up d2" style="animation-play-state: running;">
+        <div class="benefit-icon">👩‍🏫</div>
+        <div class="benefit-title">Clases 1:1</div>
+        <div class="benefit-desc">Atención personalizada a tu ritmo y nivel</div>
       </div>
-      <div class="testi-card fade-up delay-3" style="animation-play-state: paused;">
-        <div class="testi-stars">★★★★★</div>
-        <p class="testi-text">"Perfecto para repasar antes de una entrevista en inglés. Conciso, claro y al punto."</p>
-        <div class="testi-author">
-          <div class="testi-avatar">VL</div>
-          <div>
-            <div class="testi-name">Valeria L.</div>
-            <div class="testi-loc">Argentina</div>
-          </div>
-        </div>
+      <div class="benefit-card fade-up d3" style="animation-play-state: running;">
+        <div class="benefit-icon">👥</div>
+        <div class="benefit-title">Grupos</div>
+        <div class="benefit-desc">Aprende en comunidad de forma dinámica</div>
       </div>
-      <div class="testi-card fade-up delay-4" style="animation-play-state: paused;">
-        <div class="testi-stars">★★★★★</div>
-        <p class="testi-text">"Se lo envié a mis compañeros de universidad. Todos necesitábamos esto."</p>
-        <div class="testi-author">
-          <div class="testi-avatar">JP</div>
-          <div>
-            <div class="testi-name">Juan P.</div>
-            <div class="testi-loc">Venezuela</div>
-          </div>
-        </div>
+      <div class="benefit-card fade-up d4" style="animation-play-state: running;">
+        <div class="benefit-icon">💡</div>
+        <div class="benefit-title">Tips diarios</div>
+        <div class="benefit-desc">Contenido educativo en Instagram y TikTok</div>
       </div>
     </div>
   </div>
 </section>
 
-<!-- BIBLIOTECA DE RECURSOS -->
-<section style="background:var(--white);padding:56px 0;" id="biblioteca">
+<!-- BIBLIOTECA -->
+<section class="biblioteca" id="biblioteca">
   <div class="container">
-    <p class="section-label fade-up" style="animation-play-state: paused;">Recursos gratuitos</p>
-    <h2 class="section-title fade-up delay-1" style="animation-play-state: paused;">
-      Biblioteca <span>MMercedesEnglish</span>
-    </h2>
-    <p style="color: var(--gray); font-size: 15px; margin-bottom: 32px; max-width: 520px; animation-play-state: paused;" class="fade-up delay-2">
-      Materiales descargables para aprender inglés a tu ritmo. Todos gratuitos, todos prácticos.
-    </p>
+    <p class="section-label fade-up" style="animation-play-state: running;">Descarga gratis</p>
+    <h2 class="section-title fade-up d1" style="animation-play-state: running;">Biblioteca de <span>recursos</span></h2>
 
-    <!-- Filtros -->
-    <div style="display: flex; gap: 8px; flex-wrap: wrap; margin-bottom: 24px; animation-play-state: paused;" class="fade-up delay-2" id="filtros">
+    <div class="filtros fade-up d2" style="animation-play-state: running;">
       <button onclick="filtrar(&#39;todos&#39;)" class="filtro-btn filtro-active" data-filtro="todos">Todos</button>
       <button onclick="filtrar(&#39;basico&#39;)" class="filtro-btn" data-filtro="basico">Básico</button>
       <button onclick="filtrar(&#39;intermedio&#39;)" class="filtro-btn" data-filtro="intermedio">Intermedio</button>
@@ -836,134 +266,152 @@
       <button onclick="filtrar(&#39;tiempos&#39;)" class="filtro-btn" data-filtro="tiempos">Tiempos verbales</button>
     </div>
 
-    <style>
-      .filtro-btn { padding: 7px 16px; font-size: 13px; font-family: 'Poppins', sans-serif; font-weight: 500; border: 1.5px solid var(--blue-light); border-radius: 50px; cursor: pointer; background: transparent; color: var(--gray); transition: all 0.15s; }
-      .filtro-btn:hover { border-color: var(--blue); color: var(--blue); }
-      .filtro-active { background: var(--blue) !important; color: var(--white) !important; border-color: var(--blue) !important; }
-      .recurso-card { background: var(--white); border: 1.5px solid var(--blue-light); border-radius: var(--radius-lg); padding: 20px; display: flex; align-items: flex-start; gap: 16px; transition: transform .2s, box-shadow .2s; }
-      .recurso-card:hover { transform: translateY(-3px); box-shadow: 0 8px 24px rgba(27,108,168,.12); }
-      .recurso-icon { width: 48px; height: 48px; border-radius: 12px; background: var(--blue-light); display: flex; align-items: center; justify-content: center; font-size: 22px; flex-shrink: 0; }
-      .recurso-nivel { display: inline-block; font-size: 11px; font-weight: 700; padding: 2px 10px; border-radius: 50px; margin-bottom: 6px; font-family: 'Poppins', sans-serif; letter-spacing: 0.05em; text-transform: uppercase; }
-      .nivel-basico { background: #EAF3DE; color: #27500A; }
-      .nivel-intermedio { background: #E6F1FB; color: #0C447C; }
-      .recurso-titulo { font-family: 'Poppins', sans-serif; font-weight: 700; font-size: 15px; color: var(--black); margin-bottom: 4px; line-height: 1.3; }
-      .recurso-desc { font-size: 13px; color: var(--gray); line-height: 1.5; margin-bottom: 12px; }
-      .btn-recurso { display: inline-flex; align-items: center; gap: 6px; font-family: 'Poppins', sans-serif; font-weight: 700; font-size: 13px; color: var(--blue); text-decoration: none; border: 1.5px solid var(--blue); padding: 7px 16px; border-radius: 50px; transition: all .15s; }
-      .btn-recurso:hover { background: var(--blue); color: var(--white); }
-      .recursos-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 16px; }
-      .recurso-hidden { display: none !important; }
-    </style>
-
     <div class="recursos-grid" id="recursos-grid">
 
-      <!-- Recurso 1 -->
-      <div class="recurso-card fade-up delay-1" data-nivel="basico" data-tema="gramatica" style="animation-play-state: paused;">
+      <div class="recurso-card fade-up d1" data-nivel="basico" data-tema="gramatica" style="animation-play-state: running;">
         <div class="recurso-icon">📘</div>
         <div style="flex:1;">
           <span class="recurso-nivel nivel-basico">Básico</span>
           <div class="recurso-titulo">Los Cimientos del Inglés — El Presente</div>
-          <div class="recurso-desc">Guía práctica de los 4 tiempos del presente. Con ejemplos reales y errores comunes.</div>
-          <a class="btn-recurso" href="https://drive.google.com/file/d/15FtERfWKsfS2unzs9_u5ja0tKMiTuJLd/view?usp=drive_link" target="_blank">
-            ⬇ Descargar gratis
-          </a>
+          <div class="recurso-desc">Guía práctica de los 4 tiempos del presente con ejemplos reales.</div>
+          <a class="btn-recurso" href="https://drive.google.com/file/d/15FtERfWKsfS2unzs9_u5ja0tKMiTuJLd/view?usp=drive_link" target="_blank">⬇ Descargar</a>
         </div>
       </div>
 
-      <!-- Recurso 2 -->
-      <div class="recurso-card fade-up delay-2" data-nivel="basico" data-tema="gramatica" style="animation-play-state: paused;">
+      <div class="recurso-card fade-up d2" data-nivel="basico" data-tema="gramatica" style="animation-play-state: running;">
         <div class="recurso-icon">📗</div>
         <div style="flex:1;">
           <span class="recurso-nivel nivel-basico">Básico</span>
           <div class="recurso-titulo">Guía de Gramática</div>
-          <div class="recurso-desc">Gramática esencial para principiantes. Reglas claras, sin teoría pesada.</div>
-          <a class="btn-recurso" href="https://drive.google.com/file/d/1ttaXpj5DWDsYSxvTX_XKYKuaAENntGLG/view?usp=drive_link" target="_blank">
-            ⬇ Descargar gratis
-          </a>
+          <div class="recurso-desc">Gramática esencial para principiantes. Reglas claras sin teoría pesada.</div>
+          <a class="btn-recurso" href="https://drive.google.com/file/d/1ttaXpj5DWDsYSxvTX_XKYKuaAENntGLG/view?usp=drive_link" target="_blank">⬇ Descargar</a>
         </div>
       </div>
 
-      <!-- Recurso 3 -->
-      <div class="recurso-card fade-up delay-3" data-nivel="basico" data-tema="gramatica" style="animation-play-state: paused;">
+      <div class="recurso-card fade-up d3" data-nivel="basico" data-tema="gramatica" style="animation-play-state: running;">
         <div class="recurso-icon">🃏</div>
         <div style="flex:1;">
           <span class="recurso-nivel nivel-basico">Básico</span>
-          <div class="recurso-titulo">Grammar Flashcards — Fichas Gramaticales</div>
-          <div class="recurso-desc">Fichas para repasar gramática de forma visual y práctica. Perfectas para estudiar.</div>
-          <a class="btn-recurso" href="https://drive.google.com/drive/folders/1vG7dzDmLaYKH_GaW3wbJPpdwmd4rCtyM?usp=drive_link" target="_blank">
-            ⬇ Descargar gratis
-          </a>
+          <div class="recurso-titulo">Grammar Flashcards</div>
+          <div class="recurso-desc">Fichas gramaticales para repasar de forma visual y práctica.</div>
+          <a class="btn-recurso" href="https://drive.google.com/drive/folders/1vG7dzDmLaYKH_GaW3wbJPpdwmd4rCtyM?usp=drive_link" target="_blank">⬇ Descargar</a>
         </div>
       </div>
 
-      <!-- Recurso 4 -->
-      <div class="recurso-card fade-up delay-4" data-nivel="intermedio" data-tema="tiempos" style="animation-play-state: paused;">
+      <div class="recurso-card fade-up d4" data-nivel="intermedio" data-tema="tiempos" style="animation-play-state: running;">
         <div class="recurso-icon">📊</div>
         <div style="flex:1;">
           <span class="recurso-nivel nivel-intermedio">Intermedio</span>
-          <div class="recurso-titulo">16 Tenses Chart — Tiempos Verbales</div>
-          <div class="recurso-desc">Tabla completa de los 16 tiempos verbales en inglés. Tu referencia de consulta rápida.</div>
-          <a class="btn-recurso" href="https://drive.google.com/file/d/1Jo5-muPjNjZVwoGeXEEVH-Vj5N6PrTG-/view?usp=drive_link" target="_blank">
-            ⬇ Descargar gratis
-          </a>
+          <div class="recurso-titulo">16 Tenses Chart</div>
+          <div class="recurso-desc">Tabla completa de los 16 tiempos verbales. Tu referencia de consulta rápida.</div>
+          <a class="btn-recurso" href="https://drive.google.com/file/d/1Jo5-muPjNjZVwoGeXEEVH-Vj5N6PrTG-/view?usp=drive_link" target="_blank">⬇ Descargar</a>
         </div>
       </div>
 
     </div>
 
-    <!-- Próximamente -->
-    <div style="margin-top: 24px; padding: 20px; background: var(--blue-xlight); border-radius: var(--radius-lg); text-align: center; animation-play-state: paused;" class="fade-up">
-      <p style="font-family:&#39;Poppins&#39;,sans-serif;font-weight:600;font-size:14px;color:var(--blue-dark);margin-bottom:4px;">🔜 Más materiales próximamente</p>
-      <p style="font-size:13px;color:var(--gray);">Suscríbete para recibir nuevos recursos directo en tu correo.</p>
+    <div class="pronto-card fade-up" style="animation-play-state: running;">
+      <p style="font-family:&#39;Poppins&#39;,sans-serif;font-weight:600;font-size:14px;color:var(--blue);margin-bottom:4px;">🔜 Más materiales próximamente</p>
+      <p style="font-size:13px;color:var(--gray);">Suscríbete abajo para recibir nuevos recursos directo en tu correo.</p>
     </div>
-
   </div>
 </section>
 
-<script>
-function filtrar(filtro) {
-  document.querySelectorAll('.filtro-btn').forEach(b => b.classList.remove('filtro-active'));
-  document.querySelector('[data-filtro="' + filtro + '"]').classList.add('filtro-active');
-  document.querySelectorAll('.recurso-card').forEach(card => {
-    if (filtro === 'todos') {
-      card.classList.remove('recurso-hidden');
-    } else {
-      const nivel = card.getAttribute('data-nivel');
-      const tema = card.getAttribute('data-tema');
-      if (nivel === filtro || tema === filtro) {
-        card.classList.remove('recurso-hidden');
-      } else {
-        card.classList.add('recurso-hidden');
-      }
-    }
-  });
-}
-</script>
-
-<!-- CLASES SECTION -->
-<section style="background:var(--blue);padding:56px 0;" id="clases">
-  <div class="container text-center">
-    <p style="font-family:&#39;Poppins&#39;,sans-serif;font-size:12px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:rgba(255,255,255,.7);margin-bottom:10px;">Clases de inglés</p>
-    <h2 style="font-family:&#39;Poppins&#39;,sans-serif;font-weight:800;font-size:clamp(22px,5vw,34px);color:var(--white);margin-bottom:12px;line-height:1.25;">¿Quieres aprender inglés<br><span style="color:var(--yellow)">conmigo en persona?</span></h2>
-    <p style="color:rgba(255,255,255,.8);font-size:16px;margin-bottom:32px;max-width:480px;margin-left:auto;margin-right:auto;">Ofrezco clases 1:1 y sesiones grupales adaptadas a tu nivel y objetivos. Escríbeme por WhatsApp y agendamos tu primera clase.</p>
-
-    <div style="display:grid;grid-template-columns:1fr 1fr;gap:16px;max-width:480px;margin:0 auto 32px;">
-      <div style="background:rgba(255,255,255,.12);border-radius:14px;padding:20px;text-align:center;">
-        <div style="font-size:28px;margin-bottom:8px;">👤</div>
-        <div style="font-family:&#39;Poppins&#39;,sans-serif;font-weight:700;font-size:15px;color:var(--white);margin-bottom:4px;">Clases 1:1</div>
-        <div style="font-size:13px;color:rgba(255,255,255,.7);">Atención personalizada a tu ritmo y nivel</div>
+<!-- CORREO -->
+<section class="correo-section" id="correo">
+  <div class="container">
+    <div class="correo-card fade-up" style="animation-play-state: running;">
+      <div id="correo-form-view">
+        <h2>Recibe nuevos recursos <span>directo en tu correo</span> 📩</h2>
+        <p>Sin spam. Sin rollo. Solo materiales de inglés que realmente sirven — cuando los publique, te aviso.</p>
+        <div class="correo-form">
+          <input class="correo-input" type="email" id="correo-email" placeholder="Tu correo electrónico" required="">
+          <button class="btn-correo" onclick="handleCorreo()">Suscribirme</button>
+        </div>
+        <p class="correo-nota">🔒 Tu correo está seguro. Nunca lo compartimos.</p>
       </div>
-      <div style="background:rgba(255,255,255,.12);border-radius:14px;padding:20px;text-align:center;">
-        <div style="font-size:28px;margin-bottom:8px;">👥</div>
-        <div style="font-family:&#39;Poppins&#39;,sans-serif;font-weight:700;font-size:15px;color:var(--white);margin-bottom:4px;">Grupos</div>
-        <div style="font-size:13px;color:rgba(255,255,255,.7);">Aprende con otros en un ambiente dinámico</div>
+      <div class="correo-success" id="correo-success">
+        <div style="font-size:48px;margin-bottom:12px;">🎉</div>
+        <h3>¡Listo, <span id="correo-name-show"></span>!</h3>
+        <p>Te avisaremos cuando haya nuevos recursos. Mientras tanto, explora la biblioteca. 💙</p>
       </div>
     </div>
+  </div>
+</section>
 
-    <a href="https://wa.me/19044266634?text=Hola%20Mercedes%2C%20me%20interesa%20agendar%20una%20clase%20de%20ingl%C3%A9s%20%F0%9F%93%9A" target="_blank" style="display:inline-flex;align-items:center;justify-content:center;gap:12px;background:#25D366;color:var(--white);font-family:&#39;Poppins&#39;,sans-serif;font-weight:700;font-size:17px;padding:18px 36px;border-radius:14px;text-decoration:none;transition:transform .15s,box-shadow .15s;" onmouseover="this.style.transform=&#39;translateY(-2px)&#39;;this.style.boxShadow=&#39;0 8px 28px rgba(0,0,0,.25)&#39;" onmouseout="this.style.transform=&#39;&#39;;this.style.boxShadow=&#39;&#39;">
+<!-- CLASES -->
+<section class="clases" id="clases">
+  <div class="container text-center">
+    <p class="section-label fade-up" style="animation-play-state: running;">Aprende conmigo</p>
+    <h2 class="section-title fade-up d1" style="animation-play-state: running;">Clases de inglés <span>personalizadas</span></h2>
+    <p style="color: var(--gray); font-size: 15px; margin-bottom: 28px; max-width: 480px; margin-left: auto; margin-right: auto; animation-play-state: running;" class="fade-up d2">Adaptadas a tu nivel, tus objetivos y tu ritmo. Escríbeme por WhatsApp y agendamos tu primera clase.</p>
+    <div class="clases-grid fade-up d2" style="animation-play-state: running;">
+      <div class="clase-card">
+        <div class="clase-icon">👤</div>
+        <div class="clase-title">Clases 1:1</div>
+        <div class="clase-desc">Atención personalizada. Avanzas a tu ritmo con enfoque en tus necesidades específicas.</div>
+      </div>
+      <div class="clase-card">
+        <div class="clase-icon">👥</div>
+        <div class="clase-title">Sesiones grupales</div>
+        <div class="clase-desc">Aprende en comunidad. Práctica conversacional en un ambiente dinámico y motivador.</div>
+      </div>
+    </div>
+    <a class="btn-wa-big fade-up d3" href="https://wa.me/19044266634?text=Hola%20Mercedes%2C%20me%20interesa%20agendar%20una%20clase%20de%20ingl%C3%A9s%20%F0%9F%93%9A" target="_blank" style="animation-play-state: running;">
       <svg width="22" height="22" viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"></path></svg>
       Escribirme por WhatsApp
     </a>
-    <p style="color:rgba(255,255,255,.6);font-size:13px;margin-top:16px;">Te respondo en menos de 24 horas 💙</p>
+    <p style="color:var(--gray);font-size:13px;margin-top:14px;">Te respondo en menos de 24 horas 💙</p>
+  </div>
+</section>
+
+<!-- SOBRE MI -->
+<section class="sobre-mi">
+  <div class="container">
+    <div class="sobre-grid">
+      <img class="sobre-foto fade-up" src="https://via.placeholder.com/130x130/1B6CA8/FFFFFF?text=MM" alt="Mercedes — MMercedesEnglish" id="sobre-foto" style="animation-play-state: running;">
+      <div class="fade-up d1" style="animation-play-state: running;">
+        <div class="sobre-name"><span>MM</span>ercedes</div>
+        <div class="sobre-handle">@MMercedesEnglish</div>
+        <p class="sobre-bio">Soy profesora de inglés especializada en hispanohablantes. Mi método es simple: sin teoría pesada, sin abrumar, con ejemplos reales que puedes aplicar hoy. Creo que el inglés no tiene que ser difícil — solo necesitas el enfoque correcto y alguien que te lo explique como tú aprendes.</p>
+        <div class="sobre-tags">
+          <span class="sobre-tag">Principiantes</span>
+          <span class="sobre-tag">Intermedio</span>
+          <span class="sobre-tag">Inglés de negocios</span>
+          <span class="sobre-tag">Avanzado</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- TESTIMONIOS -->
+<section class="testimonios">
+  <div class="container">
+    <p class="section-label text-center fade-up" style="animation-play-state: running;">Lo que dicen</p>
+    <h2 class="section-title text-center fade-up d1" style="animation-play-state: running;">Resultados <span>reales</span></h2>
+    <div class="testi-grid">
+      <div class="testi-card fade-up d1" style="animation-play-state: running;">
+        <div class="testi-stars">★★★★★</div>
+        <p class="testi-text">"Me encantó este post... eres la mejor, lo certifico."</p>
+        <div class="testi-author"><div class="testi-av">KM</div><div><div class="testi-name">kuchitura_mr</div><div class="testi-loc">Instagram</div></div></div>
+      </div>
+      <div class="testi-card fade-up d2" style="animation-play-state: running;">
+        <div class="testi-stars">★★★★★</div>
+        <p class="testi-text">"100% recomendada, ella es lo máximo. @mmercedes_english"</p>
+        <div class="testi-author"><div class="testi-av">KM</div><div><div class="testi-name">kuchitura_mr</div><div class="testi-loc">Instagram</div></div></div>
+      </div>
+      <div class="testi-card fade-up d3" style="animation-play-state: paused;">
+        <div class="testi-stars">★★★★★</div>
+        <p class="testi-text">"Gracias Mecha, excelente teacher para mi cachorro... te quiero inmenso. 😍"</p>
+        <div class="testi-author"><div class="testi-av">JL</div><div><div class="testi-name">joyeria_jacqueline.lalanne</div><div class="testi-loc">Instagram</div></div></div>
+      </div>
+      <div class="testi-card fade-up d4" style="animation-play-state: paused;">
+        <div class="testi-stars">★★★★★</div>
+        <p class="testi-text">"Su contenido es claro, práctico y fácil de entender. Aprendes inglés de verdad con MMercedesEnglish."</p>
+        <div class="testi-author"><div class="testi-av">♥</div><div><div class="testi-name">Comunidad MMercedesEnglish</div><div class="testi-loc">Instagram &amp; TikTok</div></div></div>
+      </div>
+    </div>
   </div>
 </section>
 
@@ -971,112 +419,61 @@ function filtrar(filtro) {
 <footer>
   <div class="container">
     <div class="footer-logo"><span>MM</span>ercedesEnglish</div>
-    <div class="footer-tagline">Tiny Tips, Big Progress</div>
+    <div class="footer-tagline">Tiny Tips, Big Progress 💙</div>
     <div class="footer-links">
       <a href="https://instagram.com/mmercedesenglish" target="_blank">Instagram</a>
-      <a href="file:///C:/Users/marra/Downloads/index_13.html#biblioteca">Recursos gratuitos</a>
+      <a href="file:///C:/Users/marra/Downloads/index_15.html#biblioteca">Recursos gratuitos</a>
+      <a href="file:///C:/Users/marra/Downloads/index_15.html#clases">Agendar clase</a>
+      <a href="file:///C:/Users/marra/Downloads/index_15.html#correo">Newsletter</a>
     </div>
   </div>
 </footer>
 
-
-
 <script>
-  // ── LINK DEL PDF ─────────────────────────────────────────────────────────────
-  // 👇 REEMPLAZA ESTA URL CON TU LINK REAL DE GOOGLE DRIVE
-  const PDF_LINK = "https://drive.google.com/file/d/15FtERfWKsfS2unzs9_u5ja0tKMiTuJLd/view?usp=drive_link";
-  // ─────────────────────────────────────────────────────────────────────────────
-
-  // Scroll animations
-  const fadeEls = document.querySelectorAll('.fade-up');
-  const scrollObs = new IntersectionObserver(entries => {
-    entries.forEach(e => { if (e.isIntersecting) e.target.style.animationPlayState = 'running'; });
-  }, { threshold: 0.1 });
-  fadeEls.forEach(el => {
-    el.style.animationPlayState = 'paused';
-    scrollObs.observe(el);
-  });
-
-  // ── BREVO CONFIG ──────────────────────────────────────────────────────────────
-  const BREVO_API_KEY = "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";
-  const BREVO_LIST_ID = 5; // ID de tu lista "Suscriptores Ebook Gratis"
-  // ─────────────────────────────────────────────────────────────────────────────
-
-  // Form submit con Brevo
-  async function handleSubmit() {
-    const name  = document.getElementById('inp-name').value.trim();
-    const email = document.getElementById('inp-email').value.trim();
-
-    if (!name) {
-      const inp = document.getElementById('inp-name');
-      inp.focus(); inp.style.borderColor = '#EF4444';
-      setTimeout(() => inp.style.borderColor = '', 2000);
-      return;
-    }
-    if (!email || !email.includes('@')) {
-      const inp = document.getElementById('inp-email');
-      inp.focus(); inp.style.borderColor = '#EF4444';
-      setTimeout(() => inp.style.borderColor = '', 2000);
-      return;
-    }
-
-    // Deshabilitar boton mientras procesa
-    const btn = document.querySelector('#form-view .btn-download');
-    const originalHTML = btn.innerHTML;
-    btn.innerHTML = 'Enviando...';
-    btn.disabled = true;
-    btn.style.opacity = '0.7';
-
-    try {
-      const response = await fetch('https://api.brevo.com/v3/contacts', {
-        method: 'POST',
-        headers: {
-          'accept': 'application/json',
-          'content-type': 'application/json',
-          'api-key': BREVO_API_KEY
-        },
-        body: JSON.stringify({
-          email: email,
-          attributes: {
-            FIRSTNAME: name.split(' ')[0],
-            LASTNAME: name.split(' ').slice(1).join(' ') || ''
-          },
-          listIds: [BREVO_LIST_ID],
-          updateEnabled: true
-        })
-      });
-
-      // 201 creado, 204 actualizado — ambos son exito
-      if (response.status === 201 || response.status === 204) {
-        mostrarExito(name);
+  // Filtros biblioteca
+  function filtrar(filtro) {
+    document.querySelectorAll('.filtro-btn').forEach(b => b.classList.remove('filtro-active'));
+    document.querySelector('[data-filtro="'+filtro+'"]').classList.add('filtro-active');
+    document.querySelectorAll('.recurso-card').forEach(card => {
+      if (filtro === 'todos') {
+        card.classList.remove('recurso-hidden');
       } else {
-        const data = await response.json();
-        if (data.code === 'duplicate_parameter') {
-          mostrarExito(name); // contacto ya existe, igual mostramos exito
+        const nivel = card.getAttribute('data-nivel');
+        const tema = card.getAttribute('data-tema');
+        if (nivel === filtro || tema === filtro) {
+          card.classList.remove('recurso-hidden');
         } else {
-          throw new Error(data.message || 'Error');
+          card.classList.add('recurso-hidden');
         }
       }
-    } catch (err) {
-      console.error('Brevo error:', err);
-      // En desarrollo local puede fallar por CORS — funciona bien publicado en Carrd
-      mostrarExito(name);
+    });
+  }
+
+  // Formulario de correo simple
+  function handleCorreo() {
+    const email = document.getElementById('correo-email').value.trim();
+    if (!email || !email.includes('@')) {
+      const inp = document.getElementById('correo-email');
+      inp.style.borderColor = '#EF4444';
+      setTimeout(() => inp.style.borderColor = '', 2000);
+      return;
     }
+    // Guardar en localStorage como registro local
+    const subs = JSON.parse(localStorage.getItem('mm_subs') || '[]');
+    subs.push({ email, date: new Date().toISOString() });
+    localStorage.setItem('mm_subs', JSON.stringify(subs));
+
+    document.getElementById('correo-form-view').style.display = 'none';
+    document.getElementById('correo-success').style.display = 'block';
   }
 
-  function mostrarExito(name) {
-    document.getElementById('form-view').style.display = 'none';
-    const successView = document.getElementById('success-view');
-    successView.style.display = 'block';
-    document.getElementById('user-name-display').textContent = name.split(' ')[0];
-    successView.style.animation = 'fadeUp .5s ease both';
-  }
-
-  function goToDownload() {
-    window.open(PDF_LINK, '_blank');
-  }
+  // Animaciones scroll
+  const fadeEls = document.querySelectorAll('.fade-up');
+  const obs = new IntersectionObserver(entries => {
+    entries.forEach(e => { if (e.isIntersecting) e.target.style.animationPlayState = 'running'; });
+  }, { threshold: 0.1 });
+  fadeEls.forEach(el => { el.style.animationPlayState = 'paused'; obs.observe(el); });
 </script>
-
 
 
 </body></html>
