@@ -1,0 +1,539 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Flashcards de Gramática Inglesa | MMercedesEnglish</title>
+<style>
+  :root{
+    --navy:#0D1B3E;
+    --navy-light:#1B2F5E;
+    --yellow:#FFD23F;
+    --mustard:#E3A625;
+    --cream:#FFFBF0;
+    --white:#FFFFFF;
+  }
+
+  *{ box-sizing:border-box; margin:0; padding:0; }
+
+  html{ scroll-behavior:smooth; }
+
+  body{
+    font-family:'Poppins','Segoe UI Rounded','Trebuchet MS','Nunito',sans-serif;
+    background:
+      repeating-linear-gradient(
+        -35deg,
+        rgba(13,27,62,0.035) 0px,
+        rgba(13,27,62,0.035) 2px,
+        transparent 2px,
+        transparent 90px
+      ),
+      var(--cream);
+    min-height:100vh;
+    padding:32px 20px 60px;
+    color:var(--navy);
+    position:relative;
+    overflow-x:hidden;
+  }
+
+  .watermark{
+    position:fixed;
+    inset:0;
+    display:flex;
+    flex-wrap:wrap;
+    align-content:space-around;
+    justify-content:space-around;
+    transform:rotate(-20deg) scale(1.4);
+    pointer-events:none;
+    z-index:0;
+    opacity:0.05;
+  }
+
+  .watermark span{
+    font-weight:800;
+    font-size:1.4rem;
+    color:var(--navy);
+    white-space:nowrap;
+    margin:18px 26px;
+  }
+
+  header, main, footer, nav{
+    position:relative;
+    z-index:1;
+  }
+
+  header{
+    text-align:center;
+    max-width:820px;
+    margin:0 auto 24px;
+  }
+
+  .eyebrow{
+    display:inline-block;
+    background:var(--yellow);
+    color:var(--navy);
+    font-weight:800;
+    font-size:0.85rem;
+    letter-spacing:0.08em;
+    text-transform:uppercase;
+    padding:6px 16px;
+    border-radius:999px;
+    border:3px solid var(--navy);
+    box-shadow:3px 3px 0 var(--navy);
+    margin-bottom:16px;
+  }
+
+  h1{
+    font-size:clamp(2rem, 5vw, 3.1rem);
+    color:var(--navy);
+    line-height:1.1;
+    margin-bottom:12px;
+  }
+
+  h1 span{
+    color:var(--mustard);
+    -webkit-text-stroke: 1.5px var(--navy);
+  }
+
+  header p{
+    font-size:1.15rem;
+    color:var(--navy);
+    opacity:0.85;
+    font-weight:600;
+  }
+
+  .instructions{
+    max-width:560px;
+    margin:20px auto 0;
+    background:var(--white);
+    border:3px dashed var(--navy-light);
+    border-radius:20px;
+    padding:14px 22px;
+    font-size:1rem;
+    font-weight:600;
+    color:var(--navy-light);
+  }
+
+  /* Unit navigation */
+  nav.unit-nav{
+    max-width:1000px;
+    margin:28px auto 40px;
+    display:flex;
+    flex-wrap:wrap;
+    gap:10px;
+    justify-content:center;
+  }
+
+  nav.unit-nav a{
+    text-decoration:none;
+    background:var(--white);
+    color:var(--navy);
+    font-weight:700;
+    font-size:0.85rem;
+    padding:9px 16px;
+    border-radius:999px;
+    border:2.5px solid var(--navy);
+    transition:transform 0.15s ease, background 0.15s ease, color 0.15s ease;
+  }
+
+  nav.unit-nav a:hover, nav.unit-nav a:focus-visible{
+    background:var(--navy);
+    color:var(--yellow);
+    transform:translateY(-2px);
+  }
+
+  main{
+    max-width:1240px;
+    margin:0 auto;
+  }
+
+  .section{
+    margin-bottom:56px;
+    scroll-margin-top:20px;
+  }
+
+  .section-heading{
+    display:flex;
+    align-items:center;
+    gap:14px;
+    margin-bottom:22px;
+    flex-wrap:wrap;
+  }
+
+  .section-badge{
+    background:var(--navy);
+    color:var(--yellow);
+    font-weight:800;
+    font-size:0.95rem;
+    padding:8px 18px;
+    border-radius:12px;
+    white-space:nowrap;
+  }
+
+  .section-title{
+    font-size:1.5rem;
+    font-weight:800;
+    color:var(--navy);
+  }
+
+  .section-sub{
+    flex-basis:100%;
+    font-size:0.95rem;
+    font-weight:600;
+    color:var(--navy-light);
+    opacity:0.8;
+  }
+
+  .grid{
+    display:grid;
+    grid-template-columns:repeat(auto-fit, minmax(230px, 1fr));
+    gap:26px;
+  }
+
+  .card-wrap{
+    perspective:1400px;
+    height:230px;
+  }
+
+  .card{
+    position:relative;
+    width:100%;
+    height:100%;
+    cursor:pointer;
+    transform-style:preserve-3d;
+    transition:transform 0.65s cubic-bezier(0.68,-0.4,0.27,1.4);
+  }
+
+  .card-wrap:focus-visible .card{
+    outline:4px solid var(--navy);
+    outline-offset:6px;
+    border-radius:24px;
+  }
+
+  .card.flipped{
+    transform:rotateY(180deg);
+  }
+
+  .face{
+    position:absolute;
+    inset:0;
+    -webkit-backface-visibility:hidden;
+    backface-visibility:hidden;
+    border-radius:24px;
+    display:flex;
+    flex-direction:column;
+    align-items:center;
+    justify-content:center;
+    text-align:center;
+    padding:18px;
+    border:4px solid var(--navy);
+    box-shadow:6px 6px 0 var(--navy);
+  }
+
+  .face-front{
+    background:var(--front-color, var(--navy));
+    color:var(--front-text, var(--cream));
+  }
+
+  .face-back{
+    background:var(--white);
+    color:var(--navy);
+    transform:rotateY(180deg);
+  }
+
+  .card-number{
+    position:absolute;
+    top:14px;
+    left:14px;
+    background:var(--yellow);
+    color:var(--navy);
+    font-size:0.7rem;
+    font-weight:800;
+    min-width:26px;
+    height:26px;
+    padding:0 6px;
+    border-radius:13px;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    border:2px solid var(--navy);
+  }
+
+  .face-icon{
+    font-size:2.4rem;
+    margin-bottom:8px;
+  }
+
+  .face-title{
+    font-size:1.18rem;
+    font-weight:800;
+    line-height:1.25;
+  }
+
+  .face-hint{
+    margin-top:10px;
+    font-size:0.75rem;
+    font-weight:700;
+    opacity:0.85;
+    text-transform:uppercase;
+    letter-spacing:0.05em;
+  }
+
+  .face-back .face-hint{
+    color:var(--mustard);
+  }
+
+  .examples{
+    font-size:0.98rem;
+    font-weight:700;
+    line-height:1.5;
+  }
+
+  .examples .item{
+    display:block;
+  }
+
+  .examples .item b{
+    color:var(--mustard);
+  }
+
+  footer{
+    text-align:center;
+    margin-top:48px;
+    font-weight:700;
+    color:var(--navy);
+    opacity:0.7;
+  }
+
+  footer .heart{ color:var(--mustard); }
+
+  @media (prefers-reduced-motion: reduce){
+    .card{ transition:none; }
+  }
+
+  @media (max-width:480px){
+    .card-wrap{ height:220px; }
+    .face-title{ font-size:1.05rem; }
+    .examples{ font-size:0.88rem; }
+  }
+</style>
+</head>
+<body>
+
+<div class="watermark" id="watermark"></div>
+
+<header>
+  <span class="eyebrow">Tiny Tips, Big Progress</span>
+  <h1>Flashcards de <span>Gramática</span> en Inglés</h1>
+  <p>¡Haz clic en cada tarjeta para descubrir la respuesta!</p>
+  <div class="instructions">👆 Toca o haz clic sobre cualquier tarjeta para voltearla y ver el contenido. ¡Vuelve a tocarla para regresar!</div>
+</header>
+
+<nav class="unit-nav" id="unitNav"></nav>
+
+<main id="cardMain"></main>
+
+<footer>Hecho con <span class="heart">♥</span> por MMercedesEnglish</footer>
+
+<script>
+  // Fill watermark background, echoing the workbook diagonal watermark
+  const wm = document.getElementById('watermark');
+  for(let i=0;i<40;i++){
+    const s = document.createElement('span');
+    s.textContent = 'MMercedesEnglish';
+    wm.appendChild(s);
+  }
+
+  const palette = ["var(--navy)", "var(--mustard)", "var(--navy-light)", "var(--yellow)"];
+  const paletteText = [null, "var(--navy)", null, "var(--navy)"];
+
+  const sections = [
+    {
+      id: "repaso",
+      badge: "Repaso",
+      title: "Repaso General",
+      sub: "Bases de gramática que todo estudiante debe dominar primero.",
+      cards: [
+        { icon:"🙋", front:"Subject Pronouns", back:["I","You","He","She","It","We","They"] },
+        { icon:"🎯", front:"Object Pronouns", back:["me","you","him","her","it","us","them"] },
+        { icon:"🏠", front:"Possessive Adjectives", back:["my","your","his","her","its","our","their"] },
+        { icon:"✅", front:'Verb "to be"', back:["I am","You are","He / She / It is","We are","They are"] },
+        { icon:"➕", front:"Plurals", back:["cat → cats","box → boxes","baby → babies","child → children"] },
+        { icon:"👉", front:"This / That / These / Those", back:["this = near, singular","that = far, singular","these = near, plural","those = far, plural"] },
+        { icon:"❓", front:"Question Words", back:["Who","What","Where","When","Why","How"] },
+        { icon:"📍", front:"Prepositions of Place", back:["in","on","under","next to","between"] },
+        { icon:"🔤", front:"Articles: a / an / the", back:["a book","an apple","an hour","the sun"] },
+        { icon:"🕒", front:"Prepositions of Time", back:["in + months/years","on + days","at + clock time"] },
+        { icon:"📏", front:"Comparatives & Superlatives", back:["big → bigger → the biggest","happy → happier → the happiest","good → better → the best"] },
+        { icon:"⏰", front:"Adverbs of Frequency", back:["always","usually","often","sometimes","never"] },
+        { icon:"🧠", front:"Modal Verbs: Can / Must", back:["can = ability / permission","I can swim.","must = obligation","You must study."] },
+        { icon:"🍎", front:"Countable & Uncountable Nouns", back:["Countable: apple → apples","Uncountable: water, rice, money"] },
+        { icon:"🏃", front:"Present Continuous", back:["verb + -ing","I am reading.","She is playing.","They are eating."] },
+        { icon:"📅", front:"Simple Past (Regular Verbs)", back:["play → played","walk → walked","watch → watched"] }
+      ]
+    },
+    {
+      id: "unit1",
+      badge: "Unidad 1",
+      title: "Hello! Let's Start",
+      sub: "Saludos, presente progresivo y reglas de ortografía para -ING.",
+      cards: [
+        { icon:"👋", front:"Formal Greetings", back:["Good morning.","Good afternoon.","Good evening.","Nice to meet you."] },
+        { icon:"🙌", front:"Informal Greetings", back:["Hi!","Hey!","Yo!","What's up?"] },
+        { icon:"🔢", front:"Numbers 1–10", back:["one, two, three, four, five","six, seven, eight, nine, ten"] },
+        { icon:"🏃‍♀️", front:"Present Progressive: Formula", back:["Subject + am/is/are + verb-ing","I am waving.","She is eating.","They are playing."] },
+        { icon:"✏️", front:"Spelling Rules for -ING", back:["Most verbs: just add -ing (play → playing)","Ends in -e: drop e (make → making)","Short vowel+consonant: double it (run → running)"] }
+      ]
+    },
+    {
+      id: "unit2",
+      badge: "Unidad 2",
+      title: "Nouns, Plurals & Possessives",
+      sub: "Sustantivos, reglas de plural y formas posesivas.",
+      cards: [
+        { icon:"📐", front:"Plural Spelling Rules", back:["Add -s: books","-es after s/x/ch/sh: boxes","consonant + y → -ies: baby → babies","-f/-fe → -ves: knife → knives"] },
+        { icon:"🔁", front:"Irregular Plurals", back:["child → children","man → men","woman → women","foot → feet","tooth → teeth"] },
+        { icon:"❔", front:"How much / How many", back:["How many + countable: How many apples?","How much + uncountable: How much sugar?"] },
+        { icon:"📚", front:"Possessive Nouns", back:["Singular noun + 's: the boy's book","Plural noun + ': the students' bags"] },
+        { icon:"🆚", front:"Possessive Adjectives vs Pronouns", back:["Adjective + noun: my car","Pronoun replaces noun: It's mine."] }
+      ]
+    },
+    {
+      id: "unit3",
+      badge: "Unidad 3",
+      title: "Everyday English",
+      sub: "Preposiciones de lugar y preguntas para conocer a alguien.",
+      cards: [
+        { icon:"🗺️", front:"More Prepositions of Place", back:["in front of","behind","above","below","near","opposite"] },
+        { icon:"🌎", front:"Where are you from?", back:["Q: Where are you from?","A: I'm from + country.","Example: I'm from Venezuela."] },
+        { icon:"💼", front:"What do you do?", back:["Q: What do you do?","A: I'm a/an + profession.","Example: I'm a teacher."] },
+        { icon:"🎂", front:"How old are you?", back:["Q: How old are you?","A: I'm ... years old.","Use the verb 'to be', not 'have'."] }
+      ]
+    },
+    {
+      id: "unit4",
+      badge: "Unidad 4",
+      title: "Comandos, Peticiones & Adjetivos",
+      sub: "Cortesía, ayuda, apariencia, colores y orden de adjetivos.",
+      cards: [
+        { icon:"🛑", front:"Commands, Requests & Prohibitions", back:["Command: Close the door.","Request: Could you close the door, please?","Prohibition: Don't touch that."] },
+        { icon:"🤝", front:"Asking & Offering Help", back:["Ask: Can you help me?","Offer: Can I help you?"] },
+        { icon:"🔁", front:"Asking Someone to Repeat", back:["Could you repeat that, please?","Sorry, I didn't understand.","Can you say that again?"] },
+        { icon:"🧑", front:"Describing Appearance", back:["Q: What does she look like?","A: She's tall. She has curly hair."] },
+        { icon:"🎨", front:"Colors: Questions & Answers", back:["Q: What color is it? A: It's blue.","Q: What color are your eyes? A: They're brown."] },
+        { icon:"🏡", front:"Order of Adjectives", back:["opinion + size + age + shape + color + origin + material + noun","a big beautiful old round white house"] }
+      ]
+    },
+    {
+      id: "unit5",
+      badge: "Unidad 5",
+      title: "Comparatives & Superlatives",
+      sub: "Cómo comparar personas, lugares y cosas.",
+      cards: [
+        { icon:"📏", front:"Comparatives (Short Adjectives)", back:["adjective + -er + than","Sara is taller than Tom."] },
+        { icon:"📏", front:"Comparatives (Long Adjectives)", back:["more + adjective + than","This movie is more interesting than that one."] },
+        { icon:"🏆", front:"Superlatives (Short Adjectives)", back:["the + adjective + -est","Sara is the fastest runner in her class."] },
+        { icon:"🏆", front:"Superlatives (Long Adjectives)", back:["the most + adjective","That is the most beautiful beach in the world."] },
+        { icon:"⚖️", front:"As ... as", back:["as + adjective + as = equal","My car is as fast as yours."] },
+        { icon:"📉", front:"Less ... than", back:["less + adjective/adverb + than","This phone is less expensive than that one."] },
+        { icon:"🌀", front:"Irregular Adjectives", back:["good → better → the best","bad → worse → the worst","far → farther → the farthest"] }
+      ]
+    },
+    {
+      id: "unit6",
+      badge: "Unidad 6",
+      title: "Directions, Time & Simple Present",
+      sub: "Direcciones, la hora y el presente simple.",
+      cards: [
+        { icon:"🧭", front:"Asking for Directions", back:["Excuse me, how can I get to...?","Can you help me?"] },
+        { icon:"➡️", front:"Giving Directions", back:["Go straight.","Turn left / right.","Take the first street.","It's on the corner."] },
+        { icon:"🕒", front:"Telling Time", back:["3:00 = three o'clock","3:15 = quarter past three","3:30 = half past three","3:45 = quarter to four"] },
+        { icon:"🔄", front:"Simple Present: Uses", back:["Routines, habits, facts, general truths","Subject + base verb","I play soccer every day."] },
+        { icon:"3️⃣", front:"Simple Present: Third Person -s", back:["He / She / It + verb + s: She works.","Negative: doesn't + verb: He doesn't work.","Question: Does she work?"] },
+        { icon:"🤲", front:"Have / Has", back:["I / You / We / They + have","He / She / It + has","I have a car. She has a car."] }
+      ]
+    }
+  ];
+
+  const unitNav = document.getElementById('unitNav');
+  const main = document.getElementById('cardMain');
+  let globalIndex = 0;
+
+  sections.forEach(section => {
+    // nav pill
+    const navLink = document.createElement('a');
+    navLink.href = `#${section.id}`;
+    navLink.textContent = section.badge;
+    unitNav.appendChild(navLink);
+
+    // section wrapper
+    const sectionEl = document.createElement('section');
+    sectionEl.className = 'section';
+    sectionEl.id = section.id;
+
+    const heading = document.createElement('div');
+    heading.className = 'section-heading';
+    heading.innerHTML = `
+      <span class="section-badge">${section.badge}</span>
+      <span class="section-title">${section.title}</span>
+      <span class="section-sub">${section.sub}</span>
+    `;
+    sectionEl.appendChild(heading);
+
+    const grid = document.createElement('div');
+    grid.className = 'grid';
+
+    section.cards.forEach(data => {
+      const colorIdx = globalIndex % palette.length;
+      const wrap = document.createElement('div');
+      wrap.className = 'card-wrap';
+      wrap.tabIndex = 0;
+      wrap.setAttribute('role', 'button');
+      wrap.setAttribute('aria-label', `Flashcard: ${data.front}. Presiona para voltear.`);
+
+      const card = document.createElement('div');
+      card.className = 'card';
+
+      const frontFace = document.createElement('div');
+      frontFace.className = 'face face-front';
+      frontFace.style.setProperty('--front-color', palette[colorIdx]);
+      if(paletteText[colorIdx]){ frontFace.style.setProperty('--front-text', paletteText[colorIdx]); }
+      frontFace.innerHTML = `
+        <span class="card-number">${globalIndex + 1}</span>
+        <div class="face-icon">${data.icon}</div>
+        <div class="face-title">${data.front}</div>
+        <div class="face-hint">Toca para ver</div>
+      `;
+
+      const backFace = document.createElement('div');
+      backFace.className = 'face face-back';
+      const items = data.back.map(line => `<span class="item">${line}</span>`).join('');
+      backFace.innerHTML = `
+        <div class="examples">${items}</div>
+        <div class="face-hint">Toca para volver</div>
+      `;
+
+      card.appendChild(frontFace);
+      card.appendChild(backFace);
+      wrap.appendChild(card);
+      grid.appendChild(wrap);
+
+      function toggleFlip(){ card.classList.toggle('flipped'); }
+      wrap.addEventListener('click', toggleFlip);
+      wrap.addEventListener('keydown', (e) => {
+        if(e.key === 'Enter' || e.key === ' '){
+          e.preventDefault();
+          toggleFlip();
+        }
+      });
+
+      globalIndex++;
+    });
+
+    sectionEl.appendChild(grid);
+    main.appendChild(sectionEl);
+  });
+</script>
+
+</body>
+</html>
