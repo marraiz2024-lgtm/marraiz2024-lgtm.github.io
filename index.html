@@ -145,6 +145,15 @@
   window.GENERIC_INVALID_MESSAGE='La información no es válida. Revisa los campos e inténtalo de nuevo.';
   window.translation={common:{selectedList:'{quantity} lista seleccionada',selectedLists:'{quantity} listas seleccionadas',selectedOption:'{quantity} seleccionado',selectedOptions:'{quantity} seleccionados'}};
   var AUTOHIDE=Boolean(0);
+  (function(){
+    var form=document.getElementById('sib-form');
+    if(!form)return;
+    form.addEventListener('submit',function(event){
+      if(!form.checkValidity())return;
+      event.preventDefault();
+      HTMLFormElement.prototype.submit.call(form);
+    },true);
+  }());
 </script>
 <script defer src="https://sibforms.com/forms/end-form/build/main.js"></script></body>
 </html>
