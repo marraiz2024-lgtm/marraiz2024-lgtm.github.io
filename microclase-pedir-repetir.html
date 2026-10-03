@@ -1,0 +1,445 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Microclase: Sorry, could you say that again? | MMercedesEnglish</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Big+Shoulders+Display:wght@600;700;800&family=Lora:ital,wght@1,500;1,600&family=Work+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --navy:#0D1B3E;
+    --navy-2:#1B2F5E;
+    --yellow:#FFD23F;
+    --gold:#BE9100;
+    --cream:#FFFBF0;
+    --white:#FFFFFF;
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  body{
+    font-family:'Work Sans',system-ui,sans-serif;
+    background:var(--cream);
+    color:var(--navy);
+    min-height:100vh;
+    display:flex;flex-direction:column;align-items:center;
+    padding:0 0 40px;
+  }
+  .topbar{width:100%;background:var(--navy);border-bottom:8px solid var(--yellow);padding:14px 20px}
+  .topbar-in{max-width:1100px;margin:0 auto;display:flex;align-items:center;gap:12px;flex-wrap:wrap}
+  .mm{width:44px;height:44px;border-radius:50%;background:var(--yellow);color:var(--navy);
+      display:grid;place-items:center;font:800 20px 'Big Shoulders Display',sans-serif;letter-spacing:.5px}
+  .pill{background:var(--yellow);color:var(--navy);font-weight:700;font-size:13px;padding:6px 14px;border-radius:999px}
+  .pill.alt{background:transparent;color:var(--white);border:1.5px solid var(--yellow)}
+  .brand{margin-left:auto;font:700 22px 'Big Shoulders Display',sans-serif;color:var(--white);letter-spacing:.5px}
+  .brand b{color:var(--yellow);font-weight:700}
+
+  main{width:100%;max-width:1100px;padding:24px 20px 0}
+  h1{font:800 clamp(30px,5vw,48px)/1.05 'Big Shoulders Display',sans-serif;text-transform:uppercase;letter-spacing:.5px}
+  h1 span{background:linear-gradient(transparent 62%,var(--yellow) 62%)}
+  .sub{margin-top:8px;font-size:15px;opacity:.8}
+
+  .stage{margin-top:20px;display:grid;grid-template-columns:minmax(0,340px) minmax(0,1fr);gap:22px;align-items:start}
+  @media(max-width:820px){.stage{grid-template-columns:1fr}.avatar-card{max-width:300px;margin:0 auto}}
+
+  .avatar-card{background:var(--navy);border-radius:20px;padding:10px;position:relative;box-shadow:0 10px 30px rgba(13,27,62,.18)}
+  .avatar-card img{display:block;width:100%;height:auto;aspect-ratio:1122/1402;border-radius:12px;object-fit:cover}
+  .avatar-card .tag{position:absolute;left:18px;bottom:18px;background:var(--navy);color:var(--white);
+      font:700 15px 'Big Shoulders Display',sans-serif;letter-spacing:.5px;padding:6px 14px;border-radius:999px;border:2px solid var(--yellow)}
+  .avatar-card.talking img{animation:breathe 2.4s ease-in-out infinite}
+  @keyframes breathe{50%{transform:scale(1.012)}}
+  .seal{position:absolute;right:20px;top:20px;width:86px;height:86px}
+
+  .screen{background:var(--white);border-radius:20px;border:2px solid var(--navy);min-height:430px;display:flex;flex-direction:column;overflow:hidden}
+  .screen-head{background:var(--navy);color:var(--white);display:flex;align-items:center;gap:10px;padding:10px 18px}
+  .screen-head .time{background:var(--yellow);color:var(--navy);font-weight:700;font-size:13px;padding:3px 10px;border-radius:999px}
+  .screen-head .ttl{font:700 20px 'Big Shoulders Display',sans-serif;letter-spacing:.5px;text-transform:uppercase}
+  .panel{flex:1;padding:22px;display:flex;flex-direction:column;gap:14px;justify-content:center}
+  .caption{min-height:84px;background:var(--cream);border-top:2px solid var(--navy);padding:14px 20px;font-size:16px;line-height:1.45;display:flex;align-items:center}
+  .caption.en{font:italic 600 21px/1.35 'Lora',serif;background:var(--yellow)}
+  .caption.wait{background:var(--navy);color:var(--white)}
+
+  .big{font:800 clamp(30px,4.6vw,46px)/1.05 'Big Shoulders Display',sans-serif;text-transform:uppercase}
+  .big em{font-style:normal;background:var(--yellow);padding:0 8px;border-radius:6px}
+  .lead{font-size:17px;line-height:1.5}
+  .goals{display:grid;gap:10px;margin-top:4px}
+  .goal{display:flex;gap:12px;align-items:center;background:var(--cream);border-left:6px solid var(--yellow);border-radius:10px;padding:12px 14px;font-weight:600}
+  .goal i{font:800 22px 'Big Shoulders Display',sans-serif;background:var(--navy);color:var(--yellow);width:34px;height:34px;border-radius:50%;display:grid;place-items:center;font-style:normal;flex:none}
+
+  .dlg{display:grid;gap:10px}
+  .line{display:flex;gap:10px;align-items:flex-start;opacity:.18;transform:translateY(6px);transition:.35s}
+  .line.show{opacity:1;transform:none}
+  .line.on .bub{outline:3px solid var(--yellow)}
+  .who{flex:none;width:34px;height:34px;border-radius:50%;background:var(--navy);color:var(--yellow);font:800 18px 'Big Shoulders Display',sans-serif;display:grid;place-items:center}
+  .line.b .who{background:var(--yellow);color:var(--navy)}
+  .bub{background:var(--cream);border:2px solid var(--navy);border-radius:4px 16px 16px 16px;padding:10px 14px;font:italic 600 19px/1.3 'Lora',serif}
+  .line.b .bub{background:var(--white);border-radius:16px 4px 16px 16px}
+  .blur{filter:blur(7px);transition:filter .5s}
+  .blur.clear{filter:none}
+  .hint{display:inline-block;background:var(--navy);color:var(--white);font-size:12px;font-weight:600;padding:3px 10px;border-radius:999px;margin-left:8px;font-family:'Work Sans',sans-serif;font-style:normal}
+
+  .note{background:var(--cream);border:2px dashed var(--gold);border-radius:12px;padding:12px 14px;font-size:15px;line-height:1.45;opacity:0;transition:.4s}
+  .note.show{opacity:1}
+  .note b.tip{font:italic 700 15px 'Lora',serif;color:var(--gold)}
+
+  .phrase{display:flex;flex-wrap:wrap;gap:8px}
+  .seg{flex:1 1 150px;border:2px solid var(--navy);border-radius:14px;overflow:hidden;opacity:.35;transition:.3s}
+  .seg.on{opacity:1;box-shadow:0 0 0 4px var(--yellow)}
+  .seg .w{background:var(--navy);color:var(--white);font:italic 600 22px 'Lora',serif;padding:10px 14px}
+  .seg .d{padding:8px 14px;font-size:14px;font-weight:500;background:var(--white)}
+  .seg:nth-child(2) .w{background:var(--yellow);color:var(--navy)}
+  .seg:nth-child(3) .w{background:var(--navy-2)}
+  .trans{font-size:20px;font-weight:600;opacity:0;transition:.4s}
+  .trans.show{opacity:1}
+  .trans span{background:var(--yellow);padding:0 6px;border-radius:4px}
+
+  .listen{display:flex;align-items:center;gap:12px;background:var(--navy);color:var(--white);border-radius:14px;padding:14px 16px}
+  .wave{display:flex;gap:4px;align-items:center;height:30px}
+  .wave i{display:block;width:5px;height:8px;border-radius:3px;background:var(--yellow)}
+  .listening .wave i{animation:wv .8s ease-in-out infinite}
+  .wave i:nth-child(2n){animation-delay:.15s}.wave i:nth-child(3n){animation-delay:.3s}
+  @keyframes wv{50%{height:28px}}
+  .secret{font:italic 600 20px 'Lora',serif;background:var(--cream);border:2px solid var(--navy);border-radius:12px;padding:12px 14px;opacity:0;transition:.4s}
+  .secret.show{opacity:1}
+  .q{font-weight:700;font-size:18px;opacity:0;transition:.4s}
+  .q.show{opacity:1}
+
+  .count{display:none;align-items:center;gap:14px;font-weight:700}
+  .count.on{display:flex}
+  .ring{width:54px;height:54px;border-radius:50%;background:conic-gradient(var(--yellow) var(--p,0%),#e8e2d0 0);display:grid;place-items:center;transition:--p 1s linear}
+  .ring b{width:42px;height:42px;border-radius:50%;background:var(--white);display:grid;place-items:center;font:800 22px 'Big Shoulders Display',sans-serif}
+
+  .steps2{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+  @media(max-width:520px){.steps2{grid-template-columns:1fr}}
+  .st{background:var(--navy);color:var(--white);border-radius:14px;padding:14px}
+  .st b{display:block;font:800 26px 'Big Shoulders Display',sans-serif;color:var(--yellow)}
+
+  .controls{margin-top:18px;display:flex;align-items:center;gap:10px;flex-wrap:wrap}
+  button{font:700 15px 'Work Sans',sans-serif;border:2px solid var(--navy);background:var(--white);color:var(--navy);border-radius:999px;padding:10px 18px;cursor:pointer}
+  button:hover{background:var(--cream)}
+  button.main{background:var(--yellow)}
+  button.main:hover{background:#ffdb66}
+  .bar{flex:1;min-width:160px;height:10px;background:#e8e2d0;border-radius:999px;overflow:hidden}
+  .bar i{display:block;height:100%;width:0;background:var(--navy);transition:width .4s}
+  .chips{margin-top:14px;display:flex;gap:8px;flex-wrap:wrap}
+  .chip{font-size:13px;padding:7px 12px}
+  .chip.cur{background:var(--navy);color:var(--white)}
+  .chip small{opacity:.7;font-weight:500;margin-right:4px}
+
+  .start{position:fixed;inset:0;background:rgba(13,27,62,.92);display:grid;place-items:center;z-index:10;padding:20px}
+  .start.hide{display:none}
+  .start-in{background:var(--cream);border-radius:22px;border:3px solid var(--yellow);padding:28px;max-width:420px;text-align:center}
+  .start-in img{width:130px;height:130px;object-fit:cover;object-position:50% 14%;border-radius:50%;border:4px solid var(--navy);margin-bottom:14px}
+  .start-in h2{font:800 32px/1 'Big Shoulders Display',sans-serif;text-transform:uppercase;margin-bottom:8px}
+  .start-in p{font-size:15px;line-height:1.5;margin-bottom:16px}
+  .nov{font-size:13px;margin-top:12px;opacity:.7}
+  footer{margin-top:30px;font:700 18px 'Big Shoulders Display',sans-serif;letter-spacing:.5px}
+  footer b{color:var(--gold)}
+</style>
+</head>
+<body>
+
+<div class="start" id="start">
+  <div class="start-in">
+    <img src="microclase-avatar.webp" alt="Mercedes, profesora de MMercedesEnglish">
+    <h2>Microclase de 6 minutos</h2>
+    <p>Aprende a pedir que repitan con cortesía. Activa el sonido: escucharás el inglés y las instrucciones en voz.</p>
+    <button class="main" id="go">Comenzar</button>
+    <div class="nov" id="novoice"></div>
+  </div>
+</div>
+
+<div class="topbar"><div class="topbar-in">
+  <div class="mm">MM</div>
+  <span class="pill">Beginner English Tips</span>
+  <span class="pill alt">Microclase · 6 min</span>
+  <div class="brand">MMercedes<b>English</b></div>
+</div></div>
+
+<main>
+  <h1>Pide que <span>repitan</span> con cortesía</h1>
+  <p class="sub">Frase clave: <i>Sorry, could you say that again?</i></p>
+
+  <div class="stage">
+    <div class="avatar-card" id="avatar">
+      <svg class="seal" viewBox="0 0 100 100" aria-label="English Your Way">
+        <path id="rosette" fill="#0D1B3E" stroke="#BE9100" stroke-width="4"/>
+        <text x="50" y="42" text-anchor="middle" font-family="Big Shoulders Display,sans-serif" font-weight="700" font-size="15" textLength="44" lengthAdjust="spacingAndGlyphs" fill="#FFFFFF">ENGLISH</text>
+        <text x="50" y="62" text-anchor="middle" font-family="Big Shoulders Display,sans-serif" font-weight="700" font-size="15" textLength="50" lengthAdjust="spacingAndGlyphs" fill="#FFD23F">YOUR WAY</text>
+        <path d="M50 20l2.6 5.4 5.9.8-4.3 4.1 1 5.9L50 33.5l-5.2 2.7 1-5.9-4.3-4.1 5.9-.8z" fill="#BE9100"/>
+      </svg>
+      <img src="microclase-avatar.webp" alt="Mercedes saludando">
+      <div class="tag">Tiny Tips, Big Progress</div>
+    </div>
+
+    <div>
+      <div class="screen">
+        <div class="screen-head"><span class="time" id="time"></span><span class="ttl" id="ttl"></span></div>
+        <div class="panel" id="panel"></div>
+        <div class="caption" id="cap"></div>
+      </div>
+      <div class="controls">
+        <button id="prev" aria-label="Sección anterior">‹ Anterior</button>
+        <button class="main" id="play">Pausar</button>
+        <button id="next" aria-label="Sección siguiente">Siguiente ›</button>
+        <div class="bar"><i id="bar"></i></div>
+      </div>
+      <div class="chips" id="chips"></div>
+    </div>
+  </div>
+  <footer>MMercedes<b>English</b> · Tiny Tips, Big Progress</footer>
+</main>
+
+<script>
+// ---------- Sello festoneado ----------
+(function(){
+  const n=16,cx=50,cy=50,r=40,a=4;let d='';
+  for(let i=0;i<=360;i+=3){
+    const t=i*Math.PI/180,rr=r+a*Math.cos(n*t);
+    d+=(i?'L':'M')+(cx+rr*Math.cos(t)).toFixed(2)+' '+(cy+rr*Math.sin(t)).toFixed(2);
+  }
+  document.getElementById('rosette').setAttribute('d',d+'Z');
+})();
+
+// ---------- Contenido ----------
+const D = (cls,who,id,txt,extra='') =>
+  `<div class="line ${cls}" id="${id}"><span class="who">${who}</span><div class="bub">${txt}${extra}</div></div>`;
+
+const SCENES = [
+ { time:'0:00', ttl:'Apertura',
+   html:`<div class="big">¿No escuchaste <em>bien</em>?</div>
+     <p class="lead">Hoy practicas una frase cortés para pedir que repitan.</p>
+     <div class="goals">
+       <div class="goal"><i>1</i>Pedir que repitan: <i style="width:auto;border-radius:8px;padding:0 10px;font-size:18px;margin-left:4px">Sorry, could you say that again?</i></div>
+       <div class="goal"><i>2</i>Responder al dato que escuchas</div>
+     </div>`,
+   steps:[
+    {es:'Hola. ¿Te ha pasado que alguien te dice algo en inglés y no lo escuchas bien? En estos minutos vas a practicar una frase cortés para pedir que repitan. Al final, úsala en un diálogo y responde al dato que escuches.'}
+   ]},
+
+ { time:'0:30', ttl:'Situación',
+   html:`<div class="dlg">
+       ${D('','A','l1','What do you do?')}
+       ${D('b','B','l2','<span class="blur" id="bb">I work in a shop.</span>','<span class="hint" id="hint">volumen bajo</span>')}
+     </div>
+     <p class="q" id="q">¿Escuchaste la ocupación?</p>
+     <div class="note" id="n1"><b class="tip">Tip Mercedes:</b> no hace falta adivinar ni decir solo “What?”. Puedes pedir que la persona repita.</div>`,
+   steps:[
+    {es:'Escucha esta conversación.'},
+    {show:'l1',en:'What do you do?',voice:'A',on:'l1'},
+    {show:'l2',en:'I work in a shop.',voice:'quiet',on:'l2'},
+    {show:'q',es:'¿Escuchaste la ocupación?'},
+    {wait:3,label:'Piensa tu respuesta'},
+    {show:'n1',es:'Si no, no hace falta adivinar ni decir solo “What?”. Puedes pedir que la persona repita.'},
+    {clear:'bb'}
+   ]},
+
+ { time:'1:15', ttl:'La expresión',
+   html:`<div class="phrase">
+       <div class="seg" id="s1"><div class="w">Sorry,</div><div class="d">suaviza la interrupción</div></div>
+       <div class="seg" id="s2"><div class="w">could you</div><div class="d">hace la petición cortés</div></div>
+       <div class="seg" id="s3"><div class="w">say that again?</div><div class="d">pide escuchar el mensaje otra vez</div></div>
+     </div>
+     <p class="trans" id="tr">Significa: <span>Perdón, ¿podrías repetir eso?</span></p>`,
+   steps:[
+    {es:'Di:'},
+    {en:'Sorry, could you say that again?',voice:'A',rate:.85},
+    {show:'tr',es:'Significa: “Perdón, ¿podrías repetir eso?”.'},
+    {on:'s1',es:'“Sorry” suaviza la interrupción;'},
+    {on:'s2',es:'“could you” hace la petición cortés;'},
+    {on:'s3',es:'“say that again” pide escuchar el mensaje otra vez.'}
+   ]},
+
+ { time:'2:20', ttl:'Modelado',
+   html:`<div class="dlg">
+       ${D('','A','m1','What do you do?')}
+       ${D('b','B','m2','I work in a shop.')}
+       ${D('','A','m3','Sorry, could you say that again?')}
+       ${D('b','B','m4','Sure. I said, “I work in a shop.”')}
+       ${D('','A','m5','Oh, you work in a shop. Thanks.')}
+     </div>
+     <div class="note" id="n2"><b class="tip">Tip Mercedes:</b> la otra persona repite la información y quien escucha confirma que la entendió.</div>`,
+   steps:[
+    {show:'m1',en:'What do you do?',voice:'A',on:'m1'},
+    {show:'m2',en:'I work in a shop.',voice:'B',on:'m2'},
+    {show:'m3',en:'Sorry, could you say that again?',voice:'A',on:'m3'},
+    {show:'m4',en:'Sure. I said, “I work in a shop.”',voice:'B',on:'m4'},
+    {show:'m5',en:'Oh, you work in a shop. Thanks.',voice:'A',on:'m5'},
+    {show:'n2',es:'La otra persona repite la información y quien escucha confirma que la entendió.'}
+   ]},
+
+ { time:'3:15', ttl:'Práctica guiada',
+   html:`<div class="listen" id="ls"><div class="wave"><i></i><i></i><i></i><i></i><i></i><i></i><i></i></div><span id="lt">Tu turno</span></div>
+     <p class="q" id="q5">¿Qué puedes decir si no escuchaste bien?</p>
+     <div class="count" id="cn"><div class="ring" id="rg"><b id="cs">5</b></div><span id="cl"></span></div>
+     <div class="secret" id="a5">Sorry, could you say that again?</div>
+     <div class="secret" id="r5">Sure. I said, “I’m from Colombia, and I live in Miami.”</div>`,
+   steps:[
+    {es:'Ahora te toca. Escucha:',listen:true},
+    {en:'I’m from Colombia, and I live in Miami.',voice:'quiet',listen:true},
+    {wait:5,label:'¿Qué escuchaste?'},
+    {show:'q5',es:'¿Qué puedes decir si no escuchaste bien?'},
+    {wait:4,label:'Responde en voz alta'},
+    {show:'a5',en:'Sorry, could you say that again?',voice:'A',rate:.85},
+    {es:'Muy bien. La respuesta puede ser:'},
+    {show:'r5',en:'Sure. I said, “I’m from Colombia, and I live in Miami.”',voice:'B'}
+   ]},
+
+ { time:'4:20', ttl:'Comprobación',
+   html:`<div class="listen" id="ls"><div class="wave"><i></i><i></i><i></i><i></i><i></i><i></i><i></i></div><span id="lt">Último intento</span></div>
+     <div class="count" id="cn"><div class="ring" id="rg"><b id="cs">5</b></div><span id="cl"></span></div>
+     <div class="secret" id="a6">Sorry, could you say that again?</div>
+     <p class="q" id="q6">¿Qué le gusta hacer?</p>
+     <div class="secret" id="h6"><b>Hiking:</b> le gusta hacer caminatas.</div>
+     <div class="secret" id="r6">Oh, you like hiking. That sounds fun.</div>`,
+   steps:[
+    {es:'Último intento. Escucha:',listen:true},
+    {en:'I like hiking after work.',voice:'quiet',listen:true},
+    {wait:5,label:'Pide que lo repitan'},
+    {show:'a6',es:'Ahora escucha la respuesta otra vez:'},
+    {en:'I like hiking after work.',voice:'B',rate:.85},
+    {show:'q6',es:'¿Qué le gusta hacer?'},
+    {wait:4,label:'Piensa tu respuesta'},
+    {show:'h6',es:'Hiking: le gusta hacer caminatas. Para completar la interacción, podrías responder:'},
+    {show:'r6',en:'Oh, you like hiking. That sounds fun.',voice:'A'}
+   ]},
+
+ { time:'5:30', ttl:'Cierre',
+   html:`<p class="lead">Hoy practicaste una forma cortés de reparar una dificultad:</p>
+     <div class="big"><em>Sorry, could you say that again?</em></div>
+     <div class="steps2">
+       <div class="st"><b>Paso 1</b>Pedir que repitan</div>
+       <div class="st"><b>Paso 2</b>Responder al dato que escuchaste</div>
+     </div>
+     <p class="q" id="q7">Pregunta de salida: ¿cómo pedirías que repitan si no escuchas “I’m a nurse”?</p>
+     <div class="count" id="cn"><div class="ring" id="rg"><b id="cs">8</b></div><span id="cl"></span></div>
+     <div class="secret" id="a7">Sorry, could you say that again?</div>`,
+   steps:[
+    {es:'Hoy practicaste una forma cortés de reparar una dificultad:'},
+    {en:'Sorry, could you say that again?',voice:'A',rate:.85},
+    {es:'Recuerda los dos pasos: pedir que repitan y responder al dato que escuchaste.'},
+    {show:'q7',es:'Pregunta de salida: ¿cómo pedirías que repitan si no escuchas “I’m a nurse”? Pausa el video, responde en voz alta y luego comprueba:'},
+    {wait:8,label:'Responde en voz alta'},
+    {show:'a7',en:'Sorry, could you say that again?',voice:'A',rate:.85},
+    {done:true}
+   ]}
+];
+
+// ---------- Voz ----------
+const synth = window.speechSynthesis;
+let voices = {es:null,en:null};
+function pickVoices(){
+  if(!synth) return;
+  const v = synth.getVoices();
+  const best = (re,pref)=> v.find(x=>pref.some(p=>x.lang.replace('_','-').toLowerCase()===p)) || v.find(x=>re.test(x.lang));
+  voices.es = best(/^es/i,['es-us','es-mx','es-co']);
+  voices.en = best(/^en/i,['en-us']);
+  const nv=document.getElementById('novoice');
+  nv.textContent = (!synth || !voices.es || !voices.en) ? 'Tu navegador no tiene todas las voces. Se usará el subtitulado y los tiempos serán aproximados.' : '';
+}
+if(synth){ pickVoices(); synth.onvoiceschanged = pickVoices; }
+
+const $ = id => document.getElementById(id);
+let token = 0, idx = 0, playing = false;
+const sleep = ms => new Promise(r=>setTimeout(r,ms));
+
+function speak(text, lang, o={}){
+  return new Promise(res=>{
+    const words = text.split(/\s+/).length;
+    const est = Math.max(1200, words*(lang==='en'?520:430)) / (o.rate||1);
+    if(!synth || !voices[lang]){ setTimeout(res, est); return; }
+    const u = new SpeechSynthesisUtterance(text);
+    u.voice = voices[lang]; u.lang = voices[lang].lang;
+    u.rate = o.rate || (lang==='es' ? .95 : .9);
+    u.pitch = o.voice==='B' ? 1.25 : (o.voice==='A' ? .95 : 1);
+    u.volume = o.voice==='quiet' ? .12 : 1;
+    if(o.voice==='quiet') u.rate = 1.25;
+    let done=false; const fin=()=>{ if(!done){done=true; clearTimeout(t); res();} };
+    const t = setTimeout(fin, est*2.5+2000);
+    u.onend = fin; u.onerror = fin;
+    synth.speak(u);
+  });
+}
+
+function caption(text, kind){
+  const c=$('cap'); c.className='caption'+(kind?' '+kind:''); c.textContent=text;
+}
+
+async function countdown(sec, label, my){
+  const cn=$('cn'), lt=$('lt');
+  caption(label+'…','wait');
+  if(lt && !$('cn')) lt.textContent=label;
+  for(let s=sec; s>0; s--){
+    if(my!==token) return;
+    if(cn){ cn.classList.add('on'); $('cs').textContent=s; $('rg').style.setProperty('--p',((sec-s)/sec*100)+'%'); $('cl').textContent=label; }
+    await sleep(1000);
+  }
+  if(cn){ cn.classList.remove('on'); }
+}
+
+function setLine(id){
+  document.querySelectorAll('.line.on,.seg.on').forEach(e=>e.classList.remove('on'));
+  if(id && $(id)) $(id).classList.add('on');
+}
+
+async function run(i){
+  const my = ++token;
+  idx = i;
+  if(synth) synth.cancel();
+  const sc = SCENES[i];
+  $('time').textContent = sc.time; $('ttl').textContent = sc.ttl;
+  $('panel').innerHTML = sc.html;
+  $('bar').style.width = (i/SCENES.length*100)+'%';
+  document.querySelectorAll('.chip').forEach((c,k)=>c.classList.toggle('cur',k===i));
+  caption('');
+  await sleep(300);
+  for(const st of sc.steps){
+    if(my!==token) return;
+    if(st.show && $(st.show)) $(st.show).classList.add('show');
+    if(st.on) setLine(st.on);
+    if(st.clear && $(st.clear)) $(st.clear).classList.add('clear');
+    const ls=$('ls'); if(ls) ls.classList.toggle('listening', !!st.listen);
+    if(st.es){
+      caption(st.es); $('avatar').classList.add('talking');
+      await speak(st.es,'es',st);
+      $('avatar').classList.remove('talking');
+    }
+    if(my!==token) return;
+    if(st.en){
+      caption(st.en,'en');
+      if(st.voice!=='quiet') $('avatar').classList.add('talking');
+      await speak(st.en,'en',st);
+      $('avatar').classList.remove('talking');
+      await sleep(350);
+    }
+    if(my!==token) return;
+    if(ls && !st.listen) ls.classList.remove('listening');
+    if(st.wait){ await countdown(st.wait, st.label, my); }
+    if(st.done){ $('bar').style.width='100%'; caption('Microclase completa. Repítela cuando quieras.'); $('play').textContent='Repetir'; playing=false; return; }
+    await sleep(250);
+  }
+  if(my!==token) return;
+  setLine(null);
+  if(playing && i < SCENES.length-1){ await sleep(500); if(my===token) run(i+1); }
+}
+
+// ---------- Controles ----------
+SCENES.forEach((s,k)=>{
+  const b=document.createElement('button'); b.className='chip'; b.innerHTML=`<small>${s.time}</small>${s.ttl}`;
+  b.onclick=()=>{ playing=true; $('play').textContent='Pausar'; run(k); };
+  $('chips').appendChild(b);
+});
+$('go').onclick=()=>{ $('start').classList.add('hide'); playing=true; run(0); };
+$('play').onclick=()=>{
+  if(playing){ playing=false; token++; if(synth) synth.cancel(); $('avatar').classList.remove('talking'); $('play').textContent='Continuar'; }
+  else { const again=$('play').textContent==='Repetir'; playing=true; $('play').textContent='Pausar'; run(again?0:idx); }
+};
+$('prev').onclick=()=>{ playing=true; $('play').textContent='Pausar'; run(Math.max(0,idx-1)); };
+$('next').onclick=()=>{ playing=true; $('play').textContent='Pausar'; run(Math.min(SCENES.length-1,idx+1)); };
+
+// Vista previa inicial (sin audio)
+$('time').textContent=SCENES[0].time; $('ttl').textContent=SCENES[0].ttl; $('panel').innerHTML=SCENES[0].html;
+document.querySelectorAll('.chip')[0].classList.add('cur');
+</script>
+</body>
+</html>
