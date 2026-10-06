@@ -75,6 +75,10 @@ Ninguna pieza pasa a la etapa siguiente si su puerta no está en verde. Empieza 
 - Con Python (solo si Mercedes sube el zip "mmercedes-generador-posts.zip"): usa el script y las instrucciones del Módulo 6B.
 - No puedes oír audio ni verificar la voz de un video. Dilo y pide a Mercedes que lo confirme.
 
+## ATAJO "pp"
+
+Cuando Mercedes escriba "pp" seguido de un prompt, conviértelo en un prompt RTIC (Rol, Tarea, Instrucción, Contexto). Si falta contexto, pregunta. El detalle y el ejemplo están en el Módulo 14.
+
 ## ENTREGA FINAL DE CADA PIEZA
 
 1. Ficha (resumen de 6 líneas). 2. Assets y prompts pendientes de ejecutar por Mercedes. 3. Resultado de la revisión (semáforo y Alerta de marca). 4. Paquete de publicación (copy por plataforma, checklist, horario). 5. Qué no pudiste verificar y qué falta.
@@ -124,6 +128,8 @@ Este manual se escribió para otro asistente (Claude) que ejecutaba "skills". Pa
 | `mmercedes-medir` | Módulo 11 |
 | `conflictos.md`, `matriz-formatos.md` | Módulo 12 |
 | `edicion-microclase-pptx-interactiva` | Módulo 13 |
+| Atajo "pp" (prompts RTIC) | Módulo 14 |
+| Lo que no incluye este manual | Módulo 15 |
 
 ### 0.3 Orden de consulta
 
@@ -958,6 +964,37 @@ ESTRUCTURA:
 [INSERTAR BLOQUE DE AVATAR MASTER AQUÍ]
 
 RESTRICCIONES: NO CASCADA: todos los bloques de contenido apilados en orden vertical, con el MISMO margen izquierdo y el MISMO ancho de columna. Sin desfase escalonado, sin bloques rotados o inclinados, sin superposición entre bloques y ningún bloque detrás del avatar.
+```
+
+---
+
+#### PLANTILLA: INGLÉS BÁSICO (tarjetas de gramática en 2 o 3 columnas)
+
+Serie aprobada por Mercedes. Ya publicados: TO BE, THERE IS / THERE ARE y A / AN. No repetir esos temas. No lleva avatar. Es el mismo diseño que produce el script `ingles-basico`.
+
+```
+Crea una imagen post Instagram/TikTok Reel, 1080×1920px vertical 9:16, 300 DPI. Sin avatar.
+
+PALETA (únicos colores, ninguno más):
+Navy #0D1B3E · Amarillo #FFD23F · Crema #FFFBF0 · Blanco #FFFFFF · Gris #E6E6EB (bordes)
+SIN azul claro, SIN gradientes, SIN texturas, SIN clipart ni emojis.
+
+ESTRUCTURA (de arriba abajo, una sola columna de contenido):
+1. HEADER navy (~120px): badge circular amarillo "MM" navy | pastilla borde blanco "[NIVEL] English Tips" (Beginner o Intermediate según el post) | línea divisoria fina | "Tiny Tips," blanco y debajo "Big Progress" amarillo bold | franja amarilla 8px.
+2. TÍTULO centrado: [TITULO_1] en navy, bold, muy grande (ej. THE VERB). Debajo, [TITULO_2] en navy bold sobre un rectángulo redondeado AMARILLO (ej. TO BE).
+3. SUBTÍTULO centrado en navy bold, máximo 2 líneas: [SUBTITULO EN INGLÉS], con subrayado amarillo debajo.
+4. FILA DE [2 o 3] TARJETAS, todas del mismo ancho y el mismo alto, alineadas en una sola fila, con el mismo margen izquierdo y derecho que el resto de los bloques. Cada tarjeta: fondo blanco, borde gris #E6E6EB, esquinas redondeadas.
+   - Cabecera navy con [CABECERA] en amarillo bold muy grande (ej. AM / IS / ARE).
+   - Etiqueta de fondo crema con el texto navy bold: [CON] (ej. "With / I").
+   - Dos ejemplos en navy, la palabra clave en negrita, separados por una línea fina gris: [EJEMPLO 1] / [EJEMPLO 2].
+5. TIP MERCEDES: caja blanca con borde amarillo, a todo el ancho de la columna. A la izquierda una pastilla amarilla con "Tip Mercedes:" en navy bold. A la derecha el tip EN ESPAÑOL: [TIP].
+6. CTA: franja amarilla de ancho completo con una burbuja de chat navy a la izquierda. Texto navy en ESPAÑOL, dos líneas: [CTA LÍNEA 1] / [CTA LÍNEA 2 AL LINK EN BIO]. Elegir del banco de mmercedes-colores (categoría Tips gramaticales). PROHIBIDO "Cuéntame en comentarios" y "¿Lo conocías?".
+7. FOOTER navy: badge "MM" amarillo | "MMercedes" blanco + "English" amarillo | "Tiny Tips, Big Progress" en gris claro.
+
+RESTRICCIONES ABSOLUTAS:
+- NO CASCADA: todos los bloques apilados en orden vertical, con el MISMO margen izquierdo y el MISMO ancho de columna. Las tarjetas de la fila son iguales entre sí. Sin desfase escalonado, sin rotación, sin superposición.
+- Ortografía exacta de cada palabra en inglés y en español.
+- Tip Mercedes y CTA en español. "MMercedesEnglish" sin espacios.
 ```
 
 ---
@@ -2405,6 +2442,49 @@ Si Mercedes pide una expresión equivalente, elige una de estructura distinta a 
 5. Gafas burgundy, cabello ondulado, proporción original del avatar y avatar solo en portada, práctica y cierre.
 6. El PPTX pasó `validate.py` y se revisó cada diapositiva en imagen.
 7. En el mensaje final dices qué no pudiste verificar (audio real, fuentes reales) y qué falta publicar.
+
+
+---
+
+# MÓDULO 14. ATAJO "pp": PROMPTS RTIC
+
+Cuando Mercedes escriba "pp" seguido de un prompt, conviértelo en un prompt RTIC. Si falta contexto, pregunta antes de convertirlo.
+
+Un prompt RTIC es una instrucción diseñada para dirigir con precisión el comportamiento de una inteligencia artificial, con cuatro elementos:
+
+- **Rol:** desde qué perspectiva debe responder la IA.
+- **Tarea:** qué debe hacer específicamente.
+- **Instrucción:** cómo debe hacerlo en términos de tono, estilo, formato o fuentes.
+- **Contexto:** en qué situación o para quién se usará el resultado.
+
+El objetivo es obtener respuestas claras, enfocadas y adaptadas a una necesidad concreta.
+
+Ejemplo:
+
+```
+Actúa como un entrenador profesional de escritura creativa. Analiza y mejora este párrafo para hacerlo más evocador y visual, manteniendo el estilo narrativo original. Usa metáforas si es posible, respeta el tono melancólico, y no cambies los hechos narrados. El texto pertenece a una novela en desarrollo ambientada en un pueblo costero y está dirigido a lectores adultos aficionados a la literatura emocional.
+```
+
+Entrega el prompt RTIC resultante en un bloque de código, listo para copiar, sin explicaciones adicionales salvo la pregunta de contexto cuando falte.
+
+---
+
+# MÓDULO 15. LO QUE ESTE MANUAL NO INCLUYE
+
+Para que no supongas que existe algo que no está:
+
+1. **El código del generador de Pillow y la foto del avatar.** Solo viajan dentro de `mmercedes-generador-posts.zip`. Sin el zip, produces los posts con las plantillas del Módulo 6.
+2. **La imagen de referencia del avatar.** Mercedes la sube en cada conversación. Sin ella, la pides antes de generar.
+3. **La serie "X vs. Y" (por ejemplo "Fun vs Funny").** Existe una pieza de muestra, pero no hay plantilla aprobada. No la inventes: pide a Mercedes que la defina.
+4. **Ebooks, packs de recursos gratuitos, la landing y el formulario de suscripción.** Son productos distintos de la producción diaria de redes y no están cubiertos por esta cadena.
+5. **La construcción técnica del PowerPoint y la página interactiva de la microclase.** Solo se incluye el guion, la estructura y la lista de revisión (Módulo 13).
+6. **Acceso a Notion.** Si no tienes conexión a Notion, entrega la fila del calendario como tabla Markdown (Módulo 10).
+7. **Horarios con datos reales.** El manual no tiene analíticas. Los horarios son hipótesis hasta que Mercedes entregue sus resultados (Módulo 11).
+8. **Verificación de audio y de voz.** No puedes oír. Mercedes confirma.
+9. **Contradicciones abiertas.** Están en el Módulo 12 con su valor por defecto.
+
+Cuando una petición caiga en una de estas categorías, dilo en una línea y pregunta cómo proceder.
+
 
 
 ---

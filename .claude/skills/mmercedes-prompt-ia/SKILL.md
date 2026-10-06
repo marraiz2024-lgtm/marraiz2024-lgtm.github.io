@@ -142,6 +142,37 @@ RESTRICCIONES: NO CASCADA: todos los bloques de contenido apilados en orden vert
 
 ---
 
+## PLANTILLA: INGLÉS BÁSICO (tarjetas de gramática en 2 o 3 columnas)
+
+Serie aprobada por Mercedes. Ya publicados: TO BE, THERE IS / THERE ARE y A / AN. No repetir esos temas. No lleva avatar. Es el mismo diseño que produce el script `ingles-basico`.
+
+```
+Crea una imagen post Instagram/TikTok Reel, 1080×1920px vertical 9:16, 300 DPI. Sin avatar.
+
+PALETA (únicos colores, ninguno más):
+Navy #0D1B3E · Amarillo #FFD23F · Crema #FFFBF0 · Blanco #FFFFFF · Gris #E6E6EB (bordes)
+SIN azul claro, SIN gradientes, SIN texturas, SIN clipart ni emojis.
+
+ESTRUCTURA (de arriba abajo, una sola columna de contenido):
+1. HEADER navy (~120px): badge circular amarillo "MM" navy | pastilla borde blanco "[NIVEL] English Tips" (Beginner o Intermediate según el post) | línea divisoria fina | "Tiny Tips," blanco y debajo "Big Progress" amarillo bold | franja amarilla 8px.
+2. TÍTULO centrado: [TITULO_1] en navy, bold, muy grande (ej. THE VERB). Debajo, [TITULO_2] en navy bold sobre un rectángulo redondeado AMARILLO (ej. TO BE).
+3. SUBTÍTULO centrado en navy bold, máximo 2 líneas: [SUBTITULO EN INGLÉS], con subrayado amarillo debajo.
+4. FILA DE [2 o 3] TARJETAS, todas del mismo ancho y el mismo alto, alineadas en una sola fila, con el mismo margen izquierdo y derecho que el resto de los bloques. Cada tarjeta: fondo blanco, borde gris #E6E6EB, esquinas redondeadas.
+   - Cabecera navy con [CABECERA] en amarillo bold muy grande (ej. AM / IS / ARE).
+   - Etiqueta de fondo crema con el texto navy bold: [CON] (ej. "With / I").
+   - Dos ejemplos en navy, la palabra clave en negrita, separados por una línea fina gris: [EJEMPLO 1] / [EJEMPLO 2].
+5. TIP MERCEDES: caja blanca con borde amarillo, a todo el ancho de la columna. A la izquierda una pastilla amarilla con "Tip Mercedes:" en navy bold. A la derecha el tip EN ESPAÑOL: [TIP].
+6. CTA: franja amarilla de ancho completo con una burbuja de chat navy a la izquierda. Texto navy en ESPAÑOL, dos líneas: [CTA LÍNEA 1] / [CTA LÍNEA 2 AL LINK EN BIO]. Elegir del banco de mmercedes-colores (categoría Tips gramaticales). PROHIBIDO "Cuéntame en comentarios" y "¿Lo conocías?".
+7. FOOTER navy: badge "MM" amarillo | "MMercedes" blanco + "English" amarillo | "Tiny Tips, Big Progress" en gris claro.
+
+RESTRICCIONES ABSOLUTAS:
+- NO CASCADA: todos los bloques apilados en orden vertical, con el MISMO margen izquierdo y el MISMO ancho de columna. Las tarjetas de la fila son iguales entre sí. Sin desfase escalonado, sin rotación, sin superposición.
+- Ortografía exacta de cada palabra en inglés y en español.
+- Tip Mercedes y CTA en español. "MMercedesEnglish" sin espacios.
+```
+
+---
+
 ## PLANTILLA: SATURDAY ENGLISH (phrasal verbs y listas numeradas)
 
 Basada en la pieza "Phrasal Verbs: GO", aprobada por Mercedes. Se genera en ChatGPT o Gemini porque lleva ilustraciones. Subir el avatar master como referencia.
