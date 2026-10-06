@@ -1,0 +1,19 @@
+{
+  "nivel": "Intermediate",
+  "tema": "lose momentum",
+  "concepto_es": "perder el\nimpulso",
+  "expresion_en": "LOSE\nMOMENTUM",
+  "subtitulo": "lose momentum",
+  "literal": "Perder el\nimpulso.",
+  "significa": "Perder el ritmo o el avance\nque ya habías ganado.",
+  "ejemplos": [
+    ["I lost momentum.", "Perdí el impulso."],
+    ["Don't lose momentum!", "¡No pierdas el ritmo!"],
+    ["She lost her momentum.", "Ella perdió su avance."]
+  ],
+  "tip": [
+    "Momentum es esa energía que te impulsa hacia adelante. Cuando la pierdes, cuesta el doble retomar el paso.",
+    "**'Lose momentum' = perder ese impulso."
+  ],
+  "salida": "ejemplo_como_se_dice.png"
+}

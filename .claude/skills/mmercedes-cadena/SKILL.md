@@ -66,8 +66,9 @@ Antes de producir cualquier pieza visual carga `mmercedes-brand`.
 6. Claude no puede generar dentro de ChatGPT, Gemini, Grok, Flow, HeyGen, D-ID ni CapCut. Entrega el prompt y la lista de verificación, y Mercedes ejecuta y devuelve el resultado para revisarlo.
 7. La publicación es siempre manual y nativa en cada app. Nunca propongas programadores externos ni Meta Business Suite.
 8. Nunca precios ni métodos de pago en feed ni stories.
-9. Si algo rompe el sistema de marca, márcalo antes de pasar a publicación. Se registra como Alerta de marca.
-10. Subir un archivo al repositorio no lo publica. Dilo cada vez que ocurra.
+9. Ninguna imagen puede salir en cascada (bloques escalonados, con distinto margen o ancho, rotados o superpuestos). El script de Pillow lo valida solo. En imágenes de ChatGPT o Gemini se revisa a ojo en `mmercedes-qa`.
+10. Si algo rompe el sistema de marca, márcalo antes de pasar a publicación. Se registra como Alerta de marca.
+11. Subir un archivo al repositorio no lo publica. Dilo cada vez que ocurra.
 
 ## Modos de trabajo
 

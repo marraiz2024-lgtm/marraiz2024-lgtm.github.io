@@ -1,0 +1,15 @@
+{
+  "nivel": "Beginner",
+  "tema": "doubt question",
+  "frase_mal": ["I have", "a doubt."],
+  "frase_bien": ["I have", "a question."],
+  "ejemplos": [
+    ["I have a doubt\nabout this.", "I have a question\nabout this."],
+    ["Can you explain\nmy doubt?", "Can you answer\nmy question?"]
+  ],
+  "tip": [
+    "'Doubt' en inglés expresa duda o desconfianza. Para preguntar algo, lo más natural es:",
+    "**'I have a question.'"
+  ],
+  "salida": "ejemplo_no_digas.png"
+}

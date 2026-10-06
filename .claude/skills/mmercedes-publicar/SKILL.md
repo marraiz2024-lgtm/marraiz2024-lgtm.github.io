@@ -30,7 +30,7 @@ Parte siempre de la ficha. No cambies el contenido pedagógico.
 | TikTok | Video | Copy corto, 1 a 2 líneas | Hook más CTA. Sin audio. Hashtags fijos |
 | Facebook | Video o imagen | Más extenso, 3 a 6 líneas | Hook, explicación breve en español, el ejemplo en inglés, CTA |
 
-El CTA sigue el banco de `mmercedes-colores` (por defecto, link en bio, ver `mmercedes-cadena/references/conflictos.md` punto 2).
+El CTA dirige siempre al link en bio y se elige según el tema, con la tabla de `mmercedes-colores`. No uses "Cuéntame en comentarios" ni "¿Lo conocías?".
 
 ## Horario sugerido
 

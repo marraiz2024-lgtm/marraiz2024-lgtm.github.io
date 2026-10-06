@@ -71,6 +71,7 @@ Mira también el primer y el último fotograma, porque es donde la IA suele defo
 - Gafas negras o cabello bob corto en el avatar real.
 - Estilo ilustrado en el avatar real. (Mechita es ilustrada por diseño, no se rechaza por eso.)
 - Más de 3 bloques de contenido en cascada.
+- Imagen generada en cascada: bloques escalonados, con distinto margen o ancho de columna, rotados o superpuestos. Es un fallo frecuente de las imágenes de IA externa. Se corrige con la respuesta "Bloques en cascada" de `mmercedes-prompt-ia`.
 - Tip Mercedes sobre un tema distinto al del post.
 - Marcador del avatar que no diga exactamente "MMercedesEnglish".
 - Colores fuera de paleta usados de forma estructural.
