@@ -160,7 +160,7 @@
 
 <main>
   <h1>Pide que <span>repitan</span> con cortesía</h1>
-  <p class="sub">Frase clave: <i>Sorry, could you say that again?</i></p>
+  <p class="sub">Frases clave: <i>Sorry, could you say that again?</i> y <i>Sorry, I didn’t catch that.</i></p>
 
   <div class="stage">
     <div class="avatar-card" id="avatar">
@@ -218,16 +218,16 @@ const D = (cls,who,id,txt,extra='') =>
 const SCENES = [
  { time:'0:00', ttl:'Apertura',
    html:`<div class="big">¿No escuchaste <em>bien</em>?</div>
-     <p class="lead">Hoy practicas una frase cortés para pedir que repitan.</p>
+     <p class="lead">Hoy practicas dos frases corteses para pedir que repitan.</p>
      <div class="goals">
-       <div class="goal"><i>1</i>Pedir que repitan: <i style="width:auto;border-radius:8px;padding:0 10px;font-size:18px;margin-left:4px">Sorry, could you say that again?</i></div>
+       <div class="goal"><i>1</i>Pedir que repitan con dos frases corteses</div>
        <div class="goal"><i>2</i>Responder al dato que escuchas</div>
      </div>`,
    steps:[
-    {es:'Hola. ¿Te ha pasado que alguien te dice algo en inglés y no lo escuchas bien? En estos minutos vas a practicar una frase cortés para pedir que repitan. Al final, úsala en un diálogo y responde al dato que escuches.'}
+    {es:'Hola. ¿Te ha pasado que alguien te dice algo en inglés y no lo escuchas bien? En esta microclase vas a practicar dos frases corteses para pedir que repitan. Al final, úsalas en un diálogo y responde al dato que escuches.'}
    ]},
 
- { time:'0:30', ttl:'Situación',
+ { time:'0:25', ttl:'Situación',
    html:`<div class="dlg">
        ${D('','A','l1','What do you do?')}
        ${D('b','B','l2','<span class="blur" id="bb">I work in a shop.</span>')}
@@ -244,7 +244,7 @@ const SCENES = [
     {clear:'bb'}
    ]},
 
- { time:'1:15', ttl:'La expresión',
+ { time:'0:55', ttl:'Expresión 1',
    html:`<div class="phrase">
        <div class="seg" id="s1"><div class="w">Sorry,</div><div class="d">suaviza la interrupción</div></div>
        <div class="seg" id="s2"><div class="w">could you</div><div class="d">hace la petición cortés</div></div>
@@ -252,7 +252,7 @@ const SCENES = [
      </div>
      <p class="trans" id="tr">Significa: <span>Perdón, ¿podrías repetir eso?</span></p>`,
    steps:[
-    {es:'Di:'},
+    {es:'Primera expresión. Di:'},
     {en:'Sorry, could you say that again?',voice:'A',rate:.85},
     {show:'tr',es:'Significa: “Perdón, ¿podrías repetir eso?”.'},
     {on:'s1',es:'“Sorry” suaviza la interrupción;'},
@@ -260,7 +260,7 @@ const SCENES = [
     {on:'s3',es:'“say that again” pide escuchar el mensaje otra vez.'}
    ]},
 
- { time:'2:20', ttl:'Modelado',
+ { time:'1:35', ttl:'Modelado',
    html:`<div class="dlg">
        ${D('','A','m1','What do you do?')}
        ${D('b','B','m2','I work in a shop.')}
@@ -278,11 +278,49 @@ const SCENES = [
     {show:'n2',es:'La otra persona repite la información y quien escucha confirma que la entendió.'}
    ]},
 
- { time:'3:15', ttl:'Práctica guiada',
+
+ { time:'2:10', ttl:'Expresión 2',
+   html:`<div class="phrase">
+       <div class="seg" id="e1"><div class="w">Sorry,</div><div class="d">suaviza la interrupción</div></div>
+       <div class="seg" id="e2"><div class="w">I didn’t catch</div><div class="d">explica lo que te pasó</div></div>
+       <div class="seg" id="e3"><div class="w">that.</div><div class="d">se refiere a lo que dijeron</div></div>
+     </div>
+     <p class="trans" id="tr2">Significa: <span>Perdón, no alcancé a escuchar eso.</span></p>
+     <div class="note" id="n3"><b class="tip">Tip Mercedes:</b> “catch” significa alcanzar a escuchar.</div>`,
+   steps:[
+    {es:'También puedes decir lo que te pasó.'},
+    {en:'Sorry, I didn’t catch that.',voice:'A',rate:.85},
+    {show:'tr2',es:'Significa: “Perdón, no alcancé a escuchar eso”.'},
+    {on:'e1',es:'“Sorry” suaviza la interrupción;'},
+    {on:'e2',es:'“I didn’t catch” explica lo que te pasó;'},
+    {on:'e3',es:'“that” se refiere a lo que dijeron.'},
+    {show:'n3',es:'“Catch” significa captar o alcanzar a escuchar. Aquí no pides la repetición de forma directa. Explicas que no escuchaste y la otra persona entiende que debe repetir.'}
+   ]},
+
+ { time:'2:55', ttl:'Otro ejemplo',
+   html:`<div class="dlg">
+       ${D('','A','h1','Where do you live?')}
+       ${D('b','B','h2','I live in Houston.')}
+       ${D('','A','h3','Sorry, I didn’t catch that.')}
+       ${D('b','B','h4','No problem. I said, “I live in Houston.”')}
+       ${D('','A','h5','Oh, you live in Houston. Nice.')}
+     </div>
+     <div class="note" id="n4"><b class="tip">Tip Mercedes:</b> usa la expresión que te salga más natural.</div>`,
+   steps:[
+    {es:'Mira otro ejemplo.'},
+    {show:'h1',en:'Where do you live?',voice:'A',on:'h1'},
+    {show:'h2',en:'I live in Houston.',voice:'B',on:'h2'},
+    {show:'h3',en:'Sorry, I didn’t catch that.',voice:'A',on:'h3'},
+    {show:'h4',en:'No problem. I said, “I live in Houston.”',voice:'B',on:'h4'},
+    {show:'h5',en:'Oh, you live in Houston. Nice.',voice:'A',on:'h5'},
+    {show:'n4',es:'A no escuchó la ciudad. B repite el dato y A confirma que lo entendió. Usa la expresión que te salga más natural.'}
+   ]},
+
+ { time:'3:25', ttl:'Práctica guiada',
    html:`<div class="listen" id="ls"><div class="wave"><i></i><i></i><i></i><i></i><i></i><i></i><i></i></div><span id="lt">Tu turno</span></div>
      <p class="q" id="q5">¿Qué puedes decir si no escuchaste bien?</p>
      <div class="count" id="cn"><div class="ring" id="rg"><b id="cs">5</b></div><span id="cl"></span></div>
-     <div class="secret" id="a5">Sorry, could you say that again?</div>
+     <div class="secret" id="a5">Sorry, could you say that again?<br>Sorry, I didn’t catch that.</div>
      <div class="secret" id="r5">Sure. I said, “I’m from Colombia, and I live in Miami.”</div>`,
    steps:[
     {es:'Ahora te toca. Escucha:',listen:true},
@@ -290,22 +328,25 @@ const SCENES = [
     {wait:5,label:'¿Qué escuchaste?'},
     {show:'q5',es:'¿Qué puedes decir si no escuchaste bien?'},
     {wait:4,label:'Responde en voz alta'},
-    {show:'a5',en:'Sorry, could you say that again?',voice:'A',rate:.85},
+    {show:'a5',es:'Puedes decir:'},
+    {en:'Sorry, could you say that again?',voice:'A',rate:.85},
+    {es:'o también:'},
+    {en:'Sorry, I didn’t catch that.',voice:'A',rate:.85},
     {es:'Muy bien. La respuesta puede ser:'},
     {show:'r5',en:'Sure. I said, “I’m from Colombia, and I live in Miami.”',voice:'B'}
    ]},
 
- { time:'4:20', ttl:'Comprobación',
+ { time:'4:15', ttl:'Comprobación',
    html:`<div class="listen" id="ls"><div class="wave"><i></i><i></i><i></i><i></i><i></i><i></i><i></i></div><span id="lt">Último intento</span></div>
      <div class="count" id="cn"><div class="ring" id="rg"><b id="cs">5</b></div><span id="cl"></span></div>
-     <div class="secret" id="a6">Sorry, could you say that again?</div>
+     <div class="secret" id="a6">Sorry, could you say that again?<br>Sorry, I didn’t catch that.</div>
      <p class="q" id="q6">¿Qué le gusta hacer?</p>
      <div class="secret" id="h6"><b>Hiking:</b> le gusta hacer caminatas.</div>
      <div class="secret" id="r6">Oh, you like hiking. That sounds fun.</div>`,
    steps:[
     {es:'Último intento. Escucha:',listen:true},
     {en:'I like hiking after work.',voice:'A',listen:true},
-    {wait:5,label:'Pide que lo repitan'},
+    {wait:5,label:'Pide que lo repitan con la expresión que prefieras'},
     {show:'a6',es:'Ahora escucha la respuesta otra vez:'},
     {en:'I like hiking after work.',voice:'B',rate:.85},
     {show:'q6',es:'¿Qué le gusta hacer?'},
@@ -314,23 +355,26 @@ const SCENES = [
     {show:'r6',en:'Oh, you like hiking. That sounds fun.',voice:'A'}
    ]},
 
- { time:'5:30', ttl:'Cierre',
-   html:`<p class="lead">Hoy practicaste una forma cortés de reparar una dificultad:</p>
-     <div class="big"><em>Sorry, could you say that again?</em></div>
+ { time:'5:20', ttl:'Cierre',
+   html:`<p class="lead">Hoy practicaste dos formas corteses de reparar una dificultad:</p>
+     <div class="big"><em>Sorry, could you say that again?</em><br><em>Sorry, I didn’t catch that.</em></div>
      <div class="steps2">
        <div class="st"><b>Paso 1</b>Pedir que repitan</div>
        <div class="st"><b>Paso 2</b>Responder al dato que escuchaste</div>
      </div>
      <p class="q" id="q7">Pregunta de salida: ¿cómo pedirías que repitan si no escuchas “I’m a nurse”?</p>
      <div class="count" id="cn"><div class="ring" id="rg"><b id="cs">8</b></div><span id="cl"></span></div>
-     <div class="secret" id="a7">Sorry, could you say that again?</div>`,
+     <div class="secret" id="a7">Sorry, could you say that again?<br>Sorry, I didn’t catch that.</div>`,
    steps:[
-    {es:'Hoy practicaste una forma cortés de reparar una dificultad:'},
+    {es:'Hoy practicaste dos formas corteses de reparar una dificultad:'},
     {en:'Sorry, could you say that again?',voice:'A',rate:.85},
+    {es:'y'},
+    {en:'Sorry, I didn’t catch that.',voice:'A',rate:.85},
     {es:'Recuerda los dos pasos: pedir que repitan y responder al dato que escuchaste.'},
-    {show:'q7',es:'Pregunta de salida: ¿cómo pedirías que repitan si no escuchas “I’m a nurse”? Pausa el video, responde en voz alta y luego comprueba:'},
+    {show:'q7',es:'Pregunta de salida: ¿cómo pedirías que repitan si no escuchas “I’m a nurse”? Pausa el video, responde en voz alta con la expresión que prefieras y luego comprueba:'},
     {wait:8,label:'Responde en voz alta'},
     {show:'a7',en:'Sorry, could you say that again?',voice:'A',rate:.85},
+    {en:'Sorry, I didn’t catch that.',voice:'A',rate:.85},
     {done:true}
    ]}
 ];
