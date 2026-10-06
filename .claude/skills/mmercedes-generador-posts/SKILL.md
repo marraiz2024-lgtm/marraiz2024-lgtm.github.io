@@ -56,6 +56,7 @@ El script rechaza con error cualquier CTA que pida comentar ("Cuéntame en comen
 - Si el master no está disponible, genera sin avatar, dilo en la entrega y no uses ninguna ilustración como sustituto.
 - No incluyas el avatar en el B-roll de ambiente (regla de `mmercedes-revisor`).
 - La foto de Mercedes no se sube a repositorios públicos. Guárdala solo dentro de la skill en la cuenta de Mercedes.
+- El master actual (fotografía con resaltador verde OVERACHIEVING) ya incluye su prop, así que cuenta como el único prop de la pieza. No añadas otro. La etiqueta pequeña del resaltador salió deformada en el original y se tapó con el verde del cuerpo. Si se regenera el master, revisa que no vuelva a aparecer texto en el resaltador.
 
 ## Paso 4: ejecutar
 
