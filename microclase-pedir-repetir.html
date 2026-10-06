@@ -286,7 +286,7 @@ const SCENES = [
      <div class="secret" id="r5">Sure. I said, “I’m from Colombia, and I live in Miami.”</div>`,
    steps:[
     {es:'Ahora te toca. Escucha:',listen:true},
-    {en:'I’m from Colombia, and I live in Miami.',voice:'quiet',listen:true},
+    {en:'I’m from Colombia, and I live in Miami.',voice:'A',listen:true},
     {wait:5,label:'¿Qué escuchaste?'},
     {show:'q5',es:'¿Qué puedes decir si no escuchaste bien?'},
     {wait:4,label:'Responde en voz alta'},
@@ -304,7 +304,7 @@ const SCENES = [
      <div class="secret" id="r6">Oh, you like hiking. That sounds fun.</div>`,
    steps:[
     {es:'Último intento. Escucha:',listen:true},
-    {en:'I like hiking after work.',voice:'quiet',listen:true},
+    {en:'I like hiking after work.',voice:'A',listen:true},
     {wait:5,label:'Pide que lo repitan'},
     {show:'a6',es:'Ahora escucha la respuesta otra vez:'},
     {en:'I like hiking after work.',voice:'B',rate:.85},
@@ -391,8 +391,8 @@ function speakOne(text, lang, o){
     u.lang = voices[lang].lang;
     u.rate = o.rate || (lang==='es' ? .95 : .9);
     u.pitch = o.voice==='B' ? 1.2 : 1;
-    u.volume = o.voice==='quiet' ? .12 : 1;
-    if(o.voice==='quiet') u.rate = 1.25;
+    u.volume = o.voice==='quiet' ? .3 : 1;
+    if(o.voice==='quiet') u.rate = 1.3;
     let done=false, started=false;
     const fin=()=>{ if(!done){done=true; clearTimeout(t); clearTimeout(w); res();} };
     const t = setTimeout(fin, est*2.5+2000);
