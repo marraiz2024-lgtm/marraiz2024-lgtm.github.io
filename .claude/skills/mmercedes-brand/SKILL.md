@@ -27,9 +27,9 @@ description: "Sistema de marca visual de MMercedesEnglish (colores, tipografía,
 
 ### Descripción física exacta del MASTER (NO negociar ningún elemento):
 
-**Cabello:** oscuro (negro/castaño oscuro) con canas/mechones blancos prominentes, especialmente en la parte frontal y lateral. Largo hasta los hombros o ligeramente por encima. Ondulado/con volumen natural. **NO es un bob corto. NO es lacio. El cabello tiene movimiento y longitud notable.**
+**Cabello:** (el master actual es más lacio que el ondulado descrito aquí y Mercedes lo aceptó) oscuro (negro/castaño oscuro) con canas/mechones blancos prominentes, especialmente en la parte frontal y lateral. Largo hasta los hombros o ligeramente por encima. Ondulado/con volumen natural. **NO es un bob corto. NO es lacio. El cabello tiene movimiento y longitud notable.**
 
-**Gafas:** armazón BURGUNDY/VINO/ROJO OSCURO, forma rectangular-cuadrada. **NO son negras. NO son café. Son específicamente color vino/burgundy rojizo.** Este es el detalle más frecuentemente errado — verificar siempre, incluido en video (no solo en posts estáticos). Si un video o imagen generada muestra gafas negras, se marca como error de marca y se pide corrección.
+**Gafas:** Mercedes tiene varios armazones y todos son válidos. En cada pieza las gafas deben ser idénticas a las de la imagen de referencia y no cambiar dentro de la misma pieza o video. El armazón del master actual es burgundy/vino, rectangular-cuadrado. Si se genera con IA, la referencia manda: no se inventa un armazón distinto.
 
 **Tono de piel:** morena cálida, latina.
 
@@ -55,7 +55,7 @@ Siempre el PNG recortado del MASTER (fotografía, fondo transparente). No se usa
 - El rostro siempre completo y visible
 
 ### Errores más frecuentes a prevenir:
-- Gafas negras en lugar de burgundy → rechazar y pedir corrección (verificar también en video, no solo en imagen estática)
+- Gafas distintas a las de la imagen de referencia, o que cambian dentro de la misma pieza → rechazar y pedir corrección (verificar también en video, no solo en imagen estática)
 - Cabello bob corto en lugar de ondulado hasta los hombros → rechazar
 - Avatar con fondo no blanco en la foto de recorte (posts estáticos) → rechazar
 - Estilo ilustrado/pictórico → rechazar inmediatamente
@@ -63,11 +63,11 @@ Siempre el PNG recortado del MASTER (fotografía, fondo transparente). No se usa
 
 ## Props de enseñanza sobredimensionados
 
-Set aprobado — UN SOLO prop por publicación, interactuando con el contenido:
+Set aprobado — UN SOLO prop por publicación, interactuando con el contenido. El prop puede variar de una pieza a otra siempre que sea del set aprobado, y cada versión del master (cada prop) se guarda como un PNG aparte dentro de la skill generadora:
 - Lápiz gigante (amarillo, punta negra, borrador rosa)
 - Marcador/Sharpie gigante (blanco, "PERMANENT MARKER")
 - Pizarra pequeña con base de madera + tiza
-- Resaltador jumbo verde ("OVERACHIEVING")
+- Resaltador jumbo verde (el texto del cuerpo debe decir exactamente "MMercedesEnglish")
 - Resaltador jumbo amarillo ("WHAT'S GOING ON")
 - Resaltador jumbo naranja ("TOLD YOU SO")
 - Mano señaladora en palo (pointer hand)
@@ -120,7 +120,7 @@ Se evaluaron y descartaron: un badge motivacional fijo tipo "Avanza" (generaba c
 **"Tiny Tips, Big Progress"**
 
 ## Qué NO hacer
-- Avatar ilustrado, pictórico, con gafas negras, con bob corto → NO (aplica también en video)
+- Avatar ilustrado, pictórico, con gafas que no corresponden a la referencia, con bob corto → NO (aplica también en video)
 - Degradado/fade en borde del avatar → NO (usar sangrado por borde del canvas)
 - Más de un prop sobredimensionado por publicación estática → NO
 - Verde/rojo en quizzes o como fondo estructural → NO
@@ -133,7 +133,7 @@ Se evaluaron y descartaron: un badge motivacional fijo tipo "Avanza" (generaba c
 - Sello "English Your Way" con borde perforado tipo estampilla postal, o en amarillo brillante `#FFD23F` → NO (debe ser borde festoneado tipo sello de calidad, en Gold `#BE9100`)
 
 ## Verificación antes de entregar
-1. ¿Avatar foto realista con gafas BURGUNDY y cabello ondulado hasta los hombros? (verificar también en video)
+1. ¿Avatar foto realista con las gafas de la imagen de referencia y cabello hasta los hombros? (verificar también en video)
 2. ¿Recortado, sangrando por borde del canvas sin fade (posts estáticos)?
 3. ¿Un solo prop sobredimensionado interactuando con el contenido?
 4. ¿Pastilla de nivel correcta según el post (Beginner/Intermediate English Tips)?

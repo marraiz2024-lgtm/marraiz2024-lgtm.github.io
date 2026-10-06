@@ -1,0 +1,4 @@
+__pycache__/
+*.pyc
+# La foto del avatar no se sube al repositorio publico
+mmercedes-generador-posts/assets/avatar/*.png

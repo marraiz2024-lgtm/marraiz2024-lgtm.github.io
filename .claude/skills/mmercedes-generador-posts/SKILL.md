@@ -56,7 +56,9 @@ El script rechaza con error cualquier CTA que pida comentar ("Cuéntame en comen
 - Si el master no está disponible, genera sin avatar, dilo en la entrega y no uses ninguna ilustración como sustituto.
 - No incluyas el avatar en el B-roll de ambiente (regla de `mmercedes-revisor`).
 - La foto de Mercedes no se sube a repositorios públicos. Guárdala solo dentro de la skill en la cuenta de Mercedes.
-- El master actual (fotografía con resaltador verde OVERACHIEVING) ya incluye su prop, así que cuenta como el único prop de la pieza. No añadas otro. La etiqueta pequeña del resaltador salió deformada en el original y se tapó con el verde del cuerpo. Si se regenera el master, revisa que no vuelva a aparecer texto en el resaltador.
+- Cada versión del master (cada prop o par de gafas) es un PNG distinto dentro de `assets/avatar/`. El prop puede variar siempre que esté en el set aprobado, y las gafas pueden variar porque Mercedes tiene varios armazones. Elige el archivo con `--avatar NOMBRE` y mira los disponibles con `--listar-avatares`. Si hay varios y no eliges, el script se detiene y los lista.
+- El master incluye su propio prop, que cuenta como el único prop de la pieza. No añadas otro.
+- Si el prop es un resaltador o marcador, el texto del cuerpo debe decir exactamente "MMercedesEnglish". Revísalo antes de guardar un master nuevo.
 
 ## Paso 4: ejecutar
 
@@ -91,7 +93,7 @@ Abre el PNG y verifica:
 3. Texto sin cortar ni solapado. Si una zona no cabe, el script reduce solo la tipografía de ese texto. Si aun así no cabe, acorta el contenido.
 4. Tip Mercedes sobre el tema de este post, en español.
 5. CTA en español, al link en bio, sobre el tema de la pieza.
-6. Con avatar: gafas burgundy, cabello ondulado, rostro completo, sin estirar.
+6. Con avatar: gafas iguales a la referencia, texto del prop "MMercedesEnglish", rostro completo, sin estirar.
 7. Nombre del archivo descriptivo del tema.
 
 Pasa el resultado por `mmercedes-qa` antes de publicar.

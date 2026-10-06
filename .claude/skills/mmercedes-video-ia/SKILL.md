@@ -13,7 +13,7 @@ Claude no puede generar el video. Entrega: **Guion, Prompt por herramienta, Par�
 
 | Protagonista | Es | Reglas | Cuándo |
 |---|---|---|---|
-| Avatar real | Fotografía de Mercedes | Identidad exacta: cabello oscuro con canas, ondulado hasta los hombros, gafas burgundy rectangulares, argollas doradas, suéter negro cuello V. Nunca ilustración | Voz y rostro personales, reflexiones, explicaciones cortas, CTA |
+| Avatar real | Fotografía de Mercedes | Identidad exacta: cabello oscuro con canas hasta los hombros, las mismas gafas de la imagen de referencia (Mercedes tiene varios armazones), argollas doradas, suéter negro cuello V. Nunca ilustración | Voz y rostro personales, reflexiones, explicaciones cortas, CTA |
 | Mechita | Personaje 2D | Bob oscuro con canas, gafas burgundy, perlas, camiseta negra cuello V, jeans cropped, ballet flats. Estilo vector con sombreado suave | Diálogos modelo, drills, cápsulas de regla, contenido de curso por unidades |
 | Sin personaje | B-roll animado | Zoom lento sobre imagen de ambiente y texto aparte | Reflexiones y tips sin voz, solo música |
 
@@ -69,7 +69,7 @@ SEGMENTACIÓN          (tabla de clips, si el guion supera el límite)
 
 ## Qué verificar en el resultado (pasa a `mmercedes-qa`)
 
-Avatar real: gafas burgundy (no negras), cabello ondulado con canas, rostro sin distorsión (no tolerable), boca sincronizada, manos sin dedos extra, fondo según el set.
+Avatar real: gafas iguales a la referencia en todos los fotogramas, cabello ondulado con canas, rostro sin distorsión (no tolerable), boca sincronizada, manos sin dedos extra, texto del resaltador o marcador exacto ("MMercedesEnglish"), fondo según el set.
 Mechita: bob, gafas burgundy, perlas, misma ropa en todos los clips, texto sin parpadeo, sin cambios de voz entre clips.
 Ambos: texto legible en el formato final, sin marca de agua de la herramienta, duración dentro del objetivo.
 

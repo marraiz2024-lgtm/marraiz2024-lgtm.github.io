@@ -31,7 +31,7 @@ mkdir -p frames && ffmpeg -i entrada.mp4 -vf fps=1 frames/f_%02d.png
 Mira también el primer y el último fotograma, porque es donde la IA suele deformar.
 
 **Bloque A: avatar real**
-- Gafas burgundy o vino en todos los fotogramas (el error más frecuente). Compáralas con el archivo original, porque la compresión de la imagen puede oscurecer el tono.
+- Gafas idénticas a las de la imagen de referencia en todos los fotogramas (Mercedes tiene varios armazones y todos son válidos, pero no deben cambiar dentro del video). Compáralas con el archivo original, porque la compresión de la imagen puede cambiar el tono.
 - Cabello oscuro con canas, ondulado, hasta los hombros. Nada de bob corto.
 - Rostro sin distorsión ni cambio de edad. Un fallo aquí bloquea la pieza.
 - Boca sincronizada con el audio. Manos sin dedos extra ni dos manos izquierdas.
@@ -68,13 +68,13 @@ Mira también el primer y el último fotograma, porque es donde la IA suele defo
 
 ## Errores que bloquean siempre
 
-- Gafas negras o cabello bob corto en el avatar real.
+- Gafas que no coinciden con la referencia, o cabello bob corto, en el avatar real.
 - Estilo ilustrado en el avatar real. (Mechita es ilustrada por diseño, no se rechaza por eso.)
 - Más de 3 bloques de contenido en cascada.
 - El avatar cubre texto, una tarjeta o una ilustración (pasó en las piezas Fun vs Funny y Phrasal Verbs GO).
 - Imagen generada en cascada: bloques escalonados, con distinto margen o ancho de columna, rotados o superpuestos. Es un fallo frecuente de las imágenes de IA externa. Se corrige con la respuesta "Bloques en cascada" de `mmercedes-prompt-ia`.
 - Tip Mercedes sobre un tema distinto al del post.
-- Marcador del avatar que no diga exactamente "MMercedesEnglish".
+- Marcador o resaltador del avatar que no diga exactamente "MMercedesEnglish" (incluye el resaltador verde, antes "OVERACHIEVING").
 - Colores fuera de paleta usados de forma estructural.
 - Imagen 1:1 cuando debía ser 9:16.
 - Notas del orador visibles en una lámina.

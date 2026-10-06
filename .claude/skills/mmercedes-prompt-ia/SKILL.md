@@ -11,8 +11,8 @@ fiel al sistema de marca MMercedesEnglish.
 
 **INSTRUCCIÓN CRÍTICA — SIEMPRE decirle a Mercedes:**
 > "Sube la imagen MASTER del avatar junto con este prompt. Sin la imagen de referencia,
-> ChatGPT genera un avatar con gafas negras y cabello corto — que NO es el master.
-> La imagen correcta es: mujer con gafas BURGUNDY/VINO, cabello ondulado hasta los hombros con canas, suéter negro, fondo blanco."
+> ChatGPT genera un avatar con otras gafas y cabello corto, que NO es el master.
+> La imagen correcta es la foto de referencia: mujer con las gafas de la foto (Mercedes tiene varios armazones, usa el de la imagen que subes), cabello hasta los hombros con canas, suéter negro, fondo blanco."
 
 ---
 
@@ -25,7 +25,7 @@ La mujer exacta de la foto: NO cambies NADA de su apariencia.
 Descripción de verificación (si no tienes imagen de referencia, usar esto):
 - Mujer latina, piel morena cálida, aproximadamente 50 años
 - Cabello OSCURO con CANAS/MECHONES BLANCOS prominentes, largo hasta los hombros, ONDULADO con volumen — NO es bob corto, NO es lacio
-- Gafas armazón BURGUNDY/VINO/ROJO OSCURO, forma rectangular — NO son negras, NO son café
+- Gafas: EXACTAMENTE las de la imagen de referencia (mismo armazón, forma y color). Mercedes tiene varios y todos son válidos
 - Aretes de argolla dorada pequeños
 - Suéter NEGRO cuello V · jeans o pantalón oscuro
 - Expresión segura, sonrisa cálida, actitud de maestra con autoridad
@@ -36,7 +36,7 @@ POSICIÓN: La figura sangra ligeramente por el borde DERECHO del canvas — cort
 ROSTRO: siempre completo y visible, nunca recortado
 
 VERIFICAR ANTES DE ENTREGAR:
-□ ¿Las gafas son burgundy/vino? Si son negras → regenerar
+□ ¿Las gafas son idénticas a las de la imagen de referencia? Si no → regenerar
 □ ¿El cabello es ondulado hasta los hombros? Si es bob corto → regenerar
 □ ¿La mano que sostiene el prop es la mano DERECHA? Si no → regenerar
 □ ¿Hay dos manos izquierdas? → regenerar
@@ -50,7 +50,7 @@ VERIFICAR ANTES DE ENTREGAR:
 ```
 INSTRUCCIÓN INICIAL: Uso la imagen del avatar de referencia que subo ahora.
 OBLIGATORIO: usa EXACTAMENTE la misma mujer — mismo rostro, cabello ondulado con canas
-hasta los hombros, gafas BURGUNDY/VINO (no negras), tono de piel morena, suéter negro.
+hasta los hombros, las MISMAS gafas de la foto de referencia, tono de piel morena, suéter negro.
 No alteres ningún aspecto de su apariencia.
 
 Crea una imagen post Instagram/TikTok Reel, 1080×1920px vertical 9:16, 300 DPI.
@@ -92,7 +92,7 @@ RESTRICCIONES ABSOLUTAS:
 
 ```
 INSTRUCCIÓN INICIAL: Uso la imagen del avatar de referencia que subo ahora.
-OBLIGATORIO: misma mujer — gafas BURGUNDY/VINO, cabello ondulado con canas hasta los hombros, suéter negro. No alteres su apariencia.
+OBLIGATORIO: misma mujer, mismas gafas que la foto de referencia, cabello con canas hasta los hombros, suéter negro. No alteres su apariencia.
 
 Crea una imagen post Instagram/TikTok Reel, 1080×1920px vertical 9:16, 300 DPI.
 
@@ -120,7 +120,7 @@ RESTRICCIONES: NO CASCADA: todos los bloques de contenido apilados en orden vert
 ## PLANTILLA — VERB ALERT
 
 ```
-INSTRUCCIÓN INICIAL: Uso imagen de referencia del avatar. Misma mujer, gafas burgundy, cabello ondulado con canas.
+INSTRUCCIÓN INICIAL: Uso imagen de referencia del avatar. Misma mujer, mismas gafas, cabello ondulado con canas.
 
 FORMATO: 1080×1920px vertical 9:16, 300 DPI.
 PALETA: Navy #0D1B3E · Amarillo #FFD23F · Crema #FFFBF0 · Blanco #FFFFFF
@@ -148,7 +148,7 @@ Basada en la pieza "Phrasal Verbs: GO", aprobada por Mercedes. Se genera en Chat
 
 ```
 INSTRUCCIÓN INICIAL: Uso la imagen del avatar de referencia que subo ahora.
-OBLIGATORIO: misma mujer, gafas BURGUNDY/VINO (no negras), cabello ondulado con canas hasta los hombros, suéter negro cuello V. No alteres su apariencia.
+OBLIGATORIO: misma mujer, mismas gafas que la foto de referencia, cabello con canas hasta los hombros, suéter negro cuello V. No alteres su apariencia.
 
 Crea una imagen post Instagram/TikTok Reel, 1080×1920px vertical 9:16, 300 DPI.
 
@@ -174,7 +174,7 @@ ESTRUCTURA (de arriba abajo, una sola columna de contenido):
 7. FOOTER navy: badge "MM" + "MMercedes" blanco + "English" amarillo | "Tiny Tips, Big Progress" con estrellita amarilla.
 
 [INSERTAR BLOQUE DE AVATAR MASTER AQUÍ]
-PROP: resaltador jumbo verde (un solo prop, sostenido con la mano derecha).
+PROP: resaltador jumbo verde con el texto exacto "MMercedesEnglish" en el cuerpo (un solo prop, sostenido con la mano derecha). Verificar la ortografía del texto del resaltador.
 POSICIÓN: abajo a la derecha, sangrando por el borde derecho del canvas, sin degradado. La rejilla de ítems termina ARRIBA del avatar y el panel inferior termina ANTES del avatar: ningún ítem, franja ni panel queda detrás ni debajo del avatar.
 
 RESTRICCIONES ABSOLUTAS:
@@ -204,8 +204,8 @@ NO incluir el avatar de la maestra en imágenes de ambiente B-roll puro.
 
 ## RESPUESTAS PARA CORREGIR ERRORES DE CHATGPT
 
-**Gafas negras en lugar de burgundy:**
-> "Las gafas de la mujer deben ser color BURGUNDY/VINO/ROJO OSCURO — no negras. Es un detalle de identidad crítico. Corrige el color del armazón y regenera."
+**Gafas distintas a la referencia:**
+> "Las gafas de la mujer deben ser EXACTAMENTE las de la imagen de referencia que subí: mismo armazón, forma y color. Es un detalle de identidad. Corrige las gafas y regenera."
 
 **Cabello bob corto en lugar de ondulado:**
 > "El cabello debe ser ONDULADO, con VOLUMEN, largo hasta los HOMBROS, con canas/mechones blancos prominentes. No es un corte bob corto ni lacio. Corrige y regenera."

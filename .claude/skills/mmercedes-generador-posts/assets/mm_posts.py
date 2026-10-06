@@ -1,6 +1,9 @@
 #!/usr/bin/env python3
 """MMercedesEnglish: generador de PNG 1080x1920 (Pillow).
 
+Avatares: guarda uno o varios PNG transparentes en assets/avatar/ (prop o gafas distintos)
+y elige con --avatar NOMBRE. --listar-avatares muestra los disponibles.
+
 Subcomandos:
   como-se-dice   serie "¿Cómo se dice...?" (Opción B)
   no-digas       serie "No digas... Di..."
@@ -11,8 +14,8 @@ Uso:
   python3 mm_posts.py como-se-dice contenido.json --out ./salida [--avatar master.png]
 
 Portátil: las fuentes viajan en ./fonts, no hay rutas de sesión. La carpeta de
-fuentes se puede sustituir con la variable MM_FONTS. El avatar master se pasa con
---avatar o con la variable MM_AVATAR (PNG con fondo transparente).
+fuentes se puede sustituir con la variable MM_FONTS. El avatar se elige con
+--avatar (nombre dentro de assets/avatar o ruta) o con la variable MM_AVATAR.
 """
 import argparse
 import json
@@ -258,12 +261,43 @@ def tip_items(tip):
 
 
 # ── AVATAR MASTER (capa opcional, nunca se estira ni se recolorea) ──
-def load_avatar(path):
-    if not path:
-        path = os.environ.get("MM_AVATAR") or None
-    if not path:
-        default = HERE / "avatar" / "master.png"
-        path = str(default) if default.exists() else None
+AV_DIR = HERE / "avatar"
+
+
+def listar_avatares():
+    return sorted(AV_DIR.glob("*.png")) if AV_DIR.is_dir() else []
+
+
+def resolver_avatar(eleccion):
+    """Devuelve la ruta del avatar a usar, o None si no hay ninguno.
+    - ruta o nombre (con o sin .png, o parte del nombre) dentro de assets/avatar
+    - si no se elige: MM_AVATAR, o el único archivo de assets/avatar
+    - si hay varios y no se elige, se detiene y los lista (el prop y las gafas pueden variar)"""
+    if eleccion:
+        if Path(eleccion).is_file():
+            return str(eleccion)
+        todos = listar_avatares()
+        exactos = [f for f in todos if f.stem == eleccion or f.name == eleccion]
+        parciales = [f for f in todos if eleccion.lower() in f.stem.lower()]
+        hits = exactos or parciales
+        if len(hits) == 1:
+            return str(hits[0])
+        nombres = ", ".join(f.stem for f in todos) or "(ninguno)"
+        raise SystemExit(f"No encuentro un avatar único para '{eleccion}'. Disponibles en assets/avatar: {nombres}")
+    if os.environ.get("MM_AVATAR"):
+        return os.environ["MM_AVATAR"]
+    todos = listar_avatares()
+    if len(todos) == 1:
+        return str(todos[0])
+    if len(todos) > 1:
+        nombres = ", ".join(f.stem for f in todos)
+        raise SystemExit(f"Hay varios avatares en assets/avatar ({nombres}). Elige uno con --avatar NOMBRE "
+                         "según el prop y las gafas que correspondan a la pieza.")
+    return None
+
+
+def load_avatar(eleccion):
+    path = resolver_avatar(eleccion)
     if not path:
         return None
     img = Image.open(path)
@@ -866,8 +900,13 @@ def main(argv=None):
     ap.add_argument("serie", choices=SERIES)
     ap.add_argument("contenido", help="archivo JSON con el contenido de la pieza")
     ap.add_argument("--out", default="outputs", help="carpeta de salida (se crea si no existe)")
-    ap.add_argument("--avatar", help="PNG del avatar master con fondo transparente")
+    ap.add_argument("--avatar", help="nombre (de assets/avatar) o ruta del PNG del avatar master con fondo transparente")
     ap.add_argument("--sin-avatar", action="store_true", help="ignora MM_AVATAR y el avatar por defecto")
+    argv = sys.argv[1:] if argv is None else argv
+    if "--listar-avatares" in argv:
+        for f in listar_avatares():
+            print(f.stem)
+        return 0
     a = ap.parse_args(argv)
 
     content = json.loads(Path(a.contenido).read_text(encoding="utf-8"))
