@@ -31,7 +31,7 @@ mkdir -p frames && ffmpeg -i entrada.mp4 -vf fps=1 frames/f_%02d.png
 Mira también el primer y el último fotograma, porque es donde la IA suele deformar.
 
 **Bloque A: avatar real**
-- Gafas burgundy o vino en todos los fotogramas (el error más frecuente).
+- Gafas burgundy o vino en todos los fotogramas (el error más frecuente). Compáralas con el archivo original, porque la compresión de la imagen puede oscurecer el tono.
 - Cabello oscuro con canas, ondulado, hasta los hombros. Nada de bob corto.
 - Rostro sin distorsión ni cambio de edad. Un fallo aquí bloquea la pieza.
 - Boca sincronizada con el audio. Manos sin dedos extra ni dos manos izquierdas.
@@ -71,6 +71,7 @@ Mira también el primer y el último fotograma, porque es donde la IA suele defo
 - Gafas negras o cabello bob corto en el avatar real.
 - Estilo ilustrado en el avatar real. (Mechita es ilustrada por diseño, no se rechaza por eso.)
 - Más de 3 bloques de contenido en cascada.
+- El avatar cubre texto, una tarjeta o una ilustración (pasó en las piezas Fun vs Funny y Phrasal Verbs GO).
 - Imagen generada en cascada: bloques escalonados, con distinto margen o ancho de columna, rotados o superpuestos. Es un fallo frecuente de las imágenes de IA externa. Se corrige con la respuesta "Bloques en cascada" de `mmercedes-prompt-ia`.
 - Tip Mercedes sobre un tema distinto al del post.
 - Marcador del avatar que no diga exactamente "MMercedesEnglish".

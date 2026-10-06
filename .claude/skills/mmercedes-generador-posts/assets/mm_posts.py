@@ -5,6 +5,7 @@ Subcomandos:
   como-se-dice   serie "¿Cómo se dice...?" (Opción B)
   no-digas       serie "No digas... Di..."
   broll          overlay de B-roll (estructura corta)
+  ingles-basico  serie "Inglés básico": tarjeta de gramática en 2 o 3 columnas (TO BE, THERE IS/ARE, A/AN...)
 
 Uso:
   python3 mm_posts.py como-se-dice contenido.json --out ./salida [--avatar master.png]
@@ -82,6 +83,7 @@ SERIE_CTA = {
     "como-se-dice": "vocabulario",
     "no-digas": "errores",
     "broll": "universal",
+    "ingles-basico": "gramatica",
 }
 
 # Frases de CTA retiradas por decisión de Mercedes (nunca deben aparecer)
@@ -684,7 +686,179 @@ def broll(c, avatar=None):
     return img
 
 
-SERIES = {"como-se-dice": como_se_dice, "no-digas": no_digas, "broll": broll}
+
+# ═══════════════════ TRES COLUMNAS (formato "The verb TO BE") ═══════════════════
+def rich_lines(d, text, fn, fb, max_w):
+    """Texto con *negrita*; devuelve líneas [(palabra, es_negrita)] ajustadas al ancho."""
+    sp = tw(d, " ", fn) or 8
+    lines = []
+    for para in str(text).split("\n"):          # \n = salto voluntario (la negrita no cruza líneas)
+        toks = []
+        for i, seg in enumerate(para.split("*")):
+            toks += [(w, i % 2 == 1) for w in seg.split()]
+        cur, cw = [], 0
+        for w, b in toks:
+            ww = tw(d, w, fb if b else fn)
+            if cur and cw + sp + ww > max_w:
+                lines.append(cur)
+                cur, cw = [], 0
+            cw += (sp if cur else 0) + ww
+            cur.append((w, b))
+        if cur:
+            lines.append(cur)
+    return lines
+
+
+def draw_rich(d, x, y, lines, fn, fb, fill, step):
+    sp = tw(d, " ", fn) or 8
+    for ln in lines:
+        cx = x
+        for w, b in ln:
+            f = fb if b else fn
+            d.text((cx, y), w, font=f, fill=fill)
+            cx += tw(d, w, f) + sp
+        y += step
+    return y
+
+
+def _tres(c, extra):
+    """Serie "Inglés básico" (formato validado por Mercedes, piezas TO BE, THERE IS/ARE y A/AN):
+    título grande, subtítulo, tarjetas en fila (2 o 3), Tip Mercedes, CTA y footer. Sin avatar."""
+    _BLOCKS.clear()
+    nivel = nivel_key(c)
+    cols = c["columnas"]
+    if len(cols) not in (2, 3):
+        raise SystemExit("columnas debe tener 2 o 3 elementos")
+    img = Image.new("RGB", (W, H), CREAM)
+    d = ImageDraw.Draw(img)
+
+    # HEADER con tagline (como en el formato aprobado)
+    d.rectangle([0, 0, W, 112], fill=NAVY)
+    d.rectangle([0, 112, W, 120], fill=YELLOW)
+    fPIL = F(WSB, 28)
+    rr(d, [P, 18, P + 68, 94], 38, fill=YELLOW)
+    ctext(d, P + 34, 36, "MM", F(BS, 38), NAVY)
+    p2 = NIVELES[nivel]
+    p2w = tw(d, p2, fPIL) + 44
+    rr(d, [P + 84, 22, P + 84 + p2w, 90], 34, outline=WHITE, width=3)
+    ctext(d, P + 84 + p2w // 2, 38, p2, fPIL, WHITE)
+    tx = P + 84 + p2w + 40
+    d.line([(tx, 24), (tx, 90)], fill=FOOT_GRAY, width=2)
+    d.text((tx + 26, 20), "Tiny Tips,", font=F(WSR, 26), fill=WHITE)
+    d.text((tx + 26, 54), "Big Progress", font=F(WSB, 28), fill=YELLOW)
+
+    y = 150
+    # TÍTULO
+    t1 = c["titulo_1"].upper()
+    f1 = fit(d, t1, BS, 160, W - 2 * P)
+    ttext(d, W // 2, y, t1, f1, NAVY)
+    y += th(d, t1, f1) + 22 + extra
+    t2 = c["titulo_2"].upper()
+    f2 = fit(d, t2, BS, 145, W - 2 * P - 120)
+    bh = th(d, t2, f2) + 44
+    bw = tw(d, t2, f2) + 90
+    rr(d, [W // 2 - bw // 2, y, W // 2 + bw // 2, y + bh], 26, fill=YELLOW)
+    ttext(d, W // 2, y + 22, t2, f2, NAVY)
+    reg("texto", "titulo", P, 150, W - P, y + bh)
+    y += bh + 30 + extra
+    # SUBTÍTULO
+    fS = F(WSB, 46)
+    sub_lines = wrap(d, c["subtitulo"], fS, W - 2 * P - 60)
+    for ln in sub_lines:
+        ctext(d, W // 2, y, ln, fS, NAVY)
+        y += 58
+    ul = max(tw(d, l, fS) for l in sub_lines)
+    d.line([(W // 2 - ul // 2 + 40, y + 6), (W // 2 + ul // 2 - 40, y + 6)], fill=YELLOW, width=7)
+    y += 40 + extra
+
+    # TARJETAS EN FILA (un solo bloque: mismo margen y ancho de columna que el resto)
+    gap = 22
+    n = len(cols)
+    cw = (W - 2 * P - gap * (n - 1)) // n
+    fHead = F(BS, 104)
+    fLab, fLabB = F(WSB, 34), F(WSB, 34)
+    fEx, fExB = F(WSR, 40), F(WSB, 40)
+    pad = 22
+    # altura común: se mide la columna más larga
+    ex_heights = []
+    for col in cols:
+        h = 0
+        for ex in col["ejemplos"]:
+            h += len(rich_lines(d, ex, fEx, fExB, cw - 2 * pad)) * 52 + 36
+        ex_heights.append(h)
+    card_h = 14 + 120 + 14 + 112 + 18 + max(ex_heights) + 6
+    CARD_Y = y
+    reg("card", "tarjetas", P, CARD_Y, W - P, CARD_Y + card_h)
+    for i, col in enumerate(cols):
+        x1 = P + i * (cw + gap)
+        x2 = x1 + cw
+        rr(d, [x1, CARD_Y, x2, CARD_Y + card_h], 22, fill=WHITE, outline=GRAY_L, width=3)
+        rr(d, [x1 + 12, CARD_Y + 12, x2 - 12, CARD_Y + 132], 16, fill=NAVY)
+        fh = fit(d, col["cabecera"].upper(), BS, 104, cw - 60)
+        ttext(d, (x1 + x2) // 2, CARD_Y + 12 + (120 - th(d, col["cabecera"].upper(), fh)) // 2,
+              col["cabecera"].upper(), fh, YELLOW)
+        ly = CARD_Y + 146
+        rr(d, [x1 + 12, ly, x2 - 12, ly + 112], 16, fill=CREAM)
+        lab = wrap(d, col["con"], fLab, cw - 50)[:2]
+        by = ly + (112 - len(lab) * 42) // 2 + 2
+        for ln in lab:
+            ctext(d, (x1 + x2) // 2, by, ln, fLab, NAVY)
+            by += 42
+        ey = ly + 112 + 24
+        for k, ex in enumerate(col["ejemplos"]):
+            rl = rich_lines(d, ex, fEx, fExB, cw - 2 * pad)
+            ey = draw_rich(d, x1 + pad, ey, rl, fEx, fExB, NAVY, 52)
+            ey += 12
+            if k < len(col["ejemplos"]) - 1:
+                d.line([(x1 + pad, ey), (x2 - pad, ey)], fill=GRAY_L, width=2)
+                ey += 20
+    y = CARD_Y + card_h + 28 + extra
+
+    # TIP MERCEDES (etiqueta amarilla como en el formato aprobado; texto en español)
+    fT, fTB = F(WSR, 32), F(WSB, 32)
+    tip_txt = " ".join(c["tip"]) if isinstance(c["tip"], list) else c["tip"]
+    lab_w = 300
+    tl = rich_lines(d, tip_txt, fT, fTB, W - 2 * P - lab_w - 90)
+    tip_h = max(150, 44 + len(tl) * 42)
+    rr(d, [P, y, W - P, y + tip_h], 22, fill=WHITE, outline=YELLOW, width=3)
+    reg("card", "tip-mercedes", P, y, W - P, y + tip_h)
+    rr(d, [P + 22, y + (tip_h - 76) // 2, P + 22 + lab_w, y + (tip_h + 76) // 2], 14, fill=YELLOW)
+    ctext(d, P + 22 + lab_w // 2, y + (tip_h - 40) // 2 - 2, "Tip Mercedes:", F(WSB, 36), NAVY)
+    d.line([(P + lab_w + 52, y + 24), (P + lab_w + 52, y + tip_h - 24)], fill=GRAY_L, width=2)
+    draw_rich(d, P + lab_w + 76, y + (tip_h - len(tl) * 42) // 2, tl, fT, fTB, NAVY, 42)
+    y += tip_h + 24 + extra
+
+    l1, l2 = pick_cta("ingles-basico", c.get("tema", c["titulo_2"]), c.get("cta_categoria"), c.get("cta"))
+    y = cta_block(d, y, l1, l2)
+
+    FOOT_H = 170
+    if y > H - FOOT_H:
+        raise SystemExit(f"El contenido no cabe (termina en y={y}, el footer empieza en {H - FOOT_H}).")
+    check_layout(None)
+    _tres.sobrante = H - FOOT_H - y
+    fy = H - FOOT_H
+    d.rectangle([0, fy, W, H], fill=NAVY)
+    rr(d, [P + 10, fy + 40, P + 100, fy + 130], 45, fill=YELLOW)
+    ctext(d, P + 55, fy + 62, "MM", F(BS, 46), NAVY)
+    d.line([(P + 126, fy + 36), (P + 126, fy + 134)], fill=FOOT_GRAY, width=2)
+    fN = F(BS, 52)
+    d.text((P + 152, fy + 56), "MMercedes", font=fN, fill=WHITE)
+    d.text((P + 152 + tw(d, "MMercedes", fN), fy + 56), "English", font=fN, fill=YELLOW)
+    xx = P + 152 + tw(d, "MMercedesEnglish", fN) + 30
+    d.line([(xx, fy + 36), (xx, fy + 134)], fill=FOOT_GRAY, width=2)
+    d.text((xx + 26, fy + 70), "Tiny Tips, Big Progress", font=F(WSR, 28), fill=FOOT_GRAY)
+    return img
+
+
+def tres_columnas(c, avatar=None):
+    """Serie Inglés básico. Dos pasadas: la primera mide el sobrante vertical y la segunda lo reparte
+    entre los 5 espacios entre bloques (tope 30 px) para evitar un hueco vacío."""
+    _tres(c, 0)
+    extra = max(0, min(30, _tres.sobrante // 6))
+    return _tres(c, extra)
+
+
+SERIES = {"como-se-dice": como_se_dice, "no-digas": no_digas, "broll": broll, "ingles-basico": tres_columnas}
 
 
 def main(argv=None):
@@ -697,7 +871,7 @@ def main(argv=None):
     a = ap.parse_args(argv)
 
     content = json.loads(Path(a.contenido).read_text(encoding="utf-8"))
-    avatar = None if (a.sin_avatar or a.serie == "broll") else load_avatar(a.avatar)
+    avatar = None if (a.sin_avatar or a.serie in ("broll", "ingles-basico")) else load_avatar(a.avatar)
     img = SERIES[a.serie](content, avatar)
     out = Path(a.out)
     out.mkdir(parents=True, exist_ok=True)

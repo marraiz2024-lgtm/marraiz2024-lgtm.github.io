@@ -1,13 +1,13 @@
 ---
 name: mmercedes-generador-posts
-description: Genera automáticamente el PNG 1080×1920px de un post de MMercedesEnglish, series ¿Cómo se dice? (Opción B) y No digas/Di, con el avatar master opcional y el CTA al link en bio elegido según el tema. Usar SIEMPRE que Mercedes pida "genera el post de...", "arma el post de...", "crea la imagen para...", "haz el PNG de...", o dé el tema o contenido de un post nuevo para Instagram o TikTok. No requiere ChatGPT ni Gemini, Claude genera el PNG directamente.
+description: Genera automáticamente el PNG 1080×1920px de un post de MMercedesEnglish, series ¿Cómo se dice? (Opción B), No digas/Di e Inglés básico, con el avatar master opcional y el CTA al link en bio elegido según el tema. Usar SIEMPRE que Mercedes pida "genera el post de...", "arma el post de...", "crea la imagen para...", "haz el PNG de...", o dé el tema o contenido de un post nuevo para Instagram o TikTok. No requiere ChatGPT ni Gemini, Claude genera el PNG directamente.
 ---
 
 # MMercedesEnglish: generador de posts PNG
 
 Genera el PNG 1080×1920 con Python y Pillow. El script, las fuentes y los ejemplos viajan dentro de esta skill, así que no dependen de rutas de sesión ni de otras skills.
 
-Las series ¿Cómo se dice? y No digas... Di... funcionan bien. No cambies su estructura, sus colores ni sus fuentes. Lo único que varía es el contenido, el nivel, el CTA y la capa opcional del avatar.
+Las series ¿Cómo se dice?, No digas... Di... e Inglés básico funcionan bien. No cambies su estructura, sus colores ni sus fuentes. Lo único que varía es el contenido, el nivel, el CTA y la capa opcional del avatar.
 
 ```
 mmercedes-generador-posts/
@@ -25,7 +25,8 @@ Pregunta solo lo que falte. Si ya tienes la ficha de `mmercedes-ficha`, úsala s
 
 **¿Cómo se dice?**: `concepto_es`, `expresion_en`, `subtitulo`, `literal`, `significa`, 3 `ejemplos` [EN, ES], `tip`.
 **No digas... Di...**: `frase_mal` y `frase_bien` (2 líneas cada una), 2 `ejemplos` [incorrecto, correcto], `tip`.
-**Ambas**: `nivel` ("Beginner" o "Intermediate"), `tema` (palabra clave, sirve para variar el CTA), `salida` (nombre descriptivo del PNG).
+**Inglés básico** (serie aprobada por Mercedes; ya publicadas: TO BE, THERE IS / THERE ARE y A / AN): `titulo_1`, `titulo_2`, `subtitulo`, 2 o 3 `columnas` con `cabecera`, `con` y 2 `ejemplos` (un `*asterisco*` pone negrita y `\n` fuerza un salto), y `tip` en español. Ejemplos: `assets/ejemplos/ingles_basico_to_be.json` (3 columnas) y `ingles_basico_a_an.json` (2 columnas).
+**Ambas** (¿Cómo se dice? y No digas): `nivel` ("Beginner" o "Intermediate"), `tema` (palabra clave, sirve para variar el CTA), `salida` (nombre descriptivo del PNG).
 
 El nivel es obligatorio de decidir en cada post porque la pastilla del header lo muestra. Si Mercedes no lo dice, deduce el nivel real del contenido, no dejes "Beginner" por defecto.
 
@@ -62,6 +63,7 @@ El script rechaza con error cualquier CTA que pida comentar ("Cuéntame en comen
 SCRIPT=$(find . ~/.claude /mnt -path '*mmercedes-generador-posts/assets/mm_posts.py' 2>/dev/null | head -1)
 python3 "$SCRIPT" como-se-dice contenido.json --out ./salida --avatar master.png
 python3 "$SCRIPT" no-digas     contenido.json --out ./salida
+python3 "$SCRIPT" ingles-basico contenido.json --out ./salida    # serie Inglés básico (2 o 3 columnas)
 python3 "$SCRIPT" broll        contenido.json --out ./salida     # ver mmercedes-broll-overlay
 ```
 
@@ -99,9 +101,18 @@ Navy #0D1B3E, Amarillo #FFD23F, Crema #FFFBF0, Blanco #FFFFFF, Rojo #CD2823 (sol
 
 Cambios respecto a la versión anterior de los scripts, todos para respetar la paleta: crema pasó de #FFFCF2 a #FFFBF0, verde de #1E9641 a #1E9650, fondo del Tip de #FFF8D7 a #FFFBCC, el texto gris azulado de la tabla de ejemplos pasó a navy y se eliminó la línea divisoria del footer, que era un color fuera de paleta.
 
+## Inglés básico
+
+Serie de tarjetas de gramática para nivel Beginner. El formato (header con tagline, título grande con el tema sobre una pastilla amarilla, subtítulo con subrayado, tarjetas en fila, Tip Mercedes y footer) es el de las piezas ya publicadas. Admite 2 columnas (A / AN, THERE IS / THERE ARE) o 3 (AM / IS / ARE). No lleva avatar. Dos diferencias deliberadas respecto a las piezas publicadas:
+
+- El Tip Mercedes va en español (la pieza TO BE lo tenía en inglés, y la regla de marca pide español).
+- Lleva CTA al link en bio entre el Tip y el footer (las piezas publicadas no tenían CTA). Si Mercedes prefiere la versión sin CTA, se quita la llamada a `cta_block` en `_tres`.
+
+Las tarjetas en fila cuentan como un solo bloque para la guardia anti-cascada. El espacio sobrante se reparte entre los bloques para no dejar un hueco vacío.
+
 ## Saturday English
 
-Esta skill no incluye plantilla de Saturday English porque no existe ninguna en los skills que tengo. Si Mercedes la quiere en esta cadena, necesito un ejemplo del post para reproducirlo sin alterarlo.
+Se genera en ChatGPT o Gemini porque lleva ilustraciones. La plantilla está en `mmercedes-prompt-ia` ("SATURDAY ENGLISH") y no se produce con este script.
 
 ## Reglas finales
 

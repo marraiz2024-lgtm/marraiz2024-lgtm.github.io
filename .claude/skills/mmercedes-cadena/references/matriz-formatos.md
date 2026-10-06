@@ -8,6 +8,8 @@
 | Error común | Post No digas... Di... (PNG) | B-roll de texto, formato B | Avatar animado 15 s | Ver regla "incorrecto frente a poco natural" en `mmercedes-ficha` |
 | Verbo irregular | VERB ALERT o imagen de verbo (serie) | B-roll de texto, formato C | Drill de sonido de Mechita | La escena de la imagen rota, nunca dos veces seguidas la misma |
 | Regla gramatical corta | Cápsula de regla de Mechita (Set B) | Post con tip | n/a | Una sola regla por pieza |
+| Gramática básica Beginner (to be, there is / there are, a / an, do / does) | Inglés básico (Pillow, `ingles-basico`, 2 o 3 columnas) | Cápsula de Mechita (Set B) | n/a | Ya publicados: TO BE, THERE IS / ARE y A / AN. No repetir temas |
+| Lista numerada de 6 (phrasal verbs, preposiciones) | Saturday English (ChatGPT, plantilla en `mmercedes-prompt-ia`) | Video corto de Mechita con 2 de los ítems | n/a | Con avatar y resaltador verde |
 | Pronunciación o diálogo funcional | Drill o diálogo de Mechita (Set A) | Microclase | n/a | El audio se valida a oído |
 | Reflexión o postura | B-roll de texto, formato C | Avatar animado con voz de Mercedes | n/a | Sin avatar en B-roll de ambiente |
 | Voz personal de Mercedes | Avatar animado (Grok, HeyGen, D-ID) | Post con avatar | n/a | Identidad exacta de la foto real |

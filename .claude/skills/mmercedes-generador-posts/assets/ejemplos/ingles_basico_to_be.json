@@ -1,0 +1,37 @@
+{
+  "nivel": "Beginner",
+  "tema": "verb to be",
+  "titulo_1": "THE VERB",
+  "titulo_2": "TO BE",
+  "subtitulo": "We use a different form for different subjects.",
+  "columnas": [
+    {
+      "cabecera": "AM",
+      "con": "With\nI",
+      "ejemplos": [
+        "I *am*\nhappy.",
+        "I *am*\na student."
+      ]
+    },
+    {
+      "cabecera": "IS",
+      "con": "With\nhe, she, it",
+      "ejemplos": [
+        "She *is*\nkind.",
+        "It *is*\ncold."
+      ]
+    },
+    {
+      "cabecera": "ARE",
+      "con": "With\nyou, we, they",
+      "ejemplos": [
+        "You *are*\nready.",
+        "They *are*\nfriends."
+      ]
+    }
+  ],
+  "tip": [
+    "La forma de *to be* cambia según la persona de la que hablas. Con I usa am, con he, she, it usa is y con you, we, they usa are."
+  ],
+  "salida": "ejemplo_tres_columnas.png"
+}

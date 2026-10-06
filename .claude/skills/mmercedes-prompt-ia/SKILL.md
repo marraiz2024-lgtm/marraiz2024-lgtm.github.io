@@ -142,6 +142,53 @@ RESTRICCIONES: NO CASCADA: todos los bloques de contenido apilados en orden vert
 
 ---
 
+## PLANTILLA: SATURDAY ENGLISH (phrasal verbs y listas numeradas)
+
+Basada en la pieza "Phrasal Verbs: GO", aprobada por Mercedes. Se genera en ChatGPT o Gemini porque lleva ilustraciones. Subir el avatar master como referencia.
+
+```
+INSTRUCCIÓN INICIAL: Uso la imagen del avatar de referencia que subo ahora.
+OBLIGATORIO: misma mujer, gafas BURGUNDY/VINO (no negras), cabello ondulado con canas hasta los hombros, suéter negro cuello V. No alteres su apariencia.
+
+Crea una imagen post Instagram/TikTok Reel, 1080×1920px vertical 9:16, 300 DPI.
+
+PALETA (únicos colores, ninguno más):
+Navy #0D1B3E · Amarillo #FFD23F · Crema #FFFBF0 · Blanco #FFFFFF · Gris #E6E6EB (bordes)
+Las ilustraciones usan solo navy, amarillo, crema, blanco y tonos de piel naturales. SIN azul claro, SIN azul real, SIN lavanda.
+
+ESTRUCTURA (de arriba abajo, una sola columna de contenido):
+1. HEADER navy: badge circular amarillo "MM" + pastilla borde blanco "[NIVEL] English Tips" + franja amarilla 8px.
+2. ETIQUETA "SATURDAY ENGLISH" navy bold, con dos rayitas amarillas a cada lado.
+3. TÍTULO grande navy bold: [TEMA, ej. PHRASAL VERBS].
+4. PASTILLA navy con el elemento central en amarillo bold: [ej. GO], con rayitas amarillas a cada lado.
+5. REJILLA de 6 ítems, 2 columnas × 3 filas, todas las celdas con el mismo tamaño, el mismo margen y el mismo ancho de columna. Cada ítem:
+   - círculo amarillo con el número (01 a 06) en navy
+   - el término en navy bold mayúsculas
+   - la traducción al español en navy, debajo del término
+   - una ilustración plana pequeña a la derecha de la celda (sin texto dentro, sin emojis, estilo limpio, no kawaii)
+   - franja de ejemplo debajo, fondo BLANCO con borde gris #E6E6EB, estrella navy a la izquierda y la frase con el término en navy bold
+   - separador amarillo fino entre filas
+   Ítems: [01 TÉRMINO / traducción / ejemplo] ... [06 ...]
+6. PANEL INFERIOR con borde amarillo, 3 columnas separadas por líneas finas, SOLO en la zona izquierda (termina antes del avatar):
+   [CAJA 1: título corto + 1 frase en español] [CAJA 2: "Tip Mercedes" + tip en español] [CAJA 3: CTA en español al link en bio, ej. "Para más phrasal verbs, revisa el link en mi bio."]
+7. FOOTER navy: badge "MM" + "MMercedes" blanco + "English" amarillo | "Tiny Tips, Big Progress" con estrellita amarilla.
+
+[INSERTAR BLOQUE DE AVATAR MASTER AQUÍ]
+PROP: resaltador jumbo verde (un solo prop, sostenido con la mano derecha).
+POSICIÓN: abajo a la derecha, sangrando por el borde derecho del canvas, sin degradado. La rejilla de ítems termina ARRIBA del avatar y el panel inferior termina ANTES del avatar: ningún ítem, franja ni panel queda detrás ni debajo del avatar.
+
+RESTRICCIONES ABSOLUTAS:
+- NO CASCADA: todas las celdas de la rejilla alineadas, mismo margen izquierdo, mismo ancho de columna y mismo alto. Sin desfase, sin rotación, sin superposición.
+- Ningún texto cortado ni tapado por el avatar o por una ilustración.
+- Ortografía exacta de cada término y de cada frase de ejemplo.
+- Tip Mercedes y CTA en español. CTA al link en bio. PROHIBIDO "Cuéntame en comentarios".
+- "MMercedesEnglish" sin espacios.
+```
+
+Diferencias respecto a la pieza de muestra, aplicadas para respetar la marca: franjas de ejemplo en blanco con borde gris (la muestra usa azul claro, fuera de paleta), badge MM en lugar del foco, Tip y CTA en español, CTA al link en bio, y ningún bloque detrás del avatar (en la muestra el avatar cubre parte del ítem 06 y del panel).
+
+---
+
 ## PLANTILLA — B-ROLL (sin avatar)
 
 ```

@@ -1,0 +1,29 @@
+{
+  "nivel": "Beginner",
+  "tema": "a an",
+  "titulo_1": "A OR AN?",
+  "titulo_2": "A / AN",
+  "subtitulo": "The choice depends on the sound, not on the letter.",
+  "columnas": [
+    {
+      "cabecera": "A",
+      "con": "Before a\nconsonant sound",
+      "ejemplos": [
+        "*a* car",
+        "*a* university"
+      ]
+    },
+    {
+      "cabecera": "AN",
+      "con": "Before a\nvowel sound",
+      "ejemplos": [
+        "*an* apple",
+        "*an* hour"
+      ]
+    }
+  ],
+  "tip": [
+    "Lo que importa es el *sonido* inicial, no la letra. Por eso se dice *an hour* (la h no se pronuncia) y *a university* (suena como \"yu\")."
+  ],
+  "salida": "ejemplo_a_an.png"
+}
