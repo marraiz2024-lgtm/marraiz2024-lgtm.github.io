@@ -134,6 +134,7 @@
   .start-in p{font-size:15px;line-height:1.5;margin-bottom:16px}
   .nov{font-size:13px;margin-top:12px;opacity:.7}
   .voz{margin-top:14px;font-size:14px}.voz summary{cursor:pointer;font-weight:600}.voz label{display:block;margin-top:8px}.voz select{font:inherit;padding:6px 8px;border:2px solid var(--navy);border-radius:8px;background:var(--white);color:var(--navy);max-width:100%}
+  .vbox{margin-top:14px;display:flex;gap:12px;align-items:center;flex-wrap:wrap}#vstatus{font-size:14px;flex:1;min-width:200px}#vstatus.warn{font-weight:700}
   footer{margin-top:30px;font:700 18px 'Big Shoulders Display',sans-serif;letter-spacing:.5px}
   footer b{color:var(--gold)}
 </style>
@@ -186,6 +187,10 @@
         <div class="bar"><i id="bar"></i></div>
       </div>
       <div class="chips" id="chips"></div>
+      <div class="vbox">
+        <button id="vtest" type="button">Probar voz</button>
+        <span id="vstatus" role="status"></span>
+      </div>
       <details class="voz"><summary>Cambiar la voz</summary>
         <label>Español <select id="vses"></select></label>
         <label>Inglés <select id="vsen"></select></label>
@@ -341,6 +346,7 @@ function score(v){
   if(FEMALE.test(v.name)) n+=10;
   if(MALE.test(v.name)) n-=20;
   if(/natural|online|neural/i.test(v.name)) n+=3;
+  if(v.localService) n+=4;
   return n;
 }
 function listFor(re,pref){
@@ -360,6 +366,7 @@ function pickVoices(){
   fillSelect('vses',es,voices.es); fillSelect('vsen',en,voices.en);
   $('vses').onchange=()=>{ voices.es=es[+$('vses').value]; };
   $('vsen').onchange=()=>{ voices.en=en[+$('vsen').value]; };
+  setStatus((voices.es||voices.en)?voiceInfo():'');
   const nv=document.getElementById('novoice');
   nv.textContent = (!voices.es || !voices.en) ? 'Tu navegador no tiene todas las voces. Se usará el subtitulado y los tiempos serán aproximados.' : '';
 }
@@ -368,23 +375,45 @@ if(synth){ pickVoices(); synth.onvoiceschanged = pickVoices; }
 let token = 0, idx = 0, playing = false;
 const sleep = ms => new Promise(r=>setTimeout(r,ms));
 
-function speak(text, lang, o={}){
+function setStatus(t,warn){ const e=$('vstatus'); if(e){ e.textContent=t; e.className=warn?'warn':''; } }
+function voiceInfo(){ return 'Voz en uso: '+(voices.es?voices.es.name:'ninguna para español')+' / '+(voices.en?voices.en.name:'ninguna para inglés')+'.'; }
+
+function speakOne(text, lang, o){
   return new Promise(res=>{
     const words = text.split(/\s+/).length;
     const est = Math.max(1200, words*(lang==='en'?520:430)) / (o.rate||1);
-    if(!synth || !voices[lang]){ setTimeout(res, est); return; }
+    if(!synth || !voices[lang]){
+      setStatus('Este dispositivo no tiene voz en '+(lang==='es'?'español':'inglés')+'. Prueba en Chrome o Edge, o instala una voz en la configuración del sistema.',true);
+      setTimeout(res, est); return;
+    }
     const u = new SpeechSynthesisUtterance(text);
-    u.voice = voices[lang]; u.lang = voices[lang].lang;
+    try{ u.voice = voices[lang]; }catch(err){}
+    u.lang = voices[lang].lang;
     u.rate = o.rate || (lang==='es' ? .95 : .9);
     u.pitch = o.voice==='B' ? 1.2 : 1;
     u.volume = o.voice==='quiet' ? .12 : 1;
     if(o.voice==='quiet') u.rate = 1.25;
-    let done=false; const fin=()=>{ if(!done){done=true; clearTimeout(t); res();} };
+    let done=false, started=false;
+    const fin=()=>{ if(!done){done=true; clearTimeout(t); clearTimeout(w); res();} };
     const t = setTimeout(fin, est*2.5+2000);
+    const w = setTimeout(()=>{ if(!started) setStatus('No se detecta audio. Sube el volumen, revisa que la pestaña no esté silenciada y prueba otra voz en «Cambiar la voz».',true); }, 3500);
+    u.onstart = ()=>{ started=true; setStatus(voiceInfo()); };
     u.onend = fin; u.onerror = fin;
     synth.speak(u);
   });
 }
+
+async function speak(text, lang, o={}){
+  const parts = text.split(/(?<=[.!?:])\s+/).filter(Boolean);
+  for(const part of parts) await speakOne(part, lang, o);
+}
+
+$('vtest').onclick = async ()=>{
+  if(synth) synth.cancel();
+  setStatus('Probando la voz…');
+  await speak('Hola, esta es la voz en español.','es');
+  await speak('Hello, this is the English voice.','en');
+};
 
 function caption(text, kind){
   const c=$('cap'); c.className='caption'+(kind?' '+kind:''); c.textContent=text;
