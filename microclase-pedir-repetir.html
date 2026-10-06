@@ -133,6 +133,7 @@
   .start-in h2{font:800 32px/1 'Big Shoulders Display',sans-serif;text-transform:uppercase;margin-bottom:8px}
   .start-in p{font-size:15px;line-height:1.5;margin-bottom:16px}
   .nov{font-size:13px;margin-top:12px;opacity:.7}
+  .voz{margin-top:14px;font-size:14px}.voz summary{cursor:pointer;font-weight:600}.voz label{display:block;margin-top:8px}.voz select{font:inherit;padding:6px 8px;border:2px solid var(--navy);border-radius:8px;background:var(--white);color:var(--navy);max-width:100%}
   footer{margin-top:30px;font:700 18px 'Big Shoulders Display',sans-serif;letter-spacing:.5px}
   footer b{color:var(--gold)}
 </style>
@@ -185,6 +186,10 @@
         <div class="bar"><i id="bar"></i></div>
       </div>
       <div class="chips" id="chips"></div>
+      <details class="voz"><summary>Cambiar la voz</summary>
+        <label>Español <select id="vses"></select></label>
+        <label>Inglés <select id="vsen"></select></label>
+      </details>
     </div>
   </div>
   <footer>MMercedes<b>English</b> · Tiny Tips, Big Progress</footer>
@@ -220,7 +225,7 @@ const SCENES = [
  { time:'0:30', ttl:'Situación',
    html:`<div class="dlg">
        ${D('','A','l1','What do you do?')}
-       ${D('b','B','l2','<span class="blur" id="bb">I work in a shop.</span>','<span class="hint" id="hint">volumen bajo</span>')}
+       ${D('b','B','l2','<span class="blur" id="bb">I work in a shop.</span>')}
      </div>
      <p class="q" id="q">¿Escuchaste la ocupación?</p>
      <div class="note" id="n1"><b class="tip">Tip Mercedes:</b> no hace falta adivinar ni decir solo “What?”. Puedes pedir que la persona repita.</div>`,
@@ -327,19 +332,39 @@ const SCENES = [
 
 // ---------- Voz ----------
 const synth = window.speechSynthesis;
+const $ = id => document.getElementById(id);
 let voices = {es:null,en:null};
+const FEMALE=/sabina|helena|paulina|dalia|elvira|monica|m[oó]nica|paloma|lucia|luc[ií]a|marisol|camila|salome|salom[eé]|zira|aria|jenny|samantha|karen|ava|allison|susan|serena|moira|tessa|female|mujer|google espa|google us english|google uk english female/i;
+const MALE=/raul|raúl|pablo|jorge|diego|carlos|juan|alvaro|álvaro|ricardo|david|mark|guy|alex|daniel|fred|ryan|george|james|male\b|hombre/i;
+function score(v){
+  let n=0;
+  if(FEMALE.test(v.name)) n+=10;
+  if(MALE.test(v.name)) n-=20;
+  if(/natural|online|neural/i.test(v.name)) n+=3;
+  return n;
+}
+function listFor(re,pref){
+  const v = synth.getVoices().filter(x=>re.test(x.lang));
+  return v.sort((a,b)=> (score(b)+(pref.includes(b.lang.replace('_','-').toLowerCase())?2:0)) - (score(a)+(pref.includes(a.lang.replace('_','-').toLowerCase())?2:0)));
+}
+function fillSelect(id,list,cur){
+  const el=document.getElementById(id); if(!el) return;
+  el.innerHTML=list.map((v,i)=>`<option value="${i}">${v.name} (${v.lang})</option>`).join('');
+  const i=list.indexOf(cur); el.value = i<0?0:i;
+}
 function pickVoices(){
   if(!synth) return;
-  const v = synth.getVoices();
-  const best = (re,pref)=> v.find(x=>pref.some(p=>x.lang.replace('_','-').toLowerCase()===p)) || v.find(x=>re.test(x.lang));
-  voices.es = best(/^es/i,['es-us','es-mx','es-co']);
-  voices.en = best(/^en/i,['en-us']);
+  const es=listFor(/^es/i,['es-us','es-mx','es-co']), en=listFor(/^en/i,['en-us']);
+  if(!voices.es || !es.includes(voices.es)) voices.es = es[0]||null;
+  if(!voices.en || !en.includes(voices.en)) voices.en = en[0]||null;
+  fillSelect('vses',es,voices.es); fillSelect('vsen',en,voices.en);
+  $('vses').onchange=()=>{ voices.es=es[+$('vses').value]; };
+  $('vsen').onchange=()=>{ voices.en=en[+$('vsen').value]; };
   const nv=document.getElementById('novoice');
-  nv.textContent = (!synth || !voices.es || !voices.en) ? 'Tu navegador no tiene todas las voces. Se usará el subtitulado y los tiempos serán aproximados.' : '';
+  nv.textContent = (!voices.es || !voices.en) ? 'Tu navegador no tiene todas las voces. Se usará el subtitulado y los tiempos serán aproximados.' : '';
 }
 if(synth){ pickVoices(); synth.onvoiceschanged = pickVoices; }
 
-const $ = id => document.getElementById(id);
 let token = 0, idx = 0, playing = false;
 const sleep = ms => new Promise(r=>setTimeout(r,ms));
 
@@ -351,7 +376,7 @@ function speak(text, lang, o={}){
     const u = new SpeechSynthesisUtterance(text);
     u.voice = voices[lang]; u.lang = voices[lang].lang;
     u.rate = o.rate || (lang==='es' ? .95 : .9);
-    u.pitch = o.voice==='B' ? 1.25 : (o.voice==='A' ? .95 : 1);
+    u.pitch = o.voice==='B' ? 1.2 : 1;
     u.volume = o.voice==='quiet' ? .12 : 1;
     if(o.voice==='quiet') u.rate = 1.25;
     let done=false; const fin=()=>{ if(!done){done=true; clearTimeout(t); res();} };
