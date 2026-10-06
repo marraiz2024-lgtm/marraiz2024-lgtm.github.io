@@ -52,7 +52,7 @@ claro con el prompt corregido listo para ChatGPT.
 ### Posts de redes (Instagram/TikTok Reel)
 - **Dimensiones:** 1080 × 1920 px, vertical 9:16
 - **Estructura obligatoria:**
-  1. Header navy: pill MM + "Beginner English Tips" + pill de serie (rojo)
+  1. Header navy: pill MM + pastilla de nivel dinámica ("Beginner English Tips" o "Intermediate English Tips" según el post) + pill de serie (rojo)
   2. Zona de contenido principal (cream)
   3. Paneles o reveal según la serie
   4. Tabla de ejemplos bilingüe (EN INGLÉS / EN ESPAÑOL)
