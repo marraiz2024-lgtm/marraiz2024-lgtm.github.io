@@ -258,7 +258,7 @@ const SCENES = [
        <div class="seg" id="s3"><div class="w">please.</div><div class="d">cierra con cortesía</div></div>
      </div>
      <p class="trans" id="tr">Significa: <span>Me gustaría un café, por favor.</span></p>
-     <div class="note" id="n3"><b class="tip">Tip Mercedes:</b> I’d es la forma corta de I would. Suena como “aid”: aid like, sin separar las dos palabras.</div>`,
+     <div class="note" id="n3"><b class="tip">Tip Mercedes:</b> I’d es la forma corta de I would. Suena como “ai-d”, la “ai” de “side” y sin la s: ai-d like, sin separar las dos palabras.</div>`,
    steps:[
     {es:'El patrón es “I’d like” más lo que quieres pedir. Di:'},
     {en:'I’d like a coffee, please.',voice:'A',rate:.85},
@@ -269,7 +269,7 @@ const SCENES = [
     {es:'es lo que pides.'},
     {on:'s3',en:'Please',voice:'A',rate:.85},
     {es:'cierra con cortesía.'},
-    {show:'n3',es:'“I’d” es la forma corta de “I would”. Suena como “aid”, sin separar las dos palabras.'}
+    {show:'n3',es:'“I’d” es la forma corta de “I would”. Suena como “ai-d”, la “ai” de “side” y sin la s, sin separar las dos palabras.'}
    ]},
 
  { time:'1:50', ttl:'Modelado',
@@ -306,7 +306,7 @@ const SCENES = [
     {wait:4,label:'Repite en voz alta'},
     {show:'e3',on:'e3',en:'I’d like a chicken sandwich, please.',voice:'A',listen:true},
     {wait:4,label:'Repite en voz alta'},
-    {es:'Muy bien. Cuida el sonido “aid like” y el “please” al final.'}
+    {es:'Muy bien. Cuida el sonido “ai-d like” y el “please” al final.'}
    ]},
 
  { time:'3:30', ttl:'Roleplay',
@@ -356,8 +356,7 @@ const SCENES = [
  { time:'5:20', ttl:'Cierre',
    html:`<p class="lead">Hoy aprendiste a pedir con cortesía en un restaurante.</p>
      <div class="big"><em>I want</em> → <em>I’d like</em></div>
-     <div class="big" style="font-size:clamp(24px,3.4vw,36px)">I’d like a coffee, please.</div>
-     <div class="note" id="task"><b class="tip">Tu práctica:</b> envía un audio de 15 segundos al grupo de WhatsApp pidiendo algo con “I’d like…”. Mercedes te da retroalimentación.</div>`,
+     <div class="big" style="font-size:clamp(24px,3.4vw,36px)">I’d like a coffee, please.</div>`,
    steps:[
     {es:'Hoy aprendiste a pedir con cortesía en un restaurante. Cambia'},
     {en:'I want',voice:'A',rate:.85},
@@ -365,7 +364,7 @@ const SCENES = [
     {en:'I’d like.',voice:'A',rate:.85},
     {es:'Recuerda la frase completa:'},
     {en:'I’d like a coffee, please.',voice:'A',rate:.85},
-    {show:'task',es:'Tu práctica: graba un audio de 15 segundos pidiendo algo con “I’d like” y envíalo al grupo de WhatsApp. Yo te doy retroalimentación. Hasta la próxima.'},
+    {es:'Hasta la próxima.'},
     {done:true}
    ]}
 ];
