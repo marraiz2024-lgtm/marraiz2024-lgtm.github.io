@@ -1,0 +1,573 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Microclase: Do y does | MMercedesEnglish</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Big+Shoulders+Display:wght@600;700;800&family=Lora:ital,wght@1,500;1,600&family=Work+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --navy:#0D1B3E;
+    --navy-2:#1B2F5E;
+    --yellow:#FFD23F;
+    --gold:#BE9100;
+    --cream:#FFFBF0;
+    --white:#FFFFFF;
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  body{
+    font-family:'Work Sans',system-ui,sans-serif;
+    background:var(--cream);
+    color:var(--navy);
+    min-height:100vh;
+    display:flex;flex-direction:column;align-items:center;
+    padding:0 0 40px;
+  }
+  .topbar{width:100%;background:var(--navy);border-bottom:8px solid var(--yellow);padding:14px 20px}
+  .topbar-in{max-width:1100px;margin:0 auto;display:flex;align-items:center;gap:12px;flex-wrap:wrap}
+  .mm{width:44px;height:44px;border-radius:50%;background:var(--yellow);color:var(--navy);
+      display:grid;place-items:center;font:800 20px 'Big Shoulders Display',sans-serif;letter-spacing:.5px}
+  .pill{background:var(--yellow);color:var(--navy);font-weight:700;font-size:13px;padding:6px 14px;border-radius:999px}
+  .pill.alt{background:transparent;color:var(--white);border:1.5px solid var(--yellow)}
+  .brand{margin-left:auto;font:700 22px 'Big Shoulders Display',sans-serif;color:var(--white);letter-spacing:.5px}
+  .brand b{color:var(--yellow);font-weight:700}
+
+  main{width:100%;max-width:1100px;padding:24px 20px 0}
+  h1{font:800 clamp(30px,5vw,48px)/1.05 'Big Shoulders Display',sans-serif;text-transform:uppercase;letter-spacing:.5px}
+  h1 span{background:linear-gradient(transparent 62%,var(--yellow) 62%)}
+  .sub{margin-top:8px;font-size:15px;opacity:.8}
+
+  .stage{margin-top:20px;display:grid;grid-template-columns:minmax(0,340px) minmax(0,1fr);gap:22px;align-items:start}
+  @media(max-width:820px){.stage{grid-template-columns:1fr}.avatar-card{max-width:300px;margin:0 auto}}
+
+  .avatar-card{background:var(--navy);border-radius:20px;padding:10px;position:relative;box-shadow:0 10px 30px rgba(13,27,62,.18)}
+  .avatar-card img{display:block;width:100%;height:auto;aspect-ratio:1024/1536;border-radius:12px;object-fit:cover}
+  .avatar-card .tag{position:absolute;left:18px;bottom:18px;background:var(--navy);color:var(--white);
+      font:700 15px 'Big Shoulders Display',sans-serif;letter-spacing:.5px;padding:6px 14px;border-radius:999px;border:2px solid var(--yellow)}
+  .avatar-card.talking img{animation:breathe 2.4s ease-in-out infinite}
+  @keyframes breathe{50%{transform:scale(1.012)}}
+  .seal{position:absolute;right:20px;top:20px;width:86px;height:86px}
+
+  .screen{background:var(--white);border-radius:20px;border:2px solid var(--navy);min-height:430px;display:flex;flex-direction:column;overflow:hidden}
+  .screen-head{background:var(--navy);color:var(--white);display:flex;align-items:center;gap:10px;padding:10px 18px}
+  .screen-head .time{background:var(--yellow);color:var(--navy);font-weight:700;font-size:13px;padding:3px 10px;border-radius:999px}
+  .screen-head .ttl{font:700 20px 'Big Shoulders Display',sans-serif;letter-spacing:.5px;text-transform:uppercase}
+  .panel{flex:1;padding:22px;display:flex;flex-direction:column;gap:14px;justify-content:center}
+  .caption{min-height:84px;background:var(--cream);border-top:2px solid var(--navy);padding:14px 20px;font-size:16px;line-height:1.45;display:flex;align-items:center}
+  .caption.en{font:italic 600 21px/1.35 'Lora',serif;background:var(--yellow)}
+  .caption.wait{background:var(--navy);color:var(--white)}
+
+  .big{font:800 clamp(30px,4.6vw,46px)/1.05 'Big Shoulders Display',sans-serif;text-transform:uppercase}
+  .big em{font-style:normal;background:var(--yellow);padding:0 8px;border-radius:6px}
+  .lead{font-size:17px;line-height:1.5}
+  .goals{display:grid;gap:10px;margin-top:4px}
+  .goal{display:flex;gap:12px;align-items:center;background:var(--cream);border-left:6px solid var(--yellow);border-radius:10px;padding:12px 14px;font-weight:600}
+  .goal i{font:800 22px 'Big Shoulders Display',sans-serif;background:var(--navy);color:var(--yellow);width:34px;height:34px;border-radius:50%;display:grid;place-items:center;font-style:normal;flex:none}
+
+  .dlg{display:grid;gap:10px}
+  .line{display:flex;gap:10px;align-items:flex-start;opacity:.18;transform:translateY(6px);transition:.35s}
+  .line.show{opacity:1;transform:none}
+  .line.on .bub{outline:3px solid var(--yellow)}
+  .who{flex:none;width:34px;height:34px;border-radius:50%;background:var(--navy);color:var(--yellow);font:800 18px 'Big Shoulders Display',sans-serif;display:grid;place-items:center}
+  .line.b .who{background:var(--yellow);color:var(--navy)}
+  .bub{background:var(--cream);border:2px solid var(--navy);border-radius:4px 16px 16px 16px;padding:10px 14px;font:italic 600 19px/1.3 'Lora',serif}
+  .line.b .bub{background:var(--white);border-radius:16px 4px 16px 16px}
+  .blur{filter:blur(7px);transition:filter .5s}
+  .blur.clear{filter:none}
+  .hint{display:inline-block;background:var(--navy);color:var(--white);font-size:12px;font-weight:600;padding:3px 10px;border-radius:999px;margin-left:8px;font-family:'Work Sans',sans-serif;font-style:normal}
+
+  .note{background:var(--cream);border:2px dashed var(--gold);border-radius:12px;padding:12px 14px;font-size:15px;line-height:1.45;opacity:0;transition:.4s}
+  .note.show{opacity:1}
+  .note b.tip{font:italic 700 15px 'Lora',serif;color:var(--gold)}
+
+  .phrase{display:flex;flex-wrap:wrap;gap:8px}
+  .seg{flex:1 1 150px;border:2px solid var(--navy);border-radius:14px;overflow:hidden;opacity:.35;transition:.3s}
+  .seg.on{opacity:1;box-shadow:0 0 0 4px var(--yellow)}
+  .seg .w{background:var(--navy);color:var(--white);font:italic 600 22px 'Lora',serif;padding:10px 14px}
+  .seg .d{padding:8px 14px;font-size:14px;font-weight:500;background:var(--white)}
+  .seg:nth-child(2) .w{background:var(--yellow);color:var(--navy)}
+  .seg:nth-child(3) .w{background:var(--navy-2)}
+  .trans{font-size:20px;font-weight:600;opacity:0;transition:.4s}
+  .trans.show{opacity:1}
+  .trans span{background:var(--yellow);padding:0 6px;border-radius:4px}
+
+  .listen{display:flex;align-items:center;gap:12px;background:var(--navy);color:var(--white);border-radius:14px;padding:14px 16px}
+  .wave{display:flex;gap:4px;align-items:center;height:30px}
+  .wave i{display:block;width:5px;height:8px;border-radius:3px;background:var(--yellow)}
+  .listening .wave i{animation:wv .8s ease-in-out infinite}
+  .wave i:nth-child(2n){animation-delay:.15s}.wave i:nth-child(3n){animation-delay:.3s}
+  @keyframes wv{50%{height:28px}}
+  .secret{font:italic 600 20px 'Lora',serif;background:var(--cream);border:2px solid var(--navy);border-radius:12px;padding:12px 14px;opacity:0;transition:.4s}
+  .secret.show{opacity:1}
+  .q{font-weight:700;font-size:18px;opacity:0;transition:.4s}
+  .q.show{opacity:1}
+
+  .count{display:none;align-items:center;gap:14px;font-weight:700}
+  .count.on{display:flex}
+  .ring{width:54px;height:54px;border-radius:50%;background:conic-gradient(var(--yellow) var(--p,0%),#e8e2d0 0);display:grid;place-items:center;transition:--p 1s linear}
+  .ring b{width:42px;height:42px;border-radius:50%;background:var(--white);display:grid;place-items:center;font:800 22px 'Big Shoulders Display',sans-serif}
+
+  .steps2{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+  @media(max-width:520px){.steps2{grid-template-columns:1fr}}
+  .st{background:var(--navy);color:var(--white);border-radius:14px;padding:14px}
+  .st b{display:block;font:800 26px 'Big Shoulders Display',sans-serif;color:var(--yellow)}
+
+  .controls{margin-top:18px;display:flex;align-items:center;gap:10px;flex-wrap:wrap}
+  button{font:700 15px 'Work Sans',sans-serif;border:2px solid var(--navy);background:var(--white);color:var(--navy);border-radius:999px;padding:10px 18px;cursor:pointer}
+  button:hover{background:var(--cream)}
+  button.main{background:var(--yellow)}
+  button.main:hover{background:#ffdb66}
+  .bar{flex:1;min-width:160px;height:10px;background:#e8e2d0;border-radius:999px;overflow:hidden}
+  .bar i{display:block;height:100%;width:0;background:var(--navy);transition:width .4s}
+  .chips{margin-top:14px;display:flex;gap:8px;flex-wrap:wrap}
+  .chip{font-size:13px;padding:7px 12px}
+  .chip.cur{background:var(--navy);color:var(--white)}
+  .chip small{opacity:.7;font-weight:500;margin-right:4px}
+
+  .start{position:fixed;inset:0;background:rgba(13,27,62,.92);display:grid;place-items:center;z-index:10;padding:20px}
+  .start.hide{display:none}
+  .start-in{background:var(--cream);border-radius:22px;border:3px solid var(--yellow);padding:28px;max-width:420px;text-align:center}
+  .start-in img{width:130px;height:130px;object-fit:cover;object-position:50% 14%;border-radius:50%;border:4px solid var(--navy);margin-bottom:14px}
+  .start-in h2{font:800 32px/1 'Big Shoulders Display',sans-serif;text-transform:uppercase;margin-bottom:8px}
+  .start-in p{font-size:15px;line-height:1.5;margin-bottom:16px}
+  .nov{font-size:13px;margin-top:12px;opacity:.7}
+  .voz{margin-top:14px;font-size:14px}.voz summary{cursor:pointer;font-weight:600}.voz label{display:block;margin-top:8px}.voz select{font:inherit;padding:6px 8px;border:2px solid var(--navy);border-radius:8px;background:var(--white);color:var(--navy);max-width:100%}
+  .panel.fx{animation:sceneIn .5s ease both}
+  @keyframes sceneIn{from{opacity:0;transform:translateX(18px)}to{opacity:1;transform:none}}
+  @media (prefers-reduced-motion:reduce){.panel.fx{animation:none}}
+  .vbox{margin-top:14px;display:flex;gap:12px;align-items:center;flex-wrap:wrap}#vstatus{font-size:14px;flex:1;min-width:200px}#vstatus.warn{font-weight:700}
+  footer{margin-top:30px;font:700 18px 'Big Shoulders Display',sans-serif;letter-spacing:.5px}
+  footer b{color:var(--gold)}
+</style>
+</head>
+<body>
+
+<div class="start" id="start">
+  <div class="start-in">
+    <img src="microclase-do-does-avatar.webp" alt="Mercedes, profesora de MMercedesEnglish">
+    <h2>Microclase de 8 minutos</h2>
+    <p>Aprende a preguntar y a negar con do y does. Activa el sonido: escucharás el inglés y las instrucciones en voz.</p>
+    <button class="main" id="go">Comenzar</button>
+    <div class="nov" id="novoice"></div>
+  </div>
+</div>
+
+<div class="topbar"><div class="topbar-in">
+  <div class="mm">MM</div>
+  <span class="pill">Beginner English Tips</span>
+  <span class="pill alt">Microclase · 8 min</span>
+  <div class="brand">MMercedes<b>English</b></div>
+</div></div>
+
+<main>
+  <h1>¿Do o <span>does</span>?</h1>
+  <p class="sub">Frases clave: <i>Do you like coffee?</i> y <i>Does she work here?</i></p>
+
+  <div class="stage">
+    <div class="avatar-card" id="avatar">
+      <svg class="seal" viewBox="0 0 100 100" aria-label="English Your Way">
+        <path id="rosette" fill="#0D1B3E" stroke="#BE9100" stroke-width="4"/>
+        <text x="50" y="42" text-anchor="middle" font-family="Big Shoulders Display,sans-serif" font-weight="700" font-size="15" textLength="44" lengthAdjust="spacingAndGlyphs" fill="#FFFFFF">ENGLISH</text>
+        <text x="50" y="62" text-anchor="middle" font-family="Big Shoulders Display,sans-serif" font-weight="700" font-size="15" textLength="50" lengthAdjust="spacingAndGlyphs" fill="#FFD23F">YOUR WAY</text>
+        <path d="M50 20l2.6 5.4 5.9.8-4.3 4.1 1 5.9L50 33.5l-5.2 2.7 1-5.9-4.3-4.1 5.9-.8z" fill="#BE9100"/>
+      </svg>
+      <img src="microclase-do-does-avatar.webp" alt="Mercedes saludando">
+      <div class="tag">Tiny Tips, Big Progress</div>
+    </div>
+
+    <div>
+      <div class="screen">
+        <div class="screen-head"><span class="time" id="time"></span><span class="ttl" id="ttl"></span></div>
+        <div class="panel" id="panel"></div>
+        <div class="caption" id="cap"></div>
+      </div>
+      <div class="controls">
+        <button id="prev" aria-label="Sección anterior">‹ Anterior</button>
+        <button class="main" id="play">Pausar</button>
+        <button id="next" aria-label="Sección siguiente">Siguiente ›</button>
+        <div class="bar"><i id="bar"></i></div>
+      </div>
+      <div class="chips" id="chips"></div>
+      <div class="vbox">
+        <button id="vtest" type="button">Probar voz</button>
+        <span id="vstatus" role="status"></span>
+      </div>
+      <details class="voz"><summary>Cambiar la voz</summary>
+        <label>Español <select id="vses"></select></label>
+        <label>Inglés <select id="vsen"></select></label>
+      </details>
+    </div>
+  </div>
+  <footer>MMercedes<b>English</b> · Tiny Tips, Big Progress</footer>
+</main>
+
+<script>
+// ---------- Sello festoneado ----------
+(function(){
+  const n=16,cx=50,cy=50,r=40,a=4;let d='';
+  for(let i=0;i<=360;i+=3){
+    const t=i*Math.PI/180,rr=r+a*Math.cos(n*t);
+    d+=(i?'L':'M')+(cx+rr*Math.cos(t)).toFixed(2)+' '+(cy+rr*Math.sin(t)).toFixed(2);
+  }
+  document.getElementById('rosette').setAttribute('d',d+'Z');
+})();
+
+// ---------- Contenido ----------
+const D = (cls,who,id,txt,extra='') =>
+  `<div class="line ${cls}" id="${id}"><span class="who">${who}</span><div class="bub">${txt}${extra}</div></div>`;
+
+const SCENES = [
+ { time:'0:00', ttl:'Apertura',
+   html:`<div class="big">¿<em>Do</em> o <em>does</em>?</div>
+     <p class="lead">Casi todas las preguntas en inglés llevan un ayudante. Hoy aprendes a usarlo.</p>
+     <div class="goals">
+       <div class="goal"><i>1</i>Preguntar con do y does</div>
+       <div class="goal"><i>2</i>Responder con respuestas cortas</div>
+     </div>
+     <div class="count" id="cn"><div class="ring" id="rg"><b id="cs">3</b></div><span id="cl"></span></div>`,
+   steps:[
+    {es:'Hola. En inglés, casi todas las preguntas tienen un ayudante: do o does. Hoy aprendes cuándo usar cada uno, cómo cambia el verbo y cómo responder de forma corta.'},
+    {es:'Piensa: ¿cómo preguntarías “¿Ella trabaja aquí?” en inglés?'},
+    {wait:3,label:'Piensa tu respuesta'},
+    {es:'Vamos a verlo.'}
+   ]},
+
+ { time:'0:30', ttl:'De afirmación a pregunta',
+   html:`<div class="phrase">
+       <div class="seg" id="a1"><div class="w">She works here.</div><div class="d">Afirmación</div></div>
+       <div class="seg" id="a2"><div class="w">Does she work here?</div><div class="d">Pregunta</div></div>
+     </div>
+     <p class="trans" id="tr0">La <span>-s</span> pasa a <span>does</span>. El verbo vuelve a su forma base.</p>`,
+   steps:[
+    {es:'Mira la oración:'},
+    {on:'a1',en:'She works here.',voice:'A',rate:.85},
+    {es:'Para preguntar, pones “does” al inicio.'},
+    {on:'a2',en:'Does she work here?',voice:'A',rate:.85},
+    {show:'tr0',es:'Fíjate en un detalle: la s pasa de “works” a “does”, y el verbo vuelve a su forma base, “work”.'}
+   ]},
+
+ { time:'1:10', ttl:'Do',
+   html:`<div class="phrase">
+       <div class="seg" id="s1"><div class="w">Do</div><div class="d">el auxiliar</div></div>
+       <div class="seg" id="s2"><div class="w">you</div><div class="d">I, you, we, they</div></div>
+       <div class="seg" id="s3"><div class="w">like coffee?</div><div class="d">verbo en forma base</div></div>
+     </div>
+     <p class="trans" id="tr">Significa: <span>¿Te gusta el café?</span></p>
+     <div class="note" id="n1"><b class="tip">Respuesta corta:</b> Yes, I do. · No, I don’t. No repites el verbo.</div>`,
+   steps:[
+    {es:'Con I, you, we y they, usamos “do”. Mira:'},
+    {en:'Do you like coffee?',voice:'A',rate:.85},
+    {show:'tr',es:'Significa: “¿Te gusta el café?”.'},
+    {on:'s1',es:'“Do” es el auxiliar;'},
+    {on:'s2',es:'“you” es quien hace la acción;'},
+    {on:'s3',es:'y “like coffee” va después, con el verbo en forma base.'},
+    {show:'n1',es:'Para responder, usa una respuesta corta:'},
+    {en:'Yes, I do.',voice:'B',rate:.85},
+    {es:'o'},
+    {en:'No, I don’t.',voice:'B',rate:.85},
+    {es:'No repites el verbo.'}
+   ]},
+
+ { time:'2:00', ttl:'Does',
+   html:`<div class="phrase">
+       <div class="seg" id="d1"><div class="w">Does</div><div class="d">el auxiliar</div></div>
+       <div class="seg" id="d2"><div class="w">she</div><div class="d">he, she, it</div></div>
+       <div class="seg" id="d3"><div class="w">speak English?</div><div class="d">verbo en forma base</div></div>
+     </div>
+     <p class="trans" id="tr2">Significa: <span>¿Ella habla inglés?</span></p>
+     <div class="note" id="n2"><b class="tip">Respuesta corta:</b> Yes, she does. · No, she doesn’t.</div>`,
+   steps:[
+    {es:'Con he, she e it, usamos “does”. Mira:'},
+    {en:'Does she speak English?',voice:'A',rate:.85},
+    {show:'tr2',es:'Significa: “¿Ella habla inglés?”.'},
+    {on:'d3',es:'Otra vez, el verbo queda en forma base: “speak”, no “speaks”.'},
+    {show:'n2',es:'Para responder:'},
+    {en:'Yes, she does.',voice:'B',rate:.85},
+    {es:'o'},
+    {en:'No, she doesn’t.',voice:'B',rate:.85}
+   ]},
+
+ { time:'2:50', ttl:'El error más común',
+   html:`<div class="phrase">
+       <div class="seg" id="e1"><div class="w">Does she works here?</div><div class="d">Incorrecto</div></div>
+       <div class="seg" id="e2"><div class="w">Does she work here?</div><div class="d">Correcto</div></div>
+     </div>
+     <div class="note" id="n3"><b class="tip">Tip Mercedes:</b> “Does” ya lleva la -s. Se pronuncia /dʌz/ y rima con buzz.</div>`,
+   steps:[
+    {es:'Este es el error más común.'},
+    {on:'e1',en:'Does she works here?',voice:'A',rate:.85},
+    {es:'Es incorrecto. “Does” ya lleva la s, así que el verbo no la repite.'},
+    {on:'e2',en:'Does she work here?',voice:'A',rate:.85},
+    {es:'Así es correcto.'},
+    {show:'n3',es:'Un tip de pronunciación: “does” rima con “buzz”.'}
+   ]},
+
+ { time:'3:35', ttl:'Negativos',
+   html:`<div class="phrase">
+       <div class="seg" id="g1"><div class="w">don’t</div><div class="d">con I, you, we, they</div></div>
+       <div class="seg" id="g2"><div class="w">doesn’t</div><div class="d">con he, she, it</div></div>
+       <div class="seg" id="g3"><div class="w">+ verbo base</div><div class="d">work, like, speak</div></div>
+     </div>
+     <p class="trans" id="tr3"><span>I don’t like tea.</span> <span>She doesn’t work today.</span></p>`,
+   steps:[
+    {es:'Para decir que no, usamos “don’t” con I, you, we y they, y “doesn’t” con he, she e it.'},
+    {on:'g1',en:'I don’t like tea.',voice:'A',rate:.85},
+    {on:'g2',en:'She doesn’t work today.',voice:'A',rate:.85},
+    {on:'g3',show:'tr3',es:'Después va el verbo en forma base. La regla es la misma: el auxiliar lleva la s, el verbo no.'}
+   ]},
+
+ { time:'4:25', ttl:'Práctica en eco',
+   html:`<div class="listen" id="ls"><div class="wave"><i></i><i></i><i></i><i></i><i></i><i></i><i></i></div><span id="lt">Escucha y repite</span></div>
+     <div class="dlg">
+       ${D('b','1','p1','Do you like coffee?')}
+       ${D('b','2','p2','Does she speak English?')}
+       ${D('b','3','p3','He doesn’t work on Sunday.')}
+     </div>
+     <div class="count" id="cn"><div class="ring" id="rg"><b id="cs">4</b></div><span id="cl"></span></div>`,
+   steps:[
+    {es:'Ahora repite después de mí, en voz alta.'},
+    {show:'p1',on:'p1',en:'Do you like coffee?',voice:'A',listen:true},
+    {wait:4,label:'Repite en voz alta'},
+    {show:'p2',on:'p2',en:'Does she speak English?',voice:'A',listen:true},
+    {wait:4,label:'Repite en voz alta'},
+    {show:'p3',on:'p3',en:'He doesn’t work on Sunday.',voice:'A',listen:true},
+    {wait:4,label:'Repite en voz alta'},
+    {es:'Muy bien.'}
+   ]},
+
+ { time:'5:10', ttl:'¿Do o does?',
+   html:`<div class="dlg">
+       ${D('','1','q1','___ you speak Spanish?')}
+       ${D('','2','q2','___ she live here?')}
+       ${D('','3','q3','___ they work on Monday?')}
+       ${D('','4','q4','___ he play soccer?')}
+     </div>
+     <div class="count" id="cn"><div class="ring" id="rg"><b id="cs">4</b></div><span id="cl"></span></div>
+     <div class="dlg">
+       ${D('b','✓','r1','Do you speak Spanish?')}
+       ${D('b','✓','r2','Does she live here?')}
+       ${D('b','✓','r3','Do they work on Monday?')}
+       ${D('b','✓','r4','Does he play soccer?')}
+     </div>
+     <div class="note" id="n4"><b class="tip">Regla:</b> I, you, we, they → do. He, she, it → does.</div>`,
+   steps:[
+    {es:'Elige do o does.'},
+    {show:'q1',on:'q1',es:'Uno: “you speak Spanish”.'},
+    {wait:4,label:'¿Do o does?'},
+    {show:'q2',on:'q2',es:'Dos: “she live here”.'},
+    {wait:4,label:'¿Do o does?'},
+    {show:'q3',on:'q3',es:'Tres: “they work on Monday”.'},
+    {wait:4,label:'¿Do o does?'},
+    {show:'q4',on:'q4',es:'Cuatro: “he play soccer”.'},
+    {wait:4,label:'¿Do o does?'},
+    {es:'Respuestas.'},
+    {show:'r1',on:'r1',en:'Do you speak Spanish?',voice:'A',rate:.85},
+    {show:'r2',on:'r2',en:'Does she live here?',voice:'A',rate:.85},
+    {show:'r3',on:'r3',en:'Do they work on Monday?',voice:'A',rate:.85},
+    {show:'r4',on:'r4',en:'Does he play soccer?',voice:'A',rate:.85},
+    {show:'n4',es:'Recuerda: I, you, we y they usan do. He, she e it usan does.'}
+   ]},
+
+ { time:'6:25', ttl:'Tu turno: la entrevista',
+   html:`<div class="listen" id="ls"><div class="wave"><i></i><i></i><i></i><i></i><i></i><i></i><i></i></div><span id="lt">Responde con una respuesta corta</span></div>
+     <div class="count" id="cn"><div class="ring" id="rg"><b id="cs">5</b></div><span id="cl"></span></div>
+     <div class="secret" id="rp1">Yes, I do. · No, I don’t.</div>
+     <div class="secret" id="rp2">Yes, she does. · No, she doesn’t.</div>`,
+   steps:[
+    {es:'Ahora responde con una respuesta corta. Escucha:'},
+    {en:'Do you speak English?',voice:'B',listen:true},
+    {wait:5,label:'Responde en voz alta'},
+    {show:'rp1',es:'Por ejemplo:'},
+    {en:'Yes, I do.',voice:'A',rate:.85},
+    {es:'Ahora:'},
+    {en:'Does your friend live here?',voice:'B',listen:true},
+    {wait:5,label:'Responde en voz alta'},
+    {show:'rp2',es:'Por ejemplo:'},
+    {en:'No, she doesn’t.',voice:'A',rate:.85},
+    {es:'Responde lo que sea verdad para ti.'}
+   ]},
+
+ { time:'7:10', ttl:'Cierre',
+   html:`<p class="lead">Hoy aprendiste:</p>
+     <div class="big"><em>I, you, we, they</em> → <em>do</em></div>
+     <div class="big"><em>he, she, it</em> → <em>does</em></div>
+     <p class="q" id="q7">Pregunta de salida: corrige “He don’t like tea.”</p>
+     <div class="count" id="cn"><div class="ring" id="rg"><b id="cs">5</b></div><span id="cl"></span></div>
+     <div class="secret" id="a7">He doesn’t like tea.</div>`,
+   steps:[
+    {es:'Hoy aprendiste que do va con I, you, we y they, y does va con he, she e it. Después del auxiliar, el verbo queda en forma base.'},
+    {show:'q7',es:'Pregunta de salida: corrige esta oración.'},
+    {en:'He don’t like tea.',voice:'A',rate:.85},
+    {wait:5,label:'Corrígela en voz alta'},
+    {show:'a7',es:'La respuesta es:'},
+    {en:'He doesn’t like tea.',voice:'A',rate:.85},
+    {es:'Hasta la próxima.'},
+    {done:true}
+   ]}
+];
+
+// ---------- Voz ----------
+const synth = window.speechSynthesis;
+const $ = id => document.getElementById(id);
+let voices = {es:null,en:null};
+const FEMALE=/sabina|helena|paulina|dalia|elvira|monica|m[oó]nica|paloma|lucia|luc[ií]a|marisol|camila|salome|salom[eé]|zira|aria|jenny|samantha|karen|ava|allison|susan|serena|moira|tessa|female|mujer|google espa|google us english|google uk english female/i;
+const MALE=/raul|raúl|pablo|jorge|diego|carlos|juan|alvaro|álvaro|ricardo|david|mark|guy|alex|daniel|fred|ryan|george|james|male\b|hombre/i;
+function score(v){
+  let n=0;
+  if(FEMALE.test(v.name)) n+=10;
+  if(MALE.test(v.name)) n-=20;
+  if(/natural|online|neural/i.test(v.name)) n+=3;
+  if(v.localService) n+=4;
+  return n;
+}
+function listFor(re,pref){
+  const v = synth.getVoices().filter(x=>re.test(x.lang));
+  return v.sort((a,b)=> (score(b)+(pref.includes(b.lang.replace('_','-').toLowerCase())?2:0)) - (score(a)+(pref.includes(a.lang.replace('_','-').toLowerCase())?2:0)));
+}
+function fillSelect(id,list,cur){
+  const el=document.getElementById(id); if(!el) return;
+  el.innerHTML=list.map((v,i)=>`<option value="${i}">${v.name} (${v.lang})</option>`).join('');
+  const i=list.indexOf(cur); el.value = i<0?0:i;
+}
+function pickVoices(){
+  if(!synth) return;
+  const es=listFor(/^es/i,['es-us','es-mx','es-co']), en=listFor(/^en/i,['en-us']);
+  if(!voices.es || !es.includes(voices.es)) voices.es = es[0]||null;
+  if(!voices.en || !en.includes(voices.en)) voices.en = en[0]||null;
+  fillSelect('vses',es,voices.es); fillSelect('vsen',en,voices.en);
+  $('vses').onchange=()=>{ voices.es=es[+$('vses').value]; };
+  $('vsen').onchange=()=>{ voices.en=en[+$('vsen').value]; };
+  setStatus((voices.es||voices.en)?voiceInfo():'');
+  const nv=document.getElementById('novoice');
+  nv.textContent = (!voices.es || !voices.en) ? 'Tu navegador no tiene todas las voces. Se usará el subtitulado y los tiempos serán aproximados.' : '';
+}
+if(synth){ pickVoices(); synth.onvoiceschanged = pickVoices; }
+
+let token = 0, idx = 0, playing = false;
+const sleep = ms => new Promise(r=>setTimeout(r,ms));
+
+function setStatus(t,warn){ const e=$('vstatus'); if(e){ e.textContent=t; e.className=warn?'warn':''; } }
+function voiceInfo(){ return 'Voz en uso: '+(voices.es?voices.es.name:'ninguna para español')+' / '+(voices.en?voices.en.name:'ninguna para inglés')+'.'; }
+
+function speakOne(text, lang, o){
+  return new Promise(res=>{
+    const words = text.split(/\s+/).length;
+    const est = Math.max(1200, words*(lang==='en'?520:430)) / (o.rate||1);
+    if(!synth || !voices[lang]){
+      setStatus('Este dispositivo no tiene voz en '+(lang==='es'?'español':'inglés')+'. Prueba en Chrome o Edge, o instala una voz en la configuración del sistema.',true);
+      setTimeout(res, est); return;
+    }
+    const u = new SpeechSynthesisUtterance(text);
+    try{ u.voice = voices[lang]; }catch(err){}
+    u.lang = voices[lang].lang;
+    u.rate = o.rate || (lang==='es' ? .95 : .9);
+    u.pitch = o.voice==='B' ? 1.2 : 1;
+    u.volume = o.voice==='quiet' ? .3 : 1;
+    if(o.voice==='quiet') u.rate = 1.3;
+    let done=false, started=false;
+    const fin=()=>{ if(!done){done=true; clearTimeout(t); clearTimeout(w); res();} };
+    const t = setTimeout(fin, est*2.5+2000);
+    const w = setTimeout(()=>{ if(!started) setStatus('No se detecta audio. Sube el volumen, revisa que la pestaña no esté silenciada y prueba otra voz en «Cambiar la voz».',true); }, 3500);
+    u.onstart = ()=>{ started=true; setStatus(voiceInfo()); };
+    u.onend = fin; u.onerror = fin;
+    synth.speak(u);
+  });
+}
+
+async function speak(text, lang, o={}){
+  const parts = text.split(/(?<=[.!?:])\s+/).filter(Boolean);
+  for(const part of parts) await speakOne(part, lang, o);
+}
+
+$('vtest').onclick = async ()=>{
+  if(synth) synth.cancel();
+  setStatus('Probando la voz…');
+  await speak('Hola, esta es la voz en español.','es');
+  await speak('Hello, this is the English voice.','en');
+};
+
+function caption(text, kind){
+  const c=$('cap'); c.className='caption'+(kind?' '+kind:''); c.textContent=text;
+}
+
+async function countdown(sec, label, my){
+  const cn=$('cn'), lt=$('lt');
+  caption(label+'…','wait');
+  if(lt && !$('cn')) lt.textContent=label;
+  for(let s=sec; s>0; s--){
+    if(my!==token) return;
+    if(cn){ cn.classList.add('on'); $('cs').textContent=s; $('rg').style.setProperty('--p',((sec-s)/sec*100)+'%'); $('cl').textContent=label; }
+    await sleep(1000);
+  }
+  if(cn){ cn.classList.remove('on'); }
+}
+
+function setLine(id){
+  document.querySelectorAll('.line.on,.seg.on').forEach(e=>e.classList.remove('on'));
+  if(id && $(id)) $(id).classList.add('on');
+}
+
+async function run(i){
+  const my = ++token;
+  idx = i;
+  if(synth) synth.cancel();
+  const sc = SCENES[i];
+  $('time').textContent = sc.time; $('ttl').textContent = sc.ttl;
+  $('panel').innerHTML = sc.html;
+  $('panel').classList.remove('fx'); void $('panel').offsetWidth; $('panel').classList.add('fx');
+  $('bar').style.width = (i/SCENES.length*100)+'%';
+  document.querySelectorAll('.chip').forEach((c,k)=>c.classList.toggle('cur',k===i));
+  caption('');
+  await sleep(300);
+  for(const st of sc.steps){
+    if(my!==token) return;
+    if(st.show && $(st.show)) $(st.show).classList.add('show');
+    if(st.on) setLine(st.on);
+    if(st.clear && $(st.clear)) $(st.clear).classList.add('clear');
+    const ls=$('ls'); if(ls) ls.classList.toggle('listening', !!st.listen);
+    if(st.es){
+      caption(st.es); $('avatar').classList.add('talking');
+      await speak(st.es,'es',st);
+      $('avatar').classList.remove('talking');
+    }
+    if(my!==token) return;
+    if(st.en){
+      caption(st.en,'en');
+      if(st.voice!=='quiet') $('avatar').classList.add('talking');
+      await speak(st.en,'en',st);
+      $('avatar').classList.remove('talking');
+      await sleep(350);
+    }
+    if(my!==token) return;
+    if(ls && !st.listen) ls.classList.remove('listening');
+    if(st.wait){ await countdown(st.wait, st.label, my); }
+    if(st.done){ $('bar').style.width='100%'; caption('Microclase completa. Repítela cuando quieras.'); $('play').textContent='Repetir'; playing=false; return; }
+    await sleep(250);
+  }
+  if(my!==token) return;
+  setLine(null);
+  if(playing && i < SCENES.length-1){ await sleep(500); if(my===token) run(i+1); }
+}
+
+// ---------- Controles ----------
+SCENES.forEach((s,k)=>{
+  const b=document.createElement('button'); b.className='chip'; b.innerHTML=`<small>${s.time}</small>${s.ttl}`;
+  b.onclick=()=>{ playing=true; $('play').textContent='Pausar'; run(k); };
+  $('chips').appendChild(b);
+});
+$('go').onclick=()=>{ $('start').classList.add('hide'); playing=true; run(0); };
+$('play').onclick=()=>{
+  if(playing){ playing=false; token++; if(synth) synth.cancel(); $('avatar').classList.remove('talking'); $('play').textContent='Continuar'; }
+  else { const again=$('play').textContent==='Repetir'; playing=true; $('play').textContent='Pausar'; run(again?0:idx); }
+};
+$('prev').onclick=()=>{ playing=true; $('play').textContent='Pausar'; run(Math.max(0,idx-1)); };
+$('next').onclick=()=>{ playing=true; $('play').textContent='Pausar'; run(Math.min(SCENES.length-1,idx+1)); };
+
+// Vista previa inicial (sin audio)
+$('time').textContent=SCENES[0].time; $('ttl').textContent=SCENES[0].ttl; $('panel').innerHTML=SCENES[0].html;
+document.querySelectorAll('.chip')[0].classList.add('cur');
+</script>
+</body>
+</html>
