@@ -137,6 +137,9 @@
   .panel.fx{animation:sceneIn .5s ease both}
   @keyframes sceneIn{from{opacity:0;transform:translateX(18px)}to{opacity:1;transform:none}}
   @media (prefers-reduced-motion:reduce){.panel.fx{animation:none}}
+  .avatar-card video{display:none;width:100%;height:auto;aspect-ratio:1122/1402;border-radius:12px;object-fit:cover;background:#000}
+  .avatar-card.hasvid video{display:block}
+  .avatar-card.hasvid img.photo{display:none}
   #rec{margin-top:26px;border:3px solid var(--yellow);border-radius:16px;background:var(--white);padding:16px 18px}
   #rec h2{font:800 26px 'Big Shoulders Display',sans-serif;text-transform:uppercase;margin-bottom:6px}
   #rec p{font-size:14px;line-height:1.5;margin-bottom:10px}
@@ -186,7 +189,8 @@
         <text x="50" y="62" text-anchor="middle" font-family="Big Shoulders Display,sans-serif" font-weight="700" font-size="15" textLength="50" lengthAdjust="spacingAndGlyphs" fill="#FFD23F">YOUR WAY</text>
         <path d="M50 20l2.6 5.4 5.9.8-4.3 4.1 1 5.9L50 33.5l-5.2 2.7 1-5.9-4.3-4.1 5.9-.8z" fill="#BE9100"/>
       </svg>
-      <img src="microclase-do-does-avatar.webp" alt="Mercedes saludando">
+      <img class="photo" src="microclase-do-does-avatar.webp" alt="Mercedes saludando">
+      <video id="avvid" playsinline preload="auto" aria-label="Mercedes, profesora de MMercedesEnglish"></video>
       <div class="tag">Tiny Tips, Big Progress</div>
     </div>
 
@@ -251,7 +255,7 @@ const SCENES = [
      </div>
      <div class="count" id="cn"><div class="ring" id="rg"><b id="cs">3</b></div><span id="cl"></span></div>`,
    steps:[
-    {es:'Hola. En inglés, casi todas las preguntas tienen un ayudante: do o does. Hoy aprendes cuándo usar cada uno, cómo cambia el verbo y cómo responder de forma corta.'},
+    {take:'apertura',es:'Hola. En inglés, casi todas las preguntas tienen un ayudante: do o does. Hoy aprendes cuándo usar cada uno, cómo cambia el verbo y cómo responder de forma corta.'},
     {es:'Piensa: ¿cómo preguntarías “¿Ella trabaja aquí?” en inglés?'},
     {wait:3,label:'Piensa tu respuesta'},
     {es:'Vamos a verlo.'}
@@ -420,7 +424,7 @@ const SCENES = [
      <div class="count" id="cn"><div class="ring" id="rg"><b id="cs">5</b></div><span id="cl"></span></div>
      <div class="secret" id="a7">He doesn’t like tea.</div>`,
    steps:[
-    {es:'Hoy aprendiste que do va con I, you, we y they, y does va con he, she e it. Después del auxiliar, el verbo queda en forma base.'},
+    {take:'cierre',es:'Hoy aprendiste que do va con I, you, we y they, y does va con he, she e it. Después del auxiliar, el verbo queda en forma base.'},
     {show:'q7',es:'Pregunta de salida: corrige esta oración.'},
     {en:'He don’t like tea.',voice:'A',rate:.85},
     {wait:5,label:'Corrígela en voz alta'},
@@ -534,6 +538,34 @@ function playClip(url,o){
   });
 }
 
+// ---------- Tomas en video de la docente (opcionales) ----------
+function playTake(name){
+  return new Promise(res=>{
+    const v=$('avvid'), card=$('avatar'), exts=['mp4','webm'];
+    let k=0, started=false, done=false, timer=null;
+    const fin=ok=>{
+      if(done) return; done=true; clearTimeout(timer);
+      v.onended=v.onerror=v.oncanplay=null; try{ v.pause(); }catch(e){}
+      v.removeAttribute('src'); try{ v.load(); }catch(e){}
+      card.classList.remove('hasvid'); if(curFin===stopTake) curFin=null; res(ok);
+    };
+    const stopTake=()=>fin(started);
+    const tryNext=()=>{
+      if(k>=exts.length){ fin(false); return; }
+      v.src='video/do-does-'+name+'.'+exts[k++]; v.load();
+    };
+    curFin=stopTake;
+    v.onerror=()=>{ if(!started) tryNext(); else fin(true); };
+    v.oncanplay=()=>{
+      if(started) return; started=true; card.classList.add('hasvid'); v.currentTime=0;
+      const p=v.play(); if(p&&p.catch) p.catch(()=>fin(false));
+    };
+    v.onended=()=>fin(true);
+    timer=setTimeout(()=>{ if(!started) fin(false); },4000);
+    tryNext();
+  });
+}
+
 function speakOne(text, lang, o){
   return new Promise(res=>{
     const words = text.split(/\s+/).length;
@@ -611,7 +643,9 @@ async function run(i){
     if(st.on) setLine(st.on);
     if(st.clear && $(st.clear)) $(st.clear).classList.add('clear');
     const ls=$('ls'); if(ls) ls.classList.toggle('listening', !!st.listen);
-    if(st.es){
+    let tookVideo=false;
+    if(st.take){ caption(st.es||''); tookVideo=await playTake(st.take); if(my!==token) return; }
+    if(st.es && !tookVideo){
       caption(st.es); $('avatar').classList.add('talking');
       await speak(st.es,'es',{...st,key:i+'-'+j+'-es'});
       $('avatar').classList.remove('talking');
