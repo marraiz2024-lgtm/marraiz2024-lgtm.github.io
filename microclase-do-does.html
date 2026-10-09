@@ -502,11 +502,11 @@ async function idbGet(key){
 }
 async function idbPut(key,blob){
   const d=await openDb(); if(!d) return;
-  return new Promise(res=>{ try{ const t=d.transaction('clips','readwrite'); t.objectStore('clips').put(blob,key); t.oncomplete=()=>res(); t.onerror=()=>res(); }catch(e){ res(); } });
+  return new Promise(res=>{ try{ const t=d.transaction('clips','readwrite'); t.objectStore('clips').put(blob,key); t.oncomplete=()=>res(); t.onerror=()=>res(); t.onabort=()=>res(); }catch(e){ res(); } });
 }
 async function idbDel(key){
   const d=await openDb(); if(!d) return;
-  return new Promise(res=>{ try{ const t=d.transaction('clips','readwrite'); t.objectStore('clips').delete(key); t.oncomplete=()=>res(); t.onerror=()=>res(); }catch(e){ res(); } });
+  return new Promise(res=>{ try{ const t=d.transaction('clips','readwrite'); t.objectStore('clips').delete(key); t.oncomplete=()=>res(); t.onerror=()=>res(); t.onabort=()=>res(); }catch(e){ res(); } });
 }
 async function idbAll(){
   const d=await openDb(); if(!d) return {};
@@ -739,11 +739,11 @@ async function setupRecorder(){
       const mime=['audio/webm;codecs=opus','audio/mp4'].find(m=>window.MediaRecorder&&MediaRecorder.isTypeSupported(m));
       mr=new MediaRecorder(stream, mime?{mimeType:mime}:{}); chunks=[]; recKey=l.key;
       mr.ondataavailable=e=>{ if(e.data&&e.data.size) chunks.push(e.data); };
-      mr.onstop=async()=>{ const blob=new Blob(chunks,{type:mr.mimeType||'audio/webm'}); recKey=null; have[l.key]=blob; await idbPut(l.key,blob); paint(); count(); };
+      mr.onstop=async()=>{ const blob=new Blob(chunks,{type:mr.mimeType||'audio/webm'}); recKey=null; have[l.key]=blob; paint(); count(); try{ await idbPut(l.key,blob); }catch(e){} };
       mr.start(); paint();
     };
     bPlay.onclick=()=>{ if(audio){ audio.pause(); } audio=new Audio(URL.createObjectURL(have[l.key])); audio.play(); };
-    bDel.onclick=async()=>{ delete have[l.key]; await idbDel(l.key); paint(); count(); };
+    bDel.onclick=async()=>{ delete have[l.key]; paint(); count(); try{ await idbDel(l.key); }catch(e){} };
     b.append(st,bRec,bPlay,bDel); row.append(t,b); det.appendChild(row); paint();
   });
   count();
