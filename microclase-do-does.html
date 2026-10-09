@@ -756,7 +756,7 @@ async function setupRecorder(){
   };
   $('rclear').onclick=async()=>{ if(!confirm('¿Borrar todas las grabaciones de este navegador?')) return; for(const k of Object.keys(have)){ await idbDel(k); delete have[k]; } list.innerHTML=''; location.reload(); };
 }
-if(location.hash==='#grabar'){ setupRecorder(); }
+if(location.hash.toLowerCase()==='#grabar'){ setupRecorder(); }
 </script>
 </body>
 </html>
