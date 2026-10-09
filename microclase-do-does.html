@@ -446,7 +446,7 @@ function score(v){
   if(FEMALE.test(v.name)) n+=10;
   if(MALE.test(v.name)) n-=20;
   if(/natural|online|neural/i.test(v.name)) n+=3;
-  if(v.localService) n+=4;
+  if(v.localService) n+=8;
   return n;
 }
 function listFor(re,pref){
@@ -584,7 +584,7 @@ function speakOne(text, lang, o){
     let done=false, started=false;
     const fin=()=>{ if(!done){done=true; clearTimeout(t); clearTimeout(w); res();} };
     const t = setTimeout(fin, est*2.5+2000);
-    const w = setTimeout(()=>{ if(!started) setStatus('No se detecta audio. Sube el volumen, revisa que la pestaña no esté silenciada y prueba otra voz en «Cambiar la voz».',true); }, 3500);
+    const w = setTimeout(()=>{ if(!started && !o.retried){ const alt=listFor(new RegExp('^'+lang,'i'),[]).find(x=>x!==voices[lang]&&x.localService); if(alt){ done=true; clearTimeout(t); synth.cancel(); voices[lang]=alt; setStatus('Cambié a la voz '+alt.name+' porque la anterior no sonaba.',true); speakOne(text,lang,Object.assign({},o,{retried:true})).then(res); return; } } if(!started) setStatus('No se detecta audio. Sube el volumen, revisa que la pestaña no esté silenciada y prueba otra voz en «Cambiar la voz».',true); }, 3500);
     u.onstart = ()=>{ started=true; setStatus(voiceInfo()); };
     u.onend = fin; u.onerror = fin;
     synth.speak(u);
