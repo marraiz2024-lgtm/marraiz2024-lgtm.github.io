@@ -137,6 +137,19 @@
   .vbox{margin-top:14px;display:flex;gap:12px;align-items:center;flex-wrap:wrap}#vstatus{font-size:14px;flex:1;min-width:200px}#vstatus.warn{font-weight:700}
   footer{margin-top:30px;font:700 18px 'Big Shoulders Display',sans-serif;letter-spacing:.5px}
   footer b{color:var(--gold)}
+  #rec{margin-top:26px;border:3px solid var(--yellow);border-radius:16px;background:var(--white);padding:16px 18px}
+  #rec h2{font:800 26px 'Big Shoulders Display',sans-serif;text-transform:uppercase;margin-bottom:6px}
+  #rec p{font-size:14px;line-height:1.5;margin-bottom:10px}
+  #rec .rtop{display:flex;gap:10px;align-items:center;flex-wrap:wrap;margin:10px 0}
+  #rec details{border-top:1px solid #e8e2d0;padding:8px 0}
+  #rec summary{cursor:pointer;font-weight:700}
+  .rrow{display:grid;grid-template-columns:1fr auto;gap:8px;align-items:center;padding:8px 0;border-bottom:1px dotted #d9d2bc}
+  .rrow .rt{font-size:14px;line-height:1.4;min-width:0}
+  .rrow .rt i{font-family:'Lora',serif}
+  .rrow .rb{display:flex;gap:6px;align-items:center;flex-wrap:wrap;justify-content:flex-end}
+  .rrow button{padding:6px 12px;font-size:13px}
+  .rrow .ok{font-weight:700;font-size:13px}
+  .rrow.rec{background:var(--yellow)}
 </style>
 </head>
 <body>
@@ -197,6 +210,16 @@
       </details>
     </div>
   </div>
+  <section id="rec" hidden>
+    <h2>Modo grabación (solo docente)</h2>
+    <p>Graba cada línea con tu voz. Habla con calma y deja un segundo de silencio antes y después. Las grabaciones quedan en este navegador y se usan aquí al reproducir la microclase. Al terminar, descarga el archivo .zip para publicarlas.</p>
+    <div class="rtop">
+      <strong id="rcount"></strong>
+      <button id="rzip" class="main" type="button">Descargar grabaciones (.zip)</button>
+      <button id="rclear" type="button">Borrar todas</button>
+    </div>
+    <div id="rlist"></div>
+  </section>
   <footer>MMercedes<b>English</b> · Tiny Tips, Big Progress</footer>
 </main>
 
@@ -380,7 +403,7 @@ function score(v){
   if(FEMALE.test(v.name)) n+=10;
   if(MALE.test(v.name)) n-=20;
   if(/natural|online|neural/i.test(v.name)) n+=3;
-  if(v.localService) n+=4;
+  if(v.localService) n+=8;
   return n;
 }
 function listFor(re,pref){
@@ -412,6 +435,67 @@ const sleep = ms => new Promise(r=>setTimeout(r,ms));
 function setStatus(t,warn){ const e=$('vstatus'); if(e){ e.textContent=t; e.className=warn?'warn':''; } }
 function voiceInfo(){ return 'Voz en uso: '+(voices.es?voices.es.name:'ninguna para español')+' / '+(voices.en?voices.en.name:'ninguna para inglés')+'.'; }
 
+// ---------- Voz de la docente (grabaciones) ----------
+let curAudio=null, curFin=null, manifest={}, idbp=null;
+function stopAll(){
+  if(synth) synth.cancel();
+  if(curAudio){ try{ curAudio.pause(); }catch(e){} }
+  if(curFin){ const f=curFin; curFin=null; f(); }
+}
+function openDb(){
+  if(idbp) return idbp;
+  idbp=new Promise(res=>{
+    try{
+      const r=indexedDB.open('microclase-id-like-voz',1);
+      r.onupgradeneeded=()=>r.result.createObjectStore('clips');
+      r.onsuccess=()=>res(r.result); r.onerror=()=>res(null);
+    }catch(e){ res(null); }
+  });
+  return idbp;
+}
+async function idbGet(key){
+  const d=await openDb(); if(!d) return null;
+  return new Promise(res=>{ try{ const q=d.transaction('clips').objectStore('clips').get(key); q.onsuccess=()=>res(q.result||null); q.onerror=()=>res(null); }catch(e){ res(null); } });
+}
+async function idbPut(key,blob){
+  const d=await openDb(); if(!d) return;
+  return new Promise(res=>{ try{ const t=d.transaction('clips','readwrite'); t.objectStore('clips').put(blob,key); t.oncomplete=()=>res(); t.onerror=()=>res(); t.onabort=()=>res(); }catch(e){ res(); } });
+}
+async function idbDel(key){
+  const d=await openDb(); if(!d) return;
+  return new Promise(res=>{ try{ const t=d.transaction('clips','readwrite'); t.objectStore('clips').delete(key); t.oncomplete=()=>res(); t.onerror=()=>res(); t.onabort=()=>res(); }catch(e){ res(); } });
+}
+async function idbAll(){
+  const d=await openDb(); if(!d) return {};
+  return new Promise(res=>{
+    const out={};
+    try{
+      const q=d.transaction('clips').objectStore('clips').openCursor();
+      q.onsuccess=()=>{ const c=q.result; if(c){ out[c.key]=c.value; c.continue(); } else res(out); };
+      q.onerror=()=>res(out);
+    }catch(e){ res(out); }
+  });
+}
+try{ fetch('audio/id-like/manifest.json').then(r=>r.ok?r.json():{}).then(m=>{ manifest=m||{}; }).catch(()=>{}); }catch(e){}
+async function clipFor(key){
+  const b=await idbGet(key);
+  if(b) return URL.createObjectURL(b);
+  if(manifest[key]) return 'audio/id-like/'+manifest[key];
+  return null;
+}
+function playClip(url,o){
+  return new Promise(res=>{
+    const a=new Audio(url); curAudio=a;
+    a.volume = o.voice==='quiet' ? .3 : 1;
+    if(o.voice==='quiet') a.playbackRate=1.3;
+    const fin=()=>{ if(curAudio===a) curAudio=null; if(curFin===fin) curFin=null; res(); };
+    curFin=fin; a.onended=fin; a.onerror=fin;
+    a.onplaying=()=>setStatus('Escuchas la voz de la docente.');
+    const p=a.play(); if(p&&p.catch) p.catch(fin);
+  });
+}
+
+
 function speakOne(text, lang, o){
   return new Promise(res=>{
     const words = text.split(/\s+/).length;
@@ -430,7 +514,7 @@ function speakOne(text, lang, o){
     let done=false, started=false;
     const fin=()=>{ if(!done){done=true; clearTimeout(t); clearTimeout(w); res();} };
     const t = setTimeout(fin, est*2.5+2000);
-    const w = setTimeout(()=>{ if(!started) setStatus('No se detecta audio. Sube el volumen, revisa que la pestaña no esté silenciada y prueba otra voz en «Cambiar la voz».',true); }, 3500);
+    const w = setTimeout(()=>{ if(!started && !o.retried){ const alt=listFor(new RegExp('^'+lang,'i'),[]).find(x=>x!==voices[lang]&&x.localService); if(alt){ done=true; clearTimeout(t); synth.cancel(); voices[lang]=alt; setStatus('Cambié a la voz '+alt.name+' porque la anterior no sonaba.',true); speakOne(text,lang,Object.assign({},o,{retried:true})).then(res); return; } } if(!started) setStatus('No se detecta audio. Sube el volumen, revisa que la pestaña no esté silenciada y prueba otra voz en «Cambiar la voz».',true); }, 3500);
     u.onstart = ()=>{ started=true; setStatus(voiceInfo()); };
     u.onend = fin; u.onerror = fin;
     synth.speak(u);
@@ -438,12 +522,13 @@ function speakOne(text, lang, o){
 }
 
 async function speak(text, lang, o={}){
+  if(o.key){ const url=await clipFor(o.key); if(url){ await playClip(url,o); return; } }
   const parts = text.split(/(?<=[.!?:])\s+/).filter(Boolean);
   for(const part of parts) await speakOne(part, lang, o);
 }
 
 $('vtest').onclick = async ()=>{
-  if(synth) synth.cancel();
+  stopAll();
   setStatus('Probando la voz…');
   await speak('Hola, esta es la voz en español.','es');
   await speak('Hello, this is the English voice.','en');
@@ -473,7 +558,7 @@ function setLine(id){
 async function run(i){
   const my = ++token;
   idx = i;
-  if(synth) synth.cancel();
+  stopAll();
   const sc = SCENES[i];
   $('time').textContent = sc.time; $('ttl').textContent = sc.ttl;
   $('panel').innerHTML = sc.html;
@@ -481,7 +566,7 @@ async function run(i){
   document.querySelectorAll('.chip').forEach((c,k)=>c.classList.toggle('cur',k===i));
   caption('');
   await sleep(300);
-  for(const st of sc.steps){
+  for(const [j,st] of sc.steps.entries()){
     if(my!==token) return;
     if(st.show && $(st.show)) $(st.show).classList.add('show');
     if(st.on) setLine(st.on);
@@ -489,14 +574,14 @@ async function run(i){
     const ls=$('ls'); if(ls) ls.classList.toggle('listening', !!st.listen);
     if(st.es){
       caption(st.es); $('avatar').classList.add('talking');
-      await speak(st.es,'es',st);
+      await speak(st.es,'es',{...st,key:i+'-'+j+'-es'});
       $('avatar').classList.remove('talking');
     }
     if(my!==token) return;
     if(st.en){
       caption(st.en,'en');
       if(st.voice!=='quiet') $('avatar').classList.add('talking');
-      await speak(st.en,'en',st);
+      await speak(st.en,'en',{...st,key:i+'-'+j+'-en'});
       $('avatar').classList.remove('talking');
       await sleep(350);
     }
@@ -519,7 +604,7 @@ SCENES.forEach((s,k)=>{
 });
 $('go').onclick=()=>{ $('start').classList.add('hide'); playing=true; run(0); };
 $('play').onclick=()=>{
-  if(playing){ playing=false; token++; if(synth) synth.cancel(); $('avatar').classList.remove('talking'); $('play').textContent='Continuar'; }
+  if(playing){ playing=false; token++; stopAll(); $('avatar').classList.remove('talking'); $('play').textContent='Continuar'; }
   else { const again=$('play').textContent==='Repetir'; playing=true; $('play').textContent='Pausar'; run(again?0:idx); }
 };
 $('prev').onclick=()=>{ playing=true; $('play').textContent='Pausar'; run(Math.max(0,idx-1)); };
@@ -528,6 +613,76 @@ $('next').onclick=()=>{ playing=true; $('play').textContent='Pausar'; run(Math.m
 // Vista previa inicial (sin audio)
 $('time').textContent=SCENES[0].time; $('ttl').textContent=SCENES[0].ttl; $('panel').innerHTML=SCENES[0].html;
 document.querySelectorAll('.chip')[0].classList.add('cur');
+// ---------- Modo grabación (#grabar) ----------
+const CRC=(()=>{const t=new Uint32Array(256);for(let n=0;n<256;n++){let c=n;for(let k=0;k<8;k++)c=c&1?0xEDB88320^(c>>>1):c>>>1;t[n]=c>>>0;}return t;})();
+function crc32(u8){let c=0xFFFFFFFF;for(let i=0;i<u8.length;i++)c=CRC[(c^u8[i])&255]^(c>>>8);return (c^0xFFFFFFFF)>>>0;}
+function makeZip(files){
+  const enc=new TextEncoder(), parts=[], central=[]; let offset=0;
+  const u16=n=>[n&255,(n>>8)&255], u32=n=>[n&255,(n>>8)&255,(n>>16)&255,(n>>>24)&255];
+  for(const f of files){
+    const name=enc.encode(f.name), crc=crc32(f.data), size=f.data.length;
+    const head=new Uint8Array([...u32(0x04034b50),...u16(20),...u16(0x0800),...u16(0),...u16(0),...u16(0x21),...u32(crc),...u32(size),...u32(size),...u16(name.length),...u16(0)]);
+    parts.push(head,name,f.data); central.push({name,crc,size,offset}); offset+=head.length+name.length+size;
+  }
+  let csize=0; const cparts=[];
+  for(const c of central){
+    const h=new Uint8Array([...u32(0x02014b50),...u16(20),...u16(20),...u16(0x0800),...u16(0),...u16(0),...u16(0x21),...u32(c.crc),...u32(c.size),...u32(c.size),...u16(c.name.length),...u16(0),...u16(0),...u16(0),...u16(0),...u32(0),...u32(c.offset)]);
+    cparts.push(h,c.name); csize+=h.length+c.name.length;
+  }
+  const end=new Uint8Array([...u32(0x06054b50),...u16(0),...u16(0),...u16(central.length),...u16(central.length),...u32(csize),...u32(offset),...u16(0)]);
+  return new Blob([...parts,...cparts,end],{type:'application/zip'});
+}
+function allLines(){
+  const L=[];
+  SCENES.forEach((sc,i)=>sc.steps.forEach((st,j)=>{
+    if(st.es) L.push({key:i+'-'+j+'-es',lang:'es',text:st.es,scene:sc.time+' '+sc.ttl});
+    if(st.en) L.push({key:i+'-'+j+'-en',lang:'en',text:st.en,scene:sc.time+' '+sc.ttl});
+  }));
+  return L;
+}
+function extOf(type){ return /mp4/.test(type)?'m4a':/ogg/.test(type)?'ogg':/wav/.test(type)?'wav':'webm'; }
+async function setupRecorder(){
+  const box=$('rec'); box.hidden=false; $('start').classList.add('hide'); box.scrollIntoView();
+  const lines=allLines(), have=await idbAll();
+  let stream=null, mr=null, chunks=[], recKey=null, audio=null;
+  const list=$('rlist');
+  const count=()=>{ $('rcount').textContent=Object.keys(have).filter(k=>lines.some(l=>l.key===k)).length+' de '+lines.length+' líneas grabadas'; };
+  let lastScene=null, det=null;
+  lines.forEach(l=>{
+    if(l.scene!==lastScene){ det=document.createElement('details'); const sm=document.createElement('summary'); sm.textContent=l.scene; det.appendChild(sm); list.appendChild(det); lastScene=l.scene; }
+    const row=document.createElement('div'); row.className='rrow';
+    const t=document.createElement('div'); t.className='rt'; t.innerHTML=(l.lang==='en'?'<b>EN</b> ':'<b>ES</b> ')+'<i></i>'; t.querySelector('i').textContent=l.text;
+    const b=document.createElement('div'); b.className='rb';
+    const st=document.createElement('span'); st.className='ok';
+    const bRec=document.createElement('button'); bRec.type='button';
+    const bPlay=document.createElement('button'); bPlay.type='button'; bPlay.textContent='Escuchar';
+    const bDel=document.createElement('button'); bDel.type='button'; bDel.textContent='Borrar';
+    const paint=()=>{ const ok=!!have[l.key]; st.textContent=ok?'✓ grabada':''; bRec.textContent=recKey===l.key?'Detener':(ok?'Regrabar':'Grabar'); bPlay.disabled=!ok; bDel.disabled=!ok; row.classList.toggle('rec',recKey===l.key); };
+    bRec.onclick=async()=>{
+      if(recKey===l.key){ mr.stop(); return; }
+      if(recKey){ return; }
+      try{ stream=stream||await navigator.mediaDevices.getUserMedia({audio:true}); }catch(e){ alert('No se pudo usar el micrófono. Permite el acceso y vuelve a intentar.'); return; }
+      const mime=['audio/webm;codecs=opus','audio/mp4'].find(m=>window.MediaRecorder&&MediaRecorder.isTypeSupported(m));
+      mr=new MediaRecorder(stream, mime?{mimeType:mime}:{}); chunks=[]; recKey=l.key;
+      mr.ondataavailable=e=>{ if(e.data&&e.data.size) chunks.push(e.data); };
+      mr.onstop=async()=>{ const blob=new Blob(chunks,{type:mr.mimeType||'audio/webm'}); recKey=null; have[l.key]=blob; paint(); count(); try{ await idbPut(l.key,blob); }catch(e){} };
+      mr.start(); paint();
+    };
+    bPlay.onclick=()=>{ if(audio){ audio.pause(); } audio=new Audio(URL.createObjectURL(have[l.key])); audio.play(); };
+    bDel.onclick=async()=>{ delete have[l.key]; paint(); count(); try{ await idbDel(l.key); }catch(e){} };
+    b.append(st,bRec,bPlay,bDel); row.append(t,b); det.appendChild(row); paint();
+  });
+  count();
+  $('rzip').onclick=async()=>{
+    const keys=Object.keys(have); if(!keys.length){ alert('Aún no hay grabaciones.'); return; }
+    const files=[], man={};
+    for(const k of keys){ const name=k+'.'+extOf(have[k].type); man[k]=name; files.push({name,data:new Uint8Array(await have[k].arrayBuffer())}); }
+    files.push({name:'manifest.json',data:new TextEncoder().encode(JSON.stringify(man,null,1))});
+    const url=URL.createObjectURL(makeZip(files)); const a=document.createElement('a'); a.href=url; a.download='voz-id-like.zip'; document.body.appendChild(a); a.click(); a.remove();
+  };
+  $('rclear').onclick=async()=>{ if(!confirm('¿Borrar todas las grabaciones de este navegador?')) return; for(const k of Object.keys(have)){ await idbDel(k); delete have[k]; } list.innerHTML=''; location.reload(); };
+}
+if(location.hash.toLowerCase()==='#grabar'){ setupRecorder(); }
 </script>
 </body>
 </html>
