@@ -179,17 +179,18 @@
 <div class="start" id="start"><div class="start-in">
 <img src="microclase-can-cant-could-avatar.webp" alt="Mercedes, profesora de MMercedesEnglish">
 <h2>Can, can't y could</h2><p>Una microclase de 8 minutos para hablar de tus habilidades y pedir ayuda. Escucha, piensa y responde.</p>
-<button class="main" id="go" type="button">Comenzar</button><div class="nov" id="novoice"></div></div></div>
+<button class="main" id="go" type="button">Comenzar</button><p style="margin-top:14px"><button id="recordStart" type="button">Grabar mi voz en español</button></p><div class="nov" id="novoice"></div></div></div>
 <div class="topbar"><div class="topbar-in"><div class="mm">MM</div><span class="pill">Beginner English Tips</span><span class="pill alt">Microclase · 8 min</span><div class="brand">MMercedes<b>English</b><div class="tagline">Tiny Tips, Big Progress</div></div></div></div>
 <main><h1>Can, can't y <span>could</span></h1><p class="sub">Tus habilidades y una forma amable de pedir ayuda.</p>
 <div class="stage"><div class="avatar-card" id="avatar"><img class="photo" src="microclase-can-cant-could-avatar.webp" alt="Mercedes"></div>
 <div class="screen"><div class="screen-head"><span class="time" id="time"></span><span class="ttl" id="ttl"></span></div><div class="panel" id="panel"></div><div class="caption" id="cap" aria-live="polite" aria-atomic="true"></div></div>
 <div class="controls"><button id="prev" type="button">‹ Anterior</button><button class="main" id="play" type="button">Pausar</button><button id="next" type="button">Siguiente ›</button><div class="bar" role="progressbar" aria-label="Avance de la microclase" aria-valuemin="0" aria-valuemax="480" aria-valuenow="0"><i id="bar"></i></div></div>
 <p class="timing"><span id="elapsed">0:00</span> / 8:00 · Puedes pausar o volver a una escena.</p>
-<nav class="chips" id="chips" aria-label="Escenas"></nav><div class="vbox"><button id="vtest" type="button">Probar voz</button><span id="vstatus" role="status"></span></div>
-<details class="voz"><summary>Cambiar la voz</summary><label>Español <select id="vses"></select></label><label>Inglés <select id="vsen"></select></label></details>
+<nav class="chips" id="chips" aria-label="Escenas"></nav><div class="vbox"><button id="vtest-es" type="button">Probar voz en español</button><button id="vtest" type="button">Probar voz en inglés</button><span id="vstatus" role="status"></span></div>
+<details class="voz"><summary>Voces femeninas del navegador</summary><label>Español <select id="vses"></select></label><label>Inglés <select id="vsen"></select></label><p class="timing">La selección automática reconoce voces femeninas por su nombre. Escúchalas para confirmar cómo suenan en tu dispositivo.</p></details>
+<div class="vbox"><button id="recordOpen" type="button" aria-controls="rec" aria-expanded="false">Grabar mi voz en español</button></div>
 </div>
-<section id="rec" hidden><h2>Modo grabación (solo docente)</h2><p>Graba cada línea con tu voz. Habla con calma y deja un segundo de silencio antes y después. Las grabaciones quedan en este navegador. Al terminar, descarga el archivo .zip.</p><div class="rtop"><strong id="rcount"></strong><button id="rzip" class="main" type="button">Descargar grabaciones (.zip)</button><button id="rclear" type="button">Borrar todas</button></div><div id="rlist"></div></section>
+<section id="rec" hidden aria-labelledby="recTitle"><h2 id="recTitle">Graba tu voz en español</h2><p>Abre una escena y graba cada texto en español. Tu grabación se usará en lugar de la voz del navegador para esa línea. El inglés seguirá con la voz femenina disponible.</p><p>Cada línea indica el tiempo disponible. La grabación se detiene al llegar a ese límite para conservar el ritmo de 8 minutos. Usa Chrome o Edge con permiso de micrófono en una página segura (HTTPS).</p><p>Las grabaciones se guardan en este navegador y dispositivo. Descarga el ZIP como copia; descargarlo no publica los audios.</p><div class="rtop"><strong id="rcount"></strong><button id="rzip" class="main" type="button">Descargar grabaciones (.zip)</button><button id="rclear" type="button">Borrar todas</button><button id="recordClose" type="button">Volver a la microclase</button></div><p id="recordStatus" role="status" aria-live="polite"></p><div id="rlist"></div></section>
 <footer>MMercedes<b>English</b> · Tiny Tips, Big Progress</footer></main>
 <script>
 'use strict';
@@ -201,25 +202,28 @@ let voices={es:null,en:null}, voiceLists={es:[],en:[]}, idbp=null, curAudio=null
 let idx=0, elapsed=0, anchor=0, playing=false, lastCue=-1, complete=false, audioToken=0;
 const fmt=t=>Math.floor(t/60)+':'+String(Math.floor(t%60)).padStart(2,'0');
 function setStatus(text){$('vstatus').textContent=text;}
+// SpeechSynthesisVoice no incluye género; solo elegimos automáticamente nombres reconocidos.
+const FEMALE_VOICE=/\b(sabina|helena|paulina|dalia|elvira|monica|mónica|paloma|lucia|lucía|marisol|camila|salome|salomé|zira|aria|jenny|samantha|karen|ava|allison|susan|serena|moira|tessa|victoria|hazel|nicole|female|mujer)\b/i;
 function pickVoices(){
  for(const lang of ['es','en']){
   const previous=voices[lang];
-  voiceLists[lang]=synth?synth.getVoices().filter(v=>v.localService&&v.lang.toLowerCase().startsWith(lang)).sort((a,b)=>Number(b.lang.toLowerCase()===(lang==='en'?'en-us':'es-mx'))-Number(a.lang.toLowerCase()===(lang==='en'?'en-us':'es-mx'))):[];
+  voiceLists[lang]=synth?synth.getVoices().filter(v=>v.localService&&v.lang.toLowerCase().startsWith(lang)&&FEMALE_VOICE.test(v.name)).sort((a,b)=>Number(b.lang.toLowerCase()===(lang==='en'?'en-us':'es-mx'))-Number(a.lang.toLowerCase()===(lang==='en'?'en-us':'es-mx'))):[];
   voices[lang]=voiceLists[lang].includes(previous)?previous:(voiceLists[lang][0]||null);
   const select=$(lang==='es'?'vses':'vsen');select.replaceChildren();
-  if(!voiceLists[lang].length){const o=document.createElement('option');o.textContent='Sin voz local disponible';select.append(o);select.disabled=true;}
+  if(!voiceLists[lang].length){const o=document.createElement('option');o.textContent='Sin voz femenina local reconocida';select.append(o);select.disabled=true;}
   else{select.disabled=false;voiceLists[lang].forEach((v,i)=>{const o=document.createElement('option');o.value=i;o.textContent=v.name+' ('+v.lang+')';select.append(o);});select.value=voiceLists[lang].indexOf(voices[lang]);}
   select.onchange=()=>{voices[lang]=voiceLists[lang][Number(select.value)];stopAll();};
  }
- const warning=(!voices.es||!voices.en)?'Si faltan voces locales, puedes seguir los subtítulos. El ritmo de la clase se mantiene.':'';
+ const missing=['es','en'].filter(lang=>!voices[lang]).map(lang=>lang==='es'?'español':'inglés');
+ const warning=missing.length?'No se detectó una voz femenina local reconocida en '+missing.join(' y ')+'. Puedes seguir los subtítulos y grabar los textos en español con tu voz.':'';
  $('novoice').textContent=warning;
- setStatus(warning||'Se usarán las voces locales de tu dispositivo.');
+ setStatus(warning||'Voces femeninas seleccionadas: '+voices.es.name+' / '+voices.en.name+'. Tus grabaciones tienen prioridad.');
 }
 function stopAll(){audioToken++;if(synth)synth.cancel();if(curAudio){curAudio.pause();curAudio=null;}if(curURL){URL.revokeObjectURL(curURL);curURL=null;}}
 async function speakCue(c,key){
  stopAll();const ticket=audioToken;
  const blob=await idbGet(key);if(ticket!==audioToken)return;
- if(blob){curURL=URL.createObjectURL(blob);curAudio=new Audio(curURL);curAudio.volume=c.voice==='quiet'?.3:1;curAudio.play().catch(()=>setStatus('No se pudo reproducir la grabación. Sigue el subtítulo.'));return;}
+ if(blob){curURL=URL.createObjectURL(blob);curAudio=new Audio(curURL);curAudio.volume=c.voice==='quiet'?.3:1;setStatus('Escuchas tu grabación.');curAudio.play().catch(()=>setStatus('No se pudo reproducir la grabación. Sigue el subtítulo.'));return;}
  const lang=c.en?'en':'es',text=c.en||c.es;
  if(!text||!synth||!voices[lang])return;
  const u=new SpeechSynthesisUtterance(text);u.voice=voices[lang];u.lang=voices[lang].lang;u.rate=c.rate||(lang==='en'?.85:.95);u.volume=c.voice==='quiet'?.3:1;
@@ -246,13 +250,14 @@ function update(){if(!playing)return;let now=performance.now();elapsed=(now-anch
   if(idx===SCENES.length-1){elapsed=duration;playing=false;complete=true;stopAll();paint();$('play').textContent='Repetir';$('cap').textContent='Microclase completa. Repítela cuando quieras.';return;}
   elapsed-=duration;anchor+=duration*1000;idx++;stopAll();drawScene();
  }paint();}
-function jump(i){stopAll();idx=i;elapsed=0;complete=false;anchor=performance.now();playing=true;$('start').classList.add('hide');$('play').textContent='Pausar';drawScene();paint();}
+function jump(i){if(recording.key||recording.requesting||recording.saving){recorderStatus('Termina de grabar este texto antes de reproducir la clase.');return;}stopAll();idx=i;elapsed=0;complete=false;anchor=performance.now();playing=true;$('start').classList.add('hide');$('play').textContent='Pausar';drawScene();paint();}
 function pause(){update();if(!playing)return;playing=false;stopAll();$('play').textContent='Continuar';}
 SCENES.forEach((s,k)=>{const b=document.createElement('button');b.type='button';b.className='chip';b.textContent=fmt(s.start)+' '+s.ttl;b.onclick=()=>jump(k);$('chips').append(b);});
 $('go').onclick=()=>jump(0);
-$('play').onclick=()=>{if(complete){jump(0);return;}if(playing){pause();return;}playing=true;anchor=performance.now()-elapsed*1000;lastCue=-1;$('play').textContent='Pausar';paint();};
+$('play').onclick=()=>{if(recording.key||recording.requesting||recording.saving){recorderStatus('Termina de grabar este texto antes de reproducir la clase.');return;}if(complete){jump(0);return;}if(playing){pause();return;}playing=true;anchor=performance.now()-elapsed*1000;lastCue=-1;$('play').textContent='Pausar';paint();};
 $('prev').onclick=()=>jump(Math.max(0,idx-1));$('next').onclick=()=>jump(Math.min(SCENES.length-1,idx+1));
-$('vtest').onclick=()=>{pause();setStatus('La clase está pausada mientras pruebas la voz.');const lang=voices.en?'en':'es';speakCue({[lang]:lang==='en'?'Could you help me, please?':'Hola, esta es la voz en español.'},'voice-test');};
+$('vtest').onclick=()=>{if(recording.key||recording.requesting||recording.saving)return;pause();stopAll();setStatus(voices.en?'Prueba de la voz femenina en inglés.':'No hay una voz femenina local reconocida en inglés.');speakCue({en:'Could you help me, please?'},'voice-test-en');};
+$('vtest-es').onclick=()=>{if(recording.key||recording.requesting||recording.saving)return;pause();stopAll();setStatus(voices.es?'Prueba de la voz femenina en español.':'No hay una voz femenina local reconocida en español. Puedes grabar tu propia voz.');speakCue({es:'Hola, esta es la voz en español.'},'voice-test-es');};
 if(synth){synth.addEventListener('voiceschanged',pickVoices);}pickVoices();drawScene();paint();setInterval(update,100);
 window.addEventListener('pagehide',stopAll);
 function openDb(){
@@ -271,8 +276,8 @@ async function idbGet(key){
   return new Promise(res=>{ try{ const q=d.transaction('clips').objectStore('clips').get(key); q.onsuccess=()=>res(q.result||null); q.onerror=()=>res(null); }catch(e){ res(null); } });
 }
 async function idbPut(key,blob){
-  const d=await openDb(); if(!d) return;
-  return new Promise(res=>{ try{ const t=d.transaction('clips','readwrite'); t.objectStore('clips').put(blob,key); t.oncomplete=()=>res(); t.onerror=()=>res(); t.onabort=()=>res(); }catch(e){ res(); } });
+  const d=await openDb(); if(!d) throw new Error('No hay almacenamiento local disponible.');
+  return new Promise((res,rej)=>{ try{ const t=d.transaction('clips','readwrite'); t.objectStore('clips').put(blob,key); t.oncomplete=()=>res(); t.onerror=()=>rej(t.error); t.onabort=()=>rej(t.error); }catch(e){ rej(e); } });
 }
 async function idbDel(key){
   const d=await openDb(); if(!d) return;
@@ -308,56 +313,83 @@ function makeZip(files){
   return new Blob([...parts,...cparts,end],{type:'application/zip'});
 }
 function allLines(){
-  const L=[];
+  const lines=[];
   SCENES.forEach((sc,i)=>sc.steps.forEach((st,j)=>{
-    if(st.es) L.push({key:i+'-'+j+'-es',lang:'es',text:st.es,scene:sc.time+' '+sc.ttl});
-    if(st.en) L.push({key:i+'-'+j+'-en',lang:'en',text:st.en,scene:sc.time+' '+sc.ttl});
+    if(st.es) lines.push({key:st.key,lang:'es',text:st.es,scene:sc.time+' '+sc.ttl,maxSeconds:(sc.steps[j+1]?.at??sc.duration)-st.at});
   }));
-  return L;
+  return lines;
 }
 function extOf(type){ return /mp4/.test(type)?'m4a':/ogg/.test(type)?'ogg':/wav/.test(type)?'wav':'webm'; }
-async function setupRecorder(){
-  const box=$('rec'); box.hidden=false; $('start').classList.add('hide'); box.scrollIntoView();
-  const lines=allLines(), have=await idbAll();
-  let stream=null, mr=null, chunks=[], recKey=null, audio=null;
-  const list=$('rlist');
-  const count=()=>{ $('rcount').textContent=Object.keys(have).filter(k=>lines.some(l=>l.key===k)).length+' de '+lines.length+' líneas grabadas'; };
-  let lastScene=null, det=null;
-  lines.forEach(l=>{
-    if(l.scene!==lastScene){ det=document.createElement('details'); const sm=document.createElement('summary'); sm.textContent=l.scene; det.appendChild(sm); list.appendChild(det); lastScene=l.scene; }
-    const row=document.createElement('div'); row.className='rrow';
-    const t=document.createElement('div'); t.className='rt'; t.innerHTML=(l.lang==='en'?'<b>EN</b> ':'<b>ES</b> ')+'<i></i>'; t.querySelector('i').textContent=l.text;
-    const b=document.createElement('div'); b.className='rb';
-    const st=document.createElement('span'); st.className='ok';
-    const bRec=document.createElement('button'); bRec.type='button';
-    const bPlay=document.createElement('button'); bPlay.type='button'; bPlay.textContent='Escuchar';
-    const bDel=document.createElement('button'); bDel.type='button'; bDel.textContent='Borrar';
-    const paint=()=>{ const ok=!!have[l.key]; st.textContent=ok?'✓ grabada':''; bRec.textContent=recKey===l.key?'Detener':(ok?'Regrabar':'Grabar'); bPlay.disabled=!ok; bDel.disabled=!ok; row.classList.toggle('rec',recKey===l.key); };
-    bRec.onclick=async()=>{
-      if(recKey===l.key){ mr.stop(); return; }
-      if(recKey){ return; }
-      try{ stream=stream||await navigator.mediaDevices.getUserMedia({audio:true}); }catch(e){ alert('No se pudo usar el micrófono. Permite el acceso y vuelve a intentar.'); return; }
-      const mime=['audio/webm;codecs=opus','audio/mp4'].find(m=>window.MediaRecorder&&MediaRecorder.isTypeSupported(m));
-      mr=new MediaRecorder(stream, mime?{mimeType:mime}:{}); chunks=[]; recKey=l.key;
-      mr.ondataavailable=e=>{ if(e.data&&e.data.size) chunks.push(e.data); };
-      mr.onstop=async()=>{ const blob=new Blob(chunks,{type:mr.mimeType||'audio/webm'}); recKey=null; have[l.key]=blob; paint(); count(); try{ await idbPut(l.key,blob); }catch(e){} };
-      mr.start(); paint();
-    };
-    bPlay.onclick=()=>{ if(audio){ audio.pause(); } audio=new Audio(URL.createObjectURL(have[l.key])); audio.play(); };
-    bDel.onclick=async()=>{ delete have[l.key]; paint(); count(); try{ await idbDel(l.key); }catch(e){} };
-    b.append(st,bRec,bPlay,bDel); row.append(t,b); det.appendChild(row); paint();
-  });
-  count();
-  $('rzip').onclick=async()=>{
-    const keys=Object.keys(have); if(!keys.length){ alert('Aún no hay grabaciones.'); return; }
-    const files=[], man={};
-    for(const k of keys){ const name=k+'.'+extOf(have[k].type); man[k]=name; files.push({name,data:new Uint8Array(await have[k].arrayBuffer())}); }
-    files.push({name:'manifest.json',data:new TextEncoder().encode(JSON.stringify(man,null,1))});
-    const url=URL.createObjectURL(makeZip(files)); const a=document.createElement('a'); a.href=url; a.download='voz-'+SLUG+'.zip'; document.body.appendChild(a); a.click(); a.remove();
-  };
-  $('rclear').onclick=async()=>{ if(!confirm('¿Borrar todas las grabaciones de este navegador?')) return; for(const k of Object.keys(have)){ await idbDel(k); delete have[k]; } list.innerHTML=''; location.reload(); };
+let recorderReady=false,recorderLoading=null;
+const recording={mr:null,stream:null,timer:null,key:null,saving:false,requesting:false,audio:null,url:null};
+function releaseMicrophone(){if(recording.stream){recording.stream.getTracks().forEach(t=>t.stop());recording.stream=null;}}
+function stopPreview(){if(recording.audio){recording.audio.pause();recording.audio=null;}if(recording.url){URL.revokeObjectURL(recording.url);recording.url=null;}}
+function recorderStatus(text){$('recordStatus').textContent=text;}
+function closeRecorder(){
+  if(recording.mr?.state==='recording')recording.mr.stop();
+  releaseMicrophone();stopPreview();$('rec').hidden=true;$('recordOpen').setAttribute('aria-expanded','false');$('recordOpen').focus();
 }
-
+async function setupRecorder(){
+  pause();stopAll();$('rec').hidden=false;$('start').classList.add('hide');$('recordOpen').setAttribute('aria-expanded','true');$('rec').scrollIntoView({behavior:'auto'});
+  if(recorderReady)return;
+  if(recorderLoading)return recorderLoading;
+  recorderLoading=initializeRecorder();
+  try{await recorderLoading;}finally{recorderLoading=null;}
+}
+async function initializeRecorder(){
+  const lines=allLines(),have=await idbAll(),list=$('rlist'),painters=[];
+  const busy=()=>!!recording.key||recording.saving||recording.requesting;
+  const paintAll=()=>{painters.forEach(f=>f());$('rzip').disabled=busy();$('rclear').disabled=busy();$('rcount').textContent=lines.filter(l=>have[l.key]).length+' de '+lines.length+' textos en español grabados';};
+  let lastScene=null,det=null;
+  lines.forEach(l=>{
+    if(l.scene!==lastScene){det=document.createElement('details');const sm=document.createElement('summary');sm.textContent=l.scene;det.append(sm);list.append(det);lastScene=l.scene;}
+    const row=document.createElement('div');row.className='rrow';row.dataset.key=l.key;
+    const t=document.createElement('div');t.className='rt';const phrase=document.createElement('p');phrase.textContent=l.text;const limit=document.createElement('small');limit.textContent='Tiempo disponible: '+l.maxSeconds+' s';t.append(phrase,limit);
+    const controls=document.createElement('div');controls.className='rb';const status=document.createElement('span');status.className='ok';
+    const rec=document.createElement('button'),play=document.createElement('button'),del=document.createElement('button');
+    [rec,play,del].forEach(b=>b.type='button');play.textContent='Escuchar';del.textContent='Borrar';
+    const paint=()=>{const saved=!!have[l.key],active=recording.key===l.key;status.textContent=saved?'✓ guardada':'';rec.textContent=active?'Detener':saved?'Regrabar':'Grabar';rec.disabled=busy()&&!active;play.disabled=!saved||busy();del.disabled=!saved||busy();row.classList.toggle('rec',active);};painters.push(paint);
+    rec.onclick=async()=>{
+      if(recording.key===l.key){if(recording.mr?.state==='recording')recording.mr.stop();return;}
+      if(busy())return;
+      if(!window.isSecureContext||!navigator.mediaDevices?.getUserMedia||!window.MediaRecorder){recorderStatus('Este navegador no permite grabar aquí. Abre la página en Chrome o Edge con HTTPS y permiso de micrófono.');return;}
+      recording.requesting=true;paintAll();
+      try{
+        if(!await openDb())throw new Error('storage');
+        const stream=await navigator.mediaDevices.getUserMedia({audio:true});
+        if($('rec').hidden){stream.getTracks().forEach(t=>t.stop());return;}
+        recording.stream=stream;stopPreview();
+        const mime=['audio/webm;codecs=opus','audio/mp4'].find(m=>MediaRecorder.isTypeSupported(m));
+        const mr=new MediaRecorder(stream,mime?{mimeType:mime}:{}),chunks=[];recording.mr=mr;recording.key=l.key;
+        mr.ondataavailable=e=>{if(e.data?.size)chunks.push(e.data);};
+        mr.onstop=async()=>{
+          clearTimeout(recording.timer);releaseMicrophone();recording.key=null;recording.saving=true;paintAll();
+          try{const blob=new Blob(chunks,{type:mr.mimeType||'audio/webm'});if(!blob.size)throw new Error('empty');await idbPut(l.key,blob);have[l.key]=blob;recorderStatus('Texto guardado. Al reproducir esta línea se escuchará tu voz.');}
+          catch(e){recorderStatus('No se pudo guardar este texto. Revisa el almacenamiento del navegador y vuelve a grabarlo.');}
+          finally{recording.saving=false;recording.mr=null;paintAll();}
+        };
+        mr.onerror=()=>{recorderStatus('La grabación falló. Revisa el micrófono y vuelve a intentar.');if(mr.state==='recording')mr.stop();else{releaseMicrophone();recording.key=null;paintAll();}};
+        mr.start();recording.timer=setTimeout(()=>{if(mr.state==='recording')mr.stop();},l.maxSeconds*1000);
+        recorderStatus('Grabando. Tienes hasta '+l.maxSeconds+' segundos para este texto.');
+      }catch(e){releaseMicrophone();recording.key=null;recorderStatus(e.message==='storage'?'No se puede guardar audio en este navegador. Habilita el almacenamiento local.':'No se pudo usar el micrófono. Permite el acceso y vuelve a intentar.');}
+      finally{recording.requesting=false;paintAll();}
+    };
+    play.onclick=()=>{stopPreview();recording.url=URL.createObjectURL(have[l.key]);const audio=new Audio(recording.url);recording.audio=audio;audio.onended=stopPreview;audio.onerror=()=>{stopPreview();recorderStatus('No se pudo escuchar esta grabación.');};audio.play().catch(()=>{stopPreview();recorderStatus('No se pudo escuchar esta grabación.');});};
+    del.onclick=async()=>{stopPreview();await idbDel(l.key);delete have[l.key];paintAll();recorderStatus('Grabación borrada. Esta línea volverá a usar la voz femenina disponible.');};
+    controls.append(status,rec,play,del);row.append(t,controls);det.append(row);
+  });
+  $('rzip').onclick=async()=>{
+    const selected=lines.filter(l=>have[l.key]);if(!selected.length){recorderStatus('Aún no hay textos grabados para descargar.');return;}
+    const files=[],manifest={};
+    for(const l of selected){const name=l.key+'.'+extOf(have[l.key].type);manifest[l.key]=name;files.push({name,data:new Uint8Array(await have[l.key].arrayBuffer())});}
+    files.push({name:'manifest.json',data:new TextEncoder().encode(JSON.stringify(manifest,null,1))});
+    const url=URL.createObjectURL(makeZip(files)),a=document.createElement('a');a.href=url;a.download='voz-es-'+SLUG+'.zip';document.body.append(a);a.click();a.remove();setTimeout(()=>URL.revokeObjectURL(url),60000);recorderStatus('ZIP preparado con tus grabaciones en español y el manifiesto.');
+  };
+  $('rclear').onclick=async()=>{if(!confirm('¿Borrar todas tus grabaciones en español de este navegador?'))return;stopPreview();for(const l of lines){if(have[l.key])await idbDel(l.key);delete have[l.key];}paintAll();recorderStatus('Grabaciones borradas.');};
+  paintAll();recorderReady=true;
+}
+$('recordOpen').onclick=setupRecorder;$('recordStart').onclick=setupRecorder;$('recordClose').onclick=closeRecorder;
+window.addEventListener('pagehide',()=>{clearTimeout(recording.timer);releaseMicrophone();stopPreview();});
 if(location.hash.toLowerCase()==='#grabar'){setupRecorder();}
 </script><!-- Embedded font licenses (SIL Open Font License):
 Google Inc.
