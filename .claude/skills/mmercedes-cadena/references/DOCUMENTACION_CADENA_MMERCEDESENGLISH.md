@@ -6,6 +6,8 @@ Documento técnico y de uso. Describe qué es la cadena, cómo está construida,
 
 ## 1. Resumen
 
+Estado: actualizada el 12 de octubre de 2026 con las decisiones de Mercedes del 10 y 11 de octubre (ver la sección 8).
+
 La cadena convierte una idea (una expresión, un error común, una regla, una reflexión o un contenido largo) en piezas listas para que Mercedes las publique a mano en Instagram, TikTok y Facebook. Reúne en un solo recorrido lo que antes estaba repartido entre 13 skills sueltas, ChatGPT, Grok, Google Flow y un calendario en Notion.
 
 El recorrido tiene 7 etapas y 3 puertas de calidad:
@@ -58,11 +60,11 @@ Un análisis previo del trabajo de Mercedes encontró estos huecos:
 |---|---|
 | `mmercedes-generador-posts` | Reescrita. Script portátil `mm_posts.py` con fuentes incluidas, 4 subcomandos, avatar opcional y validación anti-cascada |
 | `mmercedes-broll-overlay` | Reescrita. Usa el subcomando `broll` del generador y ya no depende de rutas de sesión |
-| `mmercedes-colores` | Tabla de selección del CTA por tema, CTA retirados, nivel dinámico |
-| `mmercedes-prompt-ia` | CTA al link en bio, nivel dinámico, regla de gafas y prop, instrucción anti-cascada, plantillas nuevas de Saturday English e Inglés básico |
-| `mmercedes-brand` | Fuente del avatar, gafas y props variables, resaltador verde con "MMercedesEnglish", CTA |
-| `mmercedes-prompt-animacion` | Gafas iguales a la imagen de referencia |
-| `mmercedes-revisor` | Props, gafas y nivel dinámico |
+| `mmercedes-colores` | Se adoptó la versión de la cuenta (10 y 11 de octubre): CTA que viene del handoff editorial, regla de omitir X y check en diferencias de naturalidad |
+| `mmercedes-prompt-ia` | Se adoptó la versión de la cuenta: ruta de compatibilidad que no regenera a Mercedes ni reemplaza una plantilla por código, más `references/prompts-que-funcionan.md`. Las plantillas de ChatGPT se retiraron |
+| `mmercedes-brand` | Producción por código, gafas rectangulares burdeos/rojas o negras, mano izquierda, pointer, resaltador verde con "MMercedesEnglish", CTA de la ficha |
+| `mmercedes-prompt-animacion` | Gafas rectangulares iguales a la referencia, prop en la mano izquierda, CTA de la ficha |
+| `mmercedes-revisor` | Props, gafas, nivel dinámico y corrección por contenido en vez de prompt para ChatGPT |
 
 ### 4.3 Skills que se reutilizan y siguen en la cuenta de Mercedes
 
@@ -106,7 +108,8 @@ Puerta 1, verificación lingüística:
 | Formato | Quién lo produce |
 |---|---|
 | ¿Cómo se dice?, No digas... Di..., Inglés básico, overlay de B-roll | Script `mm_posts.py` (Pillow) |
-| Los mismos formatos con avatar, Saturday English, VERB ALERT, B-roll de verbos | Plantillas de `mmercedes-prompt-ia` o `mmercedes-irregular-verbs`, ejecutadas en ChatGPT |
+| Saturday English y VERB ALERT | Pendientes de renderer por código (`mmercedes-generador-posts/references/especificaciones-series.md`). Sin IA externa |
+| B-roll de verbos irregulares | `mmercedes-irregular-verbs` (ver el punto 30 de `conflictos.md`) |
 | B-roll de texto | `mmercedes-broll-texto` |
 | Microclase | `edicion-microclase-pptx-interactiva` |
 
@@ -122,7 +125,7 @@ Puerta 1, verificación lingüística:
 
 Coordina `mmercedes-revisor` (imágenes) y `mmercedes-evaluador-slides` (láminas), y añade video y copy.
 - **Video:** con ffmpeg se extrae un fotograma por segundo. Se comprueba que las gafas coincidan con la referencia, el rostro sin distorsión, la boca sincronizada, las manos sin errores, el texto legible, el formato y la ausencia de marca de agua.
-- **Copy:** español neutro con tú, signos ¿? ¡!, sin precios, hashtags fijos, sin audio sugerido en TikTok y CTA al link en bio.
+- **Copy:** español neutro con tú, signos ¿? ¡!, sin precios, hashtags por plataforma (máximo 5 en Instagram, 5 en TikTok y 8 en Facebook), sin audio sugerido en TikTok y CTA específico de la lección con dirección al link en bio.
 - **Bloqueos:** gafas que no coinciden con la referencia, bob corto, estilo ilustrado en el avatar real, más de 3 bloques en cascada, Tip sobre otro tema, texto del marcador distinto de "MMercedesEnglish", colores fuera de paleta, imagen cuadrada, inglés incorrecto o sin fuente, avatar tapando contenido e imagen en cascada.
 - **Salida:** semáforo APROBADO, CORREGIR o BLOQUEADO, campo "Alerta de marca" y lista de lo no verificado.
 
@@ -130,8 +133,8 @@ Coordina `mmercedes-revisor` (imágenes) y `mmercedes-evaluador-slides` (lámina
 
 - Instagram siempre nativo (nunca Meta Business Suite) y TikTok con audio trending añadido en la app, nunca sugerido.
 - Copy: Instagram, caption breve de 1 a 3 frases; TikTok, 1 a 2 líneas; Facebook, 3 a 6 líneas.
-- CTA siempre al link en bio, elegido por tema.
-- Hashtags fijos: #MMercedesEnglish #NoDigasDi #AprendeIngles #InglesParaLatinos #EnglishTips #LearnEnglish.
+- El CTA viene de la ficha: acción concreta sobre la lección y dirección al link en bio. Puede pedir comentar solo si es específico del post.
+- Hashtags por plataforma: máximo 5 en Instagram, 5 en TikTok y 8 en Facebook. Siempre #MMercedesEnglish y #TinyTipsBigProgress, más el de la serie si existe.
 - Horarios: sin datos de analíticas son hipótesis, marcadas como tales.
 - Checklist por plataforma que incluye verificar la etiqueta de contenido generado con IA, cuya política cambia con frecuencia.
 - Fila de la base "Calendario Editorial" de Notion con los campos Pieza, Tipo de contenido, Plataforma, Fecha, Horario sugerido, tres campos de copy, Estado, Alerta de marca y Notas. El estado pasa a Publicado solo cuando Mercedes confirma.
@@ -153,7 +156,7 @@ Archivo: `.claude/skills/mmercedes-generador-posts/assets/mm_posts.py`. Requiere
 | `ingles-basico` | Inglés básico | `titulo_1`, `titulo_2`, `subtitulo`, `columnas` (2 o 3), `tip` |
 | `broll` | Overlay de B-roll (reconstruido, pendiente de aprobación) | `hook`, `expresion`, `reveal_no`, `reveal_si`, `subtitulo`, `ejemplos`, `tip`, `serie` |
 
-Campos comunes: `nivel` (Beginner o Intermediate, obligatorio), `tema`, `salida`, y opcionales `cta`, `cta_categoria` y `falso_cognado`. En Inglés básico, `*texto*` pone negrita y `\n` fuerza un salto de línea.
+Campos comunes: `nivel` (Beginner o Intermediate, obligatorio), `cta` (obligatorio, dos líneas, lo trae la ficha), `salida`. En `no-digas`, `modo` (`error` o `naturalidad`) y, en naturalidad, `etiqueta_mal`, `etiqueta_bien`, `titulo_1` y `titulo_2` opcionales. En Inglés básico, `*texto*` pone negrita y `\n` fuerza un salto de línea.
 
 ### 6.2 Comandos
 
@@ -168,14 +171,14 @@ python3 mm_posts.py --listar-avatares
 |---|---|
 | Paleta | Constantes con los hex oficiales. Ningún color fuera de la paleta |
 | Nivel | Debe ser Beginner o Intermediate. La pastilla del header lo muestra |
-| CTA | Debe mencionar el link en bio. Rechaza "Cuéntame en comentarios", "¿Lo conocías?" y variantes |
+| CTA | Obligatorio. Debe mencionar el link en bio y no ser genérico ("Cuéntame en comentarios", "¿Lo conocías?", "¿Cuál usas tú?", "Sígueme para más"). Si pide comentar, avisa para confirmar que es específico |
 | Anti-cascada | Todos los bloques con el mismo margen izquierdo y ancho de columna, sin superposición, y ningún bloque bajo el avatar |
 | Espacio | Si el contenido no cabe, se detiene y pide acortar. Los textos largos reducen solo su tipografía |
 | Avatar | PNG con transparencia obligatoria. Escala con un solo factor, sin estirar. Sangra por el borde derecho sin degradado |
 
 ### 6.4 CTA
 
-Seis categorías: vocabulario, errores, falsos cognados, gramática, verbos y universales. La serie define la categoría (¿Cómo se dice? usa vocabulario, No digas usa errores, Inglés básico usa gramática y el overlay usa universales). Dentro de la categoría el CTA se elige por una función reproducible del tema, así que el mismo tema siempre da el mismo CTA.
+El script ya no elige el CTA ni usa un banco de frases. Decisión de Mercedes (10 de octubre de 2026): el copy completo viene de la ficha (handoff editorial). Si falta, el script se detiene y el campo queda pendiente.
 
 ### 6.5 Avatares
 
@@ -190,8 +193,8 @@ Cada versión del master (cada prop o par de gafas) es un PNG en `assets/avatar/
 | Formato | 1080×1920, vertical 9:16 |
 | Nivel | Pastilla dinámica Beginner o Intermediate |
 | Idioma | Tip Mercedes y CTA en español |
-| CTA | Siempre al link en bio, según el tema |
-| Avatar | Fotografía realista. Gafas idénticas a la referencia. Un solo prop del set aprobado. Si es resaltador o marcador, dice exactamente "MMercedesEnglish" |
+| CTA | Lo trae la ficha: acción concreta sobre la lección y dirección al link en bio. Puede pedir comentar solo si es específico del post |
+| Avatar | Fotografía real compuesta por código, nunca generada por IA. Gafas rectangulares burdeos/rojas o negras (nunca cat-eye ni redondas), iguales a la referencia. Prop en la mano izquierda en poses nuevas (es zurda). Un solo prop del set aprobado. Si es resaltador o marcador, dice exactamente "MMercedesEnglish" |
 | Mechita | Personaje 2D con sus propias reglas. No se mezcla con el avatar |
 | Cascada | Prohibida |
 | Publicación | Manual y nativa, sin precios |
@@ -200,8 +203,8 @@ Cada versión del master (cada prop o par de gafas) es un PNG en `assets/avatar/
 
 Resueltas:
 1. Pastilla de nivel dinámica.
-2. CTA siempre al link en bio, elegido por tema. Se retiran los CTA de comentarios.
-3. Se usa el avatar master fotográfico. El prop y las gafas pueden variar dentro de lo aprobado.
+2. CTA específico de la lección, que trae la ficha, con dirección al link en bio. Puede pedir comentar solo si es lógico y específico (decisión del 10 de octubre de 2026).
+3. Se usa el avatar master fotográfico, compuesto por código. Ningún modelo de imágenes dibuja el post ni genera el avatar. Gafas rectangulares burdeos/rojas o negras y prop en la mano izquierda en poses nuevas.
 4. El texto del resaltador verde es "MMercedesEnglish".
 5. Saturday English con franjas blancas con borde gris y badge MM (versión B tras comparar).
 6. Se acepta el cabello del master actual.
@@ -214,9 +217,9 @@ Todas están en `references/conflictos.md`, con su valor por defecto. Resumen:
 
 | Estado | Puntos |
 |---|---|
-| Resueltos | Nivel, CTA, avatar en Pillow, deriva de colores, rutas, cascada, Saturday English, gafas, texto del resaltador, prop variable |
-| Abiertos con valor por defecto | Usos de rojo y verde, tres tipos de B-roll, palabras por duración, base duplicada en Notion, texto generado en videos de Mechita, hashtag #NoDigasDi en otras series, pieza Fun vs Funny |
-| Pendientes | Qué avatar llevan las microclases, y si Fun vs Funny es una serie fija |
+| Resueltos | Nivel, CTA, hashtags por plataforma, avatar por código, gafas, mano izquierda en poses nuevas, variante de naturalidad, deriva de colores, rutas, cascada, Saturday English (diseño), texto del resaltador, prop variable |
+| Abiertos con valor por defecto | Usos de rojo y verde, tres tipos de B-roll, palabras por duración, base duplicada en Notion, texto generado en videos de Mechita, pieza Fun vs Funny |
+| Pendientes | Qué avatar llevan las microclases, si el master actual se regenera por la regla de mano izquierda, renderer por código de Saturday English y VERB ALERT, el texto dentro de las imágenes de verbos irregulares, los colores de las láminas Basic, y la integración con el renderer y el handoff del otro sistema |
 
 ## 10. Estructura de archivos
 
@@ -252,12 +255,14 @@ Todas están en `references/conflictos.md`, con su valor por defecto. Resumen:
 
 ## 12. Pruebas y verificación
 
-Realizadas durante la construcción:
+Realizadas durante la construcción y en la actualización del 12 de octubre de 2026:
 - Render de las cuatro series con ejemplos reales y revisión visual de cada PNG.
 - Prueba de la guardia anti-cascada con bloques desalineados simulados: bloquea y explica el error.
 - Composición del avatar master recortado en ¿Cómo se dice? y No digas... Di..., sin tapar bloques.
 - Prueba de selección entre varios avatares y de la lista.
 - Descompresión del zip en una carpeta limpia y ejecución del script desde ahí.
+- Pruebas del CTA: el script se detiene sin CTA, con CTA genérico y sin dirección al link en bio, y acepta un CTA específico que pide comentar (con aviso).
+- Render de No digas... Di... en modo error y en modo naturalidad.
 - Recorte del avatar con revisión del borde sobre fondo navy.
 - Comparación visual de Saturday English entre la pieza original y la versión en paleta.
 
@@ -274,7 +279,7 @@ No verificado:
 - Las microclases siguen con una ilustración como avatar.
 - La pieza Fun vs Funny conserva reglas anteriores y no tiene plantilla.
 - Los horarios de publicación son hipótesis hasta tener analíticas.
-- El manual para ChatGPT se generó con un script de apoyo que no quedó en el repositorio. Si cambia una skill, hay que regenerar el manual.
+- El manual para ChatGPT se genera con `mmercedes-cadena/scripts/construir_manual.py`. Si cambia una skill, hay que volver a ejecutarlo.
 
 ## 14. Mantenimiento
 

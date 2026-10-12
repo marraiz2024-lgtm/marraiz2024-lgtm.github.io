@@ -1,15 +1,32 @@
 {
+  "modo": "error",
   "nivel": "Beginner",
-  "tema": "doubt question",
-  "frase_mal": ["I have", "a doubt."],
-  "frase_bien": ["I have", "a question."],
+  "tema": "i am agree",
+  "frase_mal": [
+    "I am",
+    "agree."
+  ],
+  "frase_bien": [
+    "I",
+    "agree."
+  ],
   "ejemplos": [
-    ["I have a doubt\nabout this.", "I have a question\nabout this."],
-    ["Can you explain\nmy doubt?", "Can you answer\nmy question?"]
+    [
+      "I am agree\nwith you.",
+      "I agree\nwith you."
+    ],
+    [
+      "She is agree\nwith me.",
+      "She agrees\nwith me."
+    ]
   ],
   "tip": [
-    "'Doubt' en inglés expresa duda o desconfianza. Para preguntar algo, lo más natural es:",
-    "**'I have a question.'"
+    "'Agree' ya es un verbo, por eso no lleva 'am', 'is' ni 'are'.",
+    "**Se dice: 'I agree.'"
+  ],
+  "cta": [
+    "Completa en comentarios: I agree with ___",
+    "Más correcciones en el link de mi bio."
   ],
   "salida": "ejemplo_no_digas.png"
 }

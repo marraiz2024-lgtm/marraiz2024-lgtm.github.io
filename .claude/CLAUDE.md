@@ -19,28 +19,29 @@ Para cualquier tarea de contenido (posts, B-roll, videos, microclases, publicaci
 La cadena tiene 7 etapas: triage, ficha (puerta 1: inglés), producción visual, video con IA, revisión (puerta 2: marca), publicación (puerta 3: plataforma) y medición. Una pieza no pasa a la etapa siguiente si su puerta no está en verde.
 
 Manual completo para otras IA: `.claude/skills/mmercedes-cadena/references/MANUAL_CADENA_MMERCEDESENGLISH.md`.
-Contradicciones y decisiones: `.claude/skills/mmercedes-cadena/references/conflictos.md`. Léelo al inicio de cada sesión.
+Contradicciones y decisiones: `.claude/skills/mmercedes-cadena/references/conflictos.md`. Léelo al inicio de cada sesión. Si Mercedes decide algo nuevo, la decisión más reciente gana y se registra con fecha.
 
 ## Reglas que nunca se rompen
 
 1. Paleta única: Navy #0D1B3E, Amarillo #FFD23F, Crema #FFFBF0, Blanco #FFFFFF. Rojo #CD2823 y Verde #1E9650 solo en X, check, etiquetas y pastilla de serie, nunca como fondo de panel. Amarillo pálido #FFFBCC solo en el Tip Mercedes, Dorado #BE9100 solo en su label, Gris #E6E6EB en bordes. Sin gradientes ni texturas.
 2. Tipografía: BigShoulders-Bold (títulos), WorkSans (cuerpo), Lora Italic (hooks), NothingYouCouldDo solo en "Tip Mercedes:". Nunca Poppins ni Nunito.
 3. Posts de redes: 1080×1920, vertical 9:16.
+3b. Los posts se componen por código (texto y plantilla) con la foto real del avatar. Ningún modelo de imágenes dibuja el post completo ni genera, repara o estiliza el avatar.
 4. Nunca en cascada: todos los bloques con el mismo margen izquierdo y ancho de columna, sin escalones, rotación ni superposición, y ningún bloque detrás del avatar.
 5. Pastilla de nivel dinámica ("Beginner English Tips" o "Intermediate English Tips"), nunca fija.
-6. Tip Mercedes y CTA siempre en español. El CTA siempre dirige al link en bio y se elige según el tema. Prohibidos "Cuéntame en comentarios", "¿Lo conocías?" y "¿La conocías?".
-7. Avatar: fotografía realista de Mercedes, nunca ilustración. Gafas idénticas a la imagen de referencia y estables dentro de la pieza (ella tiene varios armazones). Un solo prop del set aprobado por pieza. Si el prop es resaltador o marcador, su texto es exactamente "MMercedesEnglish".
+6. Tip Mercedes siempre en español. El CTA lo trae la ficha (handoff editorial): primera línea con una acción concreta sobre lo aprendido, segunda línea que dirige al link en bio. Puede pedir comentar solo si es lógico y específico del post. Genéricos prohibidos: "Cuéntame en comentarios", "¿Lo conocías?", "¿La conocías?", "¿Cuál usas tú?", "Sígueme para más". Si falta, queda pendiente y vuelve a Mercedes.
+7. Avatar: fotografía realista de Mercedes, nunca ilustración y nunca generada por IA. Gafas rectangulares, burdeos/rojas o negras (nunca cat-eye ni redondas), iguales a la imagen de referencia y estables dentro de la pieza. Mercedes es zurda: en poses nuevas el prop va en la mano izquierda. Un solo prop del set aprobado por pieza (incluye el pointer de manito). Si el prop es resaltador o marcador, su texto es exactamente "MMercedesEnglish".
 8. Mechita es un personaje 2D distinto del avatar. No mezcles sus reglas.
 9. "MMercedesEnglish" siempre junto y con esa ortografía.
 10. Nunca precios ni métodos de pago en feed ni stories.
 11. La publicación es siempre manual y nativa. Nunca Meta Business Suite ni programadores. En TikTok el audio trending se añade dentro de la app y nunca se sugiere.
-12. Hashtags fijos: #MMercedesEnglish #NoDigasDi #AprendeIngles #InglesParaLatinos #EnglishTips #LearnEnglish.
+12. Hashtags: máximo 5 en Instagram, 5 en TikTok y 8 en Facebook. Siempre #MMercedesEnglish y #TinyTipsBigProgress, más el de la serie si existe (#NoDigasDi en No digas... Di...).
 13. Si una pieza rompe el sistema de marca, márcala como "Alerta de marca" antes de publicar.
 
 ## Dónde está cada cosa
 
 - Skills de la cadena: `.claude/skills/`. Las skills de la cuenta de Mercedes en claude.ai son las que se cargan en sus chats. Estas copias son la fuente, y ella las sube.
-- Generador de posts: `.claude/skills/mmercedes-generador-posts/assets/mm_posts.py` (series ¿Cómo se dice?, No digas... Di..., Inglés básico y B-roll). Valida paleta, nivel, CTA y cascada.
+- Generador de posts: `.claude/skills/mmercedes-generador-posts/assets/mm_posts.py` (series ¿Cómo se dice?, No digas... Di... en modo error o naturalidad, Inglés básico y B-roll). Valida paleta, nivel, CTA y cascada. Saturday English y VERB ALERT esperan un renderer: ver `references/especificaciones-series.md`.
 - La foto del avatar nunca se sube a este repositorio, que es público. Vive dentro de la skill en la cuenta de Mercedes (`assets/avatar/`), y el archivo `.gitignore` de `.claude/skills` la excluye.
 - Calendario editorial: base de Notion "Calendario Editorial" (`a183e8c5-2108-47f1-8ebc-2475603bd675`).
 

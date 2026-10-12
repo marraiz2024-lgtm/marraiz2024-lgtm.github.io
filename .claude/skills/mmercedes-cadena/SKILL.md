@@ -44,7 +44,6 @@ Si Mercedes escribe "ideología", entiéndelo como la idea o mensaje de fondo de
 | Formato | Skill que lo produce | Quién ejecuta |
 |---|---|---|
 | Post ¿Cómo se dice? o No digas... Di... en PNG | `mmercedes-generador-posts` | Claude genera el PNG |
-| Mismo post con avatar y prop vía ChatGPT o Gemini | `mmercedes-prompt-ia` | Mercedes pega el prompt |
 | Corregir colores o CTA | `mmercedes-colores` | Claude |
 | B-roll de texto (solo copy) | `mmercedes-broll-texto` | Claude |
 | B-roll overlay PNG | `mmercedes-broll-overlay` | Claude |
@@ -63,10 +62,10 @@ Antes de producir cualquier pieza visual carga `mmercedes-brand`.
 3. Produce solo los formatos que pidió. Los demás se mencionan en una línea como opción, sin generarlos.
 4. Máximo 3 formatos por idea. Más que eso es duplicar trabajo.
 5. El avatar (fotografía realista de Mercedes) y Mechita (personaje 2D) son dos identidades distintas con reglas distintas. Nunca apliques las reglas de una a la otra. Ver `references/conflictos.md`, punto 4.
-6. Claude no puede generar dentro de ChatGPT, Gemini, Grok, Flow, HeyGen, D-ID ni CapCut. Entrega el prompt y la lista de verificación, y Mercedes ejecuta y devuelve el resultado para revisarlo.
+6. Los posts se componen por código (script de Pillow) con la foto real del avatar. Ningún modelo de imágenes (ChatGPT, Gemini u otro) dibuja el post completo ni genera o repara el avatar (decisión de Mercedes, 10 de octubre de 2026). Claude tampoco puede generar dentro de Grok, Flow, HeyGen, D-ID ni CapCut: entrega el prompt y la lista de verificación, y Mercedes ejecuta y devuelve el resultado.
 7. La publicación es siempre manual y nativa en cada app. Nunca propongas programadores externos ni Meta Business Suite.
 8. Nunca precios ni métodos de pago en feed ni stories.
-9. Ninguna imagen puede salir en cascada (bloques escalonados, con distinto margen o ancho, rotados o superpuestos). El script de Pillow lo valida solo. En imágenes de ChatGPT o Gemini se revisa a ojo en `mmercedes-qa`.
+9. Ninguna imagen puede salir en cascada (bloques escalonados, con distinto margen o ancho, rotados o superpuestos). El script de Pillow lo valida solo. Cualquier otra imagen se revisa a ojo en `mmercedes-qa`.
 10. Si algo rompe el sistema de marca, márcalo antes de pasar a publicación. Se registra como Alerta de marca.
 11. Subir un archivo al repositorio no lo publica. Dilo cada vez que ocurra.
 

@@ -25,5 +25,9 @@
   "tip": [
     "Lo que importa es el *sonido* inicial, no la letra. Por eso se dice *an hour* (la h no se pronuncia) y *a university* (suena como \"yu\")."
   ],
-  "salida": "ejemplo_a_an.png"
+  "salida": "ejemplo_a_an.png",
+  "cta": [
+    "Di en voz alta: an hour, a university.",
+    "Más reglas básicas en el link de mi bio."
+  ]
 }

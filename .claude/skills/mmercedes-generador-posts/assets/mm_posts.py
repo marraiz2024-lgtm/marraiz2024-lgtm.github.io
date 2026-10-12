@@ -22,7 +22,6 @@ import json
 import math
 import os
 import sys
-import zlib
 from pathlib import Path
 
 from PIL import Image, ImageDraw, ImageFont
@@ -45,72 +44,41 @@ P = 52
 
 NIVELES = {"beginner": "Beginner English Tips", "intermediate": "Intermediate English Tips"}
 
-# ── BANCO DE CTAs (mmercedes-colores). Todos dirigen al link en bio ──
-CTA_BANK = {
-    "vocabulario": [
-        ("¿Quieres aprender más expresiones como esta?", "Revisa el link en mi bio."),
-        ("¿Lista para hablar inglés con más confianza?", "Todo lo que necesitas está en mi bio."),
-        ("¿Te gustó este tip? Hay más donde este vino.", "Encuéntralos en el link de mi bio."),
-    ],
-    "errores": [
-        ("¿Quieres dejar de cometer estos errores?", "Tengo más recursos para ti en mi bio."),
-        ("¿Listo para hablar inglés sin estos errores?", "Empieza hoy: link en mi bio."),
-        ("¿Cuántos de estos errores cometías tú?", "Aprende más en el link de mi bio."),
-    ],
-    "falsos_cognados": [
-        ("¿Cuántos falsos cognados conoces?", "Descubre más en el link de mi bio."),
-        ("El inglés está lleno de trampas como esta.", "Evítalas todas: link en mi bio."),
-        ("¿Quieres dominar el inglés real?", "Da el primer paso: link en mi bio."),
-    ],
-    "gramatica": [
-        ("¿Quieres más tips como este?", "Revisa el link en mi bio."),
-        ("Para seguir aprendiendo inglés sin confusiones,", "revisa el link en mi bio."),
-        ("Si quieres hablar inglés con más seguridad,", "todo está en el link de mi bio."),
-    ],
-    "verbos": [
-        ("¿Quieres dominar los verbos irregulares en inglés?", "Link en mi bio."),
-        ("Para más práctica con verbos en inglés,", "revisa el link en mi bio."),
-        ("¿Lista para no volver a confundirte con los verbos?", "Link en mi bio."),
-    ],
-    "universal": [
-        ("Para más contenido como este,", "revisa el link en mi bio."),
-        ("Si quieres seguir aprendiendo inglés,", "todo está en mi bio."),
-        ("¿Lista para llevar tu inglés al siguiente nivel?", "Link en mi bio."),
-        ("Más tips, más práctica, más confianza.", "Todo en el link de mi bio."),
-    ],
-}
-
-# Qué categoría del banco corresponde a cada serie (criterio: el CTA habla del
-# mismo tema que la pieza)
-SERIE_CTA = {
-    "como-se-dice": "vocabulario",
-    "no-digas": "errores",
-    "broll": "universal",
-    "ingles-basico": "gramatica",
-}
-
-# Frases de CTA retiradas por decisión de Mercedes (nunca deben aparecer)
-CTA_PROHIBIDO = ("comentarios", "cuéntame", "cuentame", "conocías", "conocias", "conocías?")
+# ── CTA ──
+# Decisión de Mercedes (10 de octubre de 2026): el copy completo del CTA viene de la ficha
+# (handoff editorial) y no se inventa aquí. Primera línea: acción concreta sobre lo aprendido.
+# Segunda línea: dirige al link en bio. Puede pedir comentar solo si es lógico y específico
+# del post (por ejemplo, completar "I agree with ___" en un post sobre "agree").
+CTA_GENERICOS = (
+    "cuentame en comentarios", "lo conocias", "la conocias", "cual usas tu",
+    "sigueme para mas", "dime en comentarios", "comenta abajo",
+)
 
 
-def _stable_index(seed, n):
-    """Índice reproducible: el mismo tema elige siempre el mismo CTA."""
-    return zlib.crc32(seed.encode("utf-8")) % n
+def _norm(t):
+    import unicodedata
+    t = unicodedata.normalize("NFKD", str(t).lower())
+    t = "".join(ch for ch in t if not unicodedata.combining(ch))
+    return "".join(ch for ch in t if ch.isalnum() or ch == " ").strip()
 
 
-def pick_cta(serie, tema="", categoria=None, override=None):
-    """Devuelve (linea1, linea2). override tiene prioridad si es válido."""
-    if override and len(override) == 2:
-        l1, l2 = override
-    else:
-        cat = categoria or SERIE_CTA.get(serie, "universal")
-        bank = CTA_BANK[cat]
-        l1, l2 = bank[_stable_index(f"{serie}|{tema}", len(bank))]
-    joined = f"{l1} {l2}".lower()
-    if any(bad in joined for bad in CTA_PROHIBIDO):
-        raise ValueError(f"CTA no permitido (comentarios o '¿Lo conocías?'): {l1} / {l2}")
+def resolver_cta(c):
+    """Devuelve (linea1, linea2) desde c['cta']. Si falta o es genérico, se detiene."""
+    cta = c.get("cta")
+    if not cta or len(cta) != 2 or not all(str(x).strip() for x in cta):
+        raise SystemExit(
+            "CTA pendiente: la ficha debe traer 'cta' con 2 líneas (acción concreta sobre la lección y "
+            "dirección al link en bio). El script no lo inventa. Devuélvelo a la autoridad editorial."
+        )
+    l1, l2 = (str(x).strip() for x in cta)
+    joined = _norm(f"{l1} {l2}")
+    for g in CTA_GENERICOS:
+        if g in joined:
+            raise SystemExit(f"CTA genérico no permitido ('{g}'). Debe ser específico de esta lección: {l1} / {l2}")
     if "bio" not in joined:
-        raise ValueError(f"El CTA debe dirigir al link en bio: {l1} / {l2}")
+        raise SystemExit(f"El CTA debe dirigir al link en bio: {l1} / {l2}")
+    if "coment" in joined:
+        print("Aviso: el CTA pide comentar. Confirma que es lógico y específico de este post.", file=sys.stderr)
     return l1, l2
 
 
@@ -523,7 +491,7 @@ def como_se_dice(c, avatar=None):
     y += TABLE_H + 20
 
     y = tip_block(d, y, c["tip"], step=24, base_h=180)
-    l1, l2 = pick_cta("como-se-dice", c.get("tema", c["expresion_en"]), c.get("cta_categoria"), c.get("cta"))
+    l1, l2 = resolver_cta(c)
     y = cta_block(d, y, l1, l2)
     if y > H - 110:
         raise SystemExit(f"El contenido no cabe (termina en y={y}). Acorta el texto o reduce ejemplos.")
@@ -536,6 +504,12 @@ def como_se_dice(c, avatar=None):
 def no_digas(c, avatar=None):
     _BLOCKS.clear()
     nivel = nivel_key(c)
+    # modo "error": X roja y check verde (error genuino). modo "naturalidad": diferencia de
+    # naturalidad, registro, contexto o variante válida. Se omiten X y check (decisión de Mercedes).
+    modo = c.get("modo", "error")
+    if modo not in ("error", "naturalidad"):
+        raise SystemExit("modo debe ser 'error' o 'naturalidad'")
+    nat = modo == "naturalidad"
     img = Image.new("RGB", (W, H), CREAM)
     d = ImageDraw.Draw(img)
     header(d, nivel, "No digas... Di...")
@@ -548,7 +522,7 @@ def no_digas(c, avatar=None):
 
     y = 116
     fTIT = F(BS, 88)
-    t1, t2 = "NO DIGAS...", "DI"
+    t1, t2 = (c.get("titulo_1", "EN VEZ DE..."), c.get("titulo_2", "DI")) if nat else ("NO DIGAS...", "DI")
     while tw(d, t1, fTIT) + 24 + tw(d, t2, fTIT) > col_r - col_l - 100 and fTIT.size > 40:
         fTIT = F(BS, fTIT.size - 4)
     t1w, t2w = tw(d, t1, fTIT), tw(d, t2, fTIT)
@@ -571,7 +545,16 @@ def no_digas(c, avatar=None):
         rr(d, [xl, y1, xr, y2], 14, fill=WHITE, outline=GRAY_L if is_no else YELLOW, width=1 if is_no else 2)
         reg("zona" if avatar is not None else "card", "zona-no-digas" if is_no else "zona-di", xl, y1, xr, y2)
         cx = (xl + xr) // 2
-        if is_no:
+        if nat:
+            fLBL = F(WSB, 20)
+            lw = tw(d, label, fLBL) + 28
+            if is_no:
+                rr(d, [xl + 16, y1 + 16, xl + 16 + lw, y1 + 54], 8, fill=NAVY)
+                d.text((xl + 30, y1 + 22), label, font=fLBL, fill=WHITE)
+            else:
+                rr(d, [xl + 16, y1 + 16, xl + 16 + lw, y1 + 54], 8, fill=NAVY, outline=YELLOW, width=2)
+                d.text((xl + 30, y1 + 22), label, font=fLBL, fill=YELLOW)
+        elif is_no:
             d.ellipse([xl + 16, y1 + 16, xl + 60, y1 + 60], fill=RED_C)
             xmark(d, xl + 38, y1 + 38, 10, WHITE, 3)
             fLBL = F(WSB, 18)
@@ -594,10 +577,11 @@ def no_digas(c, avatar=None):
         return y2, xl, xr
 
     ND_Y1 = y
-    ND_Y2, xl, xr = phrase_zone(ND_Y1, c["frase_mal"], "NO DIGAS:", True)
-    TACH_Y = ND_Y2 - 18
-    d.line([(xl + 16, TACH_Y), (xr - 16, TACH_Y)], fill=RED_C, width=4)
-    xmark(d, (xl + xr) // 2, TACH_Y, 8, RED_C, 3)
+    ND_Y2, xl, xr = phrase_zone(ND_Y1, c["frase_mal"], c.get("etiqueta_mal", "COMÚN:") if nat else "NO DIGAS:", True)
+    if not nat:
+        TACH_Y = ND_Y2 - 18
+        d.line([(xl + 16, TACH_Y), (xr - 16, TACH_Y)], fill=RED_C, width=4)
+        xmark(d, (xl + xr) // 2, TACH_Y, 8, RED_C, 3)
     y = ND_Y2 + 16
 
     ARR_CX = col_cx
@@ -606,7 +590,7 @@ def no_digas(c, avatar=None):
     y += 64
 
     DI_Y1 = y
-    DI_Y2, _, _ = phrase_zone(DI_Y1, c["frase_bien"], "DI:", False)
+    DI_Y2, _, _ = phrase_zone(DI_Y1, c["frase_bien"], c.get("etiqueta_bien", "MÁS NATURAL:") if nat else "DI:", False)
     d.rectangle([xl + 16, DI_Y2 - 14, xr - 16, DI_Y2 - 8], fill=YELLOW)
 
     if avatar is not None:
@@ -628,22 +612,27 @@ def no_digas(c, avatar=None):
     d.line([(COL, y + 8), (COL, y + TABLE_H - 8)], fill=GRAY_L, width=1)
     ry = y + 16
     for i, (mal, bien) in enumerate(ex):
-        d.ellipse([P + 16, ry + 4, P + 40, ry + 28], fill=RED_C)
-        xmark(d, P + 28, ry + 16, 6, WHITE, 2)
-        for j, ln in enumerate(wrap(d, mal, fENB, COL - P - 70)):
-            d.text((P + 50, ry + j * 20), ln, font=fENB, fill=RED_C)
-        d.ellipse([COL + 16, ry + 4, COL + 40, ry + 28], fill=GREEN_C)
-        check(d, COL + 28, ry + 16, 8, WHITE, 2)
-        for j, ln in enumerate(wrap(d, bien, fENB, W - P - COL - 70)):
-            d.text((COL + 50, ry + j * 20), ln, font=fENB, fill=GREEN_C)
+        if nat:
+            for j, ln in enumerate(wrap(d, mal, fENB, COL - P - 50)):
+                d.text((P + 24, ry + j * 20), ln, font=fENB, fill=NAVY)
+            for j, ln in enumerate(wrap(d, bien, fENB, W - P - COL - 50)):
+                d.text((COL + 24, ry + j * 20), ln, font=fENB, fill=NAVY)
+        else:
+            d.ellipse([P + 16, ry + 4, P + 40, ry + 28], fill=RED_C)
+            xmark(d, P + 28, ry + 16, 6, WHITE, 2)
+            for j, ln in enumerate(wrap(d, mal, fENB, COL - P - 70)):
+                d.text((P + 50, ry + j * 20), ln, font=fENB, fill=RED_C)
+            d.ellipse([COL + 16, ry + 4, COL + 40, ry + 28], fill=GREEN_C)
+            check(d, COL + 28, ry + 16, 8, WHITE, 2)
+            for j, ln in enumerate(wrap(d, bien, fENB, W - P - COL - 70)):
+                d.text((COL + 50, ry + j * 20), ln, font=fENB, fill=GREEN_C)
         ry += 110
         if i < len(ex) - 1:
             d.line([(P + 8, ry - 8), (W - P - 8, ry - 8)], fill=GRAY_L, width=1)
     y += TABLE_H + 20
 
     y = tip_block(d, y, c["tip"], step=26, base_h=190)
-    l1, l2 = pick_cta("no-digas", c.get("tema", " ".join(c["frase_bien"]) if isinstance(c["frase_bien"], list) else c["frase_bien"]),
-                      "falsos_cognados" if c.get("falso_cognado") else c.get("cta_categoria"), c.get("cta"))
+    l1, l2 = resolver_cta(c)
     y = cta_block(d, y, l1, l2)
     if y > H - 110:
         raise SystemExit(f"El contenido no cabe (termina en y={y}). Acorta el texto o reduce ejemplos.")
@@ -711,7 +700,7 @@ def broll(c, avatar=None):
     y += TABLE_H + 20
 
     y = tip_block(d, y, c["tip"], step=24, base_h=120)
-    l1, l2 = pick_cta("broll", c.get("tema", c["expresion"]), c.get("cta_categoria"), c.get("cta"))
+    l1, l2 = resolver_cta(c)
     y = cta_block(d, y, l1, l2)
     if y > H - 110:
         raise SystemExit(f"El contenido no cabe (termina en y={y}).")
@@ -862,7 +851,7 @@ def _tres(c, extra):
     draw_rich(d, P + lab_w + 76, y + (tip_h - len(tl) * 42) // 2, tl, fT, fTB, NAVY, 42)
     y += tip_h + 24 + extra
 
-    l1, l2 = pick_cta("ingles-basico", c.get("tema", c["titulo_2"]), c.get("cta_categoria"), c.get("cta"))
+    l1, l2 = resolver_cta(c)
     y = cta_block(d, y, l1, l2)
 
     FOOT_H = 170

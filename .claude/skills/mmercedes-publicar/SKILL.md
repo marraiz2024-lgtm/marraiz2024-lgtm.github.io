@@ -13,7 +13,7 @@ El contenido ya está producido. El cuello de botella es organizar qué, cómo y
 - **TikTok:** el audio trending se añade dentro de la app al publicar. Nunca sugieras un audio en el copy ni en la lista.
 - Nunca precios ni métodos de pago en feed ni en stories.
 - Español neutro latinoamericano con tú, sin voseo.
-- Hashtags fijos: #MMercedesEnglish #NoDigasDi #AprendeIngles #InglesParaLatinos #EnglishTips #LearnEnglish.
+- Hashtags por plataforma: máximo 5 en Instagram, 5 en TikTok y 8 en Facebook. Siempre #MMercedesEnglish y #TinyTipsBigProgress, más el de la serie si existe (#NoDigasDi en No digas... Di...). Si sobran espacios, se completan con hashtags temáticos que Mercedes apruebe.
 - Si una pieza rompe el sistema de marca, no entra al calendario: márcala con Alerta de marca y devuélvela a `mmercedes-qa`.
 
 ## Entradas necesarias
@@ -26,11 +26,11 @@ Parte siempre de la ficha. No cambies el contenido pedagógico.
 
 | Plataforma | Formato | Extensión | Contenido |
 |---|---|---|---|
-| Instagram | Reel o post | Caption breve, 1 a 3 frases | Hook del post, una línea de valor, CTA y los 6 hashtags fijos |
-| TikTok | Video | Copy corto, 1 a 2 líneas | Hook más CTA. Sin audio. Hashtags fijos |
-| Facebook | Video o imagen | Más extenso, 3 a 6 líneas | Hook, explicación breve en español, el ejemplo en inglés, CTA |
+| Instagram | Reel o post | Caption breve, 1 a 3 frases | Hook del post, una línea de valor, el CTA de la ficha y máximo 5 hashtags |
+| TikTok | Video | Copy corto, 1 a 2 líneas | Hook más CTA de la ficha. Sin audio. Máximo 5 hashtags |
+| Facebook | Video o imagen | Más extenso, 3 a 6 líneas | Hook, explicación breve en español, el ejemplo en inglés, CTA de la ficha y máximo 8 hashtags |
 
-El CTA dirige siempre al link en bio y se elige según el tema, con la tabla de `mmercedes-colores`. No uses "Cuéntame en comentarios" ni "¿Lo conocías?".
+El CTA es el de la ficha (handoff editorial), sin reescritura: acción concreta sobre la lección y dirección al link en bio. Puede pedir comentar solo si es específico del post. Genéricos prohibidos: "Cuéntame en comentarios", "¿Lo conocías?", "¿Cuál usas tú?", "Sígueme para más". Si la ficha no trae CTA, déjalo pendiente y devuélvelo.
 
 ## Horario sugerido
 
@@ -47,7 +47,7 @@ Distancia mínima entre publicaciones de la misma plataforma el mismo día: la q
 - [ ] Archivo final 1080×1920 sin marca de agua
 - [ ] Subido desde la app de Instagram
 - [ ] Portada elegida y legible
-- [ ] Caption pegado, con hashtags fijos
+- [ ] Caption pegado, con máximo 5 hashtags (siempre #MMercedesEnglish y #TinyTipsBigProgress)
 - [ ] Audio de la app elegido si la pieza lo lleva (los videos con voz propia no necesitan audio extra)
 - [ ] Etiqueta de contenido generado con IA marcada si la app lo pide para este video
 - [ ] Sin precios en caption ni en pantalla
@@ -56,7 +56,7 @@ Distancia mínima entre publicaciones de la misma plataforma el mismo día: la q
 - [ ] Archivo final 1080×1920
 - [ ] Subido desde la app de TikTok
 - [ ] Audio trending añadido dentro de la app, volumen balanceado con la voz
-- [ ] Copy pegado con hashtags fijos
+- [ ] Copy pegado, con máximo 5 hashtags (siempre #MMercedesEnglish y #TinyTipsBigProgress)
 - [ ] Etiqueta de contenido generado con IA marcada si aplica
 - [ ] Sin precios
 

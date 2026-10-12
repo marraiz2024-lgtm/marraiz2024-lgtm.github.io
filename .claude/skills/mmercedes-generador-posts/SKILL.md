@@ -1,6 +1,6 @@
 ---
 name: mmercedes-generador-posts
-description: Genera automáticamente el PNG 1080×1920px de un post de MMercedesEnglish, series ¿Cómo se dice? (Opción B), No digas/Di e Inglés básico, con el avatar master opcional y el CTA al link en bio elegido según el tema. Usar SIEMPRE que Mercedes pida "genera el post de...", "arma el post de...", "crea la imagen para...", "haz el PNG de...", o dé el tema o contenido de un post nuevo para Instagram o TikTok. No requiere ChatGPT ni Gemini, Claude genera el PNG directamente.
+description: Genera automáticamente el PNG 1080×1920px de un post de MMercedesEnglish, series ¿Cómo se dice? (Opción B), No digas/Di e Inglés básico, con el avatar master opcional, el CTA que trae la ficha y la variante de naturalidad sin X ni check. Usar SIEMPRE que Mercedes pida "genera el post de...", "arma el post de...", "crea la imagen para...", "haz el PNG de...", o dé el tema o contenido de un post nuevo para Instagram o TikTok. Los posts se componen por código: no requiere ni usa modelos de imágenes.
 ---
 
 # MMercedesEnglish: generador de posts PNG
@@ -13,7 +13,7 @@ Las series ¿Cómo se dice?, No digas... Di... e Inglés básico funcionan bien.
 mmercedes-generador-posts/
   SKILL.md
   assets/
-    mm_posts.py          generador (subcomandos como-se-dice, no-digas, broll)
+    mm_posts.py          generador (subcomandos como-se-dice, no-digas, ingles-basico, broll)
     fonts/               BigShoulders, WorkSans, Lora, NothingYouCouldDo (licencia OFL)
     ejemplos/            un JSON de ejemplo por serie
     avatar/master.png    (opcional) recorte del avatar master, fondo transparente
@@ -24,37 +24,33 @@ mmercedes-generador-posts/
 Pregunta solo lo que falte. Si ya tienes la ficha de `mmercedes-ficha`, úsala sin preguntar de nuevo. Verifica el inglés antes de generar.
 
 **¿Cómo se dice?**: `concepto_es`, `expresion_en`, `subtitulo`, `literal`, `significa`, 3 `ejemplos` [EN, ES], `tip`.
-**No digas... Di...**: `frase_mal` y `frase_bien` (2 líneas cada una), 2 `ejemplos` [incorrecto, correcto], `tip`.
+**No digas... Di...**: `frase_mal` y `frase_bien` (2 líneas cada una), 2 `ejemplos` [incorrecto, correcto], `tip` y `modo`. `modo: "error"` (por defecto) usa X roja y check verde y solo vale para un error genuino. `modo: "naturalidad"` se usa cuando la frase es gramatical y solo es menos natural, de otro registro o contexto, o una variante válida: omite X y check, y usa etiquetas neutras (`etiqueta_mal`, por defecto "COMÚN:"; `etiqueta_bien`, por defecto "MÁS NATURAL:"; y `titulo_1` y `titulo_2`, por defecto "EN VEZ DE..." y "DI").
 **Inglés básico** (serie aprobada por Mercedes; ya publicadas: TO BE, THERE IS / THERE ARE y A / AN): `titulo_1`, `titulo_2`, `subtitulo`, 2 o 3 `columnas` con `cabecera`, `con` y 2 `ejemplos` (un `*asterisco*` pone negrita y `\n` fuerza un salto), y `tip` en español. Ejemplos: `assets/ejemplos/ingles_basico_to_be.json` (3 columnas) y `ingles_basico_a_an.json` (2 columnas).
-**Ambas** (¿Cómo se dice? y No digas): `nivel` ("Beginner" o "Intermediate"), `tema` (palabra clave, sirve para variar el CTA), `salida` (nombre descriptivo del PNG).
+**Todas las series**: `nivel` ("Beginner" o "Intermediate"), `cta` (obligatorio, ver el Paso 2) y `salida` (nombre descriptivo del PNG).
 
 El nivel es obligatorio de decidir en cada post porque la pastilla del header lo muestra. Si Mercedes no lo dice, deduce el nivel real del contenido, no dejes "Beginner" por defecto.
 
-Opcionales: `cta` (dos líneas, para forzar uno), `cta_categoria`, `falso_cognado: true` (en No digas).
-
 Para el tip, cada elemento de la lista es un párrafo, y un elemento que empieza con `**` va en negrita. El script ajusta los saltos de línea.
 
-## Paso 2: CTA (elegir en cada caso)
+## Paso 2: CTA (viene de la ficha)
 
-El CTA siempre dirige al link en bio, en español, y habla del tema de la pieza. El script lo elige de este banco según la serie:
+Decisión de Mercedes (10 de octubre de 2026): el copy completo del CTA viene de la ficha (handoff editorial) y el script no lo inventa. Se pasa en `cta`, con dos líneas:
 
-| Serie | Categoría |
-|---|---|
-| ¿Cómo se dice? | Vocabulario y expresiones |
-| No digas... Di... | Errores comunes (o Falsos cognados si `falso_cognado` es true) |
-| B-roll overlay | Universales |
+1. Primera línea: una acción concreta sobre lo aprendido, por ejemplo "Repite en voz alta: Don't lose momentum!".
+2. Segunda línea: dirige al link en bio, por ejemplo "Más expresiones como esta en el link de mi bio.".
 
-Dentro de la categoría el script varía de forma reproducible según `tema`: el mismo tema siempre produce el mismo CTA, y temas distintos producen CTAs distintos. Si ninguna opción encaja con el tema, pasa `cta` con dos líneas escritas por ti, en el estilo del banco de `mmercedes-colores`.
+Puede pedir comentar solo si es lógico y específico del post (por ejemplo, "Completa en comentarios: I agree with ___" en un post sobre *agree*). El script avisa en esos casos para que se confirme.
 
-El script rechaza con error cualquier CTA que pida comentar ("Cuéntame en comentarios", "¿Lo conocías?") o que no mencione el link en bio.
+El script se detiene si el CTA falta, si no menciona el link en bio o si es genérico ("Cuéntame en comentarios", "¿Lo conocías?", "¿La conocías?", "¿Cuál usas tú?", "Sígueme para más", y variantes). El banco histórico de frases ya no es fuente. Si la ficha no trae CTA, el campo queda pendiente y se devuelve a Mercedes.
 
 ## Paso 3: avatar master
 
-- Con avatar: `--avatar ruta/master.png`, o la variable `MM_AVATAR`, o el archivo `assets/avatar/master.png` dentro de esta skill.
+- Con avatar: `--avatar NOMBRE` (un PNG de `assets/avatar/`), una ruta, o la variable `MM_AVATAR`. Con un solo PNG en `assets/avatar/` se usa ese.
 - El archivo debe ser el recorte del MASTER (fotografía, fondo transparente). El script se detiene si el PNG no tiene transparencia. Nunca estira la imagen: un solo factor de escala para X e Y.
 - Con avatar, el contenido se estrecha solo en la zona superior (gancho y reveal en ¿Cómo se dice?, título y bloque NO DIGAS en No digas) y el avatar sangra por el borde derecho sin cubrir ningún bloque. Sin avatar, el layout es el original completo.
 - Si el master no está disponible, genera sin avatar, dilo en la entrega y no uses ninguna ilustración como sustituto.
 - No incluyas el avatar en el B-roll de ambiente (regla de `mmercedes-revisor`).
+- Mercedes es zurda: en fotos o poses nuevas el prop va en la mano izquierda. Las gafas son rectangulares, burdeos/rojas o negras, y nunca cat-eye ni redondas. El master actual (resaltador verde) se aprobó antes de la regla de mano izquierda, así que se revisa si se regenera.
 - La foto de Mercedes no se sube a repositorios públicos. Guárdala solo dentro de la skill en la cuenta de Mercedes.
 - Cada versión del master (cada prop o par de gafas) es un PNG distinto dentro de `assets/avatar/`. El prop puede variar siempre que esté en el set aprobado, y las gafas pueden variar porque Mercedes tiene varios armazones. Elige el archivo con `--avatar NOMBRE` y mira los disponibles con `--listar-avatares`. Si hay varios y no eliges, el script se detiene y los lista.
 - El master incluye su propio prop, que cuenta como el único prop de la pieza. No añadas otro.
@@ -92,8 +88,8 @@ Abre el PNG y verifica:
 2. Pastilla de nivel correcta para el post.
 3. Texto sin cortar ni solapado. Si una zona no cabe, el script reduce solo la tipografía de ese texto. Si aun así no cabe, acorta el contenido.
 4. Tip Mercedes sobre el tema de este post, en español.
-5. CTA en español, al link en bio, sobre el tema de la pieza.
-6. Con avatar: gafas iguales a la referencia, texto del prop "MMercedesEnglish", rostro completo, sin estirar.
+5. CTA de la ficha, en español, específico de la lección y con dirección al link en bio.
+6. Con avatar: gafas rectangulares burdeos/rojas o negras iguales a la referencia, texto del prop "MMercedesEnglish", prop en la mano izquierda en poses nuevas, rostro completo, sin estirar.
 7. Nombre del archivo descriptivo del tema.
 
 Pasa el resultado por `mmercedes-qa` antes de publicar.
@@ -113,9 +109,9 @@ Serie de tarjetas de gramática para nivel Beginner. El formato (header con tagl
 
 Las tarjetas en fila cuentan como un solo bloque para la guardia anti-cascada. El espacio sobrante se reparte entre los bloques para no dejar un hueco vacío.
 
-## Saturday English
+## Saturday English y VERB ALERT
 
-Se genera en ChatGPT o Gemini porque lleva ilustraciones. La plantilla está en `mmercedes-prompt-ia` ("SATURDAY ENGLISH") y no se produce con este script.
+No tienen renderer por código todavía. Como ningún modelo de imágenes dibuja el post, estas dos series quedan pendientes de un renderer (con sus ilustraciones como assets). La especificación de diseño está en `references/especificaciones-series.md`. Hasta entonces no se producen con IA externa.
 
 ## Reglas finales
 

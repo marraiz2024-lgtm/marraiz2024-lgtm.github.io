@@ -5,11 +5,11 @@
 | Tipo de idea | Principal | Apoyo 1 | Apoyo 2 | Notas |
 |---|---|---|---|---|
 | Expresión o vocabulario | Post ¿Cómo se dice? (PNG) | Video corto de Mechita (diálogo modelo) | B-roll de texto, formato A | Los 3 ejemplos del post alimentan el diálogo |
-| Error común | Post No digas... Di... (PNG) | B-roll de texto, formato B | Avatar animado 15 s | Ver regla "incorrecto frente a poco natural" en `mmercedes-ficha` |
-| Verbo irregular | VERB ALERT o imagen de verbo (serie) | B-roll de texto, formato C | Drill de sonido de Mechita | La escena de la imagen rota, nunca dos veces seguidas la misma |
+| Error común | Post No digas... Di... (PNG, `modo: error`). Si la frase es gramatical y solo menos natural, `modo: naturalidad` | B-roll de texto, formato B | Avatar animado 15 s | Ver regla "incorrecto frente a poco natural" en `mmercedes-ficha` |
+| Verbo irregular | VERB ALERT (pendiente de renderer) o imagen de verbo (serie, sin personas) | B-roll de texto, formato C | Drill de sonido de Mechita | La escena de la imagen rota, nunca dos veces seguidas la misma |
 | Regla gramatical corta | Cápsula de regla de Mechita (Set B) | Post con tip | n/a | Una sola regla por pieza |
 | Gramática básica Beginner (to be, there is / there are, a / an, do / does) | Inglés básico (Pillow, `ingles-basico`, 2 o 3 columnas) | Cápsula de Mechita (Set B) | n/a | Ya publicados: TO BE, THERE IS / ARE y A / AN. No repetir temas |
-| Lista numerada de 6 (phrasal verbs, preposiciones) | Saturday English (ChatGPT, plantilla en `mmercedes-prompt-ia`) | Video corto de Mechita con 2 de los ítems | n/a | Con avatar y resaltador verde |
+| Lista numerada de 6 (phrasal verbs, preposiciones) | Saturday English (pendiente de renderer por código, ver `mmercedes-generador-posts/references/especificaciones-series.md`) | Video corto de Mechita con 2 de los ítems | n/a | Con avatar y prop. No se produce con IA externa |
 | Pronunciación o diálogo funcional | Drill o diálogo de Mechita (Set A) | Microclase | n/a | El audio se valida a oído |
 | Reflexión o postura | B-roll de texto, formato C | Avatar animado con voz de Mercedes | n/a | Sin avatar en B-roll de ambiente |
 | Voz personal de Mercedes | Avatar animado (Grok, HeyGen, D-ID) | Post con avatar | n/a | Identidad exacta de la foto real |

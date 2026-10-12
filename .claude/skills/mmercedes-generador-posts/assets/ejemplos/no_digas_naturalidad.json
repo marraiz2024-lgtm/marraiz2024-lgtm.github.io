@@ -1,0 +1,32 @@
+{
+  "modo": "naturalidad",
+  "nivel": "Intermediate",
+  "tema": "doubt question",
+  "frase_mal": [
+    "I have",
+    "a doubt."
+  ],
+  "frase_bien": [
+    "I have",
+    "a question."
+  ],
+  "ejemplos": [
+    [
+      "I have a doubt\nabout this.",
+      "I have a question\nabout this."
+    ],
+    [
+      "Can you clear up\nmy doubt?",
+      "Can you answer\nmy question?"
+    ]
+  ],
+  "tip": [
+    "'I have a doubt' es gramatical y se entiende. En la mayoría de los contextos, 'I have a question' suena más natural cuando quieres preguntar algo.",
+    "**Úsala cuando pidas una aclaración."
+  ],
+  "cta": [
+    "Cambia 'doubt' por 'question' en tu próxima pregunta.",
+    "Más inglés natural en el link de mi bio."
+  ],
+  "salida": "ejemplo_no_digas_naturalidad.png"
+}

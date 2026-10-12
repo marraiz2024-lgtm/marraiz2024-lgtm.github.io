@@ -34,7 +34,7 @@ Estructura de 3 partes, máximo 60-80 palabras:
 
 **REVEAL** (5-10 seg): corrección o expresión correcta pronunciada con énfasis, repetida una vez
 
-**CIERRE/CTA** (3-5 seg): invitación a comentar o guardar, corto y directo
+**CIERRE/CTA** (3-5 seg): el CTA de la ficha (acción concreta de la lección y dirección al link en bio), corto y directo
 
 Tono: cercano, didáctico, con energía — como Mercedes habla en clase.
 
@@ -51,9 +51,9 @@ IDENTITY — CRITICAL: The woman in this photo is the real person behind this br
 Preserve her appearance EXACTLY as shown:
 - Do not alter her face, facial features, skin tone, or age
 - Do not change her hair (dark with white/gray streaks, shoulder-length, wavy)
-- Do not change her glasses (keep EXACTLY the frames shown in the reference photo; she owns several pairs and every one is valid, but they must not change during the video)
+- Do not change her glasses (keep EXACTLY the frames shown in the reference photo: rectangular, burgundy/red or black, never cat-eye or round; she owns several pairs, but they must not change during the video)
 - Do not change her clothing or body proportions
-- Different poses and props are acceptable — her face and physical identity are not
+- Different poses and props are acceptable; she is left-handed, so in new poses any prop is held in her LEFT hand. Her face and physical identity are not negotiable.
 
 MOVEMENT: Natural, subtle teacher gestures only:
 - Gentle head movement toward camera

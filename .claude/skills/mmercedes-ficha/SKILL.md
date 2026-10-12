@@ -14,7 +14,7 @@ Español neutro latinoamericano con tú. Sin guion largo. Sin la estructura "no 
 1. **Recibe la entrada.** Si ya trae los datos completos, solo valida y normaliza.
 2. **Completa lo que falta.** Pregunta solo lo imprescindible: nivel (Beginner o Intermediate) y serie, si no se deducen.
 3. **Verifica el inglés (puerta G1).** Ver sección siguiente.
-4. **Elige el CTA** del banco de `mmercedes-colores` según el tipo de contenido.
+4. **Redacta el CTA de esta lección** (handoff editorial): primera línea con una acción concreta sobre lo aprendido, segunda línea que dirige al link en bio. Puede pedir comentar solo si es lógico y específico del post. Los genéricos están prohibidos y el banco histórico ya no es fuente. Si no puedes redactarlo con acción concreta, deja el campo pendiente y devuélvelo a Mercedes.
 5. **Propón formatos** con `mmercedes-cadena/references/matriz-formatos.md`. No los produzcas.
 6. **Entrega la ficha** en el formato de abajo y pide confirmación solo si hay una duda lingüística abierta.
 
@@ -23,6 +23,7 @@ Español neutro latinoamericano con tú. Sin guion largo. Sin la estructura "no 
 - La forma inglesa debe ser natural y nativa. Indica la variedad (inglés americano o británico) cuando importe.
 - **Distingue "incorrecto" de "poco natural".** "I have a doubt" es gramatical. Suena menos natural que "I have a question" en la mayoría de contextos. Si lo es, titula la pieza con ese matiz ("Sound more natural") y no con una afirmación absoluta. Nunca escribas "no existe" ni "está mal" si solo es poco común.
 - Revisa falsos amigos, registro (formal e informal) y contexto de uso.
+- **Modo de No digas... Di...:** si la frase "incorrecta" es agramatical, usa `modo: error` (X roja y check verde). Si es gramatical y solo menos natural, de otro registro o contexto, o una variante válida, usa `modo: naturalidad`: sin X ni check, con etiquetas neutras. Nunca conviertas en error una expresión válida.
 - Cada regla o afirmación lleva una fuente concreta: Cambridge Dictionary, Merriam-Webster, Oxford Learner's Dictionaries o Collins. Si no hay fuente, escribe "opinión fundamentada" en el campo de verificación. Nunca escribas "los estudios muestran" sin citar el estudio.
 - Si tienes duda y hay búsqueda web disponible, consulta la fuente antes de afirmar. Si no, deja el campo en estado `por verificar` y no avances a producción.
 - Los 3 ejemplos deben ser frases que un nativo diría. Nada de ejemplos inventados para encajar la regla.
@@ -34,7 +35,8 @@ Español neutro latinoamericano con tú. Sin guion largo. Sin la estructura "no 
 FICHA
 id:            AAAA-MM-DD-slug
 tipo (Notion): No digas...Di... | Beginner Tips | Real English | Saturday English | Otro
-serie:         ¿Cómo se dice? | No digas... Di... | VERB ALERT | Verbos irregulares | B-roll | Mechita | Microclase
+serie:         ¿Cómo se dice? | No digas... Di... | VERB ALERT | Verbos irregulares | B-roll | Mechita | Microclase | Inglés básico
+modo:          (solo No digas... Di...) error | naturalidad
 nivel:         Beginner | Intermediate
 objetivo:      qué podrá hacer el alumno tras verla (una frase)
 hook_es:       gancho en español
@@ -45,7 +47,7 @@ contenido:
   (Reflexión)       3 a 6 líneas de máximo 7 palabras cada una
 ejemplos:      3 pares EN / ES (2 pares comparativos en No digas... Di...)
 tip_mercedes:  2 a 5 líneas en español, sobre ESTE tema
-cta:           frase y línea de acción del banco
+cta:           [línea 1: acción concreta de la lección, línea 2: dirige al link en bio] o PENDIENTE
 fuente:        diccionario o referencia concreta, o "opinión fundamentada"
 verificacion:  OK | por verificar (qué falta)
 formatos:      principal + hasta 2 de apoyo

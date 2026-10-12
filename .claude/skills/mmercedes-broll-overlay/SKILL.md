@@ -33,6 +33,7 @@ Pregunta solo lo que falta: tema o expresión, si hay falso amigo o error común
   "subtitulo": "inglés conversacional, uso diario",
   "ejemplos": [["Hey! What are you up to?", "¿Qué estás haciendo?"], ["Not much, just having coffee.", "No mucho, tomando café."]],
   "tip": ["Esta frase la escucharás todo el tiempo. ¡Guárdala para no olvidarla!"],
+  "cta": ["Responde en voz alta: What are you up to?", "Más inglés real en el link de mi bio."],
   "salida": "broll_what_are_you_up_to.png"
 }
 ```
@@ -40,7 +41,7 @@ Pregunta solo lo que falta: tema o expresión, si hay falso amigo o error común
 - `serie`: "Real English" para expresiones coloquiales, "Common Mistakes" para errores.
 - `nivel`: Beginner o Intermediate, según el contenido real.
 - `ejemplos`: entre 2 y 3 filas.
-- CTA: lo elige el script del banco de Universales de `mmercedes-colores`, siempre al link en bio. Retirados: "Guarda este video", "¿La conocías?" y cualquier CTA que pida comentar. Si hace falta uno distinto, pasa `cta` con dos líneas.
+- CTA: viene de la ficha (`cta`, 2 líneas: acción concreta sobre lo que muestra el overlay y dirección al link en bio). El script no lo inventa y se detiene si falta o es genérico.
 
 ## Paso 2: ejecutar
 

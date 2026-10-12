@@ -8,10 +8,25 @@
   "reveal_si": "SIGNIFICA: ¿Qué estás haciendo?",
   "subtitulo": "inglés conversacional, uso diario",
   "ejemplos": [
-    ["Hey! What are you up to?", "¿Qué estás haciendo?"],
-    ["Not much, just having coffee.", "No mucho, tomando café."],
-    ["What are you up to this weekend?", "¿Qué haces este fin de semana?"]
+    [
+      "Hey! What are you up to?",
+      "¿Qué estás haciendo?"
+    ],
+    [
+      "Not much, just having coffee.",
+      "No mucho, tomando café."
+    ],
+    [
+      "What are you up to this weekend?",
+      "¿Qué haces este fin de semana?"
+    ]
   ],
-  "tip": ["Esta frase la escucharás todo el tiempo. ¡Guárdala para no olvidarla!"],
-  "salida": "ejemplo_broll.png"
+  "tip": [
+    "Esta frase la escucharás todo el tiempo. ¡Guárdala para no olvidarla!"
+  ],
+  "salida": "ejemplo_broll.png",
+  "cta": [
+    "Responde en voz alta: What are you up to?",
+    "Más inglés real en el link de mi bio."
+  ]
 }

@@ -31,8 +31,9 @@ mkdir -p frames && ffmpeg -i entrada.mp4 -vf fps=1 frames/f_%02d.png
 Mira también el primer y el último fotograma, porque es donde la IA suele deformar.
 
 **Bloque A: avatar real**
-- Gafas idénticas a las de la imagen de referencia en todos los fotogramas (Mercedes tiene varios armazones y todos son válidos, pero no deben cambiar dentro del video). Compáralas con el archivo original, porque la compresión de la imagen puede cambiar el tono.
-- Cabello oscuro con canas, ondulado, hasta los hombros. Nada de bob corto.
+- Gafas idénticas a las de la imagen de referencia en todos los fotogramas, y siempre rectangulares, burdeos/rojas o negras (nunca cat-eye ni redondas). Compáralas con el archivo original, porque la compresión puede cambiar el tono.
+- Cabello oscuro con canas hasta los hombros. Nada de bob corto.
+- Prop en la mano izquierda en poses nuevas (Mercedes es zurda). El prop es de un solo elemento del set aprobado.
 - Rostro sin distorsión ni cambio de edad. Un fallo aquí bloquea la pieza.
 - Boca sincronizada con el audio. Manos sin dedos extra ni dos manos izquierdas.
 - Suéter negro cuello V, argollas doradas. Props solo del set aprobado.
@@ -54,10 +55,10 @@ Mira también el primer y el último fotograma, porque es donde la IA suele defo
 
 - Español neutro latinoamericano, con tú y sin voseo. Con signos ¿? y ¡!.
 - Sin precios ni métodos de pago.
-- Hashtags fijos presentes: #MMercedesEnglish #NoDigasDi #AprendeIngles #InglesParaLatinos #EnglishTips #LearnEnglish.
+- Hashtags: máximo 5 en Instagram, 5 en TikTok y 8 en Facebook. Siempre #MMercedesEnglish y #TinyTipsBigProgress, más el de la serie si existe.
 - TikTok sin sugerencia de audio.
 - El inglés dentro del copy coincide con la ficha.
-- El CTA corresponde al decidido en la ficha.
+- El CTA es el de la ficha, específico de la lección, con acción concreta y dirección al link en bio. Genéricos ("Cuéntame en comentarios", "¿Lo conocías?", "¿Cuál usas tú?", "Sígueme para más") bloquean.
 - Sin guion largo y sin "no es X sino Y".
 
 ## Pedagogía
@@ -68,11 +69,12 @@ Mira también el primer y el último fotograma, porque es donde la IA suele defo
 
 ## Errores que bloquean siempre
 
-- Gafas que no coinciden con la referencia, o cabello bob corto, en el avatar real.
+- Gafas que no coinciden con la referencia o son cat-eye o redondas, o cabello bob corto, en el avatar real.
 - Estilo ilustrado en el avatar real. (Mechita es ilustrada por diseño, no se rechaza por eso.)
 - Más de 3 bloques de contenido en cascada.
 - El avatar cubre texto, una tarjeta o una ilustración (pasó en las piezas Fun vs Funny y Phrasal Verbs GO).
-- Imagen generada en cascada: bloques escalonados, con distinto margen o ancho de columna, rotados o superpuestos. Es un fallo frecuente de las imágenes de IA externa. Se corrige con la respuesta "Bloques en cascada" de `mmercedes-prompt-ia`.
+- Post completo dibujado por un modelo de imágenes externo, o avatar generado o reparado por IA: viola la decisión de componer por código. Se regenera con el script.
+- Imagen en cascada: bloques escalonados, con distinto margen o ancho de columna, rotados o superpuestos. Se corrige regenerando el contenido con el script, que la valida.
 - Tip Mercedes sobre un tema distinto al del post.
 - Marcador o resaltador del avatar que no diga exactamente "MMercedesEnglish" (incluye el resaltador verde, antes "OVERACHIEVING").
 - Colores fuera de paleta usados de forma estructural.

@@ -29,7 +29,7 @@ description: "Sistema de marca visual de MMercedesEnglish (colores, tipografía,
 
 **Cabello:** (el master actual es más lacio que el ondulado descrito aquí y Mercedes lo aceptó) oscuro (negro/castaño oscuro) con canas/mechones blancos prominentes, especialmente en la parte frontal y lateral. Largo hasta los hombros o ligeramente por encima. Ondulado/con volumen natural. **NO es un bob corto. NO es lacio. El cabello tiene movimiento y longitud notable.**
 
-**Gafas:** Mercedes tiene varios armazones y todos son válidos. En cada pieza las gafas deben ser idénticas a las de la imagen de referencia y no cambiar dentro de la misma pieza o video. El armazón del master actual es burgundy/vino, rectangular-cuadrado. Si se genera con IA, la referencia manda: no se inventa un armazón distinto.
+**Gafas:** burdeos/rojas o negras, siempre rectangulares. Nunca cat-eye ni redondas (decisión de Mercedes, 10 de octubre de 2026). Mercedes tiene varios armazones: en cada pieza las gafas deben ser idénticas a las de la imagen de referencia y no cambiar dentro de la pieza o video.
 
 **Tono de piel:** morena cálida, latina.
 
@@ -48,6 +48,8 @@ description: "Sistema de marca visual de MMercedesEnglish (colores, tipografía,
 ### Fuente del avatar
 Siempre el PNG recortado del MASTER (fotografía, fondo transparente). No se usa ninguna ilustración como avatar. Los scripts de Pillow lo componen con `--avatar` (ver `mmercedes-generador-posts`). Si ese archivo no está disponible, se genera el post sin avatar y se avisa a Mercedes.
 
+### Producción: Los posts se componen por código (texto y plantilla) con la foto real del avatar. Ningún modelo de imágenes dibuja el post completo ni genera, repara o estiliza el avatar.
+
 ### Regla del avatar en posts:
 - Recorte con fondo transparente antes de integrar a plantilla
 - Sangra por el borde derecho del canvas — corte intencional, sin fade ni degradado
@@ -55,7 +57,7 @@ Siempre el PNG recortado del MASTER (fotografía, fondo transparente). No se usa
 - El rostro siempre completo y visible
 
 ### Errores más frecuentes a prevenir:
-- Gafas distintas a las de la imagen de referencia, o que cambian dentro de la misma pieza → rechazar y pedir corrección (verificar también en video, no solo en imagen estática)
+- Gafas cat-eye o redondas, distintas a la referencia, o que cambian dentro de la misma pieza → rechazar y pedir corrección (verificar también en video, no solo en imagen estática)
 - Cabello bob corto en lugar de ondulado hasta los hombros → rechazar
 - Avatar con fondo no blanco en la foto de recorte (posts estáticos) → rechazar
 - Estilo ilustrado/pictórico → rechazar inmediatamente
@@ -70,7 +72,9 @@ Set aprobado — UN SOLO prop por publicación, interactuando con el contenido. 
 - Resaltador jumbo verde (el texto del cuerpo debe decir exactamente "MMercedesEnglish")
 - Resaltador jumbo amarillo ("WHAT'S GOING ON")
 - Resaltador jumbo naranja ("TOLD YOU SO")
-- Mano señaladora en palo (pointer hand)
+- Mano señaladora en palo (pointer hand), prop permitido desde la decisión del 10 de octubre de 2026
+
+**Mano:** Mercedes es zurda: en fotos o poses nuevas el prop va en la mano izquierda. La ilustración aprobada de las dos series se queda como está. Solo un prop por post.
 
 El prop interactúa con el contenido, nunca flota decorativo. En video narrado se permite además utilería de escritorio realista (cuaderno, taza con logo MMercedesEnglish) como parte de la escena, sin que sustituya el prop sobredimensionado en posts estáticos.
 
@@ -112,7 +116,7 @@ Se evaluaron y descartaron: un badge motivacional fijo tipo "Avanza" (generaba c
 
 **Cuerpo:** Título principal con subrayado amarillo + Avatar + prop + Bloques comparativos (❌ rojo / ✅ verde solo en contenido explicativo) + Ejemplos bilingüe + Tip Mercedes en ESPAÑOL
 
-**CTA:** Frase en ESPAÑOL sobre el tema de la pieza + línea que dirige al link en bio (banco y reglas de selección en `mmercedes-colores`). Retirados: "Cuéntame en comentarios" y "¿Lo conocías?"
+**CTA:** El copy completo del CTA viene de la ficha (handoff editorial), sin reescritura. Primera línea: acción concreta sobre lo aprendido. Segunda línea: dirige al link en bio. Puede pedir comentar solo si es lógico y específico del post (por ejemplo, completar "I agree with ___" en un post sobre *agree*). Genéricos prohibidos: "Cuéntame en comentarios", "¿Lo conocías?", "¿La conocías?", "¿Cuál usas tú?", "Sígueme para más". Si falta el CTA, queda pendiente y vuelve a la autoridad editorial.
 
 **Footer:** Logo MM + "MMercedes" blanco + "English" amarillo + "Tiny Tips, Big Progress"
 
@@ -120,12 +124,12 @@ Se evaluaron y descartaron: un badge motivacional fijo tipo "Avanza" (generaba c
 **"Tiny Tips, Big Progress"**
 
 ## Qué NO hacer
-- Avatar ilustrado, pictórico, con gafas que no corresponden a la referencia, con bob corto → NO (aplica también en video)
+- Avatar ilustrado, pictórico, con gafas cat-eye o redondas, con bob corto → NO (aplica también en video)
 - Degradado/fade en borde del avatar → NO (usar sangrado por borde del canvas)
 - Más de un prop sobredimensionado por publicación estática → NO
 - Verde/rojo en quizzes o como fondo estructural → NO
 - CTA o Tip Mercedes en inglés → NO
-- CTA que pida comentar ("Cuéntame en comentarios", "¿Lo conocías?") → NO
+- CTA genérico ("Cuéntame en comentarios", "¿Lo conocías?", "¿Cuál usas tú?") → NO. Un CTA que pide comentar solo vale si es específico del post
 - Colores fuera de paleta → NO
 - "MMercedesEnglish" con espacios o mal escrito → NO
 - Dejar la pastilla de nivel fija en "Beginner" para todo el contenido → NO (debe reflejar el nivel real del post)
@@ -133,12 +137,12 @@ Se evaluaron y descartaron: un badge motivacional fijo tipo "Avanza" (generaba c
 - Sello "English Your Way" con borde perforado tipo estampilla postal, o en amarillo brillante `#FFD23F` → NO (debe ser borde festoneado tipo sello de calidad, en Gold `#BE9100`)
 
 ## Verificación antes de entregar
-1. ¿Avatar foto realista con las gafas de la imagen de referencia y cabello hasta los hombros? (verificar también en video)
+1. ¿Avatar foto realista, con gafas burdeos/rojas o negras rectangulares iguales a la referencia, y cabello hasta los hombros? (verificar también en video)
 2. ¿Recortado, sangrando por borde del canvas sin fade (posts estáticos)?
 3. ¿Un solo prop sobredimensionado interactuando con el contenido?
 4. ¿Pastilla de nivel correcta según el post (Beginner/Intermediate English Tips)?
 5. ¿Sello "English Your Way" con forma de medallón festoneado, navy y borde Gold, dos líneas centradas?
 6. ¿Formato 1080×1920 vertical?
-7. ¿CTA (al link en bio) y Tip Mercedes en español?
+7. ¿CTA específico de la lección que dirige al link en bio, y Tip Mercedes en español?
 8. ¿Colores dentro de paleta?
 
