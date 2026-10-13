@@ -420,19 +420,28 @@ function listFor(re,pref){
   const v = synth.getVoices().filter(x=>re.test(x.lang));
   return v.sort((a,b)=> (score(b)+(pref.includes(b.lang.replace('_','-').toLowerCase())?2:0)) - (score(a)+(pref.includes(a.lang.replace('_','-').toLowerCase())?2:0)));
 }
+let userPick={es:null,en:null};
+try{ userPick=Object.assign(userPick,JSON.parse(localStorage.getItem('mm-voz-elegida')||'{}')); }catch(e){}
+function savePick(){ try{ localStorage.setItem('mm-voz-elegida',JSON.stringify(userPick)); }catch(e){} }
+function sameVoice(a,b){ return !!a&&!!b&&a.name===b.name&&a.lang===b.lang; }
 function fillSelect(id,list,cur){
   const el=document.getElementById(id); if(!el) return;
   el.innerHTML=list.map((v,i)=>`<option value="${i}">${v.name} (${v.lang})</option>`).join('');
-  const i=list.indexOf(cur); el.value = i<0?0:i;
+  const i=list.findIndex(v=>sameVoice(v,cur)); el.value = i<0?0:i;
+}
+function keepVoice(lang,list){
+  if(userPick[lang]){ const f=list.find(v=>v.name===userPick[lang]); if(f) return f; }
+  const f=list.find(v=>sameVoice(v,voices[lang])); if(f) return f;
+  return list[0]||null;
 }
 function pickVoices(){
   if(!synth) return;
   const es=listFor(/^es/i,['es-us','es-mx','es-co']), en=listFor(/^en/i,['en-us']);
-  if(!voices.es || !es.includes(voices.es)) voices.es = es[0]||null;
-  if(!voices.en || !en.includes(voices.en)) voices.en = en[0]||null;
+  voices.es = keepVoice('es',es);
+  voices.en = keepVoice('en',en);
   fillSelect('vses',es,voices.es); fillSelect('vsen',en,voices.en);
-  $('vses').onchange=()=>{ voices.es=es[+$('vses').value]; };
-  $('vsen').onchange=()=>{ voices.en=en[+$('vsen').value]; };
+  $('vses').onchange=()=>{ voices.es=es[+$('vses').value]; userPick.es=voices.es.name; savePick(); setStatus(voiceInfo()); };
+  $('vsen').onchange=()=>{ voices.en=en[+$('vsen').value]; userPick.en=voices.en.name; savePick(); setStatus(voiceInfo()); };
   setStatus((voices.es||voices.en)?voiceInfo():'');
   const nv=document.getElementById('novoice');
   nv.textContent = (!voices.es || !voices.en) ? 'Tu navegador no tiene todas las voces. Se usará el subtitulado y los tiempos serán aproximados.' : '';
@@ -524,7 +533,7 @@ function speakOne(text, lang, o){
     let done=false, started=false;
     const fin=()=>{ if(!done){done=true; clearTimeout(t); clearTimeout(w); res();} };
     const t = setTimeout(fin, est*2.5+2000);
-    const w = setTimeout(()=>{ if(!started && !o.retried){ const alt=listFor(new RegExp('^'+lang,'i'),[]).find(x=>x!==voices[lang]&&x.localService); if(alt){ done=true; clearTimeout(t); synth.cancel(); voices[lang]=alt; setStatus('Cambié a la voz '+alt.name+' porque la anterior no sonaba.',true); speakOne(text,lang,Object.assign({},o,{retried:true})).then(res); return; } } if(!started) setStatus('No se detecta audio. Sube el volumen, revisa que la pestaña no esté silenciada y prueba otra voz en «Cambiar la voz».',true); }, 3500);
+    const w = setTimeout(()=>{ if(!started && !o.retried && !userPick[lang]){ const alt=listFor(new RegExp('^'+lang,'i'),[]).find(x=>x!==voices[lang]&&x.localService); if(alt){ done=true; clearTimeout(t); synth.cancel(); voices[lang]=alt; setStatus('Cambié a la voz '+alt.name+' porque la anterior no sonaba.',true); speakOne(text,lang,Object.assign({},o,{retried:true})).then(res); return; } } if(!started) setStatus('No se detecta audio. Sube el volumen, revisa que la pestaña no esté silenciada y prueba otra voz en «Cambiar la voz».',true); }, userPick[lang]?9000:3500);
     u.onstart = ()=>{ started=true; setStatus(voiceInfo()); };
     u.onend = fin; u.onerror = fin;
     synth.speak(u);
