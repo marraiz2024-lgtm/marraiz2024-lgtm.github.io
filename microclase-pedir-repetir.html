@@ -406,13 +406,14 @@ const SCENES = [
 const synth = window.speechSynthesis;
 const $ = id => document.getElementById(id);
 let voices = {es:null,en:null};
-const FEMALE=/sabina|helena|paulina|dalia|elvira|monica|m[oó]nica|paloma|lucia|luc[ií]a|marisol|camila|salome|salom[eé]|zira|aria|jenny|samantha|karen|ava|allison|susan|serena|moira|tessa|female|mujer|google espa|google us english|google uk english female/i;
-const MALE=/raul|raúl|pablo|jorge|diego|carlos|juan|alvaro|álvaro|ricardo|david|mark|guy|alex|daniel|fred|ryan|george|james|male\b|hombre/i;
+const FEMALE=/sabina|helena|paulina|dalia|elvira|monica|m[oó]nica|paloma|lucia|luc[ií]a|marisol|camila|salome|salom[eé]|elena|ximena|valentina|catalina|zira|aria|jenny|michelle|emma|ana|sonia|libby|mia|natasha|clara|jane|linda|hazel|heera|catherine|sara|nancy|jessica|samantha|karen|ava|allison|susan|serena|moira|tessa|female|mujer|google espa|google us english|google uk english female/i;
+const MALE=/raul|raúl|pablo|jorge|diego|carlos|juan|alvaro|álvaro|ricardo|alonso|arnau|david|mark|guy|alex|daniel|fred|ryan|george|james|richard|davis|tony|eric|roger|steffan|christopher|brian|andrew|william|liam|thomas|jason|male|hombre/i;
 function score(v){
   let n=0;
-  if(FEMALE.test(v.name)) n+=10;
-  if(MALE.test(v.name)) n-=20;
-  if(/natural|online|neural/i.test(v.name)) n+=3;
+  const fem=FEMALE.test(v.name), mas=MALE.test(v.name);
+  if(fem) n+=10;
+  if(mas) n-=20;
+  if(/natural|online|neural/i.test(v.name)) n+= fem ? 12 : 2;   // voces naturales femeninas primero
   if(v.localService) n+=8;
   return n;
 }
@@ -533,7 +534,7 @@ function speakOne(text, lang, o){
     let done=false, started=false;
     const fin=()=>{ if(!done){done=true; clearTimeout(t); clearTimeout(w); res();} };
     const t = setTimeout(fin, est*2.5+2000);
-    const w = setTimeout(()=>{ if(!started && !o.retried && !userPick[lang]){ const alt=listFor(new RegExp('^'+lang,'i'),[]).find(x=>x!==voices[lang]&&x.localService); if(alt){ done=true; clearTimeout(t); synth.cancel(); voices[lang]=alt; setStatus('Cambié a la voz '+alt.name+' porque la anterior no sonaba.',true); speakOne(text,lang,Object.assign({},o,{retried:true})).then(res); return; } } if(!started) setStatus('No se detecta audio. Sube el volumen, revisa que la pestaña no esté silenciada y prueba otra voz en «Cambiar la voz».',true); }, userPick[lang]?9000:3500);
+    const w = setTimeout(()=>{ if(!started && !o.retried && !userPick[lang]){ const alt=listFor(new RegExp('^'+lang,'i'),[]).find(x=>x!==voices[lang]&&x.localService); if(alt){ done=true; clearTimeout(t); synth.cancel(); voices[lang]=alt; setStatus('Cambié a la voz '+alt.name+' porque la anterior no sonaba.',true); speakOne(text,lang,Object.assign({},o,{retried:true})).then(res); return; } } if(!started) setStatus('No se detecta audio. Sube el volumen, revisa que la pestaña no esté silenciada y prueba otra voz en «Cambiar la voz».',true); }, (userPick[lang]?9000:(/natural|online|neural/i.test(voices[lang].name)?6000:3500)));
     u.onstart = ()=>{ started=true; setStatus(voiceInfo()); };
     u.onend = fin; u.onerror = fin;
     synth.speak(u);
