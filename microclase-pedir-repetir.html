@@ -157,8 +157,8 @@
 <div class="start" id="start">
   <div class="start-in">
     <img src="microclase-avatar.webp" alt="Mercedes, profesora de MMercedesEnglish">
-    <h2>Microclase de 6 minutos</h2>
-    <p>Aprende a pedir que repitan con cortesía. Activa el sonido: escucharás el inglés y las instrucciones en voz.</p>
+    <h2>Could you say that again?</h2>
+    <p>Dos frases corteses para usar en una conversación en inglés. Activa el sonido: escucharás el inglés y las instrucciones en voz.</p>
     <button class="main" id="go">Comenzar</button>
     <div class="nov" id="novoice"></div>
   </div>
@@ -398,6 +398,7 @@ const SCENES = [
     {wait:8,label:'Responde en voz alta'},
     {show:'a7',en:'Sorry, could you say that again?',voice:'A',rate:.85},
     {en:'Sorry, I didn’t catch that.',voice:'A',rate:.85},
+    {es:'Gracias por practicar conmigo. Hasta la próxima.',opt:true},
     {done:true}
    ]}
 ];
@@ -496,8 +497,8 @@ async function idbAll(){
     }catch(e){ res(out); }
   });
 }
-try{ fetch('audio/pedir-repetir/manifest.json?v=2026-10-12-b',{cache:'no-cache'}).then(r=>r.ok?r.json():{}).then(m=>{ manifest=m||{}; }).catch(()=>{}); }catch(e){}
-const AUDIO_V='2026-10-12-b';
+try{ fetch('audio/pedir-repetir/manifest.json?v=2026-10-12-c',{cache:'no-cache'}).then(r=>r.ok?r.json():{}).then(m=>{ manifest=m||{}; }).catch(()=>{}); }catch(e){}
+const AUDIO_V='2026-10-12-c';
 async function clipFor(key){
   // Las tomas guardadas en el navegador solo se usan en el modo grabación (#grabar).
   // La microclase publicada reproduce siempre los archivos del sitio.
@@ -597,7 +598,8 @@ async function run(i){
     if(st.on) setLine(st.on);
     if(st.clear && $(st.clear)) $(st.clear).classList.add('clear');
     const ls=$('ls'); if(ls) ls.classList.toggle('listening', !!st.listen);
-    if(st.es){
+    if(st.es && st.opt && !(await clipFor(i+'-'+j+'-es'))){ /* despedida aun sin grabar: se omite */ }
+    else if(st.es){
       caption(st.es); $('avatar').classList.add('talking');
       await speak(st.es,'es',{...st,key:i+'-'+j+'-es'});
       $('avatar').classList.remove('talking');
