@@ -496,11 +496,16 @@ async function idbAll(){
     }catch(e){ res(out); }
   });
 }
-try{ fetch('audio/pedir-repetir/manifest.json').then(r=>r.ok?r.json():{}).then(m=>{ manifest=m||{}; }).catch(()=>{}); }catch(e){}
+try{ fetch('audio/pedir-repetir/manifest.json?v=2026-10-12-b',{cache:'no-cache'}).then(r=>r.ok?r.json():{}).then(m=>{ manifest=m||{}; }).catch(()=>{}); }catch(e){}
+const AUDIO_V='2026-10-12-b';
 async function clipFor(key){
-  const b=await idbGet(key);
-  if(b) return URL.createObjectURL(b);
-  if(manifest[key]) return 'audio/pedir-repetir/'+manifest[key];
+  // Las tomas guardadas en el navegador solo se usan en el modo grabación (#grabar).
+  // La microclase publicada reproduce siempre los archivos del sitio.
+  if(/grabar/.test(location.hash)){
+    const b=await idbGet(key);
+    if(b) return URL.createObjectURL(b);
+  }
+  if(manifest[key]) return 'audio/pedir-repetir/'+manifest[key]+'?v='+AUDIO_V;
   return null;
 }
 function playClip(url,o){
