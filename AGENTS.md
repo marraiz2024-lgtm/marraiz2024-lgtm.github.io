@@ -6,7 +6,7 @@ Instrucciones para Codex y otros agentes de código. Este repositorio es la land
 - Responde en español neutro latinoamericano, de tú. Respuestas concisas y directas. Señala errores y decisiones poco acertadas en lugar de aprobar de forma automática.
 - Respeta el guion de Mercedes palabra por palabra salvo lo que ella pida cambiar.
 - Sin guion largo, sin la estructura "No es X, sino Y", sin enumeraciones de tres por reflejo en los textos.
-- Nunca incluyas precios ni métodos de pago.
+- No incluyas precios ni métodos de pago en publicaciones de redes sociales. La landing sí los muestra.
 - Verifica antes de entregar. Di con claridad qué no pudiste comprobar (audio real, micrófono real, fuentes reales, sitio en vivo).
 - No hagas pull request salvo que Mercedes lo pida. Ella fusiona. Subir a una rama no publica nada.
 - No enlaces una microclase desde `index.html` sin que ella lo pida.
