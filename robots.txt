@@ -1,0 +1,3 @@
+User-agent: *
+Allow: /
+Sitemap: https://marraiz2024-lgtm.github.io/sitemap.xml
