@@ -1,0 +1,408 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="robots" content="noindex, nofollow">
+<title>Tu guía de inicio · MMercedesEnglish</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Big+Shoulders+Display:wght@700;800&family=Work+Sans:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+:root{
+  --navy:#0D1B3E; --yellow:#FFD23F; --cream:#FFFBF0;
+  --bg:#FFFBF0; --ink:#0D1B3E; --card:#FFFFFF; --line:rgba(13,27,62,.16); --soft:rgba(13,27,62,.68);
+  --display:"Big Shoulders Display","Arial Narrow",Impact,sans-serif;
+  --body:"Work Sans",system-ui,-apple-system,"Segoe UI",Arial,sans-serif;
+  box-sizing:border-box;
+  padding-top:env(safe-area-inset-top,0px);
+  padding-bottom:env(safe-area-inset-bottom,0px);
+  color-scheme:light;
+}
+@media (prefers-color-scheme:dark){
+  :root:not([data-theme="light"]){
+    --bg:#0D1B3E; --ink:#FFFBF0; --card:rgba(255,251,240,.07); --line:rgba(255,251,240,.22); --soft:rgba(255,251,240,.72);
+    color-scheme:dark;
+  }
+}
+:root[data-theme="dark"]{
+  --bg:#0D1B3E; --ink:#FFFBF0; --card:rgba(255,251,240,.07); --line:rgba(255,251,240,.22); --soft:rgba(255,251,240,.72);
+  color-scheme:dark;
+}
+html{background:var(--navy);scroll-padding-top:env(safe-area-inset-top,0px);height:100%}
+*,*::before,*::after{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--ink);font-family:var(--body);font-size:1.0625rem;line-height:1.55;-webkit-text-size-adjust:100%}
+img,svg{max-width:100%}
+.wrap{width:100%;max-width:40rem;margin:0 auto;padding:0 1.25rem}
+h1,h2,h3{font-family:var(--display);font-weight:800;line-height:.98;margin:0;letter-spacing:.005em}
+h1{font-size:clamp(3.4rem,15vw,6rem)}
+h2{font-size:clamp(2.4rem,9.5vw,3.6rem)}
+h3{font-size:1.9rem;line-height:1}
+p{margin:0 0 1rem}
+.lead{font-size:1.15rem;color:var(--soft)}
+
+#bar{position:fixed;left:0;right:0;top:env(safe-area-inset-top,0px);height:4px;background:var(--yellow);transform:scaleX(0);transform-origin:left;z-index:20}
+
+/* Hero */
+.hero{background:var(--navy);color:var(--cream);min-height:100svh;min-height:100vh;display:flex;flex-direction:column;justify-content:center;padding:3rem 0 4rem}
+@supports (min-height:100svh){.hero{min-height:calc(100svh - env(safe-area-inset-top,0px) - env(safe-area-inset-bottom,0px))}}
+.badge{width:3.6rem;height:3.6rem;border-radius:50%;background:var(--yellow);color:var(--navy);display:grid;place-items:center;font-family:var(--display);font-weight:800;font-size:1.7rem;margin-bottom:2rem}
+.hero p{font-size:1.2rem;color:rgba(255,251,240,.82);max-width:28rem;margin-top:1.5rem}
+.hero .tag{font-family:var(--display);font-weight:700;font-size:1.25rem;color:var(--yellow);margin-top:2.5rem}
+.cue{margin-top:3rem;font-size:.95rem;color:rgba(255,251,240,.7)}
+.cue span{display:inline-block;width:1px;height:2.2rem;background:var(--yellow);vertical-align:middle;margin-right:.75rem}
+
+/* Escena sticky del calendario */
+.track{height:430vh;background:var(--navy);color:var(--cream)}
+.stage{position:sticky;top:env(safe-area-inset-top,0px);height:100vh;height:calc(100svh - env(safe-area-inset-top,0px) - env(safe-area-inset-bottom,0px));display:flex;flex-direction:column;justify-content:center;gap:1.5rem;overflow:hidden}
+.panes{display:grid;min-height:11.5rem}
+.pane{grid-area:1/1;opacity:0;transition:opacity .35s ease;pointer-events:none}
+.pane.on{opacity:1}
+.pane h2{margin-bottom:.8rem}
+.pane p{color:rgba(255,251,240,.82);font-size:1.12rem;max-width:30rem;margin:0}
+.cal{background:rgba(255,251,240,.07);border:1px solid rgba(255,251,240,.2);border-radius:.9rem;padding:.9rem .8rem 1rem}
+.cal-head{display:flex;justify-content:space-between;align-items:baseline;margin-bottom:.6rem;padding:0 .2rem}
+.cal-head b{font-family:var(--display);font-weight:800;font-size:1.5rem}
+.count{font-family:var(--display);font-weight:800;font-size:2.6rem;line-height:1;color:var(--yellow)}
+.grid{display:grid;grid-template-columns:repeat(7,1fr);gap:.3rem}
+.dow{font-size:.78rem;text-align:center;color:rgba(255,251,240,.6);padding-bottom:.2rem}
+.cell{aspect-ratio:1;border-radius:.5rem;display:grid;place-items:center;font-family:var(--display);font-weight:800;font-size:1.25rem;color:transparent;background:rgba(255,251,240,.05)}
+.cell.slot{background:transparent;border:1.5px dashed rgba(255,251,240,.5)}
+.cell.lit{background:var(--yellow);color:var(--navy);border-color:var(--yellow);transition:background .25s ease,color .25s ease}
+.cal-foot{margin-top:.7rem;font-size:.88rem;color:rgba(255,251,240,.7);padding:0 .2rem}
+
+/* Secciones claras */
+.sec{padding:5rem 0}
+.sec + .sec{border-top:1px solid var(--line)}
+.sec h2{margin-bottom:1rem}
+.mark{background:linear-gradient(transparent 62%,var(--yellow) 62%);padding:0 .1em}
+
+.cards{display:grid;gap:1rem;margin-top:2rem}
+.card{background:var(--card);border:1px solid var(--line);border-radius:1rem;padding:1.4rem 1.3rem}
+.card .price{font-family:var(--display);font-weight:800;font-size:3rem;line-height:1;margin:.5rem 0 .2rem}
+.card .price small{font-family:var(--body);font-weight:500;font-size:.95rem;color:var(--soft);margin-left:.3rem}
+.card ul{margin:1rem 0 0;padding-left:1.15rem}
+.card li{margin-bottom:.5rem}
+
+.seg{display:inline-flex;border:1.5px solid var(--ink);border-radius:999px;padding:.2rem;margin:1.25rem 0 1.5rem}
+.seg button{font:inherit;font-weight:600;border:0;background:transparent;color:var(--ink);padding:.55rem 1.1rem;border-radius:999px;cursor:pointer;min-height:2.75rem}
+.seg button[aria-pressed="true"]{background:var(--navy);color:var(--cream)}
+:root[data-theme="dark"] .seg button[aria-pressed="true"]{background:var(--yellow);color:var(--navy)}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]) .seg button[aria-pressed="true"]{background:var(--yellow);color:var(--navy)}}
+button:focus-visible,a:focus-visible,input:focus-visible+span{outline:3px solid var(--yellow);outline-offset:2px}
+
+.pay{display:grid;gap:1rem}
+.opt{background:var(--card);border:1px solid var(--line);border-radius:1rem;padding:1.2rem}
+.opt h3{margin-bottom:.8rem}
+.bars{display:flex;gap:.4rem}
+.bar{flex:1;background:var(--navy);color:var(--cream);border-radius:.6rem;padding:.9rem .5rem;text-align:center;font-family:var(--display);font-weight:800;font-size:2rem;line-height:1}
+.bar small{display:block;font-family:var(--body);font-weight:500;font-size:.8rem;margin-top:.35rem;color:rgba(255,251,240,.75)}
+.bar.first{background:var(--yellow);color:var(--navy)}
+.bar.first small{color:rgba(13,27,62,.8)}
+.note{color:var(--soft);font-size:.98rem;margin-top:1rem}
+
+.zelle{margin-top:1rem;background:var(--navy);color:var(--cream);border-radius:1rem;padding:1.4rem 1.3rem}
+.zelle h3{color:var(--yellow);margin-bottom:.6rem}
+.zelle p{margin:0 0 .8rem;color:rgba(255,251,240,.85)}
+.mail{font-weight:600;font-size:1.15rem;word-break:break-all;user-select:all;-webkit-user-select:all;background:rgba(255,251,240,.1);border-radius:.6rem;padding:.8rem 1rem;margin-bottom:.9rem}
+.copy{font:inherit;font-weight:600;background:var(--yellow);color:var(--navy);border:0;border-radius:999px;padding:.7rem 1.3rem;min-height:2.75rem;cursor:pointer}
+.zelle .zn{margin:1rem 0 0;font-size:.95rem}
+.zelle .holder{font-weight:600;color:var(--cream)}
+.tzwrap{overflow-x:auto;margin-top:1.5rem;border:1px solid var(--line);border-radius:1rem;background:var(--card)}
+table{border-collapse:collapse;width:100%;min-width:26rem}
+th,td{text-align:left;padding:.85rem 1rem;border-bottom:1px solid var(--line);font-size:1rem}
+th{font-weight:600;font-size:.9rem;color:var(--soft)}
+tr:last-child td{border-bottom:0}
+td.t{font-family:var(--display);font-weight:800;font-size:1.5rem;white-space:nowrap}
+tr.ms td{background:var(--navy);color:var(--cream);border-bottom:0}
+tr.ms td.t{color:var(--yellow)}
+
+.how{display:grid;gap:1rem;margin-top:1.75rem}
+.how div{border-left:4px solid var(--yellow);padding:.1rem 0 .1rem 1rem}
+.how b{display:block;font-size:1.1rem}
+.how span{color:var(--soft)}
+
+.check{list-style:none;margin:1.5rem 0 0;padding:0;display:grid;gap:.6rem}
+.check label{display:flex;gap:.9rem;align-items:center;background:var(--card);border:1px solid var(--line);border-radius:.8rem;padding:.9rem 1rem;cursor:pointer;min-height:3.25rem}
+.check input{position:absolute;opacity:0;width:1px;height:1px}
+.check span::before{content:"";display:inline-block;width:1.35rem;height:1.35rem;border:2px solid var(--ink);border-radius:.35rem;margin-right:.9rem;vertical-align:-.3rem}
+.check input:checked+span::before{background:var(--yellow);border-color:var(--yellow);box-shadow:inset 0 0 0 3px var(--yellow),inset 0 0 0 4px var(--navy)}
+.check input:checked+span{text-decoration:line-through;text-decoration-color:var(--soft);color:var(--soft)}
+
+.cta{background:var(--navy);color:var(--cream);padding:5rem 0 4rem;text-align:left}
+.btn{display:inline-block;margin-top:1.5rem;background:var(--yellow);color:var(--navy);font-weight:600;text-decoration:none;padding:1rem 1.6rem;border-radius:999px;font-size:1.1rem}
+footer{background:var(--navy);color:var(--cream);padding:2rem 0 2.5rem;border-top:1px solid rgba(255,251,240,.18);font-size:.95rem}
+footer b{font-family:var(--display);font-size:1.5rem;font-weight:800}
+footer b i{font-style:normal;color:var(--yellow)}
+
+@media (min-width:720px){
+  .pay{grid-template-columns:1fr 1fr}
+  .stage{max-width:40rem;margin:0 auto;padding:0 1.25rem}
+}
+@media (prefers-reduced-motion:reduce){.pane,.cell.lit{transition:none}}
+</style>
+</head>
+<body>
+<div id="bar" aria-hidden="true"></div>
+
+<header class="hero">
+  <div class="wrap">
+    <div class="badge" aria-hidden="true">MM</div>
+    <h1>Tus clases de inglés empiezan aquí</h1>
+    <p>Todo lo esencial para tu primer mes, en una sola lectura.</p>
+    <div class="tag">Tiny Tips, Big Progress</div>
+    <div class="cue"><span></span>Empieza por tu calendario</div>
+  </div>
+</header>
+
+<section class="track" id="track" aria-label="Tu horario de clases">
+  <div class="stage">
+    <div class="wrap" style="padding-left:1.25rem;padding-right:1.25rem">
+      <div class="panes" id="panes">
+        <div class="pane on" data-step="0">
+          <h2>Martes y jueves</h2>
+          <p>Dos días fijos por semana. Tu semana ya tiene un lugar reservado para el inglés.</p>
+        </div>
+        <div class="pane" data-step="1">
+          <h2 id="timeTitle">8:00 p. m.</h2>
+          <p>Hora de Mississippi (hora central). Más abajo verás a qué hora cae en tu país.</p>
+        </div>
+        <div class="pane" data-step="2">
+          <h2>8 clases al mes</h2>
+          <p>Cada una dura 40 minutos y es en vivo por Zoom, con material digital incluido.</p>
+        </div>
+      </div>
+      <div class="cal" role="img" aria-label="Calendario de cuatro semanas con clases los martes y jueves, ocho clases en total">
+        <div class="cal-head"><b>Tu primer mes</b><span class="count" id="count">0/8</span></div>
+        <div class="grid" id="grid"></div>
+        <div class="cal-foot">4 semanas, 2 clases por semana.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="sec" id="modalidades">
+  <div class="wrap">
+    <h2>Tu modalidad: clases individuales</h2>
+    <div class="cards">
+      <article class="card">
+        <h3>Clases individuales</h3>
+        <div class="price">$40<small>al mes</small></div>
+        <ul>
+          <li>Clases solo para ti, con mi atención completa.</li>
+          <li>Si necesitas ajustar el horario, lo coordinamos por WhatsApp.</li>
+        </ul>
+      </article>
+
+    </div>
+  </div>
+</section>
+
+<section class="sec" id="pagos">
+  <div class="wrap">
+    <h2>Cómo se paga</h2>
+    <p class="lead" style="margin-bottom:1.5rem">Elige la forma que mejor te quede.</p>
+    <div class="pay">
+      <div class="opt">
+        <h3>Pago mensual</h3>
+        <div class="bars"><div class="bar first" id="fullBar">$40<small>antes de empezar</small></div></div>
+      </div>
+      <div class="opt">
+        <h3>Dos pagos quincenales</h3>
+        <div class="bars">
+          <div class="bar first" id="halfA">$20<small>antes de empezar</small></div>
+          <div class="bar" id="halfB">$20<small>quincena siguiente</small></div>
+        </div>
+      </div>
+    </div>
+    <div class="zelle">
+      <h3>Paga por Zelle</h3>
+      <p>Envía tu pago al siguiente correo:</p>
+      <div class="mail" id="mail">marraiz03@hotmail.com</div>
+      <p class="holder">Titular: Maria Mercedes Arraiz</p>
+      <button type="button" class="copy" id="copy">Copiar correo</button>
+      <p class="zn">Después de pagar, envíame la captura por WhatsApp para confirmar tu pago.</p>
+    </div>
+    <p class="note" id="payNote">Puedes pagar en divisas o en bolívares al tipo de cambio del BCV. Para pagar en bolívares, te paso los datos por WhatsApp.</p>
+  </div>
+</section>
+
+<section class="sec" id="hora">
+  <div class="wrap">
+    <h2>Tu hora en tu país</h2>
+    <p class="lead">La clase siempre es a la misma hora de Mississippi. Como allá cambia el horario el 1 de noviembre (fin del horario de verano), en algunos países tu hora local se mueve una hora.</p>
+    <div class="tzwrap">
+      <table>
+        <thead><tr><th>Lugar</th><th>Hasta el 31 de oct.</th><th>Desde el 1 de nov.</th></tr></thead>
+        <tbody id="tz"></tbody>
+      </table>
+    </div>
+    <p class="note">¿Vives en otro país? Escríbeme y lo calculamos juntos.</p>
+  </div>
+</section>
+
+<section class="sec" id="clase">
+  <div class="wrap">
+    <h2>Cómo son tus clases</h2>
+    <div class="how">
+      <div><b>Acompañamiento directo</b><span>Clases en vivo conmigo, no videos grabados.</span></div>
+      <div><b>Ajustado a tu nivel</b><span>Ya identificamos tu nivel y tus objetivos en la entrevista inicial. Ahí parte tu plan.</span></div>
+    </div>
+  </div>
+</section>
+
+<section class="sec" id="listo">
+  <div class="wrap">
+    <h2>Antes de tu primera clase</h2>
+    <p class="lead">Marca lo que ya tengas listo.</p>
+    <ul class="check" id="check"></ul>
+  </div>
+</section>
+
+<section class="cta">
+  <div class="wrap">
+    <h2>¿Te queda alguna duda?</h2>
+    <p style="margin-top:1rem;color:rgba(255,251,240,.82);max-width:28rem">Escríbeme antes de tu primera clase.</p>
+    <a class="btn" href="https://wa.me/19044266634?text=Hola%2C%20Mercedes.%20Tengo%20una%20pregunta%20sobre%20mis%20clases." rel="noopener">Escribirme por WhatsApp</a>
+  </div>
+</section>
+
+<footer>
+  <div class="wrap"><b>MMercedes<i>English</i></b><br>Tiny Tips, Big Progress</div>
+</footer>
+
+<script>
+(function(){
+  // Ajusta aquí la hora de la clase en Mississippi (formato 24 h). 20 = 8:00 p. m.
+  var CLASS_HOUR = 20;
+
+  function fmt(h){
+    h = ((h % 24) + 24) % 24;
+    var suf = h >= 12 ? "p. m." : "a. m.";
+    var h12 = h % 12 === 0 ? 12 : h % 12;
+    return h12 + ":00 " + suf;
+  }
+  document.getElementById("timeTitle").textContent = fmt(CLASS_HOUR);
+
+  // Tabla de zonas. Offsets UTC: Mississippi CDT -5 / CST -6.
+  var zones = [
+    {n:"Mississippi (hora central)", a:-5, b:-6, ms:true},
+    {n:"Venezuela", a:-4, b:-4},
+    {n:"Colombia, Perú y Ecuador", a:-5, b:-5},
+    {n:"México (Ciudad de México)", a:-6, b:-6}
+  ];
+  var tz = document.getElementById("tz");
+  zones.forEach(function(z){
+    var tr = document.createElement("tr");
+    if (z.ms) tr.className = "ms";
+    var ta = fmt(CLASS_HOUR + (z.a - (-5)));
+    var tb = fmt(CLASS_HOUR + (z.b - (-6)));
+    tr.innerHTML = "<td>" + z.n + "</td><td class=\"t\">" + ta + "</td><td class=\"t\">" + tb + "</td>";
+    tz.appendChild(tr);
+  });
+
+  // Calendario: 4 semanas, martes (col 1) y jueves (col 3)
+  var grid = document.getElementById("grid");
+  ["Lun","Mar","Mié","Jue","Vie","Sáb","Dom"].forEach(function(d){
+    var e = document.createElement("div"); e.className = "dow"; e.textContent = d; grid.appendChild(e);
+  });
+  var cells = [], n = 0;
+  for (var w = 0; w < 4; w++){
+    for (var c = 0; c < 7; c++){
+      var el = document.createElement("div");
+      el.className = "cell";
+      if (c === 1 || c === 3){ n++; el.className += " slot"; el.textContent = n; cells.push(el); }
+      grid.appendChild(el);
+    }
+  }
+
+  var track = document.getElementById("track");
+  var panes = document.querySelectorAll(".pane");
+  var count = document.getElementById("count");
+  var bar = document.getElementById("bar");
+  var reduced = window.matchMedia && window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+  var ticking = false;
+
+  function update(){
+    ticking = false;
+    var vh = window.innerHeight;
+    var r = track.getBoundingClientRect();
+    var total = r.height - vh;
+    var p = total > 0 ? -r.top / total : 0;
+    p = Math.max(0, Math.min(1, p));
+    var lit = Math.min(8, Math.floor(p * 9));
+    cells.forEach(function(el, i){ el.classList.toggle("lit", i < lit); });
+    count.textContent = lit + "/8";
+    var step = p < 0.28 ? 0 : (p < 0.58 ? 1 : 2);
+    panes.forEach(function(el, i){ el.classList.toggle("on", i === step); });
+    var doc = document.documentElement;
+    var max = doc.scrollHeight - vh;
+    bar.style.transform = "scaleX(" + (max > 0 ? Math.max(0, Math.min(1, window.scrollY / max)) : 0) + ")";
+  }
+  function onScroll(){ if (!ticking){ ticking = true; requestAnimationFrame(update); } }
+  window.addEventListener("scroll", onScroll, {passive:true});
+  window.addEventListener("resize", onScroll);
+  update();
+
+  // Pagos
+  var MODES = {ind:{m:"$40", h:"$20", note:""}, grp:{m:"$25", h:"$12,50", note:" En clases grupales, los montos son por participante."}};
+  var base = document.getElementById("payNote").textContent;
+  function setMode(k){
+    var m = MODES[k];
+    document.getElementById("fullBar").innerHTML = m.m + "<small>antes de empezar</small>";
+    document.getElementById("halfA").innerHTML = m.h + "<small>antes de empezar</small>";
+    document.getElementById("halfB").innerHTML = m.h + "<small>quincena siguiente</small>";
+    document.getElementById("payNote").textContent = base + m.note;
+    document.querySelectorAll(".seg button").forEach(function(b){
+      b.setAttribute("aria-pressed", b.getAttribute("data-mode") === k ? "true" : "false");
+    });
+  }
+  document.querySelectorAll(".seg button").forEach(function(b){
+    b.addEventListener("click", function(){ setMode(b.getAttribute("data-mode")); });
+  });
+
+  // Copiar correo de Zelle
+  var copyBtn = document.getElementById("copy");
+  copyBtn.addEventListener("click", function(){
+    var txt = document.getElementById("mail").textContent;
+    function done(){ copyBtn.textContent = "Correo copiado"; setTimeout(function(){ copyBtn.textContent = "Copiar correo"; }, 2000); }
+    function fallback(){
+      var r = document.createRange(); r.selectNodeContents(document.getElementById("mail"));
+      var s = window.getSelection(); s.removeAllRanges(); s.addRange(r);
+      try { document.execCommand("copy"); done(); } catch (e) {}
+    }
+    try {
+      if (navigator.clipboard && navigator.clipboard.writeText){ navigator.clipboard.writeText(txt).then(done, fallback); }
+      else { fallback(); }
+    } catch (e) { fallback(); }
+  });
+
+  // Lista de preparación
+  var items = [
+    "Ya hice mi primer pago",
+    "Tengo Zoom instalado y actualizado",
+    "Tengo audífonos y un lugar sin ruido",
+    "Tengo cuaderno y lápiz a la mano",
+    "Entraré 5 minutos antes para probar mi conexión"
+  ];
+  var saved = [];
+  try { saved = JSON.parse(localStorage.getItem("mm-listo") || "[]"); } catch (e) { saved = []; }
+  var ul = document.getElementById("check");
+  items.forEach(function(t, i){
+    var li = document.createElement("li");
+    var lab = document.createElement("label");
+    var inp = document.createElement("input");
+    inp.type = "checkbox";
+    inp.checked = !!saved[i];
+    var sp = document.createElement("span");
+    sp.textContent = t;
+    inp.addEventListener("change", function(){
+      saved[i] = inp.checked;
+      try { localStorage.setItem("mm-listo", JSON.stringify(saved)); } catch (e) {}
+    });
+    lab.appendChild(inp); lab.appendChild(sp); li.appendChild(lab); ul.appendChild(li);
+  });
+})();
+</script>
+</body>
+</html>
